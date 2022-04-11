@@ -1,11 +1,43 @@
 # Configure main menu and social menu
-#[[main]]
-#identifier = "home"
-#name = "Home"
-#url = "/"
-#[main.params]
-#icon = "home"
-#newtab = true
+[[main]]
+identifier = "home"
+name = "Home"
+url = ""
+weight = 1
+[main.params]
+icon = "home"
+
+[[main]]
+identifier = "archives"
+name = "Archives"
+url = "archives/"
+weight = 2
+[main.params]
+icon = "archives"
+
+[[main]]
+identifier = "search"
+name = "Search"
+url = "search/"
+weight = 3
+[main.params]
+icon = "search"
+
+[[main]]
+identifier = "about"
+name = "About"
+url = "about/"
+weight = 4
+[main.params]
+icon = "user"
+
+[[main]]
+identifier = "links"
+name = "Links"
+url = "links/"
+weight = 5
+[main.params]
+icon = "link"
 
 [[social]]
 identifier = "github"
