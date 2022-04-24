@@ -20,13 +20,3 @@ tags:
 
    报错信息："stack found no layout file for "HTML" for kind "home": You should create a template file which matches Hugo Layouts Lookup Rules for this combination."
    解决办法：`hugo mod clean`
-
-
-## github
-
-``` shell
-Host github.com
-   HostName github.com
-   User git
-   ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-```
