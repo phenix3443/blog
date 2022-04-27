@@ -2,7 +2,7 @@
 title: "使用 Stack 搭建 Blog"
 description: 使用 stack theme
 date: 2022-04-22T14:42:36+08:00
-image: 
+image: stack.jpeg
 math: 
 license: 
 hidden: false

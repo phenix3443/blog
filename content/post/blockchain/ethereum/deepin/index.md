@@ -2,7 +2,7 @@
 title: "以太坊设计与实现"
 description: 以太坊设计、架构与源码分析
 date: 2022-04-22T14:44:16+08:00
-image: 
+image: ethereum-arch-and-code.webp
 math: 
 license: 
 hidden: false

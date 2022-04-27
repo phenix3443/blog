@@ -3,7 +3,7 @@ title: Github 多个账号开发实践
 description: Github 上使用多个账号和 SSH key 进行项目开发
 slug: 
 date: 2022-03-11 00:00:00+0000
-image: 
+image: github-ssh.png
 categories:
 tags:
     - github
@@ -31,11 +31,15 @@ tags:
         AddKeysToAgent yes
         UseKeychain yes   
         IdentityFile ~/.ssh/id_rsa.personal
+        
+    IdentitiesOnly yes
     ```
+
+    注意不要缺失最后的 `IdentitiesOnly yes`，问题参见[multi host match wrong ssh key](https://serverfault.com/questions/450796/how-could-i-stop-ssh-offering-a-wrong-key) 
 
 2. 测试 ssh 秘钥配置正确性。
 
-    `ssh -T git@github.com`
+    `ssh -T git@personal.github.com`
     > Hi {personal-name}! You've successfully authenticated, but GitHub does not provide shell access.
 
     `ssh -T git@taikochain.github.com`
