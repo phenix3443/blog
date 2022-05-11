@@ -28,7 +28,7 @@ tags:
 
 ## 网络
 
-以太坊网络分为公网(public net)和私网(private net)，公网又分为主网(mainnet)，测试网络(testnet)。
+以太坊网络分为公网(public net)和专用网(private net)，公网又分为主网(mainnet)，测试网络(testnet)。
 
 目前的测试网络主要有：
 
@@ -38,7 +38,7 @@ tags:
 
 ### 公网
 
-连接 `goerli` 测试网络：`geth --goerli --syncmode "light" --http`
+连接 `goerli` 测试网络：`geth --goerli --syncmode "light" --http`，更多命令命令行参数参见 [Command-line Options](https://geth.ethereum.org/docs/interface/command-line-options)
 
 ``` shell
 INFO [04-27|18:24:27.281] Starting Geth on Görli testnet...
@@ -82,13 +82,13 @@ true
 
 #### 定制网络
 
-有时可能不需要连接到实时公网，可以选择创建自己的私有测试网（将 12345 替换为任何 非负数）：
+有时可能不需要连接到实时公网，可以选择创建自己的专用网（将 12345 替换为任何 非负数）：
 
 `geth -—networkid="12345" console`
 
 这可以用于不需要测试外部合约而只想测试技术场景，因为不必与其他矿工竞争，并且很容易产生大量测试以太币。
 
-### 私网
+### 专用网
 
 通过 `geth init /path/to/file` 命令，也可以使用 JSON 文件中的自定义创世块运行 geth。 Genesis JSON 文件应具有以下格式：
 
@@ -114,7 +114,7 @@ true
 }
 ```
 
-关于如何创建私网，参见[^1]
+关于如何创建专用网，参见[^1]
 
 ### 静态节点
 
@@ -268,6 +268,5 @@ To exit, press ctrl-d or type exit
 运行 geth，打开 `https://remix.ethereum.org`。正常编译合约，但是在部署和运行合约时，从 `Environment` 下拉菜单中选择 `Web3 Provider`，然后在弹出框中添加 `http://127.0.0.1:8545` 。
 
 ![remix connect geth in dev mode](remix-connect-dev-mode-geth.jpg)
-
 
 [^1]: https://geth.ethereum.org/docs/interface/private-network
