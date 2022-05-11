@@ -1,6 +1,6 @@
 ---
-title: "使用 solidity 开发以太坊合约"
-description: solidity 开发环境准备
+title: "使用 Solidity + Remix 开发以太坊合约"
+description: 使用 Remix 开发合约
 date: 2022-04-14T13:52:24+08:00
 image: ide.png
 math: 
@@ -12,18 +12,10 @@ categories:
     - 区块链
 tags:
     - remix
-    - 以太坊
-    - Hardhat
-    - vscode
+    - ethereum
     - solidity
     - contract
 ---
-
-目标：编写合约，部署到测试环境中。
-
-## Geth
-
-直接基于 JavaScript console 编写代码，比较低效，不推荐。
 
 ## Remix IDE
 
@@ -46,23 +38,23 @@ contract HelloWworld{
 }
 ```
 
-![code.jpg](hello-world/code.jpg)
+![code.jpg](img/code.jpg)
 
 ### 编译代码
 
-![compile.jpg](hello-world/compile.jpg)
+![compile.jpg](img/compile.jpg)
 
 相关选项更详细的信息参考 [Remix Compiler](https://remix-ide.readthedocs.io/en/latest/compile.html)
 
 ### 部署合约
 
-![deploy.jpg](hello-world/deploy.jpg)
+![deploy.jpg](img/deploy.jpg)
 
 相关选项更详细的信息参考 [Remix Deploy ](https://remix-ide.readthedocs.io/en/latest/run.html)
 
 ### 运行合约
 
-![run.jpg](hello-world/run.jpg)
+![run.jpg](img/run.jpg)
 
 相关选项更详细的信息参考 [Remix Run](https://remix-ide.readthedocs.io/en/latest/udapp.html)
 
@@ -99,20 +91,3 @@ contract HelloWworld{
 + 使用 Injected Web3 和 Metamask 部署到公共测试网
   
   Remix Desktop 无法访问 Metamask（浏览器插件），因此部署到公共链目前涉及使用 Wallet Connect 插件。Remix IDE 可以轻松访问 Metamask 浏览器插件。
-
-
-## VSCode
-
-推荐安装以下扩展：
-
-### solidity
-
-[solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) 可以用来做代码补全、跳转功能。
-
-### solidity-visual-auditor
-
-[solidity-visual-auditor](https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor) 为 Visual Studio Code 提供了以安全为中心的语法和语义高亮显示、详细的类大纲、专门的视图、高级 Solidity 代码洞察和增强。
-
-主要可以用来生成调用图。
-
-## Hardhat
