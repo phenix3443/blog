@@ -1,7 +1,8 @@
 ---
-title: "... in go package path"
-description: go cmd package 参数 为 ... 指什么
+title: "go cmd 参数中的 ./..."
+description: what doest ... in go cmd [package] param meant
 date: 2022-05-12T16:22:49+08:00
+slug: how-to-special-go-package-path
 image: 
 math: 
 license: 

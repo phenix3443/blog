@@ -9,7 +9,7 @@ hidden: false
 comments: true
 draft: false
 categories:
-    - develop
+    - git
 tags:
     - github
     - actions
