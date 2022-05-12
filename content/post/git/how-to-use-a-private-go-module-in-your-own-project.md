@@ -14,3 +14,5 @@ tags:
     - git
     - private-repo
 ---
+
+[^1](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
