@@ -1,5 +1,5 @@
 ---
-title: "go test 命令"
+title: "go test"
 description: 
 date: 2022-05-12T15:08:52+08:00
 image: 
