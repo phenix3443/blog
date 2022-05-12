@@ -2,7 +2,7 @@
 title: "使用 Solidity + Remix 开发以太坊合约"
 description: 使用 Remix 开发合约
 date: 2022-04-14T13:52:24+08:00
-image: ide.png
+image: img/ide.png
 math: 
 license: 
 hidden: false
