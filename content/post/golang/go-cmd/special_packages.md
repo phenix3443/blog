@@ -1,6 +1,6 @@
 ---
-title: "golang cmd ./... 具体含义"
-description: 
+title: "... in go package path"
+description: go cmd package 参数 为 ... 指什么
 date: 2022-05-12T16:22:49+08:00
 image: 
 math: 
