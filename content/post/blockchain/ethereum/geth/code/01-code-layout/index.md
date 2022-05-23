@@ -8,9 +8,17 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+    - 区块链
+tags:
+    - 源码分析
+    - 以太坊
+    - geth
 ---
 
-代码分析基于 [github](https://github.com/ethereum/go-ethereum) 上的 go-ethereum/v1.10.17，go-ethereum项目的组织结构基本上是按照功能模块划分的目录：
+## layout
+
+go-ethereum项目的组织结构基本上是按照功能模块划分的目录：
 
 ``` shell
 $ tree -L 2 -d
@@ -95,6 +103,14 @@ $ tree -L 2 -d
 └── trie
 ```
 
-## Build
+## compile
 
-构建 geth `make geth`, 或者构建所有实用程序 `make all`。
+可以通过 `makefile` 进行 build：
+
+build geth: `make geth`,
+
+或者 build 所有实用程序 `make all`。
+
+## install
+
+`build/ci.go` 可被项目 CI Scripts 进行调用，也可以用来编译 `cmd/` 下面的程序并将其安装到 `build/bin` 目录， 比如 `go run build/ci.go install cmd/abigen` 。
