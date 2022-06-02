@@ -9,10 +9,10 @@ hidden: false
 comments: true
 draft: true
 categories:
-    - develop
+    - golang
 tags:
     - git
-    - private-repo
+    - go-module
 ---
 
 [^1](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
