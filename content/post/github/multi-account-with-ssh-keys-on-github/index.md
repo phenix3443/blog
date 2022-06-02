@@ -20,22 +20,17 @@ tags:
         HostName github.com
         User git
         ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-        AddKeysToAgent yes
-        UseKeychain yes   
+        IdentitiesOnly yes
         IdentityFile ~/.ssh/id_rsa.work
 
     Host personal.github.com
         HostName github.com
         User git
         ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-        AddKeysToAgent yes
-        UseKeychain yes   
+        IdentitiesOnly yes
         IdentityFile ~/.ssh/id_rsa.personal
         
-    IdentitiesOnly yes
     ```
-
-    注意不要缺失最后的 `IdentitiesOnly yes`，问题参见[multi host match wrong ssh key](https://serverfault.com/questions/450796/how-could-i-stop-ssh-offering-a-wrong-key)
 
 2. 测试 ssh 秘钥配置正确性。
 
