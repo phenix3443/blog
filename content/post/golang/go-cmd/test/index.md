@@ -1,6 +1,6 @@
 ---
 title: "go test"
-description: 
+description: how to do unittest in golang
 date: 2022-05-12T15:08:52+08:00
 image: 
 math: 
@@ -12,11 +12,11 @@ categories:
     - golang
 tags:
     - cmd
-    - test
+    - unittest
 ---
 
 
-## 使用
+## go test
 
 `go test [build/test flags] [packages] [build/test flags & test binary flags]`
 
@@ -288,3 +288,21 @@ pkg.test math
 ```
 
 在第一个示例中，-x 和第二个 -v 不变地传递到测试二进制文件，并且对 go 命令本身没有影响。 在第二个示例中，参数 math 传递给测试二进制文件，而不是被解释为程序包列表。
+
+## gomock
+
+[gomock](https://github.com/golang/mock) 是 Go 编程语言的模拟框架。
+
+## gostub
+
+[gostub](https://github.com/prashantv/gostub) 是一个使单元测试中的存根变得容易的库。
+
+## go monkey
+
+[monkey](https://github.com/bouk/monkey) 在 golang 中实现 monkeypatching。
+
+## goconvey
+
+[goconvey](https://github.com/smartystreets/goconvey) 是一款 Go 测试工具。
+
+[^1]: [GoStub框架使用指南](https://www.jianshu.com/p/70a93a9ed186)
