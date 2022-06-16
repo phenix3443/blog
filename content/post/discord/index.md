@@ -22,6 +22,6 @@ tags:
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890 && /Applications/Discord.app/Contents/MacOS/Discord &
 ```
 
-方法二：开启 Surge for Mac 或者 clashx pro `enhanced mode` 是最省心的方式。
+方法二：开启 Surge for Mac 或者 ClashX Pro `enhanced mode` 是最省心的方式。
 
-方法三：直接使用网页版。
+方法三：直接使用网页版(推荐)。
