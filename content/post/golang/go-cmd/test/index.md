@@ -20,7 +20,7 @@ tags:
 
 `go test [build/test flags] [packages] [build/test flags & test binary flags]`
 
-`go test` 用于测试 import 的 package。使用以下格式打印测试结果的摘要：
+`go test` 用于测试导入的 package。使用以下格式打印测试结果的摘要：
 
 ```HTML
 ok   archive/tar   0.011s
@@ -31,9 +31,11 @@ ok   compress/gzip 0.033s
 
 然后是每个失败 package 的详细输出。
 
-`go test` 重新编译每个 package，以及名为 “\*\_test.go” 的所有文件。这些文件可以包含测试函数，基准函数和示例函数。执行 `go help testfunc` 了解过多信息。每个列出的 package 都会执行单独的测试程序。以“_”（包括“_test.go”）或 “.” 开头的文件会被忽略。
+`go test` 重新编译每个 package，以及名为 `*_test.go` 的所有文件。这些文件可以包含测试函数，基准函数和示例函数。执行 `go help testfunc` 了解更多信息。
 
-后缀为 “_test” 的测试文件中声明的 package 将被编译为单独的程序包，然后与主测试二进制文件链接并运行。
+每个列出的 `package` 都会执行单独的测试程序，以`_`（包括`_test.go`）或 `.` 开头的文件会被忽略。
+
+后缀为 `_test` 的测试文件中声明的 package 将被编译为单独的程序包，然后与主测试二进制文件链接并运行。
 
 go 工具将忽略名为 “testdata” 的目录，使其可用于保存测试所需的辅助数据。
 
@@ -45,7 +47,7 @@ Go 测试以两种不同的模式运行：
 
 第一种称为本地目录模式，发生在没有 package 参数的情况下调用 `go test` 时（例如，`go test`  或 `go test -v` ）。在这种模式下， `go test` 会编译在当前目录中找到的包和测试，然后运行生成的测试二进制文件。在这种模式下，缓存（下面讨论）被禁用。 package 测试完成后， `go test` 将打印摘要行，其中显示测试状态（“ok”或“FAIL”）， package 名称和经过时间。
 
-第二种称为程序包列表模式，发生在使用显式程序 package 参数调用 `go test` 时（例如 `go test math`，`go test ./...`，甚至 `go test .` ）。在这种模式下， `go test` 编译并测试命令行上列出的每个 package 。如果某个 package 测试通过，则 `go test` 仅打印该 package 最后的 “OK” 摘要行。如果 package 测试失败，则执行测试将打印完整的测试输出。如果使用 **-bench** 或 **-v** 标志调用，则 `go test` 会打印完整的输出，即使通过的 package 测试也是如此，以便显示请求的基准测试结果或详细的日志记录。在所有列出的 package 的测试完成并且输出了它们的输出之后，如果任何 package 测试失败， `go test` 将打印最终的 “Fail” 状态。
+第二种称为程序包列表模式，发生在使用显式程序 package 参数调用 `go test` 时（例如 `go test math`，`go test ./...`，甚至 `go test .` ）。在这种模式下， `go test` 编译并测试命令行上列出的每个 package 。如果某个 package 测试通过，则 `go test` 仅打印该 package 最后的 “OK” 摘要行。如果 package 测试失败，则执行测试将打印完整的测试输出。如果使用 **-bench** 或 **-v** 标志调用，则 `go test` 会打印完整的输出，即使通过的 package 测试也是如此，以便显示请求的基准测试结果或详细的日志记录。在所有列出的 package 的测试完成并且输出了它们的输出之后，如果任何 package 测试失败， `go test` 将打印最终的 `Fail` 状态。
 
 仅在 package 列表模式下， `go test` 会缓存成功的 package 测试结果，以避免不必要的重复运行测试。当可以从缓存中恢复测试结果时， `go test` 将重新显示先前的输出，而不是再次运行测试二进制文件。如果发生这种情况， `go test` 在摘要行中打印 “(cached)” 以代替经过的时间。
 
