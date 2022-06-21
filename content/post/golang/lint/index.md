@@ -1,7 +1,7 @@
 ---
-title: "golang lint"
+title: "linting golang"
 date: 2022-06-21T14:05:21+08:00
-slug: golang-lint
+slug: linting-golang
 draft: false
 categories:
     - golang
@@ -37,3 +37,5 @@ tags:
 ### linters
 
 + [ ] 如何选择合适的 linter。
+
+[^1]: [A guide to linting Go programs](https://freshman.tech/linting-golang/)
