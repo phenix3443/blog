@@ -11,6 +11,7 @@ comments: true
 draft: false
 categories:
     - git
+    - github
 tags:
     - golang
     - github
