@@ -1,7 +1,7 @@
 ---
 title: "Github Actions"
 slug: use-github-actions
-description: 
+description: Github CI/CD Tools
 date: 2022-06-21T15:57:20+08:00
 image: 
 math: 
@@ -9,8 +9,6 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - github
 tags:
     - actions
     - github
