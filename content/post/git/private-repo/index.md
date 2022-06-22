@@ -2,16 +2,13 @@
 title: "如何使用私有仓库"
 description: how to use private repo
 slug: how-to-use-private-repo
-date: 2022-06-12T00:47:34+08:00
+date: 2022-06-22T15:25:34+08:00
 image: 
 math: 
 license: 
 hidden: false
 comments: true
 draft: false
-categories:
-    - git
-    - github
 tags:
     - golang
     - github
@@ -46,21 +43,20 @@ If this is a private repository, see https://golang.org/doc/faq#git_https for ad
 
 ## Github Token[^2]
 
-使用凭证而不是 public key 访问仓库。
+对于用户，可以使用用户凭证而不是 public key 访问仓库。详见[](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)，注意用户凭证只能用于 HTTPS 访问。
 
 ## GitHub Actions[^3]
 
 如何设置 GitHub Actions 以使用托管在 GitHub 上的私有 go 模块，其他托管平台思路类似。
 
-+ 将 token 作为 actions secret 添加到项目。
-+ 配置 git 使用 actions secret 来拉取 repo (L12)。
++ 对于个人项目将 Personal token 作为 actions secret 添加到项目。对于组织项目，可以使用 `App Key` 或者 `deploy key` 来访问私有仓库。详见 [Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
++ 配置 git 使用 actions secret 来拉取 repo (L12)。详见 [Creating encrypted secrets for an organization](https://docs.github.com/en/actions/security-guides/encrypted-secrets#about-encrypted-secrets)
 
   ```shell
   jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      `GOPRIVATE`: github.com/fabianMendez/privatemodule
       GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
