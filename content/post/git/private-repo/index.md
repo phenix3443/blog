@@ -20,11 +20,15 @@ tags:
 
 ## Go module[^1]
 
-虽然 Go 模块通常从其源代码仓库中分发，但 Go 团队还运行一些[中央 Go 模块服务](https://proxy.golang.org/)，以确保原始仓库发生问题时模块可以继续使用。默认情况下，Go 被配置为使用这些服务，但是当尝试下载私有模块时，它们可能会导致问题，因为它们无权访问这些私有模块。要告诉 Go 某些导入路径是私有的并且它不应该尝试使用中央 Go 服务，您可以使用 `GOPRIVATE` 环境变量。 `GOPRIVATE` 环境变量是导入路径前缀的逗号分隔列表，当遇到时，Go 工具将尝试直接访问它们，而不是通过中央服务。
+虽然 Go 模块通常从其源代码仓库中分发，但 Go 团队还运行一些[中央 Go 模块服务](https://proxy.golang.org/)，以确保原始仓库发生问题时模块可以继续使用。默认情况下，Go 被配置为使用这些服务，但是当尝试下载私有模块时，它们可能会导致问题，因为它们无权访问这些私有模块。要告诉 Go 某些导入路径是私有的并且它不应该尝试使用中央 Go 服务，您可以使用 `GOPRIVATE` 环境变量。 `GOPRIVATE` 环境变量是导入路径前缀的逗号分隔列表，当遇到时，Go 工具将尝试直接访问它们，而不是通过中央服务。详见[官方说明](https://pkg.go.dev/cmd/go#hdr-Configuration_for_downloading_non_public_code)
 
 为了使用私有模块，通过在 `GOPRIVATE` 变量中设置它来告诉 Go 将哪个路径视为私有的。例如 `github.com/your_github_username/mysecret`。这样有个问题：需要将每个私有存储库单独添加到 `GOPRIVATE` ，如下所示：
 
-`export GOPRIVATE=github.com/your_github_username/mysecret,github.com/your_github_username/othersecret`
+`go env -w GOPRIVATE="github.com/{user}/{private_repo_1},github.com/{user}/{private_repo_2}"`
+
+或者直接将组织的所有 repo 都设置为私有：
+
+`go env -w GOPRIVATE=github.com/{organization}/*`
 
 即使 Go 现在知道模块是私有的，但仍然不足以使用该模块。如果尝试导入私有模块，可能会看到类似于以下内容的错误：
 
