@@ -9,10 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - golang
 tags:
+    - golang
     - cmd
+    - package
 ---
 
 go cmd 许多命令需要指定一组 package ：

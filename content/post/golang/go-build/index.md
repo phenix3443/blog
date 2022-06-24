@@ -1,6 +1,7 @@
 ---
 title: "go build"
 description: 
+slug: go-build
 date: 2022-05-12T16:08:06+08:00
 image: 
 math: 
@@ -8,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - golang
 tags:
-    - cmd
+    - golang
     - test
 ---
 
