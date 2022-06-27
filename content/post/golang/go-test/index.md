@@ -80,12 +80,12 @@ Go 测试以两种不同的模式运行：
 
 - covermode set,count,atomic
 
-  设置要测试 package 覆盖率分析的模式。 默认为 ”set”，启用 =-race= 后为“ atomic”。
+  设置要测试 package 覆盖率分析的模式。 默认为 `set`，启用 -race 后为 “atomic”。
 
-  The values:
-  + set: bool: does this statement run?
-  + count: int: how many times does this statement run?
-  + atomic: int: count, but correct in multithreaded tests; significantly more expensive. Sets -cover.
+  取值为:
+  + set: bool: 语句是否运行?
+  + count: int: 语句运行的次数?
+  + atomic: int:  类似于 count, 但表示的是并行程序中的精确计数。消耗资源也更多。
 
 - failfast
 
@@ -190,6 +190,16 @@ pkg.test -test.v -myflag testdata -test.cpuprofile=prof.out
 生成 profile 文件的测试标记（除了覆盖率以外）还将测试二进制文件保留在 pkg.test 中，以便在分析配置文件时使用。
 
 当 `go test` 运行测试二进制文件时，它将在相应程序包的源代码目录中运行。取决于测试，直接调用生成的测试二进制文件时可能需要执行相同的操作。
+
+## coverage
+
+执行结果中输入代码覆盖率： `go test ./... -cover`
+
+生成代码覆盖率分析文件： `go test ./... -coverprofile=coverage.out`
+
+在浏览器中浏览分析文件： `go tool cover -html=coverage.out`
+
+查看每个函数的代码覆盖率： `go tool cover -func=coverage.out`
 
 ## gomock
 
