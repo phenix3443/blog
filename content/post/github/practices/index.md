@@ -1,7 +1,7 @@
 ---
 title: "Github Best Practices"
 description: 记录 Github 最佳实践
-date: 2022-06-22T14:50:36+08:00
+date: 2022-06-28T01:50:36+08:00
 slug: github-best-practices
 image: 
 math: 
@@ -24,4 +24,13 @@ Github 通过 [project](https://docs.github.com/en/issues/trying-out-the-new-pro
 
 ## actions
 
-通过 [action](../use-github-actions/) 使用 Github 的 CI/CD 能力。
+通过 [action](../use-github-actions/) 使用 Github 的 CI/CD 能力。[Awesome Actions](https://github.com/sdras/awesome-actions) 搜集了常用的 actions。
+
+## 测试覆盖率
+
+[codecov](https://github.com/codecov/codecov-action) 用来添加相关覆盖率检查。
+
+
+## badges
+
+[shileds](https://github.com/badges/shields) 用来在添加仓库的各种展示图标，如编译情况，代码覆盖率等。
