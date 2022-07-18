@@ -1,27 +1,27 @@
 ---
 title: "linting golang"
 date: 2022-07-12T14:05:21+08:00
+lastmod: 2022-07-12T14:05:21+08:00
 slug: linting-golang
 draft: false
-categories:
-    - golang
 tags:
-    - lint
+  - golang
+  - lint
 ---
 
 ## golangci-lint
 
 [golangci-lint](https://github.com/golangci/golangci-lint) 是常用的 golang lint 工具。
 
-### 执行
+## 执行
 
 执行 lint: `golangci-lint run`。
 
-### 集成
+## 集成
 
 可以方便的与常用的 IDE、github action 进行集成，参见 [integrations](https://golangci-lint.run/usage/integrations/)。
 
-### 配置
+## 配置
 
 配置文件 `.golangci.yml` 使用 yaml 格式，主要包含以下配置项：
 
@@ -34,7 +34,7 @@ tags:
 
 更多详见[configuration](https://golangci-lint.run/usage/configuration/)。
 
-### run
+## run
 
 + timeout: 分析的超时时间。默认一分钟。
 + tests:是否检查测试代码。默认 `false`。
@@ -42,7 +42,7 @@ tags:
 + skip-dirs: 跳过检查的目录，与 `skip-dirs-use-default`是相互独立的配置。
 + skip-files: 跳过检查的文件。
 
-### linters
+## linters
 
 golangci-lint 支持多种 linter，具体应该选择应该根据项目而定，这里有一些推荐：
 
@@ -72,6 +72,8 @@ golangci-lint 支持多种 linter，具体应该选择应该根据项目而定�
 + unconvert 检查不必要的类型转换。
 + whitespace 检测行首行位的空格。
 
-{{< gist phenix3443 e02515e >}}
+## 示例
+
+{{< gist phenix3443 e02515ea525fa50ec8e26ab303f2acaa >}}
 
 [^1]: [A guide to linting Go programs](https://freshman.tech/linting-golang/)
