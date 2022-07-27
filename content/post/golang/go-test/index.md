@@ -2,10 +2,10 @@
 title: "go test"
 description: how to do unittest in golang
 slug: go-test
-date: 2022-05-12T15:08:52+08:00
-image: 
-math: 
-license: 
+date: 2022-07-15T15:08:52+08:00
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: false
@@ -31,22 +31,28 @@ Go 测试以两种不同的模式运行：
 
 ```HTML
 -args
-    Pass the remainder of the command line (everything after -args) o the test binary, uninterpreted and unchanged.  Because this flag consumes the remainder of the command line, the package list (if present) must appear before this flag.
+
+  Pass the remainder of the command line (everything after -args) o the test binary, uninterpreted and unchanged.  Because this flag consumes the remainder of the command line, the package list (if present) must appear before this flag.
 
 -c
-    Compile the test binary to pkg.test but do not run it (where pkg is the last element of the package\'s import path). The file name can be changed with the -o flag.
+
+  Compile the test binary to pkg.test but do not run it (where pkg is the last element of the package\'s import path). The file name can be changed with the -o flag.
 
 -exec xprog
-    Run the test binary using xprog. The behavior is the same as in 'go run'. See 'go help run' for details.
+
+  Run the test binary using xprog. The behavior is the same as in 'go run'. See 'go help run' for details.
 
 -i
-    Install packages that are dependencies of the test. Do not run the test.
+
+  Install packages that are dependencies of the test. Do not run the test.
 
 -json
-    Convert test output to JSON suitable for automated processing.  See 'go doc test2json' for the encoding details.
+
+  Convert test output to JSON suitable for automated processing.  See 'go doc test2json' for the encoding details.
 
 -o file
-    Compile the test binary to the named file.  The test still runs (unless -c or -i is specified).
+
+  Compile the test binary to the named file.  The test still runs (unless -c or -i is specified).
 ```
 
 ## testflag
@@ -64,9 +70,9 @@ Go 测试以两种不同的模式运行：
 
 -benchtime t
 
-  通过 t 指示对每个基准运行足够的迭代， t 为 =time.Duration=（例如 =-benchtime 1h30s= ）。
+  通过 t 指示对每个基准运行足够的迭代， t 为 `time.Duration`（例如 `-benchtime 1h30s` ）。
 
-  缺省值为 1 秒（1s）。特殊语法 =Nx= 表示要运行基准测试 N 次（例如， =-benchtime 100x= ）。
+  缺省值为 1 秒（1s）。特殊语法 `Nx` 表示要运行基准测试 N 次（例如， `-benchtime 100x` ）。
 
 -count n
 
@@ -78,7 +84,7 @@ Go 测试以两种不同的模式运行：
 
   启用覆盖率分析。 请注意，由于覆盖率是通过在编译之前对源代码进行注释来实现的，因此启用覆盖率的编译和测试失败可能会报告与原始源不对应的行号。
 
-- covermode set,count,atomic
+-covermode set,count,atomic
 
   设置要测试 package 覆盖率分析的模式。 默认为 `set`，启用 -race 后为 “atomic”。
 
@@ -89,7 +95,7 @@ Go 测试以两种不同的模式运行：
 
 - failfast
 
-  首次测试失败后，请勿开始新的测试。
+  首次测试失败后不开始新的测试。
 
 -list regexp
 
@@ -108,9 +114,7 @@ Go 测试以两种不同的模式运行：
   如果测试二进制文件的运行时间超过持续时间 d，则出现 panic。 如果 d 为 0，则禁用超时。 默认值为 10 分钟（10m）。
 
 -v
-
   详细的输出：在运行所有测试时记录它们。 即使测试成功，也要打印 Log 和 Logf 调用中的所有文本。
-
 ```
 
 以下标记也可以被`go test` 识别，并且可以在执行期间用于分析测试：
@@ -135,7 +139,6 @@ Go 测试以两种不同的模式运行：
 -coverprofile cover.out
 
   所有测试通过后，将 coverage 配置文件写入文件。 需设置 =-cover= 。
-
 
 -cpuprofile cpu.out
 
@@ -211,7 +214,11 @@ pkg.test -test.v -myflag testdata -test.cpuprofile=prof.out
 
 ## go monkey
 
-[monkey](https://github.com/bouk/monkey) 在 golang 中实现 monkeypatching。
+[monkey](https://github.com/bouk/monkey) 在 golang 中实现 monkeypatching。使用该工具需要注意：
+
+1. 如果启用内联，Monkey 有时无法 patch 函数。尝试在禁用内联的情况下运行测试，例如：`go test -gcflags=-l`。 相同的命令行参数也可用于 build。
+2. Monkey 不能在一些不允许同时写入和执行内存页面的安全导向操作系统上工作。比如 MacOS 12.15+。目前的实现并没有真正可靠的解决方法。
+3. Monkey 不是线程安全的。或者任何种类的安全。
 
 ## goconvey
 
