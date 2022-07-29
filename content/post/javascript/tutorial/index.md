@@ -11,3 +11,8 @@ draft: true
 tags:
     - JavaScript
 ---
+
+参考资料：
+
++ [MDN web docs](https://developer.mozilla.org/en-US/)
++ [Node.js Docs](https://nodejs.org/en/docs/)
