@@ -43,3 +43,7 @@ tags:
 ```
 
 其他的使用示例例如部署智能合约可以参考：[Geth Developer mode](https://geth.ethereum.org/docs/getting-started/dev-mode)。
+
+如果调试 `txpool` ，有时需要指定块打包间隔，可以使用 `--dev.period` 参数，单位 second。
+
+`build/bin/geth --dev --dev.period 1000  --datadir dev-chain --http --http.api eth,web3,personal,net,txpool --http.corsdomain "http://remix.ethereum.org"` 。
