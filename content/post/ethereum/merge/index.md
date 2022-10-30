@@ -1,5 +1,5 @@
 ---
-title: "Merge"
+title: "The Merge"
 description: 以太坊合并
 date: 2022-09-21T13:59:49+08:00
 image:
