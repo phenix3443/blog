@@ -15,9 +15,17 @@ tags:
     - ethereum
 ---
 
-## 概述
+## 概述[^1]
 
 ## blockchain
+
+## sync-modes
+
+Geth客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`（前身为`fast`），可以通过命令行参数`--syncmode value` 进行指定。更多参见 [get sync modes]({{< ref "/post/ethereum/geth/syncmode" >}})。
+
++ snap：同步所有的区块头、区块体和状态数据，但不对区块中的交易进行重放以生成状态数据，只会在后期对区块中的数据（包括交易）进行校验。
++ full：同步所有的区块头，区块体，并重放区块中的交易以生成状态数据。所有区块和区块中的交易都会被逐一验证。
++ light：同步所有区块头，不同步区块体和状态数据，仅在需要时从网络上其他节点处获取。不会主动进行校验（仅在读取时进行哈希校验）。
 
 ## block
 
@@ -126,13 +134,14 @@ func (bc *BlockChain) InsertChain(chain types.Blocks) (int, error) {
 }
 ```
 
-参数`chain`其实表明，所有待导入（import）的区块本身构成了一条长度较短的区块链（chain）。所以这里首先进行了两个简单的检查：
+参数`chain`其实表明：所有待导入（import）的区块本身构成了一条长度较短的区块链（chain）。所以这里首先进行了两个简单的检查：
 
 1. 检查`chain`的长度是否为0.
 2. 检查`chain`中的各区块的高度是否是从小到大按顺序依次排列的。
 
 检查完成后，就调用`BlockChain.insertChain`进行实际的插入工作。
 
-`BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../insertChain/index.md" >}})分阶段来分析具体的代码。
+`BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../insertChain" >}})分阶段来分析具体的代码。
 
 [^1]: http://yangzhe.me/2019/03/24/ethereum-blockchain/
+[^2]: https://miaoguoge.xyz/geth-snap-rpc/

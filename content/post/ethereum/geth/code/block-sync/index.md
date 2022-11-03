@@ -62,6 +62,7 @@ func RegisterEthService(stack *node.Node, cfg *ethconfig.Config) (ethapi.Backend
 NewPeer：
 
 - broadcastBlocks 是一个写入循环，它将块和块公告（block announcements）多路复用到远程对等方。 目标是拥有一个不锁定节点内部并同时限制排队数据的异步写入器。
+
 ## 运行框架
 
 [^1]: 参考文章：[https://yangzhe.me/2019/04/14/ethereum-protocol/](https://yangzhe.me/2019/04/14/ethereum-protocol/)
