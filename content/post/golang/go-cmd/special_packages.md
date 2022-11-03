@@ -3,9 +3,9 @@ title: "go cmd 参数中的 ./..."
 description: what doest ... in go cmd [package] param meant
 date: 2022-05-12T16:22:49+08:00
 slug: how-to-special-go-package-path
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: false
@@ -35,4 +35,4 @@ go cmd 许多命令需要指定一组 package ：
 
 go tool 忽略以“.” 或 “\_” 开头的目录和文件，以及名为“testdata”的目录。
 
-关于如何在 cmd 中指定 package, 参见 `go help packages` 说明。
+关于如何在 cmd 中指定 package, 参见`go help packages`说明。

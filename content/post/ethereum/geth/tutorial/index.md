@@ -21,7 +21,7 @@ tags:
 
 ## 安装
 
-+ Mac `brew install ethereum`。
++ Mac`brew install ethereum`。
 
 ## 交互示例
 
@@ -38,11 +38,11 @@ tags:
 + Görli: Proof-of-authority test network
 + 专用网(private net)
 
-连接 `goerli` 测试网络：`geth --goerli --syncmode "light" --http`，更多命令命令行参数参见 [Command-line Options](https://geth.ethereum.org/docs/interface/command-line-options)
+连接`goerli`测试网络：`geth --goerli --syncmode "light" --http`，更多命令命令行参数参见 [Command-line Options](https://geth.ethereum.org/docs/interface/command-line-options)
 
 ## 可信节点
 
-Geth 支持始终允许重新连接的受信任节点，即使已达到对等限制。它们可以通过配置文件 `<datadir>/geth/trusted-nodes.json` 永久添加，也可以通过 RPC 调用临时添加。配置文件的格式与用于静态节点的格式相同。可以通过 js 控制台使用 `admin.addTrustedPeer()` RPC 调用添加节点，并使用 `admin.removeTrustedPeer()` 调用删除节点。
+Geth 支持始终允许重新连接的受信任节点，即使已达到对等限制。它们可以通过配置文件`<datadir>/geth/trusted-nodes.json`永久添加，也可以通过 RPC 调用临时添加。配置文件的格式与用于静态节点的格式相同。可以通过 js 控制台使用`admin.addTrustedPeer()`RPC 调用添加节点，并使用`admin.removeTrustedPeer()`调用删除节点。
 
 `admin.addTrustedPeer("enode://f4642fa65af50cfdea8fa7414a5def7bb7991478b768e296f5e4a54e8b995de102e0ceae2e826f293c481b5325f89be6d207b003382e18a8ecba66fbaf6416c0@33.4.2.1:30303")`
 

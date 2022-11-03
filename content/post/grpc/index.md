@@ -1,10 +1,10 @@
 ---
 title: "gRPC 实践"
-description: 
+description:
 date: 2022-05-31T16:14:10+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: true
@@ -16,11 +16,11 @@ tags:
 
 ## quick start
 
-需要提前安装好 `protoc` 编译器以及对应的 `protoc-gen-go` 插件，参见 [protobuf实践](../protobuf-practices/)
+需要提前安装好`protoc`编译器以及对应的`protoc-gen-go`插件，参见 [protobuf实践](../protobuf-practices/)
 
 `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest`
 
-编译 `proto` 文件：
+编译`proto`文件：
 
 ```shell
 protoc --go_out=. --go_opt=paths=source_relative \

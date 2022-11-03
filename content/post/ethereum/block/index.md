@@ -2,9 +2,9 @@
 title: ""
 description: 以太坊块数据结构分析
 date: 2022-05-10T23:12:35+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: true
@@ -23,6 +23,6 @@ draft: true
 
 ## Block 验证
 
-区块链中有2类节点，全节点和轻节点，轻节点只会存储 `block header` ，所以轻节点如何才能校验账号是否合法呢？
+区块链中有2类节点，全节点和轻节点，轻节点只会存储`block header`，所以轻节点如何才能校验账号是否合法呢？
 
 [以太坊数据结构以及以太坊的 4 棵树](https://learnblockchain.cn/2020/01/27/7c1fcd777d7b)

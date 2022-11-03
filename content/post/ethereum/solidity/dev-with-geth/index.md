@@ -2,9 +2,9 @@
 title: "使用 geth and solc 开发以太坊合约"
 description:  develop contract with geth and solc
 date: 2022-05-11T21:49:51+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: true
@@ -20,7 +20,7 @@ tags:
 
 ## 编码
 
-``` solidity
+```solidity
 // SPDX-License-Identifier: SimPL-3.0
 pragma solidity ^0.8.9;
 
@@ -37,7 +37,7 @@ contract HelloWworld{
 
 ## 编译
 
-[solidity](https://github.com/ethereum/solidity) ，安装 `brew install solidity`。
+[solidity](https://github.com/ethereum/solidity) ，安装`brew install solidity`。
 
 ## hardhat
 
@@ -45,7 +45,7 @@ contract HelloWworld{
 
 使用 [nvm](https://github.com/nvm-sh/nvm) 管理 nodejs。
 
-``` shell
+```shell
 nvm install v16.15.0
 nvm use v16.15.0
 nvm ls

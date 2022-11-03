@@ -3,8 +3,8 @@ title: "geth 代码布局"
 description: source code layout
 date: 2022-05-10T23:19:15+08:00
 image: code-analsis.webp
-math: 
-license: 
+math:
+license:
 hidden: false
 comments: true
 draft: false
@@ -20,7 +20,7 @@ tags:
 
 go-ethereum项目的组织结构基本上是按照功能模块划分的目录：
 
-``` shell
+```shell
 $ tree -L 2 -d
 .
 ├── accounts  # 实现了一个高等级以太坊账户管理。
@@ -46,15 +46,15 @@ $ tree -L 2 -d
 │   ├── puppeth # 创建新的以太坊网络的 CLI 向导。
 │   ├── rlpdump # 开发人员实用工具，用于将二进制 RLP dumps（以太坊协议在网络和共识方面使用的数据编码）转换为用户友好的分层表示（例如 rlpdump --hex CE0183FFFFFFC4C304050583616263）。
 │   └── utils # cmd 下面公共代码。
-├── common 
+├── common
 ├── consensus # 以太坊共识算法。
-├── console   
-├── contracts 
+├── console
+├── contracts
 ├── core  # 以太坊核心数据结构和算法，block、state、vm 等。
-├── crypto 
+├── crypto
 ├── docs
 ├── eth # 以太坊协议实现。
-├── ethclient 
+├── ethclient
 ├── ethdb # eth的数据库，包括实际使用的 leveldb 和供测试使用的 memorydb。
 │   ├── dbtest
 │   ├── leveldb
@@ -93,7 +93,7 @@ $ tree -L 2 -d
 ├── miner # 矿工相关，挖块和出块。
 ├── mobile # 移动断相关。
 ├── node # 以太坊多种类型的节点。
-├── p2p 
+├── p2p
 ├── params
 ├── rlp
 ├── rpc
@@ -105,12 +105,12 @@ $ tree -L 2 -d
 
 ## compile
 
-可以通过 `makefile` 进行 build：
+可以通过`makefile`进行 build：
 
-build geth: `make geth`,
+build geth:`make geth`,
 
-或者 build 所有实用程序 `make all`。
+或者 build 所有实用程序`make all`。
 
 ## install
 
-`build/ci.go` 可被项目 CI Scripts 进行调用，也可以用来编译 `cmd/` 下面的程序并将其安装到 `build/bin` 目录， 比如 `go run build/ci.go install cmd/abigen` 。
+`build/ci.go`可被项目 CI Scripts 进行调用，也可以用来编译`cmd/`下面的程序并将其安装到`build/bin`目录， 比如`go run build/ci.go install cmd/abigen`。

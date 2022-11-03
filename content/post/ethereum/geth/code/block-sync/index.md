@@ -55,9 +55,9 @@ func RegisterEthService(stack *node.Node, cfg *ethconfig.Config) (ethapi.Backend
 }
 ```
 
-当配置文件中的 `SyncMode` 字段为 `downloader.LightSync` 时，会使用 les 目录下的代码；否则使用eth目录下的代码。由于eth目录下的代码实现了全部的逻辑和功能，因此我们主要关注eth目录下的代码。
+当配置文件中的`SyncMode`字段为`downloader.LightSync`时，会使用 les 目录下的代码；否则使用eth目录下的代码。由于eth目录下的代码实现了全部的逻辑和功能，因此我们主要关注eth目录下的代码。
 
-在 eth 目录下，和区块同步相关的主要的源代码文件有 `handler.go`、`peer.go`、`sync.go`，以及 `downloader` 目录和 `fetcher` 目录。其中前三个源码文件定义了区块同步协议及整体工作框架，也是本篇文章要重点分析的内容；而后两个目录是我们之后的文章要分析的内容。
+在 eth 目录下，和区块同步相关的主要的源代码文件有`handler.go`、`peer.go`、`sync.go`，以及`downloader`目录和`fetcher`目录。其中前三个源码文件定义了区块同步协议及整体工作框架，也是本篇文章要重点分析的内容；而后两个目录是我们之后的文章要分析的内容。
 
 NewPeer：
 

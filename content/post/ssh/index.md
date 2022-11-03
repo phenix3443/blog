@@ -1,10 +1,10 @@
 ---
 title: "ssh 实践"
-description: 
+description:
 date: 2022-06-02T10:39:36+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: false
@@ -30,7 +30,7 @@ tags:
 
 ### ProxyCommand
 
-指定连接 server 的命令，可用于通过代理访问 server，如 `ProxyCommand nc -X connect -x 127.0.0.1:7890 %h %p`。
+指定连接 server 的命令，可用于通过代理访问 server，如`ProxyCommand nc -X connect -x 127.0.0.1:7890 %h %p`。
 
 ### ServerAliveInterval
 
@@ -44,8 +44,8 @@ tags:
 
 [ssh-keygen](https://www.ssh.com/academy/ssh/keygen) 有相关步骤的详细介绍：
 
-1. create an SSH key: `ssh-keygen -t rsa -b 4096`
-2. copy the public key to the server: `ssh-copy-id -i ~/.ssh/tatu-key-ecdsa user@host`
+1. create an SSH key:`ssh-keygen -t rsa -b 4096`
+2. copy the public key to the server:`ssh-copy-id -i ~/.ssh/tatu-key-ecdsa user@host`
 3. add key to SSH agent:
 
    [ssh-agent](https://www.ssh.com/academy/ssh/agent) 是一个可以保存用户私钥的程序，因此私钥密码只需要提供一次。

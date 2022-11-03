@@ -65,7 +65,7 @@ func TestAbi_encodeMultiArguments(t *testing.T) {
 
 1. 通过 [`abi.NewType`](https://pkg.go.dev/github.com/ethereum/go-ethereum/accounts/abi#NewType) 定义 argument 对应的 [`ABI规范中定义的基础类型`](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#types) 类型。
 
-2. abi.NewType 第一个参数如果是 `int` `uint`，必须要指定长度，如 int8,int256。
+2. abi.NewType 第一个参数如果是`int``uint`，必须要指定长度，如 int8,int256。
 
 ### 定义结构体对应的 ABI 类型
 
