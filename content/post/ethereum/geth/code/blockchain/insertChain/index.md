@@ -15,12 +15,12 @@ draft: true
 
 ## CanonicalChain
 
-下面 [BlockChain.insertChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1487) 代码中折叠一部分，方面我们分析：
-
 这里有几个 vscode 使用小技巧:
 
 + [collapse selected code](https://stackoverflow.com/questions/30067767/how-do-i-collapse-sections-of-code-in-visual-studio-code-for-windows)
 + [how to copy and paste folded code as it is in vscode](https://stackoverflow.com/questions/69420897/on-vsc-can-i-copy-paste-folded-codes-and-keep-them-folded)
+
+下面[BlockChain.insertChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1487) 代码中折叠一部分，只展示重点流程方便分析：
 
 ```go
 // insertChain 是 InsertChain 的内部实现，它假设：
@@ -88,40 +88,26 @@ func (bc *BlockChain) insertChain(chain types.Blocks, verifySeals, setHead bool)
 }
 ```
 
-### 触发事件
-
-[defer 函数](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个ChainHeadEvent事件。
-
-```go
-    // Fire a single chain head event if we've progressed the chain
-    defer func() {
-        if lastCanon != nil && bc.CurrentBlock().Hash() == lastCanon.Hash() {
-            bc.chainHeadFeed.Send(ChainHeadEvent{lastCanon})
-        }
-    }()
-```
-
 ### 校验所有区块头部
 
-一开始最重要的是调用`engine.VerifyHeaders`对所有区块的头部进行验证（其中`bc.engine`是共识接口）（L32）。注意这个方法的实现是异步的，它会返回一个 channel 用来获取验证的结果，也即变量`results`。这里的代码使用`newInsertIterator`和`results`创建一个迭代器，后面使用这个迭代器来获取每一个验证结果。
+开始最重要的是调用`engine.VerifyHeaders`对所有区块的头部进行验证（其中`bc.engine`是共识接口）。注意这个方法的实现是异步的，它会返回一个 channel 用来获取验证的结果，也即变量`results`。这里的代码使用`newInsertIterator`和`results`创建一个迭代器，后面使用这个迭代器来获取每一个验证结果。
 
-### 跳过已知块
+### 跳过不需要生成快照的已知块
+
+删除待插入块（参数`chain`）左侧所有不需要构建快照(`snapshots`)的已知块。
 
 todo:等待完善
-修剪插入链接（参数`chain`）左侧所有不需要构建快照(`snapshots`)的已知块。
 
-### 处理首个插入块
+### 处理首个插入块验证信息
 
-#### 处理验证结果中的错误信息
+`switch/case`处理被插入的**首个区块**的验证结果，以决定后续其他区块的插入：
 
-继续看下`switch/case`处理被插入的**第一个区块**的验证结果。我们分情况进行说明：
++ case1: 第一个区块是`修剪区块(prunedBlock)`。
 
-+ case1: 第一个区块是被“修剪”的区块。
-
-  前面我们讲过，所谓被“修剪的区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
+  [之前的文章]({{< ref "../overview" >}})介绍过所谓被“修剪区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
 
   + `setHead==true`: 将整个`chain`作为侧链插入并处理可能发生的重组。因为根据修剪的规则，主链上的最新的区块（triesInMemory）是不可能不存在`state`对象的，但`chain[0]`的父块不存在`state`对象，说明它的父块不可能是主链上的最新的块，那么整个的`chain`参数所代表的这组区块肯定是在其它分支链上了。
-  + `setHead==false`: 合并后，如果父块是被修剪，就尝试恢复。
+  + `setHead==false`: 只有合并后会走到这个流程，如果父块是被修剪，就尝试恢复。
 
   ```go
     // First block is pruned
@@ -140,7 +126,7 @@ todo:等待完善
 
 + case2: 第一个区块是`futureBlock`。
 
-  `futureBlock`的概念[之前的文章]({{< ref "../overview" >}})我们也讲过。这里的判断逻辑是，要么`chain[0]`的验证结果是`ErrFutureBlock`，要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。相应的处理逻辑是将第一个区块及后续找不到父区块的区块全当成`futureBlock`，调用`addFutureBlock`。然后就直接返回了。
+  [之前的文章]({{< ref "../overview" >}})介绍过`futureBlock`。这里的判断逻辑是，要么`chain[0]`的验证结果是`ErrFutureBlock`，要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。相应的处理逻辑是将第一个区块及后续找不到父区块的区块全当成`futureBlock`，调用`addFutureBlock`。然后就直接返回了。
 
   ```go
   // First block is future, shove it (and all children) to the future queue (unknown ancestor)
@@ -159,7 +145,7 @@ todo:等待完善
         return it.index, err
   ```
 
-+ case3: 其它未知错误，直接返回。
++ case3: 除了已知块之外的其它未知错误，直接返回。（todo：补充已知块）
 
   ```go
     // Some other error(except ErrKnownBlock) occurred, abort.
@@ -172,7 +158,7 @@ todo:等待完善
         return it.index, err
   ```
 
-#### 阶段二
+### 循环处理待插入块
 
 ```go
 for ; block != nil && err == nil || errors.Is(err, ErrKnownBlock); block, err = it.next() {
@@ -241,7 +227,7 @@ writeBlockWithState在将区块写入数据库后，可能会调用reorg对主�
 
 // 如果写入主链，则生成一个ChainEvent事件；如果写入侧链则生成一个ChainSideEvent事件。
 
-#### 阶段三
+### 阶段三
 
 下面我们看看insertChain中最后一段代码：
 
@@ -263,6 +249,20 @@ writeBlockWithState在将区块写入数据库后，可能会调用reorg对主�
 ```
 
 这段代码判断如果chain中还有未处理的区块，则看看是否是futureBlock，如果是则将它们加入到FutureBlocks字段中。
+
+### defer 触发事件
+
+[`defer 函数`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个ChainHeadEvent事件。
+
+```go
+    // Fire a single chain head event if we've progressed the chain
+    defer func() {
+        if lastCanon != nil && bc.CurrentBlock().Hash() == lastCanon.Hash() {
+            bc.chainHeadFeed.Send(ChainHeadEvent{lastCanon})
+        }
+    }()
+```
+
 
 ## SideChain
 
