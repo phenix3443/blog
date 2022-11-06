@@ -29,7 +29,7 @@ tags:
 + output: 结果输出相关，可以设置输出格式（如 json）、输出文件位置等。
 + linters: 使用的各种 linter。可用的 linters 及其配置说明参见 [linters](https://golangci-lint.run/usage/linters/)。
 + linters-settings: 各 linter 对应的配置。
-+ issues: 要排除的 issues 文本的正则表达式列表。linter 检查出来的问题称为`issue`。有时候会产生一些误报([False Positives](https://golangci-lint.run/usage/false-positives/))，或者某些代码我们不希望检查，可以在这里进行配置。跳过 lint 检查还可以使用 [`nolint 指令`](https://golangci-lint.run/usage/false-positives/#nolint-directive)，但是更推荐配置在`issues`中。
++ issues: 要排除的 issues 文本的正则表达式列表。linter 检查出来的问题称为`issue`。有时候会产生一些误报([False Positives](https://golangci-lint.run/usage/false-positives/))，或者某些代码我们不希望检查，可以在这里进行配置。跳过 lint 检查还可以使用 [nolint 指令](https://golangci-lint.run/usage/false-positives/#nolint-directive)，但是更推荐配置在`issues`中。
 + severity: 设置要展示的告警级别，默认是 error。也可以针对单个 linter 进行设置。
 
 更多详见[configuration](https://golangci-lint.run/usage/configuration/)。

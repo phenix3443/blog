@@ -98,9 +98,9 @@ plain := sugar.Desugar()
 
 ## 自定义 logger
 
-zap 提供的预设适用于小型项目，但是大型项目和组织自然需要更多的自定义设置。可以通过`Config`定制 logger，参见[`BasicConfiguration`](https://pkg.go.dev/go.uber.org/zap#example-package-BasicConfiguration)
+zap 提供的预设适用于小型项目，但是大型项目和组织自然需要更多的自定义设置。可以通过`Config`定制 logger，参见[BasicConfiguration](https://pkg.go.dev/go.uber.org/zap#example-package-BasicConfiguration)
 
-更特殊的配置(输出的日志文件自动拆分，将日志发送到消息队列等) 需要直接使用`zapcore`。 示例代码参考 [`AdvancedConfiguration`](https://pkg.go.dev/go.uber.org/zap#example-package-AdvancedConfiguration) 。
+更特殊的配置(输出的日志文件自动拆分，将日志发送到消息队列等) 需要直接使用`zapcore`。 示例代码参考 [AdvancedConfiguration](https://pkg.go.dev/go.uber.org/zap#example-package-AdvancedConfiguration) 。
 
 ## 动态调整日志级别
 

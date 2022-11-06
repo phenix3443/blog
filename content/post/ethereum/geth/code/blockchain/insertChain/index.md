@@ -98,16 +98,16 @@ func (bc *BlockChain) insertChain(chain types.Blocks, verifySeals, setHead bool)
 
 todo:等待完善
 
-### 处理首个插入块验证信息
+### 处理首个区块错误信息
 
 `switch/case`处理被插入的**首个区块**的验证结果，以决定后续其他区块的插入：
 
-+ case1: 第一个区块是`修剪区块(prunedBlock)`。
++ case1: 首块是`修剪区块(prunedBlock)`。
 
   [之前的文章]({{< ref "../overview" >}})介绍过所谓被“修剪区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
 
   + `setHead==true`: 将整个`chain`作为侧链插入并处理可能发生的重组。因为根据修剪的规则，主链上的最新的区块（triesInMemory）是不可能不存在`state`对象的，但`chain[0]`的父块不存在`state`对象，说明它的父块不可能是主链上的最新的块，那么整个的`chain`参数所代表的这组区块肯定是在其它分支链上了。
-  + `setHead==false`: 只有合并后会走到这个流程，如果父块是被修剪，就尝试恢复。
+  + `setHead==false`: 只有合并后会走到这个流程（可以通过查看该函数调用进行确定），如果父块是被修剪，就尝试恢复。
 
   ```go
     // First block is pruned
@@ -124,9 +124,45 @@ todo:等待完善
         }
   ```
 
-+ case2: 第一个区块是`futureBlock`。
++ case2: 首块是`futureBlock`。
 
-  [之前的文章]({{< ref "../overview" >}})介绍过`futureBlock`。这里的判断逻辑是，要么`chain[0]`的验证结果是`ErrFutureBlock`，要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。相应的处理逻辑是将第一个区块及后续找不到父区块的区块全当成`futureBlock`，调用`addFutureBlock`。然后就直接返回了。
+  在以太坊中还有一类区块被称为`FutureBlocks`，这些区块被存储在`BlockChain.futureBlocks`字段中。根据错误码 `consensus.ErrFutureBlock` 来查看下如何定义 `futureBlock`，由于验证的代码位于共识模块中，因此这个错误在[ethash](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/consensus/ethash/consensus.go#L276)和[clique](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/consensus/clique/clique.go#L254)中返回的：
+
+  ```go
+    // Verify the header's timestamp
+    if !uncle {
+        if header.Time > uint64(unixNow+allowedFutureBlockTimeSeconds) {
+            return consensus.ErrFutureBlock
+        }
+    }
+  ```
+
+  从这段代码我们也可以看出，在`ethash`中如果不包含`uncle`，那么区块的时间戳大于当前时间`allowedFutureBlockTime`(15秒)会被认为是futureBlock；而clique中只要区块的时间戳比当前时间大，就认为是`futureBlock`。
+
+  需要稍微提一下的是，在[BlockChain.addFutureBlock](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1434)中也有一个条件判断：
+
+  ```go
+    max := uint64(time.Now().Unix() + maxTimeFutureBlocks)
+    if block.Time() > max {
+        return fmt.Errorf("future block timestamp %v > allowed %v", block.Time(), max)
+    }
+  ```
+
+  如果区块的时间戳大于当前时间`maxTimeFutureBlocks`(30秒)就会被直接丢弃，而不会加入到`BlockChain.futureBlocks`中。
+
+  到此我们对成为一个`futureBlock`的条件作一个总结。首先明确一个前提是进行条件判断的时候是在插入一组区块（chain）的时候。满足以下任意一条，都会被调用`BlockChain.addFutureBlock`方法：
+
+  + 某区块被共识代码判断为`ErrFutureBlock`（`ethash`中区块时间戳大于当前时间15秒, `clique`区块时间戳中大于当前时间）。
+  + 同一组区块（参数chain）中，前面有一个区块被判断为`futureBlock`，随后的所有找不到父区块的区块都会被判断为`futureBlock`。
+
+  在创建BlockChain时会创建一个线程[BlockChain.updateFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L409)，此线程每隔5秒钟调用[BlockChain.procFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L2251)，尝试将`BlockChain.futureBlocks`中的区块加入到数据库中。
+
+  insertChain 这里的判断逻辑是：
+
+  + 要么`chain[0]`的验证结果是`ErrFutureBlock`（因为 chain[0] 可能没有 parent）。
+  + 要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。
+
+  相应的处理逻辑是将第一个区块及后续找不到父区块的区块全当成`futureBlock`，调用`addFutureBlock`。然后就直接返回了。
 
   ```go
   // First block is future, shove it (and all children) to the future queue (unknown ancestor)
@@ -145,7 +181,7 @@ todo:等待完善
         return it.index, err
   ```
 
-+ case3: 除了已知块之外的其它未知错误，直接返回。（todo：补充已知块）
++ case3: 除了已知块之外的其它未知错误，直接返回。之前跳过是不需要生成快照的已知块，当前首块可能已知但需要重新执行来生成快照。
 
   ```go
     // Some other error(except ErrKnownBlock) occurred, abort.
@@ -221,13 +257,18 @@ for ; block != nil && err == nil || errors.Is(err, ErrKnownBlock); block, err = 
     }
 ```
 
-这一段代码就是一个for循环，不断处理所有验证通过的区块。代码虽然较多，但逻辑还是比较简单的，就是调用`processor.Process`生成区块对应的`state对象`和收据（`receipt`），并对state对象进行验证（ValidateState）。如果全都正常，则调用writeBlockWithState将区块、state对象和收据全部写入数据库中。
+这一段代码就是一个for循环，不断处理所有验证通过的区块。代码虽然较多，但逻辑还是比较简单的，就是调用`processor.Process`生成区块对应的`state`对象和收据（`receipt`），并对`state`对象进行验证（`ValidateState`）。
+如果全都正常，则调用`writeBlockWithState`将区块、`state`对象和收据全部写入数据库中。
 
-writeBlockWithState在将区块写入数据库后，可能会调用reorg对主链与侧链进行调整。随后代码跟据返回值status变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）并打印相应日志。
+随后代码根据 `setHead` 参数将块写入数据库，并根据返回值`status变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）并打印相应日志。
 
-// 如果写入主链，则生成一个ChainEvent事件；如果写入侧链则生成一个ChainSideEvent事件。
+#### writeBlockWithState
 
-### 阶段三
+#### writeBlockAndSetHead
+
+`writeBlockAndSetHead` 在调用 `writeBlockWithState`在将区块写入数据库后，可能会调用`reorg`对主链与侧链进行调整。随后代码跟据 status变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）。如果写入主链，则生成一个ChainEvent事件；如果写入侧链则生成一个ChainSideEvent事件。
+
+### 处理遗留的 future block
 
 下面我们看看insertChain中最后一段代码：
 
@@ -250,9 +291,11 @@ writeBlockWithState在将区块写入数据库后，可能会调用reorg对主�
 
 这段代码判断如果chain中还有未处理的区块，则看看是否是futureBlock，如果是则将它们加入到FutureBlocks字段中。
 
-### defer 触发事件
+### defer 函数
 
-[`defer 函数`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个ChainHeadEvent事件。
+#### 产生插入事件
+
+[defer 函数](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个ChainHeadEvent事件。
 
 ```go
     // Fire a single chain head event if we've progressed the chain
@@ -263,13 +306,154 @@ writeBlockWithState在将区块写入数据库后，可能会调用reorg对主�
     }()
 ```
 
+#### 停止预抓取
+
+```go
+    // No validation errors for the first block (or chain prefix skipped)
+    var activeState *state.StateDB
+    defer func() {
+        // The chain importer is starting and stopping trie prefetchers. If a bad
+        // block or other error is hit however, an early return may not properly
+        // terminate the background threads. This defer ensures that we clean up
+        // and dangling prefetcher, without defering each and holding on live refs.
+        if activeState != nil {
+            activeState.StopPrefetcher()
+        }
+    }()
+```
 
 ## SideChain
+
+看完了`insertChain`，我们再来看看侧链是如何插入的，即[insertSidechain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1827)。
+
+### 写入修剪块的子块
+
+```go
+    // The first sidechain block error is already verified to be ErrPrunedAncestor.
+    // Since we don't import them here, we expect ErrUnknownAncestor for the remaining
+    // ones. Any other errors means that the block is invalid, and should not be written
+    // to disk.
+    err := consensus.ErrPrunedAncestor
+    for ; block != nil && errors.Is(err, consensus.ErrPrunedAncestor); block, err = it.next() {
+        // Check the canonical state root for that number
+        if number := block.NumberU64(); current.NumberU64() >= number {
+            ...
+        }
+        if externTd == nil {
+            externTd = bc.GetTd(block.ParentHash(), block.NumberU64()-1)
+        }
+        externTd = new(big.Int).Add(externTd, block.Difficulty())
+
+        if !bc.HasBlock(block.Hash(), block.NumberU64()) {
+            start := time.Now()
+            if err := bc.writeBlockWithoutState(block, externTd); err != nil {
+                return it.index, err
+            }
+            log.Debug("Injected sidechain block", "number", block.Number(), "hash", block.Hash(),
+                "diff", block.Difficulty(), "elapsed", common.PrettyDuration(time.Since(start)),
+                "txs", len(block.Transactions()), "gas", block.GasUsed(), "uncles", len(block.Uncles()),
+                "root", block.Root())
+        }
+        lastBlock = block
+    }
+```
+
+`insertSidechain` 开始的代码使用一个for循环将所有父区块被修剪过的区块（ErrPrunedAncestor）写入数据库中，写入的方法是`WriteBlockWithoutState`，即只写入区块数据，没有state数据。
+
+这里需要注意的是有一个`shadow-state attack`检查。其判断逻辑是侧链上某区块的`state`哈希与主链上同样高度的区块的`state`哈希相同，这会导致侧链上的区块也可以拥有完整的state对象。但这仅仅可能是一个问题，因为有些情况下这确实是会发生的，比如一直没有交易发生，state对象的哈希一直没变过。
+
+```go
+if canonical != nil && canonical.Root() == block.Root() {
+    // This is most likely a shadow-state attack. When a fork is imported into the
+    // database, and it eventually reaches a block height which is not pruned, we
+    // just found that the state already exist! This means that the sidechain block
+    // refers to a state which already exists in our canon chain.
+    //
+    // If left unchecked, we would now proceed importing the blocks, without actually
+    // having verified the state of the previous blocks.
+    log.Warn("Sidechain ghost-state attack detected", "number", block.NumberU64(), "sideroot", block.Root(), "canonroot", canonical.Root())
+    // If someone legitimately side-mines blocks, they would still be imported as usual. However,
+    // we cannot risk writing unverified blocks to disk when they obviously target the pruning
+    // mechanism.
+    return it.index, errors.New("sidechain ghost-state attack")
+}
+```
+
+### 调整规范链
+
+```go
+    // 1. 检查是规范链是否需要调整
+    // At this point, we've written all sidechain blocks to database. Loop ended
+    // either on some other error or all were processed. If there was some other
+    // error, we can ignore the rest of those blocks.
+    //
+    // If the externTd was larger than our local TD, we now need to reimport the previous
+    // blocks to regenerate the required state
+    reorg, err := bc.forker.ReorgNeeded(current.Header(), lastBlock.Header())
+    if err != nil {
+        return it.index, err
+    }
+    if !reorg {
+        localTd := bc.GetTd(current.Hash(), current.NumberU64())
+        log.Info("Sidechain written to disk", "start", it.first().NumberU64(), "end", it.previous().Number, "sidetd", externTd, "localtd", localTd)
+        return it.index, err
+    }
+    // Gather all the sidechain hashes (full blocks may be memory heavy)
+    var (
+        hashes  []common.Hash
+        numbers []uint64
+    )
+    parent := it.previous()
+    // 2. 需要调整，搜集所有侧链没有 state 对象的 block
+    for parent != nil && !bc.HasState(parent.Root) {
+        hashes = append(hashes, parent.Hash())
+        numbers = append(numbers, parent.Number.Uint64())
+
+        parent = bc.GetHeader(parent.ParentHash, parent.Number.Uint64()-1)
+    }
+    if parent == nil {
+        return it.index, errors.New("missing parent")
+    }
+    // 3. 重新调用insertChain以调整分支成为主链
+    // Import all the pruned blocks to make the state available
+    var (
+        blocks []*types.Block
+        memory uint64
+    )
+    for i := len(hashes) - 1; i >= 0; i-- {
+        // Append the next block to our batch
+        block := bc.GetBlock(hashes[i], numbers[i])
+
+        blocks = append(blocks, block)
+        memory += block.Size()
+
+        // If memory use grew too large, import and continue. Sadly we need to discard
+        // all raised events and logs from notifications since we're too heavy on the
+        // memory here.
+        if len(blocks) >= 2048 || memory > 64*1024*1024 {
+            log.Info("Importing heavy sidechain segment", "blocks", len(blocks), "start", blocks[0].NumberU64(), "end", block.NumberU64())
+            if _, err := bc.insertChain(blocks, false, true); err != nil {
+                return 0, err
+            }
+            blocks, memory = blocks[:0], 0
+
+            // If the chain is terminating, stop processing blocks
+            if bc.insertStopped() {
+                log.Debug("Abort during blocks processing")
+                return 0, nil
+            }
+        }
+    }
+    if len(blocks) > 0 {
+        log.Info("Importing sidechain segment", "start", blocks[0].NumberU64(), "end", blocks[len(blocks)-1].NumberU64())
+        return bc.insertChain(blocks, false, true)
+    }
+```
+
+这部分的逻辑也比较简单，上面的中文注释将代码分成了三部分。第一部分检查当前侧链是否有可能成为主链。如果是的话，第二部分从最新区块开始，收集所有没有state对象的区块。第三部分重新调用`insertChain`以调整分支成为规范链。
 
 ## HeaderChain
 
 [HeaderChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/headerchain.go#L59)
 
-## ForkChoice
 
-[ForkChoice](https://github.com/ethereum/go-ethereum/blob/6d711f0c001ccb536c5ead8bd5d07828819e7d61/core/forkchoice.go#L48-L57) 是分叉选择器，eth1 中基于链总难度最高进行分叉，eth2 中使用外部分叉。 这个 ForkChoice 的主要目标不仅是在 eth1/2 合并阶段提供分叉选择，而且还保持与所有其他工作量证明网络的兼容性。

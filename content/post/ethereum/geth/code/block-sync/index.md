@@ -22,7 +22,7 @@ tags:
 
 ## 源码目录
 
-以太坊中关于区块同步和交换的代码位于eth目录下和les目录下。其中eth实现了所有的相关逻辑，而les只是light同步模式下的实现。这可以从 [`cmd/utils/flags.go`中的`RegisterEthService`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/cmd/utils/flags.go#L2004) 函数中看出来：
+以太坊中关于区块同步和交换的代码位于eth目录下和les目录下。其中eth实现了所有的相关逻辑，而les只是light同步模式下的实现。这可以从 [cmd/utils/flags.go`中的`RegisterEthService](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/cmd/utils/flags.go#L2004) 函数中看出来：
 
 ```go
 func RegisterEthService(stack *node.Node, cfg *ethconfig.Config) (ethapi.Backend, *eth.Ethereum) {

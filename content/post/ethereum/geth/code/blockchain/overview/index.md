@@ -29,8 +29,6 @@ Geth客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`�
 
 ## block
 
-## future block
-
 ## prune block
 
 ## 区块的组织
@@ -95,7 +93,7 @@ SetHead 将本地链倒回到一个新的头。 根据节点是快速同步还�
 
 在以太坊的区块链代码中，插入区块的方法是`BlockChain.InsertChain`，但主要的代码是由`BlockChain.insertChain`完成的。
 
-[`BlockChain.InsertChain`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1448) 方法的代码比较简单短，我们直接完整的拷贝到这里：
+[BlockChain.InsertChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1448) 方法的代码比较简单短，我们直接完整的拷贝到这里：
 
 ```go
 // InsertChain attempts to insert the given batch of blocks in to the canonical
