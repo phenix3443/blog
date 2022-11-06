@@ -31,6 +31,16 @@ Geth客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`�
 
 ## prune block
 
+以太坊运行以来，随着时间的推移，以太坊的客户端需要存储的数据越来越多，多到了难以接受的地步。以太坊的团队通过对区块数据进行修剪的方式来解决这个问题。准确的说，修剪的其实是`state`数据，因为导致以太坊数据增长如此之快的最终原因不是区块数量的增长，而是state数据的增长。
+
+对于那些不需要的 state 数据，我们可以不进行存储。万一哪天需要用到了，由于保存了完整的区块信息，我们是可以费点时间重新计算得到这些数据的。
+
+以太坊提供的方式是对trie树的节点进行修剪。在trie的实现中，会对存在于内存中的节点进行“引用计数”，即每个节点都有一个记录自己被引用次数的数字，当引用数量变为0时，节点内存就会被释放，也就不会被写入到数据库中去了。trie模块提供了`trie.Database.Reference`和`trie.Database.Dereference`方法，可以引用和解引用某一个节点（关于对trie节点的引用，可以参考[这篇文章](https://yangzhe.me/2019/01/12/ethereum-trie-part-1/)和[这篇文章](https://yangzhe.me/2019/01/18/ethereum-trie-part-2/）)。
+
+trie节点的这种“引用计数”式的设计应该是很好理解的，[这篇文章](https://blog.ethereum.org/2015/06/26/state-tree-pruning/)也对其进行了详细的说明。在本篇文章里，我们重点关注blockchain模块是如何使用这一功能对state进行修剪的。
+
+对state进行修剪是在插入区块时进行的，具体是在BlockChain.writeBlockWithState中，更详细的讨论参见[^1]。
+
 ## 区块的组织
 
 我们先整体地看一下在以太坊中区块是如何组织成链的。然后再深入细节，去讨论一些具体的问题。
@@ -142,4 +152,3 @@ func (bc *BlockChain) InsertChain(chain types.Blocks) (int, error) {
 `BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../insertChain" >}})分阶段来分析具体的代码。
 
 [^1]: http://yangzhe.me/2019/03/24/ethereum-blockchain/
-[^2]: https://miaoguoge.xyz/geth-snap-rpc/

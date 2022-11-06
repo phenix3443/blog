@@ -454,6 +454,4 @@ if canonical != nil && canonical.Root() == block.Root() {
 
 ## HeaderChain
 
-[HeaderChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/headerchain.go#L59)
-
-
+todo: [HeaderChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/headerchain.go#L59) 等待补充。
