@@ -1,5 +1,6 @@
 ---
 title: "skeleton"
+slug: geth-downloader-skeleton
 description: downloader/skeleton 源码分析
 date: 2022-11-06T22:40:40+08:00
 image:
