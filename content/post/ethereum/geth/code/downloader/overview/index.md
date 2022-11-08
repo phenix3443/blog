@@ -1,6 +1,7 @@
 ---
 title: "downloader"
-description:
+slug: geth-downloader
+description: geth downloader 源码分析
 date: 2022-11-06T22:40:41+08:00
 image:
 math:
@@ -15,7 +16,6 @@ draft: false
 ## 创建
 
 在以太坊链管理协议（ ethereum chain management protocol）Handler 的创建 [newHandler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L195) 中进行初始化。
-
 
 ## syncWithPeer
 
