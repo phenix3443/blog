@@ -29,7 +29,6 @@ draft: false
 
 子链使用完全相同的数据库命名空间，并且彼此不脱节。 因此，将一个扩展为与另一个重叠需要首先减少第二个。 这种组合缓冲区模型用于避免在两个子链连接在一起时必须在磁盘上移动数据。
 
-
 ## 启动
 
 在`downloader.New`函数中[声明](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L230)了`skeleton`对象。
