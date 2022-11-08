@@ -268,7 +268,7 @@ func (s *skeleton) Sync(head *types.Header, force bool) error {
 }
 ```
 
-跟踪代码发现，这个函数是最终被共识引擎`ConsensusAPI.ForkchoiceUpdatedV1`[调用](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/catalyst/api.go#L199)。
+跟踪代码发现，这个函数是最终被共识引擎 API`ConsensusAPI.ForkchoiceUpdatedV1`[调用](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/catalyst/api.go#L199)。
 
 ```go
 func (api *ConsensusAPI) ForkchoiceUpdatedV1(update beacon.ForkchoiceStateV1, payloadAttributes *beacon.
@@ -284,4 +284,3 @@ PayloadAttributesV1) (beacon.ForkChoiceResponse, error) {
         return beacon.STATUS_SYNCING, nil
     }
 ```
-
