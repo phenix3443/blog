@@ -13,11 +13,9 @@ draft: true
 
 ## 概述
 
-eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 eth/67。 更多参见[官方协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)
+eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 eth/67。 这里分析 geth 中对于[eth协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
 
-### 协议注册
-
-在`eth.New`中[注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265),
+## 注册 eth 协议为 p2p 子协议
 
 ```go
 // New creates a new Ethereum object (including the
@@ -37,6 +35,8 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 }
 ```
 
+在`eth.New`中[注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265) p2p 子协议。
+
 ```go
 // Protocols returns all the currently configured
 // network protocols to start.
@@ -49,6 +49,8 @@ func (s *Ethereum) Protocols() []p2p.Protocol {
 }
 
 ```
+
+`MakeProtocols` 将 eth 协议转换为 p2p 子协议。注意函数的第一个参数进行了类型转换：`(*ethHandler)(s.handler)`，启动协议时`Backend.RunPeer`后续启动协议的时候实际调用的是`s.handler.RunPeer`。
 
 ```go
 // MakeProtocols constructs the P2P protocol definitions for `eth`.
@@ -92,9 +94,7 @@ func MakeProtocols(backend Backend, network uint64, dnsdisc enode.Iterator) []p2
 var ProtocolVersions = []uint{ETH67, ETH66}
 ```
 
-### 协议启动
-
-现在继续看上面 `MakeProtocols`生成协议时候定义的[`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106)函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415) `
+## 启动 eth 协议 peer
 
 ```go
     Run: func(p *p2p.Peer, rw p2p.MsgReadWriter) error {
@@ -106,9 +106,9 @@ var ProtocolVersions = []uint{ETH67, ETH66}
     },
 ```
 
-让我们逐步看下这个函数：
+现在继续看上面 `MakeProtocols`生成协议时候定义的[`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106)函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415)。这个函数首先本地实例化一个 peer，然后启动运行它。
 
-#### NewPeer
+### 生成 peer 实例
 
 ```go
 func NewPeer(version uint, p *p2p.Peer, rw p2p.MsgReadWriter, txpool TxPool) *Peer {
@@ -125,26 +125,68 @@ func NewPeer(version uint, p *p2p.Peer, rw p2p.MsgReadWriter, txpool TxPool) *Pe
 }
 ```
 
-启动 peer 后会执行：
+peer 实例使用单独的 goroutine 来执行：
 
 + 广播区块。
 + 广播交易。
++ 声明交易。（是否有更好翻译）
 + 分发上层的请求。
 
-#### RunPeer
-
-这了实际调用的是 [ethHandler.RunPeer](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler_eth.go#L40)
+### peer 间握手
 
 ```go
-// RunPeer is invoked when a peer joins on the `eth` protocol.
-func (h *ethHandler) RunPeer(peer *eth.Peer, hand eth.Handler) error {
-    return (*handler)(h).runEthPeer(peer, hand)
+// runEthPeer registers an eth peer into the joint eth/snap peerset, adds it to
+// various subsystems and starts handling messages.
+func (h *handler) runEthPeer(peer *eth.Peer, handler eth.Handler) error {
+    ...
+    if err := peer.Handshake(h.networkID, td, hash, genesis.Hash(), forkID, h.forkFilter); err != nil {
+        peer.Log().Debug("Ethereum handshake failed", "err", err)
+        return err
+    }
+    ...
+    // Handle incoming messages until the connection is torn down
+    return handler(peer)
+```
+
+`backend.RunPeer`实际执行的是`handler.runEthPeer`，这也是前面`MakeProtocols`中类型转换的原因。
+
+```go
+// Handshake executes the eth protocol handshake, negotiating version number,
+// network IDs, difficulties, head and genesis blocks.
+func (p *Peer) Handshake(network uint64, td *big.Int, head common.Hash, genesis common.Hash, forkID forkid.ID,
+forkFilter forkid.Filter) error {
+    ...
+    // Send out own handshake in a new thread
+    var status StatusPacket // safe to read after two values have been received from errc
+
+    go func() {
+        errc <- p2p.Send(p.rw, StatusMsg, &StatusPacket{
+            ProtocolVersion: uint32(p.version),
+            NetworkID:       network,
+            TD:              td,
+            Head:            head,
+            Genesis:         genesis,
+            ForkID:          forkID,
+        })
+    }()
+    go func() {
+        errc <- p.readStatus(network, &status, genesis, forkFilter)
+    }()
+    ...
+    p.td, p.head = status.TD, status.Head
+    ...
+    return nil
 }
 ```
 
-现在看下 runEthPeer 函数。
+与其他 peer 建立连接后，必须发送`Status`消息，其中包括总难度 (TD) 和它们“最佳”已知块的哈希。
 
-建立连接后，必须发送`Status`消息。在收到 peer 的`Status`消息后，以太坊会话处于活动状态，并且可以发送任何其他消息。`RunPeer` 负责处理 eth `Status`消息(handshake)。`Handle` 负责循环处理之后的所有消息。
+同时本地 peer 也会收到其他 peer 发来的 TD 以及最新区块的 head Hash, 具有最差 TD 的客户端继续使用 `GetBlockHeaders` 消息下载 block header 。它验证接收到的 header 中的工作量证明值，并使用 `GetBlockBodies` 消息获取块体。使用以太坊虚拟机执行收到的区块，重新创建 state tree和收据。后面链同步时候继续讲。
+
+此处具体与哪些 peer 建立连接，以及连接的建立过程是 p2p 底层协议处理，这里不做进一步分析。
+
+### 循环处理消息
+
 
 ```go
 // Handle is invoked whenever an `eth` connection is made that successfully passes
@@ -160,9 +202,7 @@ func Handle(backend Backend, peer *Peer) error {
 }
 ```
 
-## 基本操作
-
-[handleMessage](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L201) 负责 eth 协议的握手之后的相关交互。
+在收到 peer 的`Status`消息后，以太坊会话处于活动状态，[handleMessage](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L201) 负责处理后续的 peer 间消息。
 
 ```go
 // handleMessage is invoked whenever an inbound message is received from a remote
@@ -194,7 +234,7 @@ func handleMessage(backend Backend, peer *Peer) error {
 
 ```
 
-客户端实现应该强制限制协议消息的大小。底层 RLPx 传输将单个消息的大小限制为 16.7 MiB。 eth 协议的实际限制较低，通常为 10 MiB。如果接收到的消息大于限制，则应断开 peer 的连接。 geth 代码中该限制定义为`maxMessageSize`：
+客户端实现应该强制限制协议消息的大小。底层 RLPx 传输将单个消息的大小限制为 16.7 MiB。 eth 协议的实际限制较低，通常为 10 MiB（`maxMessageSize`）。如果接收到的消息大于限制，则应断开 peer 的连接。
 
 ```go
 // maxMessageSize is the maximum cap on the size of a protocol message.
@@ -203,7 +243,7 @@ const maxMessageSize = 10 * 1024 * 1024
 
 除了接收消息的硬限制，客户端还应该对他们发送的请求和响应施加“软”限制。建议的软限制因消息类型而异。限制请求和响应可确保并发活动，例如块同步和交易交换在同一个 peer 连接上顺利进行。
 
-[eth66](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L167)、[eth67](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L184) 定义了消息类型以及对应的处理函数：
+消息根据 peer 的不同版本选择不同的 handler 进行对应处理。[eth66](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L167)、[eth67](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L184) 定义了消息类型以及对应的处理函数：
 
 ```go
 var eth66 = map[uint64]msgHandler{
@@ -220,17 +260,13 @@ var eth67 = map[uint64]msgHandler{
 }
 ```
 
+### 常见认为
+
 在一个会话中，可以执行三个高级任务：链同步、块传播和交易交换。这些任务使用不相交的协议消息集，客户端通常将它们作为所有 peer 连接上的并发活动来执行。
 
-## 链同步
+### 链同步
 
-参与 eth 协议的节点应了解从创世块到当前最新块的所有块的完整链。该链是通过从其他 peer 下载获得的。
-
-连接后，双方都会发送他们的状态消息，其中包括总难度 (TD) 和它们“最佳”已知块的哈希。
-
-然后，具有最差 TD 的客户端继续使用 `GetBlockHeaders` 消息下载 block header 。它验证接收到的 header 中的工作量证明值，并使用 `GetBlockBodies` 消息获取块体。使用以太坊虚拟机执行收到的区块，重新创建 state tree和收据。
-
-请注意， header 下载、block body 下载和块执行可能同时发生。
+eth 协议的节点应了解从创世块到当前最新块的所有块的完整链。该链是通过从其他 peer 下载获得的。
 
 ### 状态同步（又名“快速同步”）
 
