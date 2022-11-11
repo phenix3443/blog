@@ -11,47 +11,97 @@ comments: true
 draft: false
 ---
 
+## 概述
 
-## skeleton
+合并后（post-merge），local chain 依赖共识层调用 engine-API（ConsensusAPI.ForkchoiceUpdatedV1）进行同步。 该 api 调用 [downloader](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/catalyst/api.go#L199) 从 p2p 网络同步信息。
 
-[skeleton](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L191)表示合并后同步的`header`链，其中不再通过 PoW 以正向方式验证块，而是通过信标链（`beacon chain`）指定和扩展`head`，并在原始以太坊块同步协议上回填(`backfill`)。
+```go
+func (api *ConsensusAPI) ForkchoiceUpdatedV1(update beacon.ForkchoiceStateV1, payloadAttributes *beacon.
+PayloadAttributesV1) (beacon.ForkChoiceResponse, error) {
+    api.forkchoiceLock.Lock()
+    ...
+    block := api.eth.BlockChain().GetBlockByHash(update.HeadBlockHash)
+    if block == nil {
+        // If this block was previously invalidated, keep rejecting it here too
+        if err := api.eth.Downloader().BeaconSync(api.eth.SyncMode(), header); err != nil {
+            return beacon.STATUS_SYNCING, err
+        }
+        return beacon.STATUS_SYNCING, nil
+    }
 
-由于`skeleton`是从头向后生长到创世的，它被作为一个单独的实体处理，而不是与块的逻辑顺序转换混合。一旦`skeleton`连接到现有的、经过验证的链，`header`将被移动到主下载器（`downloader`）中以进行填充和执行。
+// BeaconSync is the post-merge version of the chain synchronization, where the
+// chain is not downloaded from genesis onward, rather from trusted head announces
+// backwards.
+//
+// Internally backfilling and state sync is done the same way, but the header
+// retrieval and scheduling is replaced.
+func (d *Downloader) BeaconSync(mode SyncMode, head *types.Header) error {
+    return d.beaconSync(mode, head, true)
+}
 
-原始的以太坊区块同步是去信任的（并使用主节点来最小化攻击面），与之相反，合并后的区块同步从一个可信的`header`开始。因此，不再需要主对等体（peers），并且可以完全同时请求`header`（尽管如果它们没有正确链接，某些批次可能会被丢弃）。
+// Internally backfilling and state sync is done the same way, but the header
+// retrieval and scheduling is replaced.
+func (d *Downloader) beaconSync(mode SyncMode, head *types.Header, force bool) error {
+    d.skeleton.filler.(*beaconBackfiller).setMode(mode)
 
-尽管`skeleton`是同步周期的一部分，但它不会重新创建，而是在下载器的整个生命周期内保持活动状态。这允许它与同步周期同时扩展，因为扩展来自 API 层面，而不是内部（与传统的以太坊同步相比）。
+    // Signal the skeleton sync to switch to a new head, however it wants
+    if err := d.skeleton.Sync(head, force); err != nil {
+        return err
+    }
+    return nil
 
-由于`skeleton`跟踪整个`header`链，直到被前向块填充（`backfill`）消耗，存储每块需要 0.5KB。在当前的主网大小下，这只能通过磁盘后端实现。由于`skeleton`与节点的`header`链是分开的，所以在同步完成之前临时存储`header`是浪费磁盘 IO，但这是我们现在为了保持简单而付出的代价。
+func (s *skeleton) Sync(head *types.Header, force bool) error {
+    log.Trace("New skeleton head announced", "number", head.Number, "hash", head.Hash(), "force", force)
+    errc := make(chan error)
 
-## 子链（subchain）
+    select {
+    case s.headEvents <- &headUpdate{header: head, force: force, errc: errc}:
+        return <-errc
+    case <-s.terminated:
+        return errTerminated
+    }
+}
+```
 
-[subchain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L93)是由数据库支持的、连续的、分段的区块头链，但可能未链接到规范链或侧链。skeleton-syncer可能会在每次重新启动时生成一个新的子链，直到子链增长到足以与先前的子链连接。
+可看到，链同步是通过`skeleton.Sync`[写入](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L329)`headUpdate`事件来触发。
 
-子链使用完全相同的数据库命名空间，并且彼此不脱节。 因此，将一个扩展为与另一个重叠需要首先减少第二个。 这种组合缓冲区模型用于避免在两个子链连接在一起时必须在磁盘上移动数据。
+这篇文章就介绍一下 skeleton 相关概念，以及同步的具体过程。
 
-## 启动
+### skeleton
 
-在`downloader.New`函数中[声明](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L230)了`skeleton`对象。
+[skeleton](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L191)表示合并后同步的`header chain`，它不再通过 PoW 以正向方式验证块，而是通过信标链（`beacon chain`）指定和扩展`head`，并在原始以太坊块同步协议上进行回填(`backfill`)。所以合并后的链同步氛围两个阶段：
+
+1. `skeleton` 同步 head。
+2. 一旦`skeleton`上的 head 可以连接到现有的、经过验证的链，就可以在主下载器（`downloader`）中以进行填充和执行。
+
+### subchain
+
+[subchain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L93)是由数据库支持的、连续的、分段的`header chain`，但可能未链接到规范链或侧链。skeleton-syncer可能会在每次重新启动时生成一个新的子链，直到子链增长到足以与先前的子链连接。
+
+subchain 使用完全相同的数据库命名空间，并且彼此不脱节。 因此，将一个扩展为与另一个重叠需要首先减少第二个。 这种组合缓冲区模型用于避免在两个子链连接在一起时必须在磁盘上移动数据。
+
+### backfiller
+
+## 实例化
+
+在实例化`downloader`时候[定义](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L230)了`skeleton`对象，它在 downloader 的整个生命周期内保持活动状态。
 
 ```go
 
 // New creates a new downloader to fetch hashes and blocks from remote peers.
 func New(checkpoint uint64, stateDb ethdb.Database, mux *event.TypeMux, chain BlockChain, lightchain LightChain,
 dropPeer peerDropFn, success func()) *Downloader {
-    if lightchain == nil {
-        lightchain = chain
-    }
+    ...
     dl := &Downloader{
+        ...
     }
     dl.skeleton = newSkeleton(stateDb, dl.peers, dropPeer, newBeaconBackfiller(dl, success))
-
-    go dl.stateFetcher()
+    ...
     return dl
 }
 ```
 
-需要注意： `skeleton` 声明就启动了一个循环：`startup`。
+同时 skeleton 也给自己实例化了一个 `backfiller`.
 
 ```go
 func newSkeleton(db ethdb.Database, peers *peerSet, drop peerDropFn, filler backfiller) *skeleton {
@@ -70,7 +120,7 @@ func newSkeleton(db ethdb.Database, peers *peerSet, drop peerDropFn, filler back
 }
 ```
 
-`skeleton.startup` 是一个后台循环函数，它通过等待事件进而启动或关闭同步器。
+`skeleton` 使用独立的 goroutine 执行`startup`。这是一个后台循环函数，它通过等待事件进而启动或关闭同步器。
 
 ```go
 func (s *skeleton) startup() {
@@ -82,9 +132,11 @@ func (s *skeleton) startup() {
     // client requests sync head extensions, but not forced reorgs (i.e. they are
     // giving us new payloads without setting a starting head initially).
     for {
+        // event loop
         select {
         case errc := <-s.terminate:
             ...
+        // 处理 skeleton.Sync 中产生的 headEvents。
         case event := <-s.headEvents:
             // New head announced, start syncing to it, looping every time a current
             // cycle is terminated due to a chain event (head reorg, old chain merge).
@@ -96,28 +148,57 @@ func (s *skeleton) startup() {
             head := event.header
             s.started = time.Now()
 
+            // subchain sync loop: 依次同步 subchain 中的每个 head，
             for {
-                // 注意：这里通过 for 循环不断重试？
+                // 直到 subchain 被local chain linked 或者 merged，或者 sync be terminated.
                 // If the sync cycle terminated or was terminated, propagate up when
                 // higher layers request termination. There's no fancy explicit error
                 // signalling as the sync loop should never terminate (TM).
+
+                // 根据 err 判断 subchain 当前处理状态，是否有新的 head 需要同步。
+                // newHead 就是 subchain 中下次需要同步的 head。
                 newhead, err := s.sync(head)
                 switch {
-                    // err 错误处理
-                    ...
+                case err == errSyncLinked:
+                    // Sync cycle linked up to the genesis block. Tear down the loop
+                    // and restart it so, it can properly notify the backfiller. Don't
+                    // account a new head.
+                    head = nil
+
+                case err == errSyncMerged:
+                    // Subchains were merged, we just need to reinit the internal
+                    // start to continue on the tail of the merged chain. Don't
+                    // announce a new head,
+                    head = nil
+
+                case err == errSyncReorged:
+                    // The subchain being synced got modified at the head in a
+                    // way that requires resyncing it. Restart sync with the new
+                    // head to force a cleanup.
+                    head = newhead
+
+                case err == errTerminated:
+                    // Sync was requested to be terminated from within, stop and
+                    // return (no need to pass a message, was already done internally)
+                    return
+
+                default:
+                    // Sync either successfully terminated or failed with an unhandled
+                    // error. Abort and wait until Geth requests a termination.
+                    errc := <-s.terminate
+                    errc <- err
+                    return
                 }
             }
         }
     }
 ```
 
-同步由新区块头事件`headEvent`触发，这里[调用](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L269)`skeleton.sync` 进行同步。
+注意看函数中新加的中文注释。 下面我们
 
-## 同步
+## head 同步
 
-假设新的区块头是本地最新区块的下一个，看一下是`skeleton.sync`如何同步的：
-
-### 设置同步 head
+下面看 `skeleton.sync`如何同步的。假设同步场景是 `remoteHead = localHead + 2`：
 
 ```go
 // If we're continuing a previous merge interrupt, just access the existing
@@ -128,12 +209,10 @@ if head == nil {
     // Otherwise, initialize the sync, trimming and previous leftovers until
     // we're consistent with the newly requested chain head
     s.initSync(head)
+}
 ```
 
-这里根据是否指定待同步的`head`分情况处理：
-
-+ 没指定，从以往的同步过程恢复。
-+ 有指定，就进行同步初始化。
+### 初始化同步信息
 
 ```go
 // initSync attempts to get the skeleton sync into a consistent state wrt any
@@ -145,7 +224,6 @@ func (s *skeleton) initSync(head *types.Header) {
 
     // Retrieve the previously saved sync progress
     if status := rawdb.ReadSkeletonSyncStatus(s.db); len(status) > 0 {
-        // 这里忽略已有的 skeleton 同步状态
         ...
     }
     // Either we've failed to decode the previous state, or there was none. Start
@@ -172,11 +250,30 @@ func (s *skeleton) initSync(head *types.Header) {
 }
 ```
 
-这里假设是`skeleton`之前没有其他子链的同步，只关注`initSync`中处理首次同步的逻辑：将`skeleton`同步状态写入数据库。
+`initSync`中主要的事情就是将 head 作为 `skeleton.process.Subchains[0]`(后面统一称为 `lastchain`)，处理逻辑是：
 
-### 可链接，恢复回填
++ 如果之前有未完成同步的`subchains`，并且 head 可以和原有的 `Subchains[0]` 进行合并，就进行合并。
++ 否则将 head 作为新的 subchains[0]。
 
-此轮都是在同步是在同步`s.progress.Subchains[0]`子链,如果该子链可以和数据库中的其他块链接，就开始执行回填：
+后面的流程都是针对`lastchain`进行同步和回填。
+
+```go
+    // Create the scratch space to fill with concurrently downloaded headers
+    s.scratchSpace = make([]*types.Header, scratchHeaders)
+    defer func() { s.scratchSpace = nil }() // don't hold on to references after sync
+
+    s.scratchOwners = make([]string, scratchHeaders/requestHeaders)
+    defer func() { s.scratchOwners = nil }() // don't hold on to references after sync
+
+    s.scratchHead = s.progress.Subchains[0].Tail - 1 // tail must not be 0!
+```
+
++ 初始化用于保存同步 head 的内存空间，每次同步可以保存 131072 个 head（`scratchHeaders`)。
++ head 同步自不同的 peer，每个 peer 可以同步 512 个 head（`requestHeaders`）。`scratchOwners` 记录了每批 head 对应的 peerID 。
++ `scratchHead` 是 lastchain 末尾 head 可以连接的 parent head number。
+
+### backfill
+
 
 ```go
 // If the sync is already done, resume the backfiller. When the loop stops,
@@ -190,7 +287,7 @@ if linked {
 }
 ```
 
-`beaconBackFiller.resume`为回填`state`和链数据[启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader`线程（`downloader.synchronise`），需要注意这里是异步的。
+如果`lastchain` 可以与`local chain`连接起来，就执行`backfill`.
 
 ```go
 // resume starts the downloader threads for backfilling state and chain data.
@@ -218,7 +315,10 @@ func (b *beaconBackfiller) resume() {
 }
 ```
 
-`downloader.synchronise`[调用](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L439)`downloader.syncWithPeer` 进行同步（该函数更多分析参见[downloader分析]({{< ref "../overview" >}})）。
+`beaconBackFiller.resume` 逻辑很简单：
+
++ 修改`filler`本身的状态参数。
++ 使用单独的 goroutine [启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader.synchronise`同步`lastchain`对应的`state`和链上数据。`downloader.synchronise`函数分析参见[downloader分析]({{< ref "../overview" >}})）。
 
 `downloader.syncWithPeer`中通过`skeleton.Bounds`[了解](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L480)此轮同步的边界。
 
@@ -253,35 +353,4 @@ todo: 等待补充。
 
 前面说到`skeleton.sync`是消费`skeleton.headEvents`中的，那么又是谁来产生事件的呢？
 
-通过阅读代码可以看到只有`skeleton.Sync`[写入](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L329)`headUpdate`事件。
-
-```go
-func (s *skeleton) Sync(head *types.Header, force bool) error {
-    log.Trace("New skeleton head announced", "number", head.Number, "hash", head.Hash(), "force", force)
-    errc := make(chan error)
-
-    select {
-    case s.headEvents <- &headUpdate{header: head, force: force, errc: errc}:
-        return <-errc
-    case <-s.terminated:
-        return errTerminated
-    }
-}
-```
-
-跟踪代码发现，这个函数是最终被共识引擎 API`ConsensusAPI.ForkchoiceUpdatedV1`[调用](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/catalyst/api.go#L199)。
-
-```go
-func (api *ConsensusAPI) ForkchoiceUpdatedV1(update beacon.ForkchoiceStateV1, payloadAttributes *beacon.
-PayloadAttributesV1) (beacon.ForkChoiceResponse, error) {
-    api.forkchoiceLock.Lock()
-    ...
-    block := api.eth.BlockChain().GetBlockByHash(update.HeadBlockHash)
-    if block == nil {
-        // If this block was previously invalidated, keep rejecting it here too
-        if err := api.eth.Downloader().BeaconSync(api.eth.SyncMode(), header); err != nil {
-            return beacon.STATUS_SYNCING, err
-        }
-        return beacon.STATUS_SYNCING, nil
-    }
-```
+通过阅读代码可以看到只有
