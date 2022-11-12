@@ -92,6 +92,7 @@ func MakeProtocols(backend Backend, network uint64, dnsdisc enode.Iterator) []p2
 // is primary).
 var ProtocolVersions = []uint{ETH67, ETH66}
 ```
+
 ## 启动 eth 协议 peer
 
 ```go
@@ -294,3 +295,5 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 当客户端池中出现新交易时，它应该使用`Transactions`和`NewPooledTransactionHashes`消息将它们传播到网络。`Transactions` 消息转发完整的交易对象，通常发送给一小部分随机连接的 peer 。所有其他 peer 都会收到交易哈希的通知，还可以请求完整的交易对象（如果不知道的话）。将完整的交易分发给一小部分 peer 通常可以确保所有节点都接收到交易并且不需要请求它。
 
 节点永远不应该将交易发送回它可以确定已经知道它的 peer （因为它以前被发送过，或者因为它最初是从这个 peer 通知的）。这通常是通过记住一组最近由 peer 转发的交易哈希来实现的。
+
+[^1]: [以太坊源码解析：区块同步-Protocol](https://yangzhe.me/2019/04/14/ethereum-protocol/)
