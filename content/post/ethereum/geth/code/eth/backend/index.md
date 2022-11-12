@@ -8,7 +8,7 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 ---
 
 ## 概述
@@ -22,7 +22,7 @@ type Ethereum struct {
     // Handlers
     txPool             *txpool.TxPool
     blockchain         *core.BlockChain
-    handler            *handler
+    handler            *handler  // 用于处理以太坊链管理协议
     ethDialCandidates  enode.Iterator
     snapDialCandidates enode.Iterator
     merger             *consensus.Merger
@@ -54,8 +54,6 @@ type Ethereum struct {
     shutdownTracker *shutdowncheck.ShutdownTracker // Tracks if and when the node has shutdown ungracefully
 }
 ```
-
-## 实例化
 
 ```go
 
@@ -96,7 +94,9 @@ eth.shouldPreserve, &config.TxLookupLimit)
 }
 ```
 
-## 启动
+## 主要逻辑
+
+### 启动
 
 它是作为一个 service(`lifecycle`) 注册在 node 上面的，所以现在看下 service 启动做了些什么事情：
 
@@ -131,7 +131,7 @@ func (s *Ethereum) Start() error {
 
 ## eth ENR
 
-## handler
+## handler {#handler}
 
 ```go
 // newHandler returns a handler for all Ethereum chain management protocol.
@@ -154,7 +154,7 @@ nil, inserter, h.removePeer)
 
 定义了一下组件：
 
-+ downloader
++ [downloader]({{< ref "../downloader/downloader" >}})
 + blockFetcher
 + txFetcher
 + chainSync

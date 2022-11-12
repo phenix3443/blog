@@ -318,7 +318,7 @@ func (b *beaconBackfiller) resume() {
 `beaconBackFiller.resume` 逻辑很简单：
 
 + 修改`filler`本身的状态参数。
-+ 使用单独的 goroutine [启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader.synchronise`同步`lastchain`对应的`state`和链上数据。`downloader.synchronise`函数分析参见[downloader分析]({{< ref "../overview" >}})）。
++ 使用单独的 goroutine [启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader.synchronise`同步`lastchain`对应的`state`和链上数据。`downloader.synchronise`函数分析参见[downloader分析]({{< ref "../downloader" >}})）。
 
 `downloader.syncWithPeer`中通过`skeleton.Bounds`[了解](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L480)此轮同步的边界。
 
