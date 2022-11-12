@@ -13,7 +13,7 @@ draft: true
 
 ## 概述
 
-eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 eth/67。 这里分析 geth 中对于[eth协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
+eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 `eth/67`。 这里分析 geth 中对于[eth协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
 
 ## 注册 eth 协议为 p2p 子协议
 
@@ -35,7 +35,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 }
 ```
 
-在`eth.New`中[注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265) p2p 子协议。
+在`eth.New`中[注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265) eth 相关 p2p 子协议。
 
 ```go
 // Protocols returns all the currently configured
@@ -47,10 +47,9 @@ func (s *Ethereum) Protocols() []p2p.Protocol {
     }
     return protos
 }
-
 ```
 
-`MakeProtocols` 将 eth 协议转换为 p2p 子协议。注意函数的第一个参数进行了类型转换：`(*ethHandler)(s.handler)`，启动协议时`Backend.RunPeer`后续启动协议的时候实际调用的是`s.handler.RunPeer`。
+`MakeProtocols` 将 eth 协议转换为 p2p 子协议。
 
 ```go
 // MakeProtocols constructs the P2P protocol definitions for `eth`.
@@ -86,14 +85,13 @@ func MakeProtocols(backend Backend, network uint64, dnsdisc enode.Iterator) []p2
 }
 ```
 
-从[ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43) 可以看出当前 geth 支持两个版本的 eth 协议：
++ [ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43)指示当前 geth 支持两个版本的 eth 协议：
 
 ```go
 // ProtocolVersions are the supported versions of the `eth` protocol (first
 // is primary).
 var ProtocolVersions = []uint{ETH67, ETH66}
 ```
-
 ## 启动 eth 协议 peer
 
 ```go
@@ -106,7 +104,9 @@ var ProtocolVersions = []uint{ETH67, ETH66}
     },
 ```
 
-现在继续看上面 `MakeProtocols`生成协议时候定义的[`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106)函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415)。这个函数首先本地实例化一个 peer，然后启动运行它。
+当 p2p 模块发现一个新的节点并完成链接时，会调用[`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106)函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415)。这个函数首先本地实例化一个 peer，然后启动运行它。
+
+`Backend.RunPeer`实际调用的是`s.handler.RunPeer`，这是因为调用`MakeProtocols`时第一个参数进行了类型转换：`(*ethHandler)(s.handler)`。
 
 ### 生成 peer 实例
 
@@ -187,7 +187,6 @@ forkFilter forkid.Filter) error {
 
 ### 循环处理消息
 
-
 ```go
 // Handle is invoked whenever an `eth` connection is made that successfully passes
 // the protocol handshake. This method will keep processing messages until the
@@ -202,7 +201,7 @@ func Handle(backend Backend, peer *Peer) error {
 }
 ```
 
-在收到 peer 的`Status`消息后，以太坊会话处于活动状态，[handleMessage](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L201) 负责处理后续的 peer 间消息。
+在收到 peer 的`Status`消息后，以太坊会话处于活动状态，这里无限循环使用 [handleMessage](https://tk.github.com/taikochain/taiko-geth/blob/ad914f6fd42e95ad578827f755f9e399bdc12448/eth/protocols/eth/handler.go#L201) 负责处理后续的 peer 间消息。
 
 ```go
 // handleMessage is invoked whenever an inbound message is received from a remote
@@ -260,7 +259,7 @@ var eth67 = map[uint64]msgHandler{
 }
 ```
 
-### 常见认为
+## 常见消息
 
 在一个会话中，可以执行三个高级任务：链同步、块传播和交易交换。这些任务使用不相交的协议消息集，客户端通常将它们作为所有 peer 连接上的并发活动来执行。
 
@@ -274,7 +273,7 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 
 状态同步通常通过下载 block header 链来进行，验证它们的有效性。在链同步部分中请求块体，但不执行交易，仅验证其“数据有效性”。客户端在链头附近选择一个块（`pivot block`）并下载该块的 state。
 
-## 块传播
+### 块传播
 
 新挖出的区块必须转发到所有节点。这是通过块传播发生的，这是一个两步过程。当收到来自 Peer 的`NewBlock`公告消息时，客户端首先验证该块的基本头有效性，检查工作量证明值是否有效。然后，它使用`NewBlock`消息将块发送给一小部分已连接的 peer （通常是 peer 总数的平方根）。
 
@@ -284,7 +283,7 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 
 如果块不是客户端当前最新块的直接后继，则接收块公告也可能触发链同步。
 
-## 交易交换
+### 交易广播
 
 所有节点必须交换待处理的交易，以便将它们转发给矿工，矿工将选择它们以包含在区块链中。客户端跟踪“交易池”中的待处理交易集。该池受特定于客户的限制，可以包含许多（即数千个）交易。
 
