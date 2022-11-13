@@ -275,7 +275,7 @@ func (s *skeleton) initSync(head *types.Header) {
 + head 同步自不同的 peer，每个 peer 可以同步 512 个 head（`requestHeaders`）。`scratchOwners` 记录了每批 head 对应的 peerID 。
 + `scratchHead` 是 lastchain 末尾 head 可以连接的 parent head number。
 
-### last chain 可 link
+### lastchain 可 link
 
 ```go
 // If the sync is already done, resume the backfiller. When the loop stops,
@@ -382,7 +382,7 @@ func (s *skeleton) Bounds() (head *types.Header, tail *types.Header, err error) 
     }
 ```
 
-在等待 Downloader 对 last chain 进行回填过程中，当前 skeleton 继续等待其他 event 发生，如果有 newHeader 到来，就将其整合到 last chain 中， 返回new header 以及 errSyncReorged 到上一层，循环中开启下一次同步。
+在等待 Downloader 对 lastchain 进行回填过程中，当前 skeleton 继续等待其他 event 发生，如果有 newHeader 到来，就将其整合到 lastchain 中， 返回new header 以及 errSyncReorged 到上一层，循环中开启下一次同步。
 
 ### lastchain 不可 link
 

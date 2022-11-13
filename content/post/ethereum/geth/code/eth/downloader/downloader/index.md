@@ -309,8 +309,8 @@ processSnapSyncContent 和 processFullSyncContent 做的事情也很简单，将
 
 这篇文章介绍了 Downloader 对象更新到指定 header 的整体流程， 配合 [skeleton]({{< ref "../skeleton" >}}) 与 [queue]({{< ref "../queue" >}}) 两篇文章，基本上已经将以太坊(post-merge)通过信标连同步的流程说清楚了：
 
-1. skeleton 设置要同步的 head 片段，也称为 `last chain`
-2. downloader 更具同步模式（snap or full）执行主要下载逻辑，从不同 peer 节点下载 last chain 中所有的 block 、receipt 等信息。
+1. skeleton 设置要同步的 head 片段，也称为 `lastchain`
+2. downloader 更具同步模式（snap or full）执行主要下载逻辑，从不同 peer 节点下载 lastchain 中所有的 block 、receipt 等信息。
 3. queue 作为 downloader 下载过程中的辅助对象，协助 Downloader 将下载任务按照一定的策略分配到不同的 peer，又将 peer 返回的数据组合成最终的 res，供 Downloader 后续在 local chain 使用。
 
 整个流程中，使用 channel、goroutine、sync.Cond 实现了流程的异步处理。
