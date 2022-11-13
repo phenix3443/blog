@@ -1,7 +1,7 @@
 ---
 title: "skeleton"
 slug: geth-downloader-skeleton
-description: downloader/skeleton 源码分析
+description: Geth 源码解析：downloader/skeleton
 date: 2022-11-06T22:40:40+08:00
 image:
 math:
@@ -9,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
 ## 概述
@@ -272,8 +275,7 @@ func (s *skeleton) initSync(head *types.Header) {
 + head 同步自不同的 peer，每个 peer 可以同步 512 个 head（`requestHeaders`）。`scratchOwners` 记录了每批 head 对应的 peerID 。
 + `scratchHead` 是 lastchain 末尾 head 可以连接的 parent head number。
 
-### backfill
-
+### last chain 可 link
 
 ```go
 // If the sync is already done, resume the backfiller. When the loop stops,
@@ -287,7 +289,7 @@ if linked {
 }
 ```
 
-如果`lastchain` 可以与`local chain`连接起来，就执行`backfill`.
+如果`lastchain` 可以与`local chain`连接起来，就让 Downloader 执行`backfill`，注意这是一个异步过程。
 
 ```go
 // resume starts the downloader threads for backfilling state and chain data.
@@ -343,14 +345,75 @@ func (s *skeleton) Bounds() (head *types.Header, tail *types.Header, err error) 
 }
 ```
 
-可以看到，每次 `resume` 都是在同步第一条子链`skeleton.progress.Subchains[0]`。
+可以看到，每次 `resume` 都是在同步第一条 subchain `skeleton.progress.Subchains[0]`。
 
-### 不可链接，创建任务
+```go
+    for {
+        ..
+        select {
+            ...
+        case event := <-s.headEvents:
+            // New head was announced, try to integrate it. If successful, nothing
+            // needs to be done as the head simply extended the last range. For now
+            // we don't seamlessly integrate reorgs to keep things simple. If the
+            // network starts doing many mini reorgs, it might be worthwhile handling
+            // a limited depth without an error.
+            if reorged := s.processNewHead(event.header, event.force); reorged {
+                // If a reorg is needed, and we're forcing the new head, signal
+                // the syncer to tear down and start over. Otherwise, drop the
+                // non-force reorg.
+                if event.force {
+                    event.errc <- nil // forced head reorg accepted
+                    return event.header, errSyncReorged
+                }
+                event.errc <- errReorgDenied
+                continue
+            }
+            event.errc <- nil // head extension accepted
 
-todo: 等待补充。
+            // New head was integrated into the skeleton chain. If the backfiller
+            // is still running, it will pick it up. If it already terminated,
+            // a new cycle needs to be spun up.
+            if linked {
+                s.filler.resume()
+            }
+        ...
+        }
+    }
+```
 
-## beacon 同步
+在等待 Downloader 对 last chain 进行回填过程中，当前 skeleton 继续等待其他 event 发生，如果有 newHeader 到来，就将其整合到 last chain 中， 返回new header 以及 errSyncReorged 到上一层，循环中开启下一次同步。
 
-前面说到`skeleton.sync`是消费`skeleton.headEvents`中的，那么又是谁来产生事件的呢？
+### lastchain 不可 link
 
-通过阅读代码可以看到只有
+``` go
+    for {
+        // Something happened, try to assign new tasks to any idle peers
+        if !linked {
+            s.assignTasks(responses, requestFails, cancel)
+        }
+        // Wait for something to happen
+        select {
+            ...
+        case res := <-responses:
+            // Process the batch of headers. If though processing we managed to
+            // link the current subchain to a previously downloaded one, abort the
+            // sync and restart with the merged subchains.
+            //
+            // If we managed to link to the existing local chain or genesis block,
+            // abort sync altogether.
+            linked, merged := s.processResponse(res)
+            if linked {
+                log.Debug("Beacon sync linked to local chain")
+                return nil, errSyncLinked
+            }
+            if merged {
+                log.Debug("Beacon sync merged subchains")
+                return nil, errSyncMerged
+            }
+            // We still have work to do, loop and repeat
+        }
+    }
+```
+
+如果 lastchain 不能和 localchain link 在一起，就需要调用 assignTasks 建立任务下载二者之前缺少的 head，下载成功后由 processResponse 处理，返回 errSyncLinked 或者 errSyncMerged 错误，在上层循环中开启下次同步。

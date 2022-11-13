@@ -1,6 +1,6 @@
 ---
 title: "geth Consensus 源码阅读"
-description:
+description: Geth 源码解析：consensus
 slug: get-consensus
 date: 2022-08-22T21:59:04+08:00
 image:

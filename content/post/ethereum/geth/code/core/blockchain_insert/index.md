@@ -1,14 +1,17 @@
 ---
-title: "geth insertChain"
-description:
-slug: geth-insert-chain
+title: "geth blockchain insert"
+description: Geth 源码解析：blockchain insert
+slug: geth-blockchain-insert
 date: 2022-11-03T10:49:21+08:00
 image:
 math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
 详细看一下区块是如何被加入到链中的。
@@ -104,7 +107,7 @@ todo:等待完善
 
 + case1: 首块是`修剪区块(prunedBlock)`。
 
-  [之前的文章]({{< ref "../overview" >}})介绍过所谓被“修剪区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
+  [之前的文章]({{< ref "../blockchain" >}})介绍过所谓被“修剪区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
 
   + `setHead==true`: 将整个`chain`作为侧链插入并处理可能发生的重组。因为根据修剪的规则，主链上的最新的区块（triesInMemory）是不可能不存在`state`对象的，但`chain[0]`的父块不存在`state`对象，说明它的父块不可能是主链上的最新的块，那么整个的`chain`参数所代表的这组区块肯定是在其它分支链上了。
   + `setHead==false`: 只有合并后会走到这个流程（可以通过查看该函数调用进行确定），如果父块是被修剪，就尝试恢复。

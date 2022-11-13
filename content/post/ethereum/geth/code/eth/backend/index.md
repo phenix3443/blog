@@ -1,7 +1,7 @@
 ---
 title: "ethereum full node service"
-description:
-slug: eth-full-node-service
+description: Geth 源码解析：ethereum 全节点服务
+slug: geth-ethereum-service
 date: 2022-11-09T16:35:37+08:00
 image:
 math:
@@ -9,9 +9,12 @@ license:
 hidden: false
 comments: true
 draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
-## 概述
+## 引言
 
 [Ethereum](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L66) 实现了 Ethereum 完全节点服务（full node service）。
 
@@ -22,7 +25,7 @@ type Ethereum struct {
     // Handlers
     txPool             *txpool.TxPool
     blockchain         *core.BlockChain
-    handler            *handler  // 用于处理以太坊链管理协议
+    handler            *handler
     ethDialCandidates  enode.Iterator
     snapDialCandidates enode.Iterator
     merger             *consensus.Merger
@@ -55,8 +58,9 @@ type Ethereum struct {
 }
 ```
 
-```go
+## 实例化 {#newEthereum}
 
+```go
 // New creates a new Ethereum object (including the
 // initialisation of the common Ethereum object)
 func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
@@ -94,6 +98,8 @@ eth.shouldPreserve, &config.TxLookupLimit)
 }
 ```
 
+[New](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L106) 用于创建 Ethereum Service 实例。
+
 ## 主要逻辑
 
 ### 启动
@@ -129,9 +135,11 @@ func (s *Ethereum) Start() error {
 + 启动更新 [eth ENR](https://eips.ethereum.org/EIPS/eip-778) 循环。
 + 启动管理 ethereum 链协议的[handler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L129) 。
 
-## eth ENR
-
 ## handler {#handler}
+
+[eth.handler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L92) 用于处理以太坊链管理协议。
+
+### 实例化 {#newHandler}
 
 ```go
 // newHandler returns a handler for all Ethereum chain management protocol.
@@ -141,6 +149,7 @@ func newHandler(config *handlerConfig) (*handler, error) {
         config.EventMux = new(event.TypeMux) // Nicety initialization for tests
     }
     h := &handler{
+        ...
     }
     // Construct the downloader (long sync)
     h.downloader = downloader.New(h.checkpointNumber, config.Database, h.eventMux, h.chain, nil, h.removePeer, success)

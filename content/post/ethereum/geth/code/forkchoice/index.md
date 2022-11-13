@@ -1,6 +1,7 @@
 ---
 title: "forkchoice"
-description:
+description: Geth 源码解析：forkchoice
+slug: geth-forkchoice
 date: 2022-11-06T21:17:22+08:00
 image:
 math:
@@ -8,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
+tag:
+    - geth
+    - ethereum
 ---
 ## 源码
 

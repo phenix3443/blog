@@ -9,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
 更详细信息参考 [官方文档](https://geth.ethereum.org/docs/interface/sync-modes)。

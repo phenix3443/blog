@@ -1,13 +1,17 @@
 ---
 title: "beacon-sync"
-description: downloader-beacon-sync
+description: Geth 源码解析：downloader-beacon-sync
+slug: geth-downloader-beaconsync
 date: 2022-11-06T22:44:20+08:00
 image:
 math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
 ## beaconBackfiller

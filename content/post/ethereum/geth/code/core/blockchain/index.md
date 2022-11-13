@@ -1,7 +1,7 @@
 ---
-title: "Blockchain-overview"
-slug: blockchain-overview
-description:
+title: "geth blockchain 实现"
+slug: geth-blockchain
+description: Geth 源码解析：blockchain
 date: 2022-10-31T19:29:44+08:00
 slug: blockchain-insert
 image:
@@ -9,7 +9,7 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 tags:
     - geth
     - ethereum
@@ -149,6 +149,6 @@ func (bc *BlockChain) InsertChain(chain types.Blocks) (int, error) {
 
 检查完成后，就调用`BlockChain.insertChain`进行实际的插入工作。
 
-`BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../insertChain" >}})分阶段来分析具体的代码。
+`BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../blockchain_insert" >}})分阶段来分析具体的代码。
 
 [^1]: http://yangzhe.me/2019/03/24/ethereum-blockchain/

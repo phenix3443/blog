@@ -1,7 +1,7 @@
 ---
 title: "downloader"
 slug: geth-downloader
-description: geth downloader 源码分析
+description: Geth 源码解析：downloader
 date: 2022-11-11T22:40:41+08:00
 image:
 math:
@@ -9,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
+tag:
+    - geth
+    - ethereum
 ---
 
 ## 概述
@@ -17,8 +20,8 @@ draft: false
 
 downloader 模块的代码位于 `eth/downloader` 目录下。其主要的功能代码分别在：
 
-+ downloader.go 实现了区块同步的主要功能和逻辑
-+ peer.go 实际上是对 eth/peer.go 中的对象的封装，增加了节点是否空闲(idle) 的统计
++ downloader.go 实现了区块同步的主要功能和逻辑。
++ peer.go 实际上是对 eth/peer.go 中的对象的封装，增加了节点是否空闲(idle) 的统计。
 + queue.go 实现了 queue 对象（关于 queue 对象的介绍请参看这篇文章），可以理解为这是一个对区块的组装队列。
 + statesync.go 是用来同步 state 对象的。
 
@@ -26,13 +29,9 @@ downloader 模块的代码位于 `eth/downloader` 目录下。其主要的功能
 
 参考之前的[文章]({{< ref "/post/ethereum/geth/syncmode" >}})
 
-### deliver
-
-### queue
-
 ## 实例化
 
-[Ethereum service]({{< ref "../../backend/#handler" >}}) 文章中介绍过 [eth.handler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L92) 来实现以太坊链管理协议。
+[eth.handler]({{< ref "../../backend/#newHandler" >}}) 对象的初始化过程定义了 Downloader 实例。
 
 ## 同步
 
@@ -55,9 +54,9 @@ beaconPing chan struct{}) error {
 }
 ```
 
-[synchronise](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L363) 找到可用的 peer 后调用 `syncWithPeer` 进行同步。
+[synchronise](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/Downloader.go#L363) 找到可用的 peer 后调用 `syncWithPeer` 进行同步。
 
-[syncWithPeer](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L448)实现了 full sync 与 snap sync，二者逻辑差别不大，重点关注通过信标链进行的 full sync。下面分段看下这个函数。
+[syncWithPeer](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/Downloader.go#L448)实现了 full sync 与 snap sync，二者逻辑差别不大，重点关注通过信标链进行的 full sync。下面分段看下这个函数。
 
 ### 查找最新 head
 
@@ -171,9 +170,11 @@ func (d *Downloader) findBeaconAncestor() (uint64, error) {
 
 使用 5 个 goroutine 开始下载从公共祖先第一个后继区块的 header、body、receipt，并插入本地数据。
 
-#### fetchHeaders && processHeaders {#processHeaders}
+#### fetchHeaders && fetchBeaconHeaders
 
-[downloader.fetchBeaconHeaders](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L282) 将 skeleton 中需要同步的 Head 拿出来生成`task`放入`downloader.headerProcCh`，代码很简单不做分析。
+beaconMode 下，[Downloader.fetchBeaconHeaders](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L282) 将 lastchain 需要同步的 Head 拿出来生成`task`放入`Downloader.headerProcCh`，代码很简单不做分析。
+
+#### processHeaders {#processHeaders}
 
 ```go
 // processHeaders takes batches of retrieved headers from an input channel and
@@ -214,11 +215,9 @@ func (d *Downloader) processHeaders(origin uint64, td, ttd *big.Int, beaconMode 
 }
 ```
 
-[processHeaders](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L1254) 消费`downloader.headerProcCh`调用 [downloader.queue]({{< ref "../queue" >}}) 进行下载，并激活`d.queue.blockWakeCh`, `d.queue.receiptWakeCh`准备下载 body 和 receipt。
+[processHeaders](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/Downloader.go#L1254) 消费`Downloader.headerProcCh`，使用 [queue.Schedule]({{< ref "../queue#Schedule" >}}) 初始化下载任务，并激活`d.queue.blockWakeCh`, `d.queue.receiptWakeCh`准备下载 body 和 receipt。
 
-关于 queue 说明，参见 [queue]
-
-#### fetchBodies &&  fetchReceipts
+#### fetchBodies &&  fetchReceipts {#concurrentFetch}
 
 ```go
 // concurrentFetch iteratively downloads scheduled block parts, taking available
@@ -268,8 +267,52 @@ func (d *Downloader) concurrentFetch(queue typedQueue, beaconMode bool) error {
 }
 ```
 
-body 和 receipt 都通过 [concurrentFetch](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent.go#L79) 来进行下载，该函数核心代码如上所示，关键的是三个函数 `queue.reserve`、`queue.request`、`queue.deliver`, 参考 [queue](../queue/)
+body 和 receipt 都通过 [typedQueue](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent.go#L39) 接口实现了下载流程的统一，该接口定义了将特定类型（[headerQueue](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent_headers.go#L29)，[bodyQueue](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent_bodies.go#L29)，[receiptQueue](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent_receipts.go#L29s)）的下载器/队列调度程序转换为与类型无关的通用并发获取器算法（[concurrentFetch](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/fetchers_concurrent.go#L79) ）调用所需的适配器。该算法中关键的是三个函数 `typedQueue.reserve`、`typedQueue.request`、`typedQueue.deliver`，这三个函数的具体实现又调用了 queue 对象中不同类型对应的[方法]({{< ref "../queue/#reserve" >}})。
 
-#### processSnapSyncContent && processFullSyncContent
+#### processSnapSyncContent && processFullSyncContent {#processSyncContent}
 
-用来处理同步的信息。
+```go
+
+// processFullSyncContent takes fetch results from the queue and imports them into the chain.
+func (d *Downloader) processFullSyncContent(ttd *big.Int, beaconMode bool) error {
+    for {
+        results := d.queue.Results(true)
+        if err := d.importBlockResults(results); err != nil {
+            return err
+        }
+    }
+}
+
+func (d *Downloader) importBlockResults(results []*fetchResult) error {
+    // Check for any early termination requests
+    // Retrieve a batch of results to import
+    first, last := results[0].Header, results[len(results)-1].Header
+    log.Debug("Inserting downloaded chain", "items", len(results),
+    blocks := make([]*types.Block, len(results))
+    for i, result := range results {
+        blocks[i] = types.NewBlockWithHeader(result.Header).WithBody(result.Transactions, result.Uncles)
+    }
+    // Downloaded blocks are always regarded as trusted after the
+    // transition. Because the downloaded chain is guided by the
+    // consensus-layer.
+    if index, err := d.blockchain.InsertChain(blocks); err != nil {
+    }
+    return nil
+}
+```
+
+processSnapSyncContent 和 processFullSyncContent 做的事情也很简单，将 `queue.Results` 返回的下载结果组成 block，使用 [blockchain.InsertChain]({{< ref "../../../core/blockchain_insert" >}}) 更新 local chain。
+
+这里需要注意的是 queue.Results 的第一个参数 true 表明是阻塞调用，process 阻塞直到结果返回。
+
+## 总结
+
+这篇文章介绍了 Downloader 对象更新到指定 header 的整体流程， 配合 [skeleton]({{< ref "../skeleton" >}}) 与 [queue]({{< ref "../queue" >}}) 两篇文章，基本上已经将以太坊(post-merge)通过信标连同步的流程说清楚了：
+
+1. skeleton 设置要同步的 head 片段，也称为 `last chain`
+2. downloader 更具同步模式（snap or full）执行主要下载逻辑，从不同 peer 节点下载 last chain 中所有的 block 、receipt 等信息。
+3. queue 作为 downloader 下载过程中的辅助对象，协助 Downloader 将下载任务按照一定的策略分配到不同的 peer，又将 peer 返回的数据组合成最终的 res，供 Downloader 后续在 local chain 使用。
+
+整个流程中，使用 channel、goroutine、sync.Cond 实现了流程的异步处理。
+
+系列文章很多地方参考了[fatcat22 以太坊源码解析](http://yangzhe.me/2019/05/09/ethereum-downloader) 系列，感谢 fatcat22 对知识的分享。
