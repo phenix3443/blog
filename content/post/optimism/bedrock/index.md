@@ -16,7 +16,7 @@ tag:
 
 ## 引言
 
-Bedrock 是 Optimism 网络的下一个主要版本，计划于 2023 年第一季度发布。在 Bedrock 有两个组件：
+[Bedrock](https://github.com/ethereum-optimism/optimism/tree/bedrock/specs) 是 Optimism 网络的下一个主要版本，计划于 2023 年第一季度发布。在 Bedrock 有两个组件：
 
 + Rollup node：负责从 L1 块派生 L2 链的组件。它有点类似于 consensus layer client 。
 

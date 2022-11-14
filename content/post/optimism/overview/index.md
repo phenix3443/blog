@@ -44,3 +44,6 @@ tag:
 这样做会带来许多类似于运行以太坊节点的好处，例如能够在本地模拟 L2 交易，而没有速率限制。
 
 它还允许`validator`通过重新导出输出根并将它们与`sequencer`提交的根进行比较来验证`sequencer`的工作。 在不匹配的情况下，验证器可以执行故障证明(`fault proof`)。
+
+
+[^1]: https://godorz.info/2022/04/optimism-notes/

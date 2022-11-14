@@ -95,7 +95,7 @@ L1Origin)
 
 如果在 L2 落后了，立即调用 reqStep 来完成同步到链的尖端。 当 L1 头向前移动时，或者如果需要处理 L1 链上的重组，也会触发 reqStep。
 
-loop 启动后就会执行一次 reqStep，在 L2 node 没有进行 p2p 同步 state 的情况下，会不断同步并处理 L1 上的块，缩小 L2SafeHeader.L1Origin 与 L1.LatestHeader 之间的差距。
+loop 启动后就会执行一次 reqStep，在 L2 node 没有进行 p2p 同步 state 的情况下(happy-path sync[^1])，会不断同步并处理 L1 上的块，缩小 L2SafeHeader.L1Origin 与 L1.LatestHeader 之间的差距(worst-case sync[^1])。
 
 对 L1 块的同步与处理位于 [handleEpoch](https://github.com/ethereum-optimism/optimism/blob/1e0bb3c0b8d9ca834b13feff9bb6dfce92073af1/op-node/rollup/driver/state.go#L278) 中：
 
@@ -127,11 +127,19 @@ func (s *state) handleEpoch(ctx context.Context) (bool, error) {
 
 ### l2BlockCreationTickerCh
 
+todo:
+
 ### l2BlockCreationReqC
 
-### s.unsafeL2Payloads:
+todo:
 
-### l1Heads:
+### s.unsafeL2Payloads
+
+todo:
+
+### l1Heads
+
+todo:
 
 ## 创建新块
 
@@ -197,3 +205,5 @@ func (s *state) handleUnsafeL2Payload(ctx context.Context, payload *l2.Execution
 [handleUnsafeL2Payload](https://github.com/ethereum-optimism/optimism/blob/1e0bb3c0b8d9ca834b13feff9bb6dfce92073af1/op-node/rollup/driver/state.go#L320) 调用 [processBlock](https://github.com/ethereum-optimism/optimism/blob/1e0bb3c0b8d9ca834b13feff9bb6dfce92073af1/op-node/rollup/driver/step.go#L57) 来更新 L2 上的 block。
 
 ## 总结
+
+[^1]: [exec-engine-sync](https://github.com/ethereum-optimism/optimism/blob/bedrock/specs/exec-engine.md#sync)
