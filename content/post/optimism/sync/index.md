@@ -1,6 +1,7 @@
 ---
 title: "optimism block sync"
 description: sync in optimism
+slug: optimism-block-sync
 date: 2022-11-07T17:27:25+08:00
 image:
 math:
@@ -8,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
+tag:
+    - optimism
+    - ethereum
 ---
 
 ## 网络[^1]
