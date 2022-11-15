@@ -8,8 +8,6 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - software
 tags:
     - discord
 ---
@@ -19,3 +17,9 @@ tags:
 方法一：开启 Surge for Mac 或者 ClashX Pro`enhanced mode`是最省心的方式。
 
 方法二：直接使用网页版(推荐)。
+
+## 增强模式
+
+todo: 待补充
+
+[^1]: https://console.bywa.art/clientarea.php
