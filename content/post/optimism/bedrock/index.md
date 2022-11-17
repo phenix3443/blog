@@ -31,21 +31,28 @@ tag:
 + `BatchInbox`：`Batch Submitter`用于批量提交交易的 L1 地址。
   + 批量交易包括 L2 交易的 calldata、timestamp 和 ordering information。
   + BatchInbox 是一个常规的 EOA 地址。 这让我们可以通过不执行任何 EVM 代码来节省 gas 成本。
-+ `L2OutputOracle`：一种存储 [L2 output root]() 的智能合约，用于取款和故障证明。
++ `L2OutputOracle`：一种存储 [L2 output root](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#l2-output) 的智能合约，用于取款和故障证明。
 
 ### L2 组件
 
 + Rollup node：
   + 一个独立的、无状态的二进制文件。
   + Receives L2 transactions from users.（todo: 有这个功能么？）
-  + 同步并验证 L1 上的 rollup 数据。
+  + 同步并验证 L1 上的 rollup 数据（主要是 deposit transaction?）。
   + 应用特定于 rollup 的块生产规则从 L1 合成块。
   + 使用 engine-api 将块附加到 L2 链。
   + 处理 L1 重组。
   + 将未提交的块分发到其他 rollup node 。
 
-
-+ Execution engine：实际执行交易的组件。
++ Execution engine：
+  + 一个普通的 Geth 节点，经过少量修改以支持 Optimism。
+  + 保持 L2 状态。
+  + 将状态同步到其他 L2 节点以实现快速加入。
+  + 向 rollup node 提供 engine-API。
++ Batch Submitter
+  将 [transaction batches](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#sequencer-batch) 提交到 BatchInbox 地址的后台进程。
++ Output Submitter
+  A background process that submits L2 output commitments to the L2OutputOracle.
 
 ![Bedrock-components](Bedrock-components.png)
 

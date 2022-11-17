@@ -19,10 +19,10 @@ tag:
 代码基于 optimism 最新的 [bedrock]({{< ref "../../../bedrock" >}}) 版本。
 
 ```go
-type Driver struct {
-    s *state
-}
+
 ```
+
+[Driver](https://github.com/ethereum-optimism/optimism/blob/66d56a47a233451d3db1fefb764dd4212300c66f/op-node/rollup/driver/state.go#L23) 几个
 
 ## 主要逻辑
 
