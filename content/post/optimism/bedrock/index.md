@@ -20,7 +20,7 @@ tag:
 
 ## 架构
 
-![components](./components.svg)
+![components](./components.png)
 
 ### L1 组件
 
@@ -50,9 +50,12 @@ tag:
   + 将状态同步到其他 L2 节点以实现快速加入。
   + 向 rollup node 提供 engine-API。
 + Batch Submitter
+
   将 [transaction batches](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#sequencer-batch) 提交到 BatchInbox 地址的后台进程。
+
 + Output Submitter
-  A background process that submits L2 output commitments to the L2OutputOracle.
+
+  将 L2 output commitments 提交到 L2OutputOracle 的后台进程。
 
 ![Bedrock-components](Bedrock-components.png)
 
