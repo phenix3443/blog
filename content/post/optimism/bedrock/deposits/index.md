@@ -30,7 +30,7 @@ tag:
 3. 它们在 L1 上购买 L2 gas，因此，L2 gas不可退还。
 
 我们定义了一个新的 [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) 兼容交易类型，前缀为`0x7E`，然后是一个版本化的字节序列。第一个版本将`0x00`作为版本字节，然后是以下字段（rlp 按照它们在此处出现的顺序编码）：
-c
+
 + `bytes32 sourceHash`: source-hash，唯一标识 deposit 来源。
 + `address from`: 发送者的账户地址。
 + `address to`: 收款人账户的地址，如果deposit 的交易是合约创建，则为空（零长度）地址。
