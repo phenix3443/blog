@@ -1,7 +1,7 @@
 ---
-title: "Deposits"
+title: "optimism deposit transactions"
+description: optimism 源码分析：deposit 交易
 slug: op-deposits
-description:
 date: 2022-11-18T20:34:20+08:00
 image:
 math:

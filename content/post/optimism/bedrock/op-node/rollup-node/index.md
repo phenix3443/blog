@@ -1,6 +1,6 @@
 ---
-title: "Rollup Node"
-description:
+title: "optimism rollup node"
+description: optimism 源码分析：rollup 节点
 date: 2022-11-18T22:31:24+08:00
 image:
 math:

@@ -1,6 +1,7 @@
 ---
-title: "Withdraw"
-description:
+title: "optimism withdraw transactions"
+description: optimism 源码分析：withdraw交易
+slug: op-withdraw
 date: 2022-11-19T02:17:41+08:00
 image:
 math:

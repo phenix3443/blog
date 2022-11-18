@@ -1,6 +1,6 @@
 ---
-title: "optimism-driver"
-description: optimism 源码解析： op-node/driver
+title: "optimism op-node 中的 driver"
+description: optimism 源码解析：op-node/driver
 slug: op-node-driver
 date: 2022-11-15T00:38:49+08:00
 image:

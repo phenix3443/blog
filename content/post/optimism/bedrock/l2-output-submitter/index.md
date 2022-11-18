@@ -1,6 +1,6 @@
 ---
-title: "L2 Output Submitter"
-description:
+title: "optimism L2 Output Submitter"
+description: optimism 源码分析：L2 Output Submitter"
 slug: op-l2-output-submitter
 date: 2022-11-18T18:02:09+08:00
 image:

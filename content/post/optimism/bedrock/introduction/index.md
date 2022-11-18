@@ -1,6 +1,6 @@
 ---
-title: "Optimism introduction"
-description: Optimism Bedrock introduction
+title: "optimism introduction"
+description: optimism 源码分析：交易模型
 slug: op-introduction
 date: 2022-11-15T01:17:01+08:00
 image:
