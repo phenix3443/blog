@@ -1,5 +1,5 @@
 ---
-title: "optimism specials: execution engine"
+title: "optimism specification: execution engine"
 description: optimism 源码分析：执行引擎规范
 slug: op-ee
 date: 2022-11-18T18:01:35+08:00
