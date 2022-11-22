@@ -8,6 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
+tag:
+    - ethereum
 ---
 
 区块链中有2类节点，全节点和轻节点，轻节点只会存储`block header`，所以轻节点如何才能校验账号是否合法呢？
