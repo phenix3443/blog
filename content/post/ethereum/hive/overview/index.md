@@ -1,13 +1,14 @@
 ---
-title: "ethereum  hive "
+title: "ethereum hive"
 description: 以太坊端到端集成测试系统
+slug: hive-overview
 date: 2022-11-22T15:19:14+08:00
 image:
 math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 tag:
     - ethereum
     - hive
