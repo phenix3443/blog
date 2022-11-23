@@ -1,6 +1,6 @@
 ---
 title: "hive clients"
-description: hive client 介绍
+description: hive clients 组件介绍
 slug: ethereum-hive-clients
 date: 2022-11-22T15:48:26+08:00
 image:

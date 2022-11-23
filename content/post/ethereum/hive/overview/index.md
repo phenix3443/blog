@@ -118,7 +118,7 @@ go build .
 
 所有 hive 命令都应从仓库的根目录中运行。要运行 simulation ，请使用以下命令：
 
-`./hive --sim <simulation> --client <要测试的客户端>`
+`./hive --sim <simulator> --client <要测试的客户端>`
 
 例如，如果想针对 geth 和 openethereum 运行 discv4 测试，命令如下所示：
 
