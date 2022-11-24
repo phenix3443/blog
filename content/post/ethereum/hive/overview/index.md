@@ -118,7 +118,7 @@ go build .
 
 所有 hive 命令都应从仓库的根目录中运行。要运行 simulation ，请使用以下命令：
 
-`./hive --sim <simulator> --client <要测试的客户端>`
+`./hive --sim <simulator-expression> --client <要测试的客户端>`
 
 例如，如果想针对 geth 和 openethereum 运行 discv4 测试，命令如下所示：
 
@@ -133,13 +133,13 @@ go build .
 + `--docker.pull`：设置这个选项让 hive 重新拉取所有构建的 docker 容器的基础镜像。
 + `--docker.output`：这允许将所有 docker 容器输出打印到 stderr。
 + `--sim.loglevel <level>`：选择客户端实例的日志级别。支持值 0-5，默认为 3。请注意，此值可能会被特定客户端的 simulator 覆盖。这会在客户端容器中设置`HIVE_LOGLEVEL`的默认值。
-+ `--sim.limit <pattern>`：指定一个正则表达式以选择性地启用套件和测试用例。这是由 simulator 解释的。它设置 `HIVE_TEST_PATTERN` 环境变量。
++ `--sim.limit <expression>`：指定一个正则表达式以选择性地启用套件和测试用例。这是由 simulator 解释的。它设置 `HIVE_TEST_PATTERN` 环境变量。
 + `--docker.nocache <expression>`：选择强制重建的 docker 镜像的正则表达式。可以在 simulator 开发期间使用此选项以确保构建新镜像，即使 simulator 代码没有更改也是如此。
 + `--sim.timelimit <timeout>`：simulation 超时时间。如果超过此时间，Hive 将中止 simulator 。没有默认超时。
 
-更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
+上面的 expression 是 golang regexp 支持[re2语法](https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex)。更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
 
-```html
+```log
 % ./hive --sim devp2p --sim.limit discv4 --client go-ethereum
 INFO[11-24|21:10:59] building image                           image=hive/hiveproxy nocache=false pull=false
 INFO[11-24|21:11:00] building 1 clients...
