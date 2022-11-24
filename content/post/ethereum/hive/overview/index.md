@@ -137,7 +137,57 @@ go build .
 + `--docker.nocache <expression>`：选择强制重建的 docker 镜像的正则表达式。可以在 simulator 开发期间使用此选项以确保构建新镜像，即使 simulator 代码没有更改也是如此。
 + `--sim.timelimit <timeout>`：simulation 超时时间。如果超过此时间，Hive 将中止 simulator 。没有默认超时。
 
-更多参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
+更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
+
+```html
+% ./hive --sim devp2p --sim.limit discv4 --client go-ethereum
+INFO[11-24|21:10:59] building image                           image=hive/hiveproxy nocache=false pull=false
+INFO[11-24|21:11:00] building 1 clients...
+INFO[11-24|21:11:00] building image                           image=hive/clients/go-ethereum:latest dir=clients/go-ethereum nocache=false pull=false
+INFO[11-24|21:11:00] building 1 simulators...
+INFO[11-24|21:11:00] building image                           image=hive/simulators/devp2p:latest dir=simulators/devp2p nocache=false pull=false
+INFO[11-24|21:11:01] running simulation: devp2p
+INFO[11-24|21:11:02] hiveproxy started                        container=79959fc25d80 addr=172.17.0.2:8081
+INFO[11-24|21:11:02] API: suite started                       suite=0 name=discv4
+INFO[11-24|21:11:02] API: test started                        suite=0 test=1 name=go-ethereum
+INFO[11-24|21:11:04] API: client go-ethereum started          suite=0 test=1 container=f598f244
+INFO[11-24|21:11:04] API: container IP requested              network=bridge container=f598f244 ip=172.17.0.4
+INFO[11-24|21:11:04] API: network created                     name=network1
+INFO[11-24|21:11:04] API: container connected to network      network=network1 container=simulation
+INFO[11-24|21:11:05] API: container connected to network      network=network1 container=f598f244
+INFO[11-24|21:11:05] API: container IP requested              network=bridge container=simulation ip=172.17.0.3
+INFO[11-24|21:11:05] API: container IP requested              network=network1 container=simulation ip=172.19.0.2
+INFO[11-24|21:11:05] API: test started                        suite=0 test=2 name="Ping/Basic (go-ethereum)"
+INFO[11-24|21:11:05] API: test ended                          suite=0 test=2 pass=true
+INFO[11-24|21:11:05] API: test started                        suite=0 test=3 name="Ping/WrongTo (go-ethereum)"
+INFO[11-24|21:11:05] API: test ended                          suite=0 test=3 pass=true
+INFO[11-24|21:11:05] API: test started                        suite=0 test=4 name="Ping/WrongFrom (go-ethereum)"
+INFO[11-24|21:11:05] API: test ended                          suite=0 test=4 pass=true
+INFO[11-24|21:11:05] API: test started                        suite=0 test=5 name="Ping/ExtraData (go-ethereum)"
+INFO[11-24|21:11:05] API: test ended                          suite=0 test=5 pass=true
+INFO[11-24|21:11:05] API: test started                        suite=0 test=6 name="Ping/ExtraDataWrongFrom (go-ethereum)"
+INFO[11-24|21:11:05] API: test ended                          suite=0 test=6 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=7 name="Ping/PastExpiration (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=7 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=8 name="Ping/WrongPacketType (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=8 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=9 name="Ping/BondThenPingWithWrongFrom (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=9 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=10 name="Findnode/WithoutEndpointProof (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=10 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=11 name="Findnode/BasicFindnode (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=11 pass=true
+INFO[11-24|21:11:06] API: test started                        suite=0 test=12 name="Findnode/UnsolicitedNeighbors (go-ethereum)"
+INFO[11-24|21:11:06] API: test ended                          suite=0 test=12 pass=true
+INFO[11-24|21:11:07] API: test started                        suite=0 test=13 name="Findnode/PastExpiration (go-ethereum)"
+INFO[11-24|21:11:07] API: test ended                          suite=0 test=13 pass=true
+INFO[11-24|21:11:07] API: test started                        suite=0 test=14 name="Amplification/InvalidPongHash (go-ethereum)"
+INFO[11-24|21:11:07] API: test ended                          suite=0 test=14 pass=true
+INFO[11-24|21:11:07] API: test ended                          suite=0 test=1 pass=true
+INFO[11-24|21:11:07] removing docker network                  name=network1
+INFO[11-24|21:11:07] API: suite ended                         suite=0
+INFO[11-24|21:11:08] simulation devp2p finished               suites=1 tests=14 failed=0
+```
 
 ### hiveview
 
