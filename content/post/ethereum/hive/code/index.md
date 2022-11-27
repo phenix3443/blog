@@ -70,6 +70,7 @@ func main() {
     // 从文件目录查询可用的 clients and simulators.
     inv, err := libhive.LoadInventory(".")
     ...
+    // 使用命令行中指定的 --sim 参数正则匹配生成要执行的 simulator
     simList, err := inv.MatchSimulators(*simPattern)
     ...
     // Create the docker backends.
@@ -93,13 +94,13 @@ func main() {
         SimDurationLimit:   *simTimeLimit,
         ClientStartTimeout: *clientTimeout,
     }
-    // runner 用于执行 simulation
+    // runner 用于执行 simulation 的对象实例
     runner := libhive.NewRunner(inv, builder, cb)
 
-    // 获取命令行指定的客户端
+    // 获取命令行 --client 指定的客户端列表
     clientList := splitAndTrim(*clients, ",")
 
-    // 构建命令行指定的 clients 以及 simulator 相关镜像
+    // 构建执行 simulation 需要相关镜像： hiveproxy、clients、simulator
     if err := runner.Build(ctx, clientList, simList); err != nil {
         fatal(err)
     }
@@ -141,7 +142,7 @@ hiveproxy 实现了 hive API 服务器代理。这是供“hive”命令行工�
 
 ## run simulations
 
-[Runner.run](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L163) 执行单个 simulation 的流程。
+通过 [Runner.run](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L163) 来看下执行单个 simulation 的流程。
 
 ```go
 // run runs one simulation.
@@ -169,7 +170,7 @@ func (r *Runner) run(ctx context.Context, sim string, env SimEnv) (SimResult, er
     }
     containerID, err := r.container.CreateContainer(ctx, r.simImages[sim], opts)
     ...
-    // start simulator container
+    // 启动 simulator container，执行定义的相关测试
     sc, err := r.container.StartContainer(ctx, containerID, opts)
     // 等待 simulations finish，搜集结果返回
     // Count the results.
@@ -216,7 +217,12 @@ func newSimulationAPI(b ContainerBackend, env SimEnv, tm *TestManager) http.Hand
 }
 ```
 
-`api.startTest` 和 `api.endTest` 中看到之前的日志打印。
+`api.startTest` 和 `api.endTest` 中看到之前日志中 test 启动和结束的相关日志：
+
+```log
+INFO[11-24|21:40:13] API: test started                        suite=0 test=1 name="client launch (go-ethereum)"
+INFO[11-24|21:40:40] API: test ended                          suite=0 test=1 pass=true
+```
 
 ### run hiveproxy
 
@@ -267,6 +273,8 @@ func (cb *ContainerBackend) ServeAPI(ctx context.Context, h http.Handler) (libhi
 
 ### run simulator
 
+[启动 simulator 镜像](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218) 后就开始执行其中定义相关测试代码代码。
+
 [ClientTestSpec.runTest](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/hivesim/testapi.go#L339)描述了单个 ClientTestSpec 类型的 simulation 核心逻辑：
 
 ```go
@@ -302,6 +310,16 @@ func (spec ClientTestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Sui
     return nil
 }
 ```
+
+从上面的代码可以看出 client container 是在执行测试用例的过程中启动的，与日志也匹配：
+
+```log
+INFO[11-24|21:40:13] API: test started                        suite=0 test=1 name="client launch (go-ethereum)"
+INFO[11-24|21:40:19] API: client go-ethereum started          suite=0 test=1 container=1743f1a0
+INFO[11-24|21:40:40] API: test ended                          suite=0 test=1 pass=true
+```
+
+另外，从对 `spec.Role`的判断，我们可以明白 simulation 中该字段的用途：“If no role is specified, the test runs for all available client types.”，如果没有指定该字段，那么 spec.Run 针对命令行中指定的所有 client 都会运行，这可能不是我们想要的。
 
 ```go
 func runTest(host *Simulation, test testSpec, runit func(t *T)) error {

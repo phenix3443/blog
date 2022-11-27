@@ -109,7 +109,7 @@ func runMyClientTest(t *hivesim.T, c *hivesim.Client) {
 测试用例可以用用三种表示：
 
 + `TestSpec`：默认不启动任何客户端。
-+ `ClientTestSpec`：针对单个客户端的测试。
++ `ClientTestSpec`：针对单个客户端的测试，要留意 `Role` 字段的定义和使用：“If no role is specified, the test runs for all available client types.”，如果没有指定该字段，那么 spec.Run 针对命令行中指定的所有 client 都会运行，这可能不是我们想要的。。
 + 实现`AnyTest` 接口的任何 struct。
 
   ```go

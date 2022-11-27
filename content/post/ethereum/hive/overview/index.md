@@ -31,7 +31,7 @@ Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P网
 
 + `devp2p`：该 simulator 运行 “eth”、“snap” 和 “discv4” P2P 协议测试。测试套件（test suits）本身在 go-ethereum 仓库中维护。在它们的 hive 适配代码中，simulator 启动具有已知测试链的客户端，获取其 P2P 端点（`enode://` URL）并向其发送协议消息。客户端的响应由测试套件进行分析，以确保它们符合相应的协议规范。
 
-+ `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 --client 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
++ `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 `--client` 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
 
 + `ethereum/consensus`：该 simulator 针对所有客户端运行 Ethereum 1 共识测试。虽然通常期望客户端实施者自己运行这些测试，但它们可能并不总是运行最新的测试，并且如果花费的时间太长，它们可能会跳过其中的一些测试。在hive simulation 中运行这些测试可确保不会跳过任何测试。
 
@@ -118,7 +118,7 @@ go build .
 
 所有 hive 命令都应从仓库的根目录中运行。要运行 simulation ，请使用以下命令：
 
-`./hive --sim <simulator-expression> --client <要测试的客户端>`
+`./hive --sim <simulator-expression> --client <simulator 测试需要用到的客户端>`
 
 例如，如果想针对 geth 和 openethereum 运行 discv4 测试，命令如下所示：
 
