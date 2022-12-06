@@ -19,9 +19,9 @@ tag:
 
 [Hive](https://github.com/ethereum/hive/blob/master/docs/overview.md) 是一个帮助以太坊（ethereum）客户端（clients）进行集成测试（integration tests）的系统。
 
-在 Hive 中，集成测试称为“`simulations`”。 simulations 由 `simulator` 控制，simulator 是可用任何语言编写的程序。simulator 启动客户端并包含测试逻辑。它将测试结果上报 Hive，在那里它们被聚合以显示在 web 浏览器中。
+在 Hive 中，集成测试称为“`simulations`”，也就是一个 simulation 就是一个测试用例（test case）。 simulations 由 `simulator` 控制，simulator 是可用任何语言编写的程序。simulator 启动客户端并包含测试逻辑。它将测试结果上报 Hive，在那里它们被聚合以显示在 web 浏览器中。simulator 实际上是 simulation 的 docker 化运行环境，所有的 simulation 都此 docker 环境中运行。
 
-Hive 与其他通用 CI 基础设施的不同之处在于其同太坊客户端及其功能紧密集成。simulator 程序通常不需要关心客户端实现之间的差异，因为 Hive 提供了一个通用接口来启动和配置它们。当前，可以为任何 Ethereum 1 网络定义配置客户端，即创世块和硬分叉激活块号。simulations 还可以指示客户端加载预定义的测试链并启用挖矿（mining）。您可以在 [hive 客户端文档]({{< ref "../client" >}}) 中找到有关客户端配置的更多信息。
+Hive 与其他通用 CI 基础设施的不同之处在于其同太坊客户端及其功能紧密集成。simulator 程序通常不需要关心客户端实现之间的差异，因为 Hive 提供了一个通用接口来启动和配置它们。当前，可以为任何 Ethereum 1 网络定义配置客户端（通过定义创世块和硬分叉激活块号）。simulations 还可以指示客户端加载预定义的测试链并启用挖矿（mining）。可以在 [hive 客户端文档]({{< ref "../client" >}}) 中找到有关客户端配置的更多信息。
 
 Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P网络规范合规性以及大多数 Ethereum 客户端实现的用户 API 支持。您可以在 <https://hivetests.ethdevops.io/> 找到最新的测试结果。
 
@@ -31,13 +31,21 @@ Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P网
 
 + `devp2p`：该 simulator 运行 “eth”、“snap” 和 “discv4” P2P 协议测试。测试套件（test suits）本身在 go-ethereum 仓库中维护。在它们的 hive 适配代码中，simulator 启动具有已知测试链的客户端，获取其 P2P 端点（`enode://` URL）并向其发送协议消息。客户端的响应由测试套件进行分析，以确保它们符合相应的协议规范。
 
-+ `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 `--client` 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
++ `eth2/engine`：TODO：待补充。
+
++ `eth2/testnet`：TODO：待补充。
 
 + `ethereum/consensus`：该 simulator 针对所有客户端运行 Ethereum 1 共识测试。虽然通常期望客户端实施者自己运行这些测试，但它们可能并不总是运行最新的测试，并且如果花费的时间太长，它们可能会跳过其中的一些测试。在hive simulation 中运行这些测试可确保不会跳过任何测试。
 
-+ `ethereum/rpc`：该 simulator 为 clique PoA 挖矿配置客户端，并针对 web3 JSON-RPC 接口运行各种测试。这些测试确保客户端能够通过 RPC 接收交易，将它们合并到其链中，并通过标准 API 报告交易结果。
++ `ethereum/engine`：TODO：待补充。
 
 + `ethereum/graphql`：该 simulator 使用已知测试链初始化客户端并启用 GraphQL API 端点。然后它执行某些查询并将其输出与已知的期望输出进行比较。
+
++ `ethereum/rpc`：该 simulator 为 clique PoA 挖矿配置客户端，并针对 web3 JSON-RPC 接口运行各种测试。这些测试确保客户端能够通过 RPC 接收交易，将它们合并到其链中，并通过标准 API 报告交易结果。
+
++ `ethereum/rpc-compat`：TODO：待补充。
+
++ `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 `--client` 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
 
 ## 运行原理 {#how-it-works}
 
@@ -47,15 +55,15 @@ Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P网
 
 `./hive --sim ethereum/sync --client go-ethereum,besu,openethereum`
 
-Hive 首先使用 docker 构建 simulator 和客户端镜像。它需要 `./simulators/ethereum/sync` 目录中的 Dockerfile 以及指定的每个客户端的 Dockerfile（在 `./clients/*/Dockerfile` 中）。
+Hive 首先使用 docker 构建 simulator 和客户端镜像。此例中，它需要 `./simulators/ethereum/sync` 目录中的 Dockerfile 以及指定的每个客户端的 Dockerfile（在 `./clients/*/Dockerfile` 中）。
 
 虽然 simulator 构建必须始终无错误地工作，但某些客户端构建失败也没问题，只要其中一个成功就可以了。这是因为从各自的上游存储库中提取的客户端代码有时可能无法构建。
 
 ![sim-overview](sim-overview.png)
 
-一旦构建了所有镜像， simulator 程序就会在 docker 容器中启动。`HIVE_SIMULATOR` 环境变量包含 hive 控制器（hive controller）的 HTTP 服务 URL。可以通过此 URL 访问 [hive simulation API](https://github.com/ethereum/hive/blob/master/docs/simulators.md#simulation-api-reference)。simulator 启动客户端并通过 API 报告测试结果。
+一旦构建了所有镜像， simulator 程序就会在 docker 容器中启动。`HIVE_SIMULATOR` 环境变量包含 hive 控制器（hive controller，也就是 hive 命令启动的服务）的 HTTP 服务 URL。可以通过此 URL 访问 [hive simulation API](https://github.com/ethereum/hive/blob/master/docs/simulators.md#simulation-api-reference)。simulator 启动客户端并通过 API 报告向 hive 控制器测试结果。
 
-当 simulator 请求客户端实例时，Hive 控制器使用构建的客户端镜像启动一个新的 docker 容器。客户端容器入口点通过 simulator 提供的环境变量和文件接收进行配置。根据此配置数据，客户端入口点配置客户端的创世状态并导入测试链（如果提供）。现在期望客户端启动其网络端点以进行 RPC 和 p2p 通信。
+当 simulator 请求客户端实例时，Hive 控制器使用构建的客户端镜像启动一个新的 docker 容器。客户端容器入口点通过 simulator 提供的环境变量和文件接收进行配置（参见[simulator/devp2p](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/simulators/devp2p/main.go#L65)）。根据此配置数据，客户端入口点配置客户端的创世状态并导入测试链（如果提供）。客户端启动后可以与其进行 RPC 和 p2p 通信。
 
 当客户端完成启动时，simulator 程序在 RPC 和 p2p 端点上与其通信。可以启动多个客户端，客户端也可以相互通信。
 

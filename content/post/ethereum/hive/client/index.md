@@ -17,13 +17,13 @@ tag:
 
 ## 引言[^1]
 
-本文 [go-ethereum](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/clients/go-ethereum) 解释了客户端容器如何在 Hive 中工作。
+本文通过分析 [go-ethereum](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/clients/go-ethereum) client 解释客户端容器如何在 Hive 中工作。
 
 ## Client definitions
 
 ### Dockerfile
 
-客户端是可以通过 simulation 实例化（重点：通过 simulation 进行实例化）的 docker 镜像。客户端定义由 Dockerfile 和相关资源组成。客户端定义位于 hive 存储库中 `clients/` 的子​​目录中。
+客户端是可以通过 simulation 实例化的 docker 镜像（重点：通过 simulation 进行实例化）。客户端定义由 Dockerfile 和相关资源组成。客户端定义位于 hive 存储库中 `clients/` 的子​​目录中。
 
 当 hive 运行 simulation 时，它首先使用它们的 Dockerfile 构建所有客户端 docker 镜像，也就是在客户端目录中运行
 
@@ -67,9 +67,9 @@ head -1 > /version.txt
 
 当 simulation 请求客户端实例时，hive 从客户端映像创建一个 docker 容器。 simulator 可以通过传递带有前缀 `HIVE_` 的环境变量来自定义容器。它还可以在启动前将文件上传到容器中。创建容器后，hive 只需运行 `Dockerfile` 中定义的入口点（entry point）。
 
-hive 等待客户端容器打开 TCP 端口 8545 后才可供 simulator 使用。此端口可通过 `HIVE_CHECK_LIVE_PORT` 变量进行配置，并且可以通过将其设置为 0 来禁用检查。如果客户端容器在特定超时时间内未打开此端口，则 Hive 假定客户端启动失败。
+对于 ethereum client，hive 等待客户端容器打开 TCP 端口 8545 后才认为其可供 simulator 使用；如果客户端容器在特定超时时间内未打开此端口，则 Hive 假定客户端启动失败。此端口可通过 `HIVE_CHECK_LIVE_PORT` 变量进行配置，对于自定义非 eth client，可以通过将其设置为 0 来禁用检查。
 
-入口点（entry point）解析的环境变量和文件定义了 simulator 和客户端之间的“协议”。虽然 Hive 本身不需要支持任何特定的变量或文件，但 simulator通常希望客户端容器能够以某些方式进行配置。例如，为了针对多个以太坊客户端运行测试， simulator 需要能够将所有客户端配置为特定区块链，并让它们加入用于测试的 P2P 网络。
+simulator 可以给客户端传递启动容器需要的环境变量和文件。虽然 Hive 本身不需要支持任何特定的变量或文件，但 simulator通常希望客户端容器能够以某些方式进行配置。例如，为了针对多个以太坊客户端运行测试，simulator 需要能够将所有客户端配置为特定区块链，并让它们加入用于测试的 P2P 网络。
 
 ## Eth1 Client Requirements
 

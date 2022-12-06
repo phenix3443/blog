@@ -23,7 +23,7 @@ simulator 是针对 hive 提供的基于 HTTP simulation  API [^2] 编写的程�
 
 simulator 位于 hive 仓库的 `simulators/` 目录中。每个 simulator 都有一个专用的子目录。当 hive 运行 simulation 时，它首先在 simulator 目录中使用 `docker build` 构建镜像。该镜像必须包含测试所需的所有资源。
 
-当 simulator 容器入口点（entry point）运行时，`HIVE_SIMULATOR` 环境变量被设置为 API 服务器的 URL。
+当 simulator 容器入口点（entry point）运行时，`HIVE_SIMULATOR` 环境变量被设置为 API 服务器的 URL（参见[源码](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218))。
 
 simulation  API 采用特定的数据模型，该模型决定了 API 的使用方式。为了使用 API 执行任何操作，simulator 必须首先请求启动测试套件并记住其 ID。测试套件由 simulator 分配名称和描述。API 提供的所有其他资源都在测试套件范围内，并一直保留到 simulator 结束测试套件。
 
@@ -98,11 +98,9 @@ func runMyClientTest(t *hivesim.T, c *hivesim.Client) {
 }
 ```
 
-### test suit && test case
+### test suit && test case[^3]
 
-测试套件（test suit）代表 simulator 的单次运行。一个测试套件可以包含多个测试用例（test case）。 测试用例代表针对一个或多个客户端的单独测试。
-
-为了对客户端执行测试，有必要首先创建一个测试套件并向该套件添加一个或多个测试用例。 这可以通过创建 “Suite”对象来完成，如下所示：
+一个测试套件可以包含多个测试用例（test case）。 测试用例代表针对一个或多个客户端的单独测试。
 
 `Suite` 有一个额外的字段 `Tests`，它表示测试套件要执行的所有测试用例。 可以使用 `Add()` 方法将测试用例添加到套件中。
 
@@ -185,5 +183,9 @@ ENTRYPOINT ["./sim"]
 
 ## 总结
 
++ 运行时，simulator 实际上是 simulation 运行的测试环境（host）。
++ simulator 中可以运行多个 test suit, 每个 suit 可以包含多个 test spec，也就是 test case。
+
 [^1]: [hive simulator](https://github.com/ethereum/hive/blob/master/docs/simulators.md)
 [^2]: [hive simulation API Reference](https://github.com/ethereum/hive/blob/master/docs/simulators.md#simulation-api-references)
+[^3]: [hivesim](https://pkg.go.dev/github.com/ethereum/hive/hivesim)

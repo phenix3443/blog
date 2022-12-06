@@ -10,14 +10,14 @@ hidden: false
 comments: true
 draft: false
 tag:
-    - ethereum
-    - hive
-    - test
+  - ethereum
+  - hive
+  - test
 ---
 
 ## 引言
 
-之前的文章中分析了 hive 中 [simulation 的运行原理]({{< ref "../overview#how-it-works">}}) 还有 [client的声明周期]({{< ref "../client#client-lifecycle" >}})，本文结合源码分析一下 hive 执行流程：
+之前的文章中分析了 hive 中 [simulation 的运行原理]({{< ref "../overview#how-it-works">}}) 还有 [client 的声明周期]({{< ref "../client#client-lifecycle" >}})，本文结合源码分析一下 hive 执行流程：
 
 `ethereum/rpc` 这个 simulator 的执行结果：
 
@@ -48,17 +48,17 @@ INFO[11-24|21:41:46] simulation ethereum/rpc finished         suites=1 tests=77 
 
 从上面的日志可以看出：
 
-+ 编译镜像：
-  + hive/hiveproxy 将 simulation api 接收 simulation API请求，并转发到 hive 控制器。
-  + hive/clients/go-ethereum：latest 命令行指定的客户端。
-  + hive/simulators/ethereum/rpc:latest 命令行指定的 simulator。
-+ 执行 simulation
-  + 启动 hiveproxy
-  + 启动 suit
-  + 并行执行各种 test
-    + 有些 test 需要启动 client
-  + 完成 suit
-+ 完成 simulation
+- 编译镜像：
+  - hive/hiveproxy 将 simulation api 接收 simulation API 请求，并转发到 hive 控制器。
+  - hive/clients/go-ethereum：latest 命令行指定的客户端。
+  - hive/simulators/ethereum/rpc:latest 命令行指定的 simulator。
+- 执行 simulation
+  - 启动 hiveproxy
+  - 启动 suit
+  - 并行执行各种 test
+    - 有些 test 需要启动 client
+  - 完成 suit
+- 完成 simulation
 
 ## hive 整体逻辑
 
@@ -85,7 +85,7 @@ func main() {
     builder, cb, err := libdocker.Connect(*dockerEndpoint, dockerConfig)
     ...
 
-    // env 启动 container 的相关配置参数，用于 simulator 的 run test case
+    // env 是启动 container(simulator 以及其他测试依赖 container) 相关配置参数
     env := libhive.SimEnv{
         LogDir:             *testResultsRoot,
         SimLogLevel:        *simLogLevel,
@@ -107,10 +107,13 @@ func main() {
     ...
 
     var failCount int
-    // 执行 simulation，可以看到这里传入了启动 container 相关的 env 参数
+    // 执行命令行 --sim 指定的 simulator（可以通过正则表达式匹配多个）
+    // 可以看到这里传入了启动 container 相关的 env 参数
     for _, sim := range simList {
         result, err := runner.Run(ctx, sim, env)
         if err != nil {
+            ...
+        }
     }
 }
 ```
@@ -140,9 +143,9 @@ hiveproxy 实现了 hive API 服务器代理。这是供“hive”命令行工�
 
 前端还有可由后端通过 RPC 触发辅助功能。具体来说，它可以运行 TCP 端点探测，hive 使用这些探测来确认客户端容器已经启动。
 
-## run simulations
+## run simulator
 
-通过 [Runner.run](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L163) 来看下执行单个 simulation 的流程。
+通过 [Runner.run](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L163) 来看下执行单个 simulator 的流程。
 
 ```go
 // run runs one simulation.
@@ -172,7 +175,7 @@ func (r *Runner) run(ctx context.Context, sim string, env SimEnv) (SimResult, er
     ...
     // 启动 simulator container，执行定义的相关测试
     sc, err := r.container.StartContainer(ctx, containerID, opts)
-    // 等待 simulations finish，搜集结果返回
+    // 等待 simulator finish，搜集结果返回
     // Count the results.
     var result SimResult
     for _, suite := range tm.Results() {
@@ -273,7 +276,81 @@ func (cb *ContainerBackend) ServeAPI(ctx context.Context, h http.Handler) (libhi
 
 ### run test {#run-test}
 
-[启动 simulator 镜像](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218) 后就开始执行其中定义相关测试代码代码。
+[启动 simulator 容器](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218) 后就开始执行其中定义相关测试代码代码。以 [devp2p](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/simulators/devp2p/main.go#L14) 为例了解执行流程。
+
+```go
+func main() {
+    discv4 := hivesim.Suite{
+        Name:        "discv4",
+        Description: "This suite runs Discovery v4 protocol tests.",
+        Tests: []hivesim.AnyTest{
+            hivesim.ClientTestSpec{
+                ...
+            },
+        },
+    }
+
+    eth := hivesim.Suite{
+        Name:        "eth",
+        Description: "This suite tests a client's ability to accurately respond to basic eth protocol messages.",
+        Tests: []hivesim.AnyTest{
+            hivesim.ClientTestSpec{
+                ...
+            },
+        },
+    }
+
+    snap := hivesim.Suite{
+        ...
+    }
+
+    hivesim.MustRun(hivesim.New(), discv4, eth, snap)
+}
+```
+
+跟踪 `hivesim.MustRun` 可以看到所有的执行所有 test case 的地方：
+
+```go
+
+// RunSuite runs all tests in a suite.
+func RunSuite(host *Simulation, suite Suite) error {
+    ...
+    suiteID, err := host.StartSuite(suite.Name, suite.Description, "")
+    if err != nil {
+        return err
+    }
+    defer host.EndSuite(suiteID)
+
+    for _, test := range suite.Tests {
+        // 调用了所有 test case 的 runTest 方法
+        if err := test.runTest(host, suiteID, &suite); err != nil {
+            return err
+        }
+    }
+    return nil
+}
+```
+
+hive 默认定义两种 testCase 类型，分别来看下：
+
+#### TestSpec
+
+```go
+func (spec TestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Suite) error {
+    test := testSpec{
+        suiteID:   suiteID,
+        suite:     suite,
+        name:      spec.Name,
+        desc:      spec.Description,
+        alwaysRun: spec.AlwaysRun,
+    }
+    return runTest(host, test, spec.Run)
+}
+```
+
+TestSpec.runTest 直接调用 test case 逻辑。
+
+#### ClientTestSpec
 
 [ClientTestSpec.runTest](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/hivesim/testapi.go#L339)描述了单个 ClientTestSpec 类型的 simulation 核心逻辑：
 
@@ -284,6 +361,8 @@ func (spec ClientTestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Sui
         return err
     }
     for _, clientDef := range clients {
+        // 根据 test case 中指定的 role 过滤命令行中指定的 client，然后对其执行所有的 test case.
+        // 如果test case 没有指定 role，对所有的额 client 执行测试。
         // 'role' is an optional filter, so eth1 tests, beacon node tests,
         // validator tests, etc. can all live in harmony.
         if spec.Role != "" && !clientDef.HasRole(spec.Role) {
@@ -298,7 +377,7 @@ func (spec ClientTestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Sui
         }
         // runTest 是一个封装函数
         err := runTest(host, test, func(t *T) {
-            // 启动 client
+            // 执行测试前启动 client
             client := t.StartClient(clientDef.Name, spec.Parameters, WithStaticFiles(spec.Files))
             // 调用自定义的测试逻辑
             spec.Run(t, client)
