@@ -271,7 +271,7 @@ func (cb *ContainerBackend) ServeAPI(ctx context.Context, h http.Handler) (libhi
 }
 ```
 
-### run simulator
+### run test {#run-test}
 
 [启动 simulator 镜像](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218) 后就开始执行其中定义相关测试代码代码。
 
