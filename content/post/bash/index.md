@@ -19,6 +19,8 @@ tags:
 
 ## 脚本
 
+[编程规范](https://www.jianshu.com/p/161618366866)
+
 ## 自动补全
 
 bash 自动补全依赖 [bash-completion](https://github.com/scop/bash-completion)， 按照官方说明进行安装即可。
