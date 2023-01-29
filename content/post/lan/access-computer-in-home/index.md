@@ -67,3 +67,19 @@ tags:
 ### 内网主机设置
 
 一般需要开通的是 ssh 端口，由于现在可以公网访问了，所以需要进行必要的安全设置。
+
+## WakeOnLan
+
+家里有一台 Intel NUC windows 机器，想要通过 WOL 进行启动。按照 [官方指导](https://www.intel.com/content/www/us/en/support/articles/000027615/intel-nuc.html)， 实际操作过程只需要在 “Power Options” 中关闭快速启动即可。
+
+mac 上有两个软件可以给网卡发送 WakeOnLan 信号：
+
+- wakeonlan
+
+  命令行工具，免费软件，`wakeonlan <mac 地址> <ip 地址>`
+
+- remote-wake-u
+
+  GUI 界面，可以显示局域网中存活的网卡，但该软件收费。
+
+这样就可以在 nuc 不使用的时候关机，使用的时候通过 wake on lan 唤醒。
