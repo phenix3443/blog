@@ -12,6 +12,7 @@ draft: false
 tags:
   - router
   - ddns
+  - lan
 ---
 
 ## 概述
