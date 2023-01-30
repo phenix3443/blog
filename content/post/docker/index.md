@@ -19,6 +19,8 @@ tags:
 
 ## Docker Daemon
 
+修改镜像默认存储位置：[https://cloud.tencent.com/developer/article/1835999]
+
 ## Docker Client
 
 ## Docker Desktop

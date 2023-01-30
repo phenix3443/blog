@@ -10,9 +10,9 @@ hidden: false
 comments: true
 draft: false
 tags:
-    - vscode
-    - 最佳实践
-    - docker
+  - vscode
+  - 最佳实践
+  - docker
 ---
 
 所有内容出自[官方文档](https://code.visualstudio.com/docs)。
@@ -24,3 +24,7 @@ tags:
 vscode 使用`.devcontainer/devcontainer.json`或者`.devcontainer.json`以及可选的`Dockerfile`或`docker-compose.yml`来创建开发容器。
 
 首先，根据提供的 Docker 文件或镜像名称创建开发容器使用的 image。 然后使用`devcontainer.json`中的一些设置创建并启动一个容器，重新安装和配置您的 Visual Studio Code 环境。
+
+## SSH GCE
+
+使用 `gcloud compute ssh <use@instance>` 登录 GCE 实例时，如果 user 不是本地 host 账号，而是实例上已有的账号，会登录出错，报 public key error 错误，这时候首先要删除原有用户 `sudo userdel -r <exist_user>`
