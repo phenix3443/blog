@@ -27,7 +27,7 @@ tags:
 
 ### gcloud cli
 
-[Google Cloud Client](https://cloud.google.com/sdk/docs?hl=zh-cn) 是用于管理 Google Cloud 上托管资源和应用的命令行工具。
+[Google Cloud Client](https://cloud.google.com/sdk/docs?hl=zh-cn) 是用于管理 Google Cloud 上托管资源和应用的命令行工具。 推荐使用[交互式安装](https://cloud.google.com/sdk/docs/downloads-interactive?hl=zh-cn)。
 
 ```shell
 gcloud GROUP | COMMAND [--account=ACCOUNT]
