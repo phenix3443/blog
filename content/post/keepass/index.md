@@ -49,6 +49,10 @@ lastPass 导出的 csv 密码文件，简单设置以下字段映射关系就可
 
 安装对应的浏览器插件后，点击插件图标，连接 keepassxc 即可。
 
+### 全局自动输入
+
+通过全局自动输入，可以在本地电脑的其他应用上也进行自动输入账号和密码。 在工具 → 设置 → 自动输入选项卡，单击进入“自动键入”对话框，然后按所需的组合键，将触发自动输入过程。
+
 ## KeePass2Android
 
 [KeePass2Android](https://github.com/PhilippC/keepass2android) 与 [KeePassDX](https://www.keepassdx.com/) 是 Android 上的解决方案，二者相比：
