@@ -22,6 +22,7 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 ## 测试网（testnet)
 
 [faucetlink](https://faucetlink.to/) faucet 资源聚合网站，支持 goerli & sepolia。
+[chainlink](https://faucets.chain.link/)
 
 ### goerli
 
