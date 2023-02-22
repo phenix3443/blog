@@ -102,3 +102,7 @@ git 底层使用 ssh 来访问 github，上述过程中，repo 对应的仓库 U
  [url "git@{organization}.github.com:{organization}/"]
      insteadOf = git@github.com:{organization}/
 ```
+
+## 查看配置
+
+可以通过 `git config -l --show-origin` 查看 git 相关配置项来自哪个文件。

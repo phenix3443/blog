@@ -10,10 +10,10 @@ hidden: false
 comments: true
 draft: false
 tags:
-    - golang
-    - github
-    - actions
-    - private-repo
+  - golang
+  - github
+  - actions
+  - private-repo
 ---
 
 本文介绍日常开发中和私有仓库相关的问题。
@@ -33,10 +33,11 @@ tags:
 即使 Go 现在知道模块是私有的，但仍然不足以使用该模块。如果尝试导入私有模块，可能会看到类似于以下内容的错误：
 
 ```html
-go get: module github.com/your_github_username/mysecret: git ls-remote -q origin in /Users/your_github_username/go/pkg/mod/cache/vcs/2f8c...b9ea: exit status 128:
-	fatal: could not read Username for 'https://github.com': terminal prompts disabled
-Confirm the import path was entered correctly.
-If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+go get: module github.com/your_github_username/mysecret: git ls-remote -q origin
+in /Users/your_github_username/go/pkg/mod/cache/vcs/2f8c...b9ea: exit status
+128: fatal: could not read Username for 'https://github.com': terminal prompts
+disabled Confirm the import path was entered correctly. If this is a private
+repository, see https://golang.org/doc/faq#git_https for additional information.
 ```
 
 此错误消息显示 Go 尝试下载私有模块，但仍然无法访问。由于 go mod 使用 Git 下载模块，它通常会要求您输入凭据。但是，在这种情况下，Go 正在为您调用 Git，并且无法输入访问凭据。此时，要访问私有模块，需要为 Git 提供一种无需立即输入即可检索访问凭据的方法。
@@ -53,24 +54,24 @@ If this is a private repository, see https://golang.org/doc/faq#git_https for ad
 
 如何设置 GitHub Actions 以使用托管在 GitHub 上的私有 go 模块，其他托管平台思路类似。
 
-+ 对于个人项目将 Personal token 作为 actions secret 添加到项目。对于组织项目，可以使用`App Key`或者`deploy key`来访问私有仓库。详见 [Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
-+ 配置 git 使用 actions secret 来拉取 repo (L12)。详见 [Creating encrypted secrets for an organization](https://docs.github.com/en/actions/security-guides/encrypted-secrets#about-encrypted-secrets)
+- 对于个人项目将 Personal token 作为 actions secret 添加到项目。对于组织项目，可以使用`App Key`或者`deploy key`来访问私有仓库。详见 [Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
+- 配置 git 使用 actions secret 来拉取 repo (L12)。详见 [Creating encrypted secrets for an organization](https://docs.github.com/en/actions/security-guides/encrypted-secrets#about-encrypted-secrets)
 
- ```shell
-  jobs:
-  run:
-    runs-on: ubuntu-latest
-    env:
-      GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
-        with:
-            go-version: '1.16'
-      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
-      - run: go build
+```shell
+ jobs:
+ run:
+   runs-on: ubuntu-latest
+   env:
+     GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+   steps:
+     - uses: actions/checkout@v2
+     - uses: actions/setup-go@v2
+       with:
+           go-version: '1.16'
+     - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
+     - run: go build
 
- ```
+```
 
 [^1]: [how-to-use-a-private-go-module-in-your-own-project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
 [^2]: [creating-a-personal-access-token](https://docs.github.com/cn/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
