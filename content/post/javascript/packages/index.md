@@ -1,6 +1,7 @@
 ---
-title: "npm"
-description:
+title: "JavaScript Packages"
+description: "JavaScript 包管理系统"
+slug: js-packages
 date: 2023-02-16T10:43:45+08:00
 image:
 math:
@@ -11,19 +12,9 @@ draft: false
 tags:
   - javascript
   - npm
-  - nvm
   - pnpm
+  - yarn
 ---
-
-## nvm
-
-使用 [nvm](https://github.com/nvm-sh/nvm) 管理 nodejs。
-
-```shell
-nvm install --lts
-nvm use --lts
-nvm ls
-```
 
 ## npm
 
