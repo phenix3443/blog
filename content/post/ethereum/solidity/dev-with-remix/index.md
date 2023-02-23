@@ -1,6 +1,7 @@
 ---
 title: "使用 Solidity + Remix 开发以太坊合约"
 description: 使用 Remix 开发合约
+slug: solidity-remix
 date: 2022-04-14T13:52:24+08:00
 image: img/ide.png
 math:
@@ -12,7 +13,7 @@ tags:
   - remix
   - ethereum
   - solidity
-  - contract
+  - smart-contract
 ---
 
 ## Remix IDE
