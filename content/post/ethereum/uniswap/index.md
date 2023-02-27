@@ -17,7 +17,7 @@ tags:
 
 [Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。
 
-## 准备工作
+## 准备工作[^1]
 
 uniswap-v2 版本智能合约部分的代码存放在 [Uniswap/v2-core](https://github.com/Uniswap/v2-core)  和 [Uniswap/v2-periphery](https://github.com/Uniswap/v2-periphery)  两个仓库，编译智能合约需要 `node@>=10`  版本。
 
@@ -33,7 +33,7 @@ git clone git@github.com:Uniswap/v2-periphery.git
 
 现在准备工作完成了，下面开始编译并且部署智能合约。
 
-## 部署合约
+## 部署合约[^1]
 
 由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹 `uniswap-contracts`  保存后续编译的智能合约代码：
 
@@ -73,7 +73,7 @@ cp -r build ../uniswap-contracts
 cd ..
 ```
 
-### 部署
+### 部署[^1]
 
 编译好的合约代码我们已经全部拷贝到 `uniswap-contracts`  目录。接下来就是部署合约了，这一步稍微麻烦一些，需要我们编写一个脚本。
 
@@ -241,7 +241,7 @@ cd interface
 yarn
 ```
 
-### 修改 SDK
+### 修改 SDK[^2]
 
 升级 @uniswap/sdk 到 3.0.3，因为当前 beta 版本无法将改动做成 patch:
 
@@ -420,3 +420,6 @@ tokens.json 文件完成编辑后就可以上传至服务器了。随便上传�
 添加成功，现在可以在交易所里面为 **MATIC**  代币添加流动性或者进行兑换了。
 
 ![matic](image/interface/ui/matic.png)
+
+[^1]: [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
+[^2]: [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
