@@ -8,17 +8,15 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - 区块链
 tags:
-    - 源码分析
-    - 以太坊
-    - geth
+  - 源码分析
+  - 以太坊
+  - geth
 ---
 
 ## layout
 
-go-ethereum项目的组织结构基本上是按照功能模块划分的目录：
+go-ethereum 项目的组织结构基本上是按照功能模块划分的目录：
 
 ```shell
 $ tree -L 2 -d

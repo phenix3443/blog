@@ -8,11 +8,11 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - macos
 tags:
-    - brew
+  - macos
+  - brew
 ---
+
 安装的 go@1.18.1 版本有点问题，需要切换到 1.17 版本。
 
 首先搜索软件包可用的版本`brew search go`， 可以查询到 go 的其他可用版本:

@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-    - 最佳实践
 tags:
-    - ssh
+  - ssh
 ---
 
 ## 概述
