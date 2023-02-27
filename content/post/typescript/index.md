@@ -9,16 +9,27 @@ license:
 hidden: false
 comments: true
 draft: true
+tags:
+  - typescript
 ---
 
 ## 概述
 
 [TypeScript](https://www.typescriptlang.org/zh)
 
-[TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-
 ## 安装
 
-`npm install -g typescript`
+安装编译器： `npm install -g typescript`
 
 查看版本 `tsc --version`
+
+编译代码文件 `tsc hello.ts`, 然后通过 `node hello.js` 运行代码。或者直接通过 [ts-node](https://www.npmjs.com/package/ts-node) 运行 `ts-node hello.ts`。
+
+## 语法
+
+- 多种多样的 for 循环语法。c-for, for-in, for-of, forEach, every, some.
+- 各种语法的 export 与 import: [https://segmentfault.com/a/1190000018249137]
+
+## 资料
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
