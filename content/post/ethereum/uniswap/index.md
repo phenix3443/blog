@@ -8,14 +8,14 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 tags:
   - uniswap
   - remix
   - sepolia
 ---
 
-[Uniswap](https://uniswap.org/)  是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。
+[Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。
 
 ## 准备工作
 
@@ -24,28 +24,27 @@ uniswap-v2 版本智能合约部分的代码存放在 [Uniswap/v2-core](https://
 然后将 clone 两个智能合约的代码仓库到本地：
 
 ```shell
+~$
 git clone git@github.com:Uniswap/v2-core.git
 git clone git@github.com:Uniswap/v2-periphery.git
 ```
 
-还需要准备一个开放了 JSON RPC API 的以太坊节点，嫌麻烦可以去 [https://infura.io](https://link.segmentfault.com/?enc=01KYiQMcrygNadbBQzSA0A%3D%3D.TaiP9vRsroRZk4ZeHg3q7FbQPW7jg9%2FAYgJw2%2B1YqxY%3D)  申请一个免费的 API Key。以及一个拥有足够 ETH 余额的以太坊地址，sepolia 测试网络可以打开 [triangleplatform](https://faucet.triangleplatform.com/ethereum/sepolia)  水龙头为你的地址获取测试的 ETH 代币。
+还需要准备一个开放了 JSON RPC API 的以太坊节点，嫌麻烦可以去 [infura](https://infura.io) 申请一个免费的 API Key。以及一个拥有足够 ETH 余额的以太坊地址，sepolia 测试网络可以打开 [triangle](https://faucet.triangleplatform.com/ethereum/sepolia) 水龙头为你的地址获取测试的 ETH 代币。
 
 现在准备工作完成了，下面开始编译并且部署智能合约。
 
 ## 部署合约
 
-由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹 `uniswap-contracts`  保存后续编译的智能合约代码。
+由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹 `uniswap-contracts`  保存后续编译的智能合约代码：
 
 ```shell
-mkdir uniswap-contracts
+~$ mkdir uniswap-contracts
+~$ ls uniswap-contracts
 ```
 
 当前的目录结构如下：
 
-```shell
-$ ls
-interface      uniswap-contracts    v2-core     v2-periphery
-```
+`interface uniswap-contracts v2-core v2-periphery`
 
 接下来我们分别编译两个项目的智能合约代码，然后拷贝到 `uniswap-contracts`  目录。
 
@@ -338,31 +337,15 @@ yarn patch-package @uniswap/sdk
 
 ![src/components/Header/index.tsx](image/interface/src/components/Header/index.tsx.png)
 
-You
+修改完成之后运行前端程序：`yarn start`
 
-修改完成之后运行前端程序：
-
-```
-yarn start
-```
-
-```
-Starting the development server...
-
-Browserslist: caniuse-lite is outdated. Please run:
-npx browserslist@latest --update-db
-
-Files successfully emitted, waiting for typecheck results...
-
-Compiled successfully!
-
-You can now view @uniswap/interface in the browser.
-
-  Local:            http://localhost:3000
-  On Your Network:  http://172.23.227.86:3000
-
-Note that the development build is not optimized.
-To create a production build, use yarn build.
+```html
+Starting the development server... Browserslist: caniuse-lite is outdated.
+Please run: npx browserslist@latest --update-db Files successfully emitted,
+waiting for typecheck results... Compiled successfully! You can now view
+@uniswap/interface in the browser. Local: http://localhost:3000 On Your Network:
+http://172.23.227.86:3000 Note that the development build is not optimized. To
+create a production build, use yarn build.
 ```
 
 最后打开浏览器访问地址 [http://localhost:3000](http://localhost:3000)  查看效果。
