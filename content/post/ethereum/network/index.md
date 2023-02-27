@@ -8,9 +8,10 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 tags:
   - ethereum
+  - testnets
 ---
 
 ## 概述
@@ -30,8 +31,10 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 
 ## sepolia
 
-Faucet:
-
-- [https://www.allthatnode.com/faucet/ethereum.dsrv] 推荐使用。
-- [https://faucet.triangleplatform.com/ethereum/sepolia]
-- [https://coinbase.com/faucets/ethereum-sepolia-faucet]
+| Faucet                                                           | 频次         |
+| ---------------------------------------------------------------- | ------------ |
+| [官方](https://sepoliafaucet.net/)                               | 暂时不可用   |
+| [laika](https://web.getlaika.app/faucets)                        | 0.1ETH/h     |
+| [allthatnode](https://www.allthatnode.com/faucet/ethereum.dsrv)  | 0.025/24h    |
+| [triangle](https://faucet.triangleplatform.com/ethereum/sepolia) | 0.001ETH/24h |
+| [coinbase](https://coinbase.com/faucets/ethereum-sepolia-faucet) | 0.05ETH/24h  |
