@@ -31,10 +31,11 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 
 | Faucet                                                           | 频次         |
 | ---------------------------------------------------------------- | ------------ |
-| [官方 Faucet](https://goerlifaucet.com/)                         | 暂时不可用   |
+| [官方 Faucet](https://goerlifaucet.com/)                         |              |
 | [allthatnode](https://www.allthatnode.com/faucet/ethereum.dsrv)  | 0.025/24h    |
 | [triangle](https://faucet.triangleplatform.com/ethereum/goerli)  | 0.001ETH/24h |
 | [coinbase](https://coinbase.com/faucets/ethereum-sepolia-faucet) | 0.05ETH/24h  |
+| [pow 获取 eth](https://goerli-faucet.pk910.de/                   | 量大，推荐   |
 
 -
 
@@ -42,11 +43,11 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 
 介绍参见 [Sepolia Testnet Guide – What is the Sepolia Testnet?](https://moralis.io/sepolia-testnet-guide-what-is-the-sepolia-testnet/)
 
-| Faucet                                                           | 频次             |
-| ---------------------------------------------------------------- | ---------------- |
-| [官方](https://sepoliafaucet.net/)                               | 暂时不可用       |
-| [laika](https://web.getlaika.app/faucets)                        | 0.1ETH/h         |
-| [allthatnode](https://www.allthatnode.com/faucet/ethereum.dsrv)  | 0.025/24h        |
-| [triangle](https://faucet.triangleplatform.com/ethereum/sepolia) | 0.001ETH/24h     |
-| [coinbase](https://coinbase.com/faucets/ethereum-sepolia-faucet) | 0.05ETH/24h      |
-| [pow 获取 eth](https://sepolia-faucet.pk910.de/)                 | pow 挖矿（推荐） |
+| Faucet                                                           | 频次         |
+| ---------------------------------------------------------------- | ------------ |
+| [官方](https://sepoliafaucet.net/)                               | 暂时不可用   |
+| [laika](https://web.getlaika.app/faucets)                        | 0.1ETH/h     |
+| [allthatnode](https://www.allthatnode.com/faucet/ethereum.dsrv)  | 0.025/24h    |
+| [triangle](https://faucet.triangleplatform.com/ethereum/sepolia) | 0.001ETH/24h |
+| [coinbase](https://coinbase.com/faucets/ethereum-sepolia-faucet) | 0.05ETH/24h  |
+| [pow 获取 eth](https://sepolia-faucet.pk910.de/)                 | 量大，推荐   |
