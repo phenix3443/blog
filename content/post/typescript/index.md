@@ -33,3 +33,5 @@ tags:
 ## 资料
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [TypeScript 入门教程](https://ts.xcatliu.com/)
+- [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
