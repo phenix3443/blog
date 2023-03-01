@@ -421,5 +421,21 @@ tokens.json 文件完成编辑后就可以上传至服务器了。随便上传�
 
 ![matic](image/interface/ui/matic.png)
 
+## 验证功能
+
+1. 程序启动： 正常
+2. 链接钱包（metamask、coinbase)：正常
+3. 显示钱包余额
+4. 添加流动池
+5. 进行交换
+
+## 问题
+
+1. 切换网络 app 会崩溃
+
+## 参考
+
+- [knows-token-decimals](https://medium.com/@nuuneoi/knows-token-decimals-when-1-million-tokens-does-not-always-mean-there-is-only-1-million-tokens-d89c1a8c27ee)
+
 [^1]: [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
 [^2]: [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
