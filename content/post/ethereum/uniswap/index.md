@@ -15,65 +15,108 @@ tags:
   - sepolia
 ---
 
-[Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。
+[Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。该方法也可用于将 Uniswap V2 部署到 private 网络。
 
 ## 准备工作[^1]
 
-uniswap-v2 版本智能合约部分的代码存放在 [Uniswap/v2-core](https://github.com/Uniswap/v2-core)  和 [Uniswap/v2-periphery](https://github.com/Uniswap/v2-periphery)  两个仓库，编译智能合约需要 `node@>=10`  版本。
+### Nodejs 版本
 
-然后将 clone 两个智能合约的代码仓库到本地：
+智能合约需要 `node@>=10`  版本，整个配置过程通过 `.nvmrc` 文件进行 node 版本控制：
 
-```shell
-~$
-git clone git@github.com:Uniswap/v2-core.git
-git clone git@github.com:Uniswap/v2-periphery.git
+```html
+v14.21.3
 ```
 
-还需要准备一个开放了 JSON RPC API 的以太坊节点，嫌麻烦可以去 [infura](https://infura.io) 申请一个免费的 API Key。以及一个拥有足够 ETH 余额的以太坊地址，sepolia 测试网络可以打开 [triangle](https://faucet.triangleplatform.com/ethereum/sepolia) 水龙头为你的地址获取测试的 ETH 代币。
+然后项目目录下可以通过 `nvm use` 切换到 v14.21.3 这个 lts 版本。
+
+### RPC EndPoint
+
+还需要准备一个开放了 JSON RPC API 的以太坊节点，嫌麻烦可以去 [infura](https://infura.io) 申请一个免费的 API Key。
+
+以及一个拥有足够 ETH 余额的以太坊地址，sepolia 测试网络可以打开 [pow faucet](https://sepolia-faucet.pk910.de/) 为你的地址获取测试的 ETH 代币。
 
 现在准备工作完成了，下面开始编译并且部署智能合约。
 
-## 部署合约[^1]
+### clone 代码仓库
 
-由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹 `uniswap-contracts`  保存后续编译的智能合约代码：
+- uniswap-v2 版本智能合约部分代码有两个仓库
+  - [Uniswap/v2-core](https://github.com/Uniswap/v2-core)
+  - [Uniswap/v2-periphery](https://github.com/Uniswap/v2-periphery)
+- uniswap 界面 [Uniswap/interface](https://github.com/Uniswap/interface)
+- uniswap 还用到了 [multicall](https://github.com/makerdao/multicall)
+
+clone 几个仓库到本地：
 
 ```shell
-~$ mkdir uniswap-contracts
-~$ ls uniswap-contracts
+git clone git@github.com:Uniswap/v2-core.git
+git clone git@github.com:Uniswap/v2-periphery.git
+git clone https://github.com/makerdao/multicall.git
+git clone git@github.com:Uniswap/interface.git
 ```
+
+由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹保存后续编译的智能合约代码，
+
+`mkdir uniswap-contracts`
 
 当前的目录结构如下：
 
-`interface uniswap-contracts v2-core v2-periphery`
+`interface multicall uniswap-contracts v2-core v2-periphery`
 
-接下来我们分别编译两个项目的智能合约代码，然后拷贝到 `uniswap-contracts`  目录。
+## 编译合约
 
-### 编译
+### uniswap [^1]
+
+接下来我们分别编译 `v2-core v2-periphery` 两个仓库的代码，然后将编译后的 JSON 文件拷贝到 `uniswap-contracts`  目录。
 
 首先是 `Uniswap/v2-core`  项目，进入目录后拉取依赖然后编译：
 
 ```shell
-cd v2-core
-yarn && yarn compile
+cd v2-core && yarn && yarn compile
 ```
 
 编译后的代码存放在 `build`  目录，我们需要把它拷贝至之前创建的 `uniswap-contracts`  目录。
 
 ```shell
-cp -r build ../uniswap-contracts
-cd ..
+cp -r build ../uniswap-contracts && cd -
 ```
 
 接下来编译 `Uniswap/v2-periphery`  项目，也是相同的步骤，最后将编译后的代码拷贝到 `uniswap-contracts`  目录：
 
 ```shell
-cd v2-periphery
-yarn && yarn compile
-cp -r build ../uniswap-contracts
-cd ..
+cd v2-periphery && yarn && yarn compile && cp -r build ../uniswap-contracts && cd -
 ```
 
-### 部署[^1]
+### multicall[^3]
+
+multicall 使用 [dapp.tools](https://dapp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
+
+#### dapp.tools
+
+dapp.tools 是用于以太坊智能合约开发的命令行工具和智能合约库。该工具依赖 `nix`：
+
+```shell
+apt update && apt install -y git nix
+echo y | nix profile install github:dapphub/dapptools#{dapp,ethsign,hevm,seth} --extra-experimental-features nix-command --extra-experimental-features flakes
+alias dapp=~/.nix-profile/bin/dapp
+```
+
+dapp 安装过程会持续很长时间。
+
+#### build
+
+```shell
+cd multicall
+dapp update && dapp build
+```
+
+会在 `out/` 下生成编译后好的 abi 文件，其中信息很多，需要提取 multicall 合约部分：
+
+```shell
+jq '.contracts."src/Multicall.sol:Multicall"' out/dapp.sol.json > ../uniswap-contracts/build/Multicall.json
+cd -
+```
+
+## 部署合约 [^1]
 
 编译好的合约代码我们已经全部拷贝到 `uniswap-contracts`  目录。接下来就是部署合约了，这一步稍微麻烦一些，需要我们编写一个脚本。
 
@@ -81,17 +124,17 @@ cd ..
 
 > 注意：常量 **endpoint**  和 **hexPrivateKey**  请自行修改，并保证地址里面有足够的 **ETH**  用于支付 GAS 费用。
 
-```jsx
+```js
 const Web3 = require("web3");
 const WETH9 = require("./build/WETH9.json");
+const Multicall = require("./build/Multicall.json");
 const UniswapV2Pair = require("./build/UniswapV2Pair.json");
 const UniswapV2Factory = require("./build/UniswapV2Factory.json");
 const UniswapV2Router01 = require("./build/UniswapV2Router01.json");
 const UniswapV2Router02 = require("./build/UniswapV2Router02.json");
 
-const endpoint = "https://goerli.infura.io/v3/5c5a4a14c82f4d6e852b7cc29b2cbb6e";
-const hexPrivateKey =
-  "0xfad9c8855b740a0b7ed4c221dbad0f33a83a49cad6b3fe8d5817ac83d38b6a19";
+const endpoint = "<your endpoint url>";
+const hexPrivateKey = "<your private key>";
 
 async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
   const message = {
@@ -114,6 +157,23 @@ async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
   const chainId = await web3.eth.getChainId();
   const gasPrice = await web3.eth.getGasPrice();
   let nonce = await web3.eth.getTransactionCount(account.address);
+
+  // deploy Multicall contract
+  let multicall = null;
+  {
+    const contract = new web3.eth.Contract(Multicall.abi);
+    const data = contract.deploy({ data: Multicall.bin }).encodeABI();
+    const receipt = await sendTransaction(
+      web3,
+      chainId,
+      account,
+      data,
+      nonce,
+      gasPrice
+    );
+    console.info("Multicall:", (multicall = receipt.contractAddress));
+    nonce = nonce + 1;
+  }
 
   // deploy WETH contract
   let weth = null;
@@ -192,7 +252,6 @@ async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
     console.info("UniswapV2Router02:", receipt.contractAddress);
     nonce = nonce + 1;
   }
-
   let data = UniswapV2Pair.bytecode;
   if (!data.startsWith("0x")) data = "0x" + data;
   console.info("INIT_CODE_HASH:", web3.utils.keccak256(data));
@@ -202,7 +261,7 @@ async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
 然后再拉取依赖：
 
 ```shell
-yarn init && yarn add web3
+nvm use && yarn init && yarn add web3
 ```
 
 最后执行部署合约脚本：
@@ -220,16 +279,16 @@ UniswapV2Factory: 0xb75dF9841B3BACe732C558A495a8AA5F914bd3F5
 UniswapV2Router01: 0xaA60271e6590A7aD9E4E190e232586Ad1C3d0bbE
 UniswapV2Router02: 0xf0cC3752BDE1B65bd32B925b1a672396BF26B77e
 INIT_CODE_HASH: 0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f
+Multicall: 0x908c6E870161204C440469FfAC38330b283E7554
 ```
 
 到这里合约就部署完成了，把终端输出的合约地址记录下来，部署前端的时候需要进行配置。
 
 ## 部署前端
 
-我们需要 clone [Uniswap/interface](https://github.com/Uniswap/interface)  前端仓库，把 tag 切换到 `v2.6.5`，因为后续的版本推出了 **UNI**  代币和治理功能，这里不进行部署。
+我们需要将 `Uniswap/interface`仓库 tag 切换到 `v2.6.5`，因为后续的版本推出了 **UNI**  代币和治理功能，这里不进行部署。
 
 ```shell
-git clone git@github.com:Uniswap/interface.git
 cd interface
 git checkout v2.6.5
 ```
@@ -424,7 +483,7 @@ tokens.json 文件完成编辑后就可以上传至服务器了。随便上传�
 ## 验证功能
 
 1. 程序启动： 正常
-2. 链接钱包（metamask、coinbase)：正常
+2. 链接钱包（metamask、coinbase）：正常
 3. 显示钱包余额
 4. 添加流动池
 5. 进行交换
@@ -439,3 +498,4 @@ tokens.json 文件完成编辑后就可以上传至服务器了。随便上传�
 
 [^1]: [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
 [^2]: [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
+[^3]: [如何使 uniswap v2 去中心化交易所支持以太坊私链](https://segmentfault.com/a/1190000040404602)

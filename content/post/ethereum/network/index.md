@@ -16,7 +16,9 @@ tags:
 
 ## 概述
 
-ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主网（mainnet）和测试网（testnet)
+ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主网（mainnet）和测试网（testnet)。
+
+[ChainList](https://chainlist.org/) 是所有以太坊区块链信息聚合网站，在上面可以看到各个网络上面的 ChainID、RPC Server Address 等信息。
 
 ## 主网（mainnet）
 
@@ -35,7 +37,7 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 | [allthatnode](https://www.allthatnode.com/faucet/ethereum.dsrv)  | 0.025/24h    |
 | [triangle](https://faucet.triangleplatform.com/ethereum/goerli)  | 0.001ETH/24h |
 | [coinbase](https://coinbase.com/faucets/ethereum-sepolia-faucet) | 0.05ETH/24h  |
-| [pow 获取 eth](https://goerli-faucet.pk910.de/                   | 量大，推荐   |
+| [pow 获取 eth](https://goerli-faucet.pk910.de/)                  | 量大，推荐   |
 
 -
 

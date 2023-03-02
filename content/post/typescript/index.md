@@ -27,6 +27,7 @@ tags:
 
 ## 语法
 
+- 类型是一种集合。[^1]
 - 多种多样的 for 循环语法。c-for, for-in, for-of, forEach, every, some.
 - 各种语法的 export 与 import: [https://segmentfault.com/a/1190000018249137]
 
@@ -35,3 +36,5 @@ tags:
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [TypeScript 入门教程](https://ts.xcatliu.com/)
 - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
+
+[^1]: [Types as Sets](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)
