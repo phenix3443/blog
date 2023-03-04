@@ -1,7 +1,7 @@
 ---
-title: "Deploy UniswapV2 on Sepolia Testnet"
+title: "Deploy UniswapV2 on Private Network"
 description: 在以太坊 Sepolia 测试网上部署 UniswapV2 智能合约
-slug: deploy-uniswap-v2-on-sepolia-testnet
+slug: deploy-uniswap-v2-on-private-network
 date: 2023-02-22T23:36:15+08:00
 image:
 math:
@@ -15,46 +15,52 @@ tags:
   - sepolia
 ---
 
-[Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，它的代码完全开源，本文将以 Uniswap v2 版本为例，讲解如何将 uniswap v2 智能合约部署到以太坊 sepolia  测试网络，并且搭建前端进行操作。该方法也可用于将 Uniswap V2 部署到 private 网络。
+[Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，本文以 UniswapV2 为例：
+
+- 将智能合约部署到以太坊 sepolia 测试网络。
+- 搭建 Uniswap app 前端，并进行功能验证。
+
+该方法也可用于将 Uniswap V2 部署到 Private Network。
 
 ## 准备工作[^1]
 
 ### Nodejs 版本
 
-智能合约需要 `node@>=10`  版本，整个配置过程通过 `.nvmrc` 文件进行 node 版本控制：
+uniswapV2 智能合约需要 `node@>=10` 版本，整个部署过程中， Nodejs 版本通过 [nvm](https://github.com/nvm-sh/nvm) 搭配 [.nvmrc](https://github.com/nvm-sh/nvm#nvmrc) 文件控制：
 
-```html
+```shell
+## .nvmrc
 v14.21.3
 ```
 
-然后项目目录下可以通过 `nvm use` 切换到 v14.21.3 这个 lts 版本。
+项目下可以通过 `nvm use` 切换到 v14.21.3 这个 lts 版本。
 
-### RPC EndPoint
+### Ethereum Node
 
-还需要准备一个开放了 JSON RPC API 的以太坊节点，嫌麻烦可以去 [infura](https://infura.io) 申请一个免费的 API Key。
+需要准备一个开放了 `JSON RPC API` 的以太坊节点，嫌麻烦可以去 [infura](https://infura.io) 或者类似的基础设施提供商申请一个免费的 API Key。
 
-以及一个拥有足够 ETH 余额的以太坊地址，sepolia 测试网络可以打开 [pow faucet](https://sepolia-faucet.pk910.de/) 为你的地址获取测试的 ETH 代币。
+部署合约需要一个拥有足够 ETH 余额的以太坊地址(后续简称 `deployerAddress`)，sepolia 测试网络可以打开 [pow faucet](https://sepolia-faucet.pk910.de/) 获取测试的 ETH 代币。
 
-现在准备工作完成了，下面开始编译并且部署智能合约。
+### 代码仓库
 
-### clone 代码仓库
-
-- uniswap-v2 版本智能合约部分代码有两个仓库
+- uniswapV2 智能合约：
   - [Uniswap/v2-core](https://github.com/Uniswap/v2-core)
   - [Uniswap/v2-periphery](https://github.com/Uniswap/v2-periphery)
-- uniswap 界面 [Uniswap/interface](https://github.com/Uniswap/interface)
-- uniswap 还用到了 [multicall](https://github.com/makerdao/multicall)
+- uniswap 前端：
+  - 界面仓库 [Uniswap/interface](https://github.com/Uniswap/interface)
+  - 依赖 [multicall](https://github.com/makerdao/multicall) 合约。
+  - 依赖 [ens](https://ens.domains/) 合约
 
-clone 几个仓库到本地：
+将上述的几个仓库 clone 到本地：
 
 ```shell
 git clone git@github.com:Uniswap/v2-core.git
 git clone git@github.com:Uniswap/v2-periphery.git
-git clone https://github.com/makerdao/multicall.git
 git clone git@github.com:Uniswap/interface.git
+git clone https://github.com/makerdao/multicall.git
 ```
 
-由于智能合约代码存放在两个仓库，不便统一部署，我们先创建一个文件夹保存后续编译的智能合约代码，
+由于智能合约代码存放在两个仓库，不便统一部署，先创建一个文件夹保存后续编译的智能合约代码，
 
 `mkdir uniswap-contracts`
 
@@ -62,11 +68,11 @@ git clone git@github.com:Uniswap/interface.git
 
 `interface multicall uniswap-contracts v2-core v2-periphery`
 
-## 编译合约
+现在准备工作完成了，下面开始编译并且部署智能合约。
 
-### uniswap [^1]
+## 编译 uniswap 合约 [^1]
 
-接下来我们分别编译 `v2-core v2-periphery` 两个仓库的代码，然后将编译后的 JSON 文件拷贝到 `uniswap-contracts`  目录。
+接下来我们分别编译 `v2-core` 和 `v2-periphery` 两个仓库的代码，然后将编译后的 JSON 文件拷贝到 `uniswap-contracts`  目录。
 
 首先是 `Uniswap/v2-core`  项目，进入目录后拉取依赖然后编译：
 
@@ -74,7 +80,7 @@ git clone git@github.com:Uniswap/interface.git
 cd v2-core && yarn && yarn compile
 ```
 
-编译后的代码存放在 `build`  目录，我们需要把它拷贝至之前创建的 `uniswap-contracts`  目录。
+编译后的代码存放在 `build`  目录，需要把它拷贝至之前创建的 `uniswap-contracts`  目录。
 
 ```shell
 cp -r build ../uniswap-contracts && cd -
@@ -86,37 +92,7 @@ cp -r build ../uniswap-contracts && cd -
 cd v2-periphery && yarn && yarn compile && cp -r build ../uniswap-contracts && cd -
 ```
 
-### multicall[^3]
-
-multicall 使用 [dapp.tools](https://dapp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
-
-#### dapp.tools
-
-dapp.tools 是用于以太坊智能合约开发的命令行工具和智能合约库。该工具依赖 `nix`：
-
-```shell
-apt update && apt install -y git nix
-echo y | nix profile install github:dapphub/dapptools#{dapp,ethsign,hevm,seth} --extra-experimental-features nix-command --extra-experimental-features flakes
-alias dapp=~/.nix-profile/bin/dapp
-```
-
-dapp 安装过程会持续很长时间。
-
-#### build
-
-```shell
-cd multicall
-dapp update && dapp build
-```
-
-会在 `out/` 下生成编译后好的 abi 文件，其中信息很多，需要提取 multicall 合约部分：
-
-```shell
-jq '.contracts."src/Multicall.sol:Multicall"' out/dapp.sol.json > ../uniswap-contracts/build/Multicall.json
-cd -
-```
-
-## 部署合约 [^1]
+## 部署 uniswap 合约 [^1]
 
 编译好的合约代码我们已经全部拷贝到 `uniswap-contracts`  目录。接下来就是部署合约了，这一步稍微麻烦一些，需要我们编写一个脚本。
 
@@ -279,12 +255,100 @@ UniswapV2Factory: 0xb75dF9841B3BACe732C558A495a8AA5F914bd3F5
 UniswapV2Router01: 0xaA60271e6590A7aD9E4E190e232586Ad1C3d0bbE
 UniswapV2Router02: 0xf0cC3752BDE1B65bd32B925b1a672396BF26B77e
 INIT_CODE_HASH: 0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f
-Multicall: 0x908c6E870161204C440469FfAC38330b283E7554
 ```
 
 到这里合约就部署完成了，把终端输出的合约地址记录下来，部署前端的时候需要进行配置。
 
-## 部署前端
+## 部署前端依赖合约
+
+前端程序依赖两个合约： multicall 与 ens ，我们分别进行部署。
+
+### multicall[^3]
+
+multicall 使用 [dapp.tools](https://dapp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
+
+dapp.tools 是用于以太坊智能合约开发的命令行工具和智能合约库。该工具依赖 `nix`：
+
+```shell
+apt update && apt install -y git nix
+echo y | nix profile install github:dapphub/dapptools#{dapp,ethsign,hevm,seth} --extra-experimental-features nix-command --extra-experimental-features flakes
+alias dapp=~/.nix-profile/bin/dapp
+```
+
+dapp 安装过程会持续很长时间。完成之后进行编译：
+
+```shell
+cd multicall
+dapp update && dapp build
+```
+
+会在 `out/` 下生成编译后好的 abi 文件，其中信息很多，需要提取 multicall 合约部分：
+
+```shell
+jq '.contracts."src/Multicall.sol:Multicall"' out/dapp.sol.json > ../uniswap-contracts/build/Multicall.json
+cd -
+```
+
+使用下面的脚本进行部署：
+
+```js
+const Web3 = require("web3");
+const Multicall = require("../build/Multicall.json");
+
+const endpoint = "";
+const hexPrivateKey = "";
+
+async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
+  const message = {
+    from: account.address,
+    gas: 5000000,
+    gasPrice: gasPrice,
+    data: data.startsWith("0x") ? data : "0x" + data,
+    nonce: nonce,
+    chainId: chainId,
+  };
+  const transaction = await account.signTransaction(message);
+  return web3.eth.sendSignedTransaction(transaction.rawTransaction);
+}
+
+(async () => {
+  const options = { timeout: 1000 * 30 };
+  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint, options));
+  const account = web3.eth.accounts.privateKeyToAccount(hexPrivateKey);
+
+  const chainId = await web3.eth.getChainId();
+  const gasPrice = await web3.eth.getGasPrice();
+  let nonce = await web3.eth.getTransactionCount(account.address);
+
+  // deploy Multicall contract
+  let multicall = null;
+  {
+    const contract = new web3.eth.Contract(Multicall.abi);
+    const data = contract.deploy({ data: Multicall.bin }).encodeABI();
+    const receipt = await sendTransaction(
+      web3,
+      chainId,
+      account,
+      data,
+      nonce,
+      gasPrice
+    );
+    console.info("Multicall:", (multicall = receipt.contractAddress));
+  }
+})();
+```
+
+Multicall 部署位置: 0x908c6E870161204C440469FfAC38330b283E7554
+
+### ens
+
+参考 [Deploying ENS on a Private Chain](https://docs.ens.domains/deploying-ens-on-a-private-chain)，[中文版](https://ensuser.com/docs/deploying-ens-on-a-private-chain.html)
+
+这两篇文章中的部署说明有 bug，我给他们提了一个 issue：[Failed to deploy ReverseRegistrar contract](https://github.com/ensdomains/docs/issues/130)
+
+ens_register 部署位置: 0x457f57fEF8c189EB688f27A7E0674dc610810897
+
+## 修改前端代码
 
 我们需要将 `Uniswap/interface`仓库 tag 切换到 `v2.6.5`，因为后续的版本推出了 **UNI**  代币和治理功能，这里不进行部署。
 
@@ -300,6 +364,11 @@ cd interface
 yarn
 ```
 
+下面我们需要修改将 SDK 与前端代码，目的：
+
+- 修改涉及上面合约部署地址的地方。
+- 添加 sepolia 网络相关配置。
+
 ### 修改 SDK[^2]
 
 升级 @uniswap/sdk 到 3.0.3，因为当前 beta 版本无法将改动做成 patch:
@@ -309,7 +378,7 @@ yarn add --dev patch-package
 yarn add --dev @uniswap/sdk
 ```
 
-我们开始修改 SDK 中的以下文件：
+我们需要修改 SDK 中的：
 
 `node_modules/@uniswap/sdk/dist/constants.d.ts`
 
@@ -338,13 +407,13 @@ yarn add --dev @uniswap/sdk
 
 ![sdk/dist/sdk.cjs.development.js_weth](image/interface/node_modules/sdk/dist/sdk.cjs.development.weth.png)
 
-`node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json`添加 sepolia weth 新配置。
-
-![default-token-list/build/uniswap-default.tokenlist.json](image/interface/node_modules/default-token-list/build/uniswap-default.tokenlist.json.png)
-
 `node_modules/@uniswap/sdk/dist/entities/token.d.ts`, 添加 sepolia 新配置。
 
 ![node_modules/@uniswap/sdk/dist/entities/token.d.ts](image/interface/node_modules/sdk/entities/token.d.ts.png)
+
+`node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json`添加 sepolia weth 新配置。
+
+![default-token-list/build/uniswap-default.tokenlist.json](image/interface/node_modules/default-token-list/build/uniswap-default.tokenlist.json.png)
 
 为了复用上面的 sdk 更改，我们将其做成 patch。
 
@@ -360,7 +429,7 @@ yarn patch-package @uniswap/sdk
 
 ![postinstall](image/interface/postinstall.png)
 
-### 修改前端代码
+### 修改交互代码
 
 由于我们部署了新的合约，而前端配置里面还是 uniswap 官方的合约地址，所以需要进行如下修改：
 
@@ -396,7 +465,19 @@ yarn patch-package @uniswap/sdk
 
 ![src/components/Header/index.tsx](image/interface/src/components/Header/index.tsx.png)
 
-修改完成之后运行前端程序：`yarn start`
+修改 ens 相关部署
+
+`src/hooks/useContract.ts` 添加 sepolia 配置：
+
+![src/hooks/useContract.ts](image/interface/src/hooks/useContract.ts.png)
+
+`src/utils/resolveENSContentHash.ts` 修改 `REGISTRAR_ADDRESS` 数值。
+
+![src/utils/resolveENSContentHash.ts](image/interface/src/utils/resolveENSContentHash.ts.png)
+
+## 启动前端
+
+修改完成之后运行前端程序：`nvm exec yarn start`
 
 ```html
 Starting the development server... Browserslist: caniuse-lite is outdated.
@@ -409,88 +490,146 @@ create a production build, use yarn build.
 
 最后打开浏览器访问地址 [http://localhost:3000](http://localhost:3000)  查看效果。
 
-1. 点击 **Connect to a wallet**，选择 **MetaMask**  钱包(需要预先安装[浏览器插件](https://metamask.io/))。
+## 验证功能
 
-   ![Connect to a wallet](image/interface/ui/connect-wallet.png)
+### 连接钱包
 
-2. 注意切换钱包网络至 sepolia 测试网络，因为我们的智能合约部署在上面。
+点击 `Connect to a wallet`，选择 `MetaMask`(需要预先安装[浏览器插件](https://metamask.io/))。注意切换钱包网络至 sepolia 测试网络，因为我们的智能合约部署在上面。
 
-   [https://www.notion.so](https://www.notion.so)
+![Connect to a wallet](image/test/connect-wallet/connect-wallet.png)
 
-3. 现在可以开始添加流动性或者交易了。
+![connect-metamask-success](image/test/connect-wallet/connect-metamask-success.png)
 
-   ![add-liquidity](image/interface/ui/add-liquidity.png)
+可以看到正常显示 sepolia 当前地址的余额。
 
-## 添加代币列表
+### 切换钱包网络
 
-现在 uniswap v2 已经成功部署了，如果我们想要在交易所添加自己的代币该怎么办呢？下面我就来一步一步讲解如何添加自定义代币。
+由于 interface 代码中默认包含 uniswap 在 goerli 网络上的相关配置，所以我们可以直接将钱包切换到 goerli 测试网。如果刚才没有更新 ens 合约地址，这里切换钱包网络时程序会 crash 掉。
 
-uniswap v2 前端显示的代币列表配置在 `interface/src/constants/lists.ts`  文件中的 **DEFAULT_LIST_OF_LISTS**  常量数组，数组元素的值可以是一个 **http 地址**、**ifps 地址**  和 **ENS name**。地址返回结果必须是指定结构的 **json**  文件，我们可以通过向 **DEFAULT_LIST_OF_LISTS**  常量数组添加新的地址达到添加自定义代币的目的。
+![change-network-in-metamask](image/test/switch-network/change-network-in-metamask.png)
 
-下面就来通过添加一个代币详细描述这个过程。
+![change-to-goerli](image/test/switch-network/change-to-goerli.png)
 
-### 创建 tokens.json 文件
+可以看到 goerli 网络上的余额也正常展示。同样，还可以切会 sepolia 网络继续下面的测试。
+
+### 添加代币列表
+
+我们想要在交易所添加自己的代币该怎么办呢？下面我就来一步一步讲解如何添加自定义代币。
+
+下面就来通过添加一个代币详细描述这个过程，这里可以自己部署代币，也可以使用 sepolia 网络上已经部署好的，当前测试用 [`ChainLink token`](https://etherscan.io/token/0x514910771af9ca656af840dff83e8264ecf986ca)，可在 [faucet](https://faucets.chain.link/) 领取。
+
+uniswapV2 前端显示的代币列表配置在 `interface/src/constants/lists.ts`  文件中的 `DEFAULT_LIST_OF_LISTS`  常量数组，数组元素的值可以是一个 `http 地址`、`ifps 地址` 和 `ENS name`。地址返回结果必须是指定结构的 `JSON` 文件，我们可以通过向 `DEFAULT_LIST_OF_LISTS`  常量数组添加新的地址达到添加自定义代币的目的。
+
+#### 创建 tokens.json 文件
 
 文件格式如下：
 
 ```json
 {
-  "name": "Test Tokens List",
+  "name": "sepolia Tokens List",
   "version": {
     "major": 1,
     "minor": 0,
     "patch": 0
   },
-  "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png",
-  "timestamp": "2021-07-25 00:00:00.000+00:00",
+  "logoURI": "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/docs/logo-chainlink-blue.svg",
+  "timestamp": "2023-03-01 00:00:00.000+00:00",
   "tokens": [
     {
-      "chainId": 5,
-      "address": "0x499d11E0b6eAC7c0593d8Fb292DCBbF815Fb29Ae",
-      "name": "Matic Token",
-      "symbol": "MATIC",
+      "chainId": 11155111,
+      "address": "0x779877A7B0D9E8603169DdbD7836e478b4624789",
+      "name": "ChainLink Token",
+      "symbol": "LINK",
       "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/docs/logo-chainlink-blue.svg"
     }
   ]
 }
 ```
 
-`tokens`  字段是一个数组类型，它负责描述代币列表包含的所有代币。我们在里面添加了一个名为 `Matic Token`  的代币(当然也可以添加多个代币)，符号是 `MATIC`，合约地址是 `0x499d11E0b6eAC7c0593d8Fb292DCBbF815Fb29Ae`。请注意里面有一个 `chainId`  字段，值为 `5`，这是因为 goerli 测试网络的 chainId 是 5，前端只有在钱包连接网络的 chainId 为 5 时才会显示这个代币。其它以太坊网络 chainId 的值请参考：[https://besu.hyperledger.org/en/stable/Concepts/NetworkID-And-ChainID](https://link.segmentfault.com/?enc=LTyIX4MGVQNqg7pqllRb0A%3D%3D.jrJafrcRPlxj4vlZo5Ys9pyAij5Xl0ZmdSTsCWPxGeZTET0iFoDAYh9eZU8jk6P48GnGjLiW%2BU6nELE31PVTEjbdcdEKxSRw5aZQmo9BCUI%3D)。
+`tokens`  字段是一个数组类型，它负责描述代币列表包含的所有代币。我们在里面添加了一个名为 `ChainLink Token`  的代币(当然也可以添加多个代币)，符号是 `LINK`，合约地址是 `0x779877A7B0D9E8603169DdbD7836e478b4624789`(可从 [Etherscan](https://sepolia.etherscan.io/token/0x779877a7b0d9e8603169ddbd7836e478b4624789?a=0x4281ecf07378ee595c564a59048801330f3084ee) 查询到)。
 
-### 上传 tokens.json 文件
+请注意里面有一个 `chainId` 字段，值为 `11155111`，这是因为 sepolia 测试网络的 chainId 是 11155111，前端只有在钱包连接网络的 chainId 为 11155111 时才会显示这个代币。
 
-tokens.json 文件完成编辑后就可以上传至服务器了。随便上传到哪里都可以，比如你自己的 HTTP 文件服务器，只要能够公网访问就行。我将它上传到了 [gist.github.com](https://gist.github.com/) (需要翻墙)，访问地址是：[https://gist.githubusercontent.com/pygdev/ec497ed8bba8008c2512b3f241bfb5ef/raw/ac6d0286e3e5a39499a71575a065f16787782a70/tokens.json](https://gist.githubusercontent.com/pygdev/ec497ed8bba8008c2512b3f241bfb5ef/raw/ac6d0286e3e5a39499a71575a065f16787782a70/tokens.json)。
+其它以太坊网络 chainId 的值可在[ChainList](https://chainlist.org/) 查询到。
+
+#### 上传 tokens.json 文件
+
+tokens.json 文件完成编辑后就可以上传至服务器了。随便上传到哪里都可以，比如你自己的 HTTP 文件服务器，只要能够公网访问就行。
+
+这里选择直接将内容复制到 [GitHub gist](https://gist.github.com/alexshliu/b3119bdfbee6ef2a6b83297b3fd7aff5)  上。
+
+可以选择将该链接添加到 `interface/src/constants/lists.ts`  文件中的 `DEFAULT_LIST_OF_LISTS`，这样前端启动之后就会有默认展示。
+
+![add-token-list-in-code](image/test/add-token-list/change-in-code.png)
+
+也可以选择在前端界面手动添加。
 
 ### 在前端添加 Tokens List
 
-首先打开 uniswap v2 前端页面，连接钱包，并切换至 seplia 网络，然后点击 **选择通证**  按钮。
+![choose-token](image/test/add-token-list/choose-token.png)
 
-![choose-token](image/interface/ui/choose-token.png)
+首先打开 uniswapV2 前端页面，连接钱包，并切换至 seplia 网络，然后点击 `selectToken`  按钮。
 
-然后在输入框输入 `tokens.json`  的地址，点击 **Add**  按钮。
+![change-token-list](image/test/add-token-list/change-token-list.png)
 
-![add-list](image/interface/ui/add-list.png)
+选择 `change`
 
-添加 `tokens.json`  成功后 Tokens List 就会出现在列表里面了，点击 **Select**  按钮添加代币列表。
+![add-list](image/test/add-token-list/add-list.png)
 
-![select-list](image/interface/ui/select-list.png)
+填写 tokens.json 在 GitHub gist 上的文件链接，点击 `add`。
 
-添加成功，现在可以在交易所里面为 **MATIC**  代币添加流动性或者进行兑换了。
+![add-list-result](image/test/add-token-list/add-list-result.png)
 
-![matic](image/interface/ui/matic.png)
+就可以看到 Tokens List 就会出现在列表里面了，点击 `select`  按钮添加我们的代币列表。
 
-## 验证功能
+![show-chain-link-token](image/test/add-token-list/show-chain-link-token.png)
 
-1. 程序启动： 正常
-2. 链接钱包（metamask、coinbase）：正常
-3. 显示钱包余额
-4. 添加流动池
-5. 进行交换
+就可以在跳转后的界面看到列表中设置 `LINK` token 了，点击 token 图标，就可以选中该代币进行交易了。
+
+![choose-link](image/test/add-token-list/choose-link.png)
+
+同时，也可以看到当前地址持有的 `LINK` Token 数量。
+
+### 添加流动性
+
+在与代币进行交换之前，需要为代币添加流动性。
+
+![add-liquidity](image/test/add-liquidity/add-liquidity.png)
+
+经过一系列点击操作和 metamask 确认信息后，可以 `pool` 中看到刚才添加的流动性
+
+![my-pool](image/test/add-liquidity/my-pool.png)
+
+操作过程中可以在 Etherscan 上看到相关的操作记录。
+
+![etherscan-record](image/test/add-liquidity/etherscan-record.png)
+
+### 交换代币
+
+![start-swap.png](image/test/swap/start-swap.png)
+
+选择代币以及要交换的数额，发起交换。
+
+![confirm-swap](image/test/swap/confirm-swap.png)
+
+uniswap 预览交易详情，确认交换。
+
+![metamask-confirm](image/test/swap/metamask-confirm.png)
+
+metamask 确认交换。
+
+![swap-success](image/test/swap/swap-success.png)
+
+交换成功，metamask 给出消息提示。
+
+![etherscan-record](image/test/swap/etherscan-record.png)
+
+etherscan 上可以看到相关的交易记录。
 
 ## 问题
 
-1. 切换网络 app 会崩溃
+1. 如何控制 hardhat 使用指定版本的 solc 编译 node_modules 中的模块。
 
 ## 参考
 
