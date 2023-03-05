@@ -348,7 +348,7 @@ Multicall 部署位置: 0x908c6E870161204C440469FfAC38330b283E7554
 
 ens_register 部署位置: 0x457f57fEF8c189EB688f27A7E0674dc610810897
 
-## 修改前端代码
+## 添加 ChainID 改动
 
 我们需要将 `Uniswap/interface`仓库 tag 切换到 `v2.6.5`，因为后续的版本推出了 **UNI**  代币和治理功能，这里不进行部署。
 
@@ -370,13 +370,6 @@ yarn
 - 添加 sepolia 网络相关配置。
 
 ### 修改 SDK[^2]
-
-升级 @uniswap/sdk 到 3.0.3，因为当前 beta 版本无法将改动做成 patch:
-
-```shell
-yarn add --dev patch-package
-yarn add --dev @uniswap/sdk
-```
 
 我们需要修改 SDK 中的：
 
@@ -414,20 +407,6 @@ yarn add --dev @uniswap/sdk
 `node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json`添加 sepolia weth 新配置。
 
 ![default-token-list/build/uniswap-default.tokenlist.json](image/interface/node_modules/default-token-list/build/uniswap-default.tokenlist.json.png)
-
-为了复用上面的 sdk 更改，我们将其做成 patch。
-
-```bash
-yarn add --dev patch-package postinstall-postinstall
-yarn patch-package @uniswap/default-token-list
-yarn patch-package @uniswap/sdk
-```
-
-这样下次运行 `yarn install` 后，直接运行 `yarn patch-package` 就可以应用上面的更改。
-
-也可以将这个过程作为 npm script 放在 package.json 中，这样运行 `yarn postinstall` 即可
-
-![postinstall](image/interface/postinstall.png)
 
 ### 修改交互代码
 
@@ -474,6 +453,15 @@ yarn patch-package @uniswap/sdk
 `src/utils/resolveENSContentHash.ts` 修改 `REGISTRAR_ADDRESS` 数值。
 
 ![src/utils/resolveENSContentHash.ts](image/interface/src/utils/resolveENSContentHash.ts.png)
+
+## 修改原生代币名称改动
+
+如果我们需要将原生代币名称由 ETH 改为其它的，例如 GAS，还需要作出以下修改。
+
+打开 node_modules/@uniswap/sdk/dist/sdk.cjs.development.js 文件，找到 Currency.ETHER，将值改为 new Currency(18, 'GAS', 'Gas Token');
+打开 node_modules/@uniswap/sdk/dist/sdk.esm.js 文件，找到 Currency.ETHER，将值改为 new Currency(18, 'GAS', 'Gas Token');
+打开 src/components/Header/index.tsx 文件，将文本 ETH 修改为 GAS。
+打开 src/components/SearchModal/CommonBases.tsx 文件，将文本 ETH 修改为 { ETHER.symbol }。
 
 ## 启动前端
 
@@ -627,9 +615,53 @@ metamask 确认交换。
 
 etherscan 上可以看到相关的交易记录。
 
-## 问题
+## 自动化部署
 
-1. 如何控制 hardhat 使用指定版本的 solc 编译 node_modules 中的模块。
+可以看出上面的部署过程很复杂，代码改动也比较多，我们需要做一些整理和优化工作，达到可自动化部署的效果。
+
+### patch @uniswap module changes
+
+为了复用之前的 uniswap module 改动，我们需要将其做成 patch。
+
+```shell
+yarn add --dev patch-package
+yarn add --dev @uniswap/sdk
+```
+
+此外，还需要升级 @uniswap/sdk 到 3.0.3，因为当前 beta 版本无法进行 patch。
+
+```bash
+yarn add --dev patch-package postinstall-postinstall
+yarn patch-package @uniswap/default-token-list
+yarn patch-package @uniswap/sdk
+```
+
+这样, `yarn install` 后直接运行 `yarn patch-package` 就可将之前的 `@uniswap` module 的改动重新应用到当前 `node_modules/@uniswap` 中。
+
+![postinstall](image/interface/postinstall.png)
+
+也可以将这个过程作为 npm script 放在 package.json 中，这样运行 `yarn postinstall` 即可
+
+### 整合合约部署脚本
+
+所有合约整合一个 Hardhat 项目中进行部署：[uniswap-v2-deploy](https://github.com/taikoxyz/uniswap-v2-deploy)，结合 Hardhat 很大程度上简化了部署脚本，降低了部署难度。
+
+### 合约验证
+
+`yarn add --dev @nomiclabs/hardhat-etherscan`
+
+ToDo：如何验证合约
+
+### 前端界面 docker 部署
+
+固定合约部署的地址一种方法：使用特定的私钥，从 `nonce=0` 开始执行合约部署，如何合约部署顺序不变，那么合约地址就是固定的。利用这个特性，前段界面中的代码只需要修改一次，就可以不再改动了。
+
+这样，我们只需要将编译（`yarn build`）后的前端代码制作成 Docker 镜像，就可以在 k8s 上部署了：
+
+```dockerfile
+FROM nginx:alpine
+COPY build/ /usr/share/nginx/html
+```
 
 ## 参考
 
@@ -638,3 +670,8 @@ etherscan 上可以看到相关的交易记录。
 [^1]: [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
 [^2]: [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
 [^3]: [如何使 uniswap v2 去中心化交易所支持以太坊私链](https://segmentfault.com/a/1190000040404602)
+[^4]: [Deploying an Example Application (Uniswap) to Moonbeam](https://moonbeam.network/tutorial/deploying-uniswap-to-moonbeam/)
+
+```
+
+```
