@@ -10,8 +10,8 @@ hidden: false
 comments: true
 draft: false
 tag:
-    - geth
-    - ethereum
+  - geth
+  - ethereum
 ---
 
 更详细信息参考 [官方文档](https://geth.ethereum.org/docs/interface/sync-modes)。
@@ -33,33 +33,34 @@ tag:
 Geth 在状态修复期间定期报告`Syncing, state heal in progress`,这会通知用户状态修复尚未完成。也可以使用`eth.syncing`确认这一点：如果此命令返回 false，则节点处于同步状态。如果它返回 false 以外的任何内容，则同步仍在进行中。
 
 ```html
-# this log message indicates that state healing is still in progress
-INFO [10-20|20:20:09.510] State heal in progress                   accounts=313,309@17.95MiB slots=363,525@28.77MiB codes=7222@50.73MiB nodes=49,616,912@12.67GiB pending=29805
+# this log message indicates that state healing is still in progress INFO
+[10-20|20:20:09.510] State heal in progress accounts=313,309@17.95MiB
+slots=363,525@28.77MiB codes=7222@50.73MiB nodes=49,616,912@12.67GiB
+pending=29805
 ```
 
 ```html
-# this indicates that the node is in sync, any other response indicates that syncing has not finished
-eth.syncing
->> false
+# this indicates that the node is in sync, any other response indicates that
+syncing has not finished eth.syncing >> false
 ```
 
 修复速度必须超过区块链的增长速度，否则节点将永远赶不上当前状态。 有一些硬件因素决定了状态修复的速度（磁盘读/写和互联网连接的速度）以及每个块中使用的总 gas（更多的 gas 意味着必须处理更多的状态变化）。
 
 总而言之，快照同步按以下顺序进行：
 
-+ 下载并验证标头。
-+ 下载块体和收据。同时，下载原始状态数据并构建状态树。
-+ 修复状态试图解释新到达的数据。
+- 下载并验证标头。
+- 下载块体和收据。同时，下载原始状态数据并构建状态树。
+- 修复状态试图解释新到达的数据。
 
 注意：快照同步是默认行为，因此如果在启动时没有将 `--syncmode` 值传递给 Geth，Geth 将使用快照同步。 使用 snap 启动的节点一旦赶上链的头部，就会切换到逐块同步。
 
-更多关于 snapShots/snapSync 信息参见[snap in geth]({{< ref "post/ethereum/geth/snap" >}})。
+更多关于 snapShots/snapSync 信息参见[snap in geth]({{< ref "post/geth/snap" >}})。
 
 #### 完全同步（full）
 
 完全同步通过执行从创世块开始的每个块来生成当前状态。完全同步通过重新执行整个历史区块序列中的交易来独立地验证工作量证明和区块出处以及所有状态转换。只有最近的 128 个块状态存储在全节点中 - 较旧的块状态会定期修剪并表示为一系列检查点，可以根据请求从这些检查点重新生成任何先前的状态。 128 个区块大约是 25.6 分钟的历史，区块时间为 12 秒。要创建一个完全同步的节点，请在启动时传递`--syncmode full`。
 
-在完全同步模式下，同步模块调用`BlockChain.InsertChain`向数据库中插入从别它节点获取到的区块数据。而在`BlockChain.InsertChain`中，会逐个计算和验证每个块的`state`和`recepits`等数据，如果一切正常就将同步而来的区块数据以及自己计算得到的state、recepits数据一起写入到数据库中。
+在完全同步模式下，同步模块调用`BlockChain.InsertChain`向数据库中插入从别它节点获取到的区块数据。而在`BlockChain.InsertChain`中，会逐个计算和验证每个块的`state`和`recepits`等数据，如果一切正常就将同步而来的区块数据以及自己计算得到的 state、recepits 数据一起写入到数据库中。
 
 ### 存档节点（Archive nodes）
 

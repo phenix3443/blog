@@ -10,9 +10,9 @@ hidden: false
 comments: true
 draft: false
 tags:
+  - ethereum
   - uniswap
-  - remix
-  - sepolia
+  - dapp
 ---
 
 [Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，本文以 UniswapV2 为例：

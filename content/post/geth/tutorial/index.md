@@ -1,6 +1,6 @@
 ---
 title: Geth Tutorial
-description: 介绍以太坊官方客户端 Geth
+description: Geth 客户端使用
 slug: geth-tutorial
 date: 2022-08-18T15:05:26+08:00
 math:
@@ -9,8 +9,8 @@ hidden: false
 comments: true
 draft: false
 tags:
-    - geth
-    - 以太坊
+  - geth
+  - 以太坊
 ---
 
 所有内容来自 [Geth Documentation](https://geth.ethereum.org/docs/)，如果错漏，请以官方文档为准。
@@ -21,7 +21,7 @@ tags:
 
 ## 安装
 
-+ Mac`brew install ethereum`。
+- Mac`brew install ethereum`。
 
 ## 交互示例
 
@@ -33,10 +33,8 @@ tags:
 
 ## 测试网络(testnet)
 
-+ Ropsten: Proof-of-work test network
-+ Rinkeby: Proof-of-authority test network
-+ Görli: Proof-of-authority test network
-+ 专用网(private net)
+- Görli: Proof-of-authority test network
+- 专用网(private net)
 
 连接`goerli`测试网络：`geth --goerli --syncmode "light" --http`，更多命令命令行参数参见 [Command-line Options](https://geth.ethereum.org/docs/interface/command-line-options)
 

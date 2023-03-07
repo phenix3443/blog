@@ -10,8 +10,8 @@ hidden: false
 comments: true
 draft: false
 tag:
-    - geth
-    - ethereum
+  - geth
+  - ethereum
 ---
 
 ## 概述
@@ -20,14 +20,14 @@ tag:
 
 downloader 模块的代码位于 `eth/downloader` 目录下。其主要的功能代码分别在：
 
-+ downloader.go 实现了区块同步的主要功能和逻辑。
-+ peer.go 实际上是对 eth/peer.go 中的对象的封装，增加了节点是否空闲(idle) 的统计。
-+ queue.go 实现了 queue 对象（关于 queue 对象的介绍请参看这篇文章），可以理解为这是一个对区块的组装队列。
-+ statesync.go 是用来同步 state 对象的。
+- downloader.go 实现了区块同步的主要功能和逻辑。
+- peer.go 实际上是对 eth/peer.go 中的对象的封装，增加了节点是否空闲(idle) 的统计。
+- queue.go 实现了 queue 对象（关于 queue 对象的介绍请参看这篇文章），可以理解为这是一个对区块的组装队列。
+- statesync.go 是用来同步 state 对象的。
 
 ### 同步模式
 
-参考之前的[文章]({{< ref "/post/ethereum/geth/syncmode" >}})
+参考之前的[文章]({{< ref " /post/geth/syncmode" >}})
 
 ## 实例化
 
@@ -217,7 +217,7 @@ func (d *Downloader) processHeaders(origin uint64, td, ttd *big.Int, beaconMode 
 
 [processHeaders](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/Downloader.go#L1254) 消费`Downloader.headerProcCh`，使用 [queue.Schedule]({{< ref "../queue#Schedule" >}}) 初始化下载任务，并激活`d.queue.blockWakeCh`, `d.queue.receiptWakeCh`准备下载 body 和 receipt。
 
-#### fetchBodies &&  fetchReceipts {#concurrentFetch}
+#### fetchBodies && fetchReceipts {#concurrentFetch}
 
 ```go
 // concurrentFetch iteratively downloads scheduled block parts, taking available

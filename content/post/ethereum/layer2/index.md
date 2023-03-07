@@ -2,12 +2,14 @@
 title: "二层网络"
 description: layer2
 date: 2022-05-11T11:49:39+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: true
+tag:
+  - ethereum
 ---
 
 ## 参考资料
