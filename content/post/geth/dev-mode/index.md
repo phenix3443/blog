@@ -8,9 +8,11 @@ license:
 hidden: false
 comments: true
 draft: true
-tag:
+categories:
   - geth
-  - ethereum
+  - 源码分析
+tags:
+  - dev-mode
 ---
 
 如果更改客户端后可以快速部署和测试，但不会将真实用户或资产置于风险的环境中，这无疑会极大方便开发人员。为此，Geth 有一个`--dev`标志，可以在“开发者模式”下启动 Geth。这将创建一个与任何外部对等点没有连接的单节点以太坊测试网络。它仅存在于本地机器上。在开发者模式下启动 Geth 会执行以下操作：

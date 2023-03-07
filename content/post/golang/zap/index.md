@@ -9,12 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - golang
 tags:
-    - golang
-    - logging
-    - zap
+  - zap
 ---
-
 
 ## 概览
 
@@ -48,9 +47,9 @@ defer logger.Sync()
 
 三种预设的区别在于：
 
-+ NewExample 构建的 logger 用于 zap 的测试示例中。它将 DebugLevel 及以上的日志写成 JSON 标准输出，但省略了时间戳和调用函数，以使示例输出简短明了。
-+ NewDevelopment 构建的 logger 以人性化的格式将 DebugLevel 及以上的日志写入标准错误。
-+ NewProduction 构建了生产用的 logger ，将 InfoLevel 及以上的日志作为 JSON 写入标准错误中。这是`NewProductionConfig().Build(... Option)`的快捷方式。
+- NewExample 构建的 logger 用于 zap 的测试示例中。它将 DebugLevel 及以上的日志写成 JSON 标准输出，但省略了时间戳和调用函数，以使示例输出简短明了。
+- NewDevelopment 构建的 logger 以人性化的格式将 DebugLevel 及以上的日志写入标准错误。
+- NewProduction 构建了生产用的 logger ，将 InfoLevel 及以上的日志作为 JSON 写入标准错误中。这是`NewProductionConfig().Build(... Option)`的快捷方式。
 
 ## 使用 SugaredLogger
 
@@ -69,9 +68,9 @@ sugar.Infof("failed to fetch URL: %s", "http://example.com")
 
 sugaredLoger 对于每个日志级别，它公开了三种方法：
 
-+ 用于松散类型的结构化日志记录，例如`Infow`(结构化上下文中的“info with”）
-+ 用于`println`样式格式化，例如`Info`
-+ 用于`printf`样式格式化，例如`Infof`
+- 用于松散类型的结构化日志记录，例如`Infow`(结构化上下文中的“info with”）
+- 用于`println`样式格式化，例如`Info`
+- 用于`printf`样式格式化，例如`Infof`
 
 当性能和类型安全至关重要时，请使用`Logger`。它比`SugaredLogger`更快，并且分配的资源少得多，但仅支持结构化日志记录。
 

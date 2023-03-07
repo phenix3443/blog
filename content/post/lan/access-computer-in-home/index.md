@@ -9,6 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - best-practices
 tags:
   - router
   - ddns

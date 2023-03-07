@@ -9,6 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - k8s
 ---
 
 ## 概述

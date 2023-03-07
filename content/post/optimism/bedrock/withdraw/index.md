@@ -9,10 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - optimism
-    - ethereum
-    - bedrock
+categories:
+  - ethereum
+  - optimism
+tags:
+  - bedrock
 ---
 
 ## 引论[^1]

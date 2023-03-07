@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - google-cloud
 tags:
-  - gcloud
 ---
 
 ## 概述

@@ -9,9 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - geth
-    - ethereum
+categories:
+  - geth
+  - 源码分析
+tags:
+  - blockchain
 ---
 
 详细看一下区块是如何被加入到链中的。
@@ -20,8 +22,8 @@ tag:
 
 这里有几个 vscode 使用小技巧:
 
-+ [collapse selected code](https://stackoverflow.com/questions/30067767/how-do-i-collapse-sections-of-code-in-visual-studio-code-for-windows)
-+ [how to copy and paste folded code as it is in vscode](https://stackoverflow.com/questions/69420897/on-vsc-can-i-copy-paste-folded-codes-and-keep-them-folded)
+- [collapse selected code](https://stackoverflow.com/questions/30067767/how-do-i-collapse-sections-of-code-in-visual-studio-code-for-windows)
+- [how to copy and paste folded code as it is in vscode](https://stackoverflow.com/questions/69420897/on-vsc-can-i-copy-paste-folded-codes-and-keep-them-folded)
 
 下面[BlockChain.insertChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1487) 代码中折叠一部分，只展示重点流程方便分析：
 
@@ -105,12 +107,12 @@ todo:等待完善
 
 `switch/case`处理被插入的**首个区块**的验证结果，以决定后续其他区块的插入：
 
-+ case1: 首块是`修剪区块(prunedBlock)`。
+- case1: 首块是`修剪区块(prunedBlock)`。
 
   [之前的文章]({{< ref "../blockchain" >}})介绍过所谓被“修剪区块”，就是指区块虽然存在，但它的`state`对象却不存在。这里分为两种情况：
 
-  + `setHead==true`: 将整个`chain`作为侧链插入并处理可能发生的重组。因为根据修剪的规则，主链上的最新的区块（triesInMemory）是不可能不存在`state`对象的，但`chain[0]`的父块不存在`state`对象，说明它的父块不可能是主链上的最新的块，那么整个的`chain`参数所代表的这组区块肯定是在其它分支链上了。
-  + `setHead==false`: 只有合并后会走到这个流程（可以通过查看该函数调用进行确定），如果父块是被修剪，就尝试恢复。
+  - `setHead==true`: 将整个`chain`作为侧链插入并处理可能发生的重组。因为根据修剪的规则，主链上的最新的区块（triesInMemory）是不可能不存在`state`对象的，但`chain[0]`的父块不存在`state`对象，说明它的父块不可能是主链上的最新的块，那么整个的`chain`参数所代表的这组区块肯定是在其它分支链上了。
+  - `setHead==false`: 只有合并后会走到这个流程（可以通过查看该函数调用进行确定），如果父块是被修剪，就尝试恢复。
 
   ```go
     // First block is pruned
@@ -127,7 +129,7 @@ todo:等待完善
         }
   ```
 
-+ case2: 首块是`futureBlock`。
+- case2: 首块是`futureBlock`。
 
   在以太坊中还有一类区块被称为`FutureBlocks`，这些区块被存储在`BlockChain.futureBlocks`字段中。根据错误码 `consensus.ErrFutureBlock` 来查看下如何定义 `futureBlock`，由于验证的代码位于共识模块中，因此这个错误在[ethash](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/consensus/ethash/consensus.go#L276)和[clique](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/consensus/clique/clique.go#L254)中返回的：
 
@@ -140,7 +142,7 @@ todo:等待完善
     }
   ```
 
-  从这段代码我们也可以看出，在`ethash`中如果不包含`uncle`，那么区块的时间戳大于当前时间`allowedFutureBlockTime`(15秒)会被认为是futureBlock；而clique中只要区块的时间戳比当前时间大，就认为是`futureBlock`。
+  从这段代码我们也可以看出，在`ethash`中如果不包含`uncle`，那么区块的时间戳大于当前时间`allowedFutureBlockTime`(15 秒)会被认为是 futureBlock；而 clique 中只要区块的时间戳比当前时间大，就认为是`futureBlock`。
 
   需要稍微提一下的是，在[BlockChain.addFutureBlock](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1434)中也有一个条件判断：
 
@@ -151,19 +153,19 @@ todo:等待完善
     }
   ```
 
-  如果区块的时间戳大于当前时间`maxTimeFutureBlocks`(30秒)就会被直接丢弃，而不会加入到`BlockChain.futureBlocks`中。
+  如果区块的时间戳大于当前时间`maxTimeFutureBlocks`(30 秒)就会被直接丢弃，而不会加入到`BlockChain.futureBlocks`中。
 
   到此我们对成为一个`futureBlock`的条件作一个总结。首先明确一个前提是进行条件判断的时候是在插入一组区块（chain）的时候。满足以下任意一条，都会被调用`BlockChain.addFutureBlock`方法：
 
-  + 某区块被共识代码判断为`ErrFutureBlock`（`ethash`中区块时间戳大于当前时间15秒, `clique`区块时间戳中大于当前时间）。
-  + 同一组区块（参数chain）中，前面有一个区块被判断为`futureBlock`，随后的所有找不到父区块的区块都会被判断为`futureBlock`。
+  - 某区块被共识代码判断为`ErrFutureBlock`（`ethash`中区块时间戳大于当前时间 15 秒, `clique`区块时间戳中大于当前时间）。
+  - 同一组区块（参数 chain）中，前面有一个区块被判断为`futureBlock`，随后的所有找不到父区块的区块都会被判断为`futureBlock`。
 
-  在创建BlockChain时会创建一个线程[BlockChain.updateFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L409)，此线程每隔5秒钟调用[BlockChain.procFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L2251)，尝试将`BlockChain.futureBlocks`中的区块加入到数据库中。
+  在创建 BlockChain 时会创建一个线程[BlockChain.updateFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L409)，此线程每隔 5 秒钟调用[BlockChain.procFutureBlocks](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L2251)，尝试将`BlockChain.futureBlocks`中的区块加入到数据库中。
 
   insertChain 这里的判断逻辑是：
 
-  + 要么`chain[0]`的验证结果是`ErrFutureBlock`（因为 chain[0] 可能没有 parent）。
-  + 要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。
+  - 要么`chain[0]`的验证结果是`ErrFutureBlock`（因为 chain[0] 可能没有 parent）。
+  - 要么是`找不到父区块（ErrUnknownAncestor`但父区块存在于`futureBlocks`中。
 
   相应的处理逻辑是将第一个区块及后续找不到父区块的区块全当成`futureBlock`，调用`addFutureBlock`。然后就直接返回了。
 
@@ -184,7 +186,7 @@ todo:等待完善
         return it.index, err
   ```
 
-+ case3: 除了已知块之外的其它未知错误，直接返回。之前跳过是不需要生成快照的已知块，当前首块可能已知但需要重新执行来生成快照。
+- case3: 除了已知块之外的其它未知错误，直接返回。之前跳过是不需要生成快照的已知块，当前首块可能已知但需要重新执行来生成快照。
 
   ```go
     // Some other error(except ErrKnownBlock) occurred, abort.
@@ -260,20 +262,20 @@ for ; block != nil && err == nil || errors.Is(err, ErrKnownBlock); block, err = 
     }
 ```
 
-这一段代码就是一个for循环，不断处理所有验证通过的区块。代码虽然较多，但逻辑还是比较简单的，就是调用`processor.Process`生成区块对应的`state`对象和收据（`receipt`），并对`state`对象进行验证（`ValidateState`）。
+这一段代码就是一个 for 循环，不断处理所有验证通过的区块。代码虽然较多，但逻辑还是比较简单的，就是调用`processor.Process`生成区块对应的`state`对象和收据（`receipt`），并对`state`对象进行验证（`ValidateState`）。
 如果全都正常，则调用`writeBlockWithState`将区块、`state`对象和收据全部写入数据库中。
 
-随后代码根据 `setHead` 参数将块写入数据库，并根据返回值`status变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）并打印相应日志。
+随后代码根据 `setHead` 参数将块写入数据库，并根据返回值`status 变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）并打印相应日志。
 
 #### writeBlockWithState
 
 #### writeBlockAndSetHead
 
-`writeBlockAndSetHead` 在调用 `writeBlockWithState`在将区块写入数据库后，可能会调用`reorg`对主链与侧链进行调整。随后代码跟据 status变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）。如果写入主链，则生成一个ChainEvent事件；如果写入侧链则生成一个ChainSideEvent事件。
+`writeBlockAndSetHead` 在调用 `writeBlockWithState`在将区块写入数据库后，可能会调用`reorg`对主链与侧链进行调整。随后代码跟据 status 变量可以判断此区块是被写入主链了（CanonStatTy）还是写入侧链了（SideStatTy）。如果写入主链，则生成一个 ChainEvent 事件；如果写入侧链则生成一个 ChainSideEvent 事件。
 
 ### 处理遗留的 future block
 
-下面我们看看insertChain中最后一段代码：
+下面我们看看 insertChain 中最后一段代码：
 
 ```go
     // Any blocks remaining here? The only ones we care about are the future ones
@@ -292,13 +294,13 @@ for ; block != nil && err == nil || errors.Is(err, ErrKnownBlock); block, err = 
     }
 ```
 
-这段代码判断如果chain中还有未处理的区块，则看看是否是futureBlock，如果是则将它们加入到FutureBlocks字段中。
+这段代码判断如果 chain 中还有未处理的区块，则看看是否是 futureBlock，如果是则将它们加入到 FutureBlocks 字段中。
 
 ### defer 函数
 
 #### 产生插入事件
 
-[defer 函数](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个ChainHeadEvent事件。
+[defer 函数](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L1501)检查主链最新的区块（`lastCanon`）是否发生了变化，如果是则生成一个 ChainHeadEvent 事件。
 
 ```go
     // Fire a single chain head event if we've progressed the chain
@@ -361,9 +363,9 @@ for ; block != nil && err == nil || errors.Is(err, ErrKnownBlock); block, err = 
     }
 ```
 
-`insertSidechain` 开始的代码使用一个for循环将所有父区块被修剪过的区块（ErrPrunedAncestor）写入数据库中，写入的方法是`WriteBlockWithoutState`，即只写入区块数据，没有state数据。
+`insertSidechain` 开始的代码使用一个 for 循环将所有父区块被修剪过的区块（ErrPrunedAncestor）写入数据库中，写入的方法是`WriteBlockWithoutState`，即只写入区块数据，没有 state 数据。
 
-这里需要注意的是有一个`shadow-state attack`检查。其判断逻辑是侧链上某区块的`state`哈希与主链上同样高度的区块的`state`哈希相同，这会导致侧链上的区块也可以拥有完整的state对象。但这仅仅可能是一个问题，因为有些情况下这确实是会发生的，比如一直没有交易发生，state对象的哈希一直没变过。
+这里需要注意的是有一个`shadow-state attack`检查。其判断逻辑是侧链上某区块的`state`哈希与主链上同样高度的区块的`state`哈希相同，这会导致侧链上的区块也可以拥有完整的 state 对象。但这仅仅可能是一个问题，因为有些情况下这确实是会发生的，比如一直没有交易发生，state 对象的哈希一直没变过。
 
 ```go
 if canonical != nil && canonical.Root() == block.Root() {
@@ -453,7 +455,7 @@ if canonical != nil && canonical.Root() == block.Root() {
     }
 ```
 
-这部分的逻辑也比较简单，上面的中文注释将代码分成了三部分。第一部分检查当前侧链是否有可能成为主链。如果是的话，第二部分从最新区块开始，收集所有没有state对象的区块。第三部分重新调用`insertChain`以调整分支成为规范链。
+这部分的逻辑也比较简单，上面的中文注释将代码分成了三部分。第一部分检查当前侧链是否有可能成为主链。如果是的话，第二部分从最新区块开始，收集所有没有 state 对象的区块。第三部分重新调用`insertChain`以调整分支成为规范链。
 
 ## HeaderChain
 

@@ -9,9 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - geth
-    - ethereum
+categories:
+  - geth
+  - 源码分析
+tags:
+  - downloader
 ---
 
 ## 引言
@@ -22,51 +24,51 @@ queue 对象与 Downloader 对象紧密关联，共同完成了区块下载的�
 
 ## 有哪些功能
 
-queue 对象是 downloader  模块的一个内部对象，只有 downloader 对象使用了它。下面我们会先从整体上了解一下 queue 提供的功能，然后详细分析一下 queue 的内部实现。
+queue 对象是 downloader 模块的一个内部对象，只有 downloader 对象使用了它。下面我们会先从整体上了解一下 queue 提供的功能，然后详细分析一下 queue 的内部实现。
 
 在下载正式发起之前，以及数据真正下载之前，Downloader 对象会调用 queue 的一些方法，对其进行初始化，或将需要下载的数据信息告诉 queue。我们先来看一下这类功能：
 
-+ `queue.Prepare`用来在下载开始之前，告诉 queue 对象将要下载的一系列区块的起始高度和下载模式（fast 或 full 模式）。
-+ `queue.ScheduleSkeleton`用来在填充 skeleton 之前，使用 skeleton 的信息对 queue 对象进行初始化。
-+ `queue.Schedule`用来准备对一些 body 和 receipt 数据的下载。在 [Downloader.processHeaders]({{< ref "../downloader/#processHeaders" >}}) 中处理下载成功的 header 时，使用这些 header 调用 queue.Schedule 方法，以便 queue 对象可以开始对这些 header 对应的 body 和 receipt 开始下载调度。
+- `queue.Prepare`用来在下载开始之前，告诉 queue 对象将要下载的一系列区块的起始高度和下载模式（fast 或 full 模式）。
+- `queue.ScheduleSkeleton`用来在填充 skeleton 之前，使用 skeleton 的信息对 queue 对象进行初始化。
+- `queue.Schedule`用来准备对一些 body 和 receipt 数据的下载。在 [Downloader.processHeaders]({{< ref "../downloader/#processHeaders" >}}) 中处理下载成功的 header 时，使用这些 header 调用 queue.Schedule 方法，以便 queue 对象可以开始对这些 header 对应的 body 和 receipt 开始下载调度。
 
 在数据的下载过程中，Downloader 对象会使用 queue 提供的一些信息来决定和判断数据的下载状态等信息。下面就是 queue 提供的这类功能：
 
-+ pending
+- pending
 
   pending 功能用来告诉调用者还有多少条数据需要下载。提供此功能的方法有：queue.PendingHeaders、queue.PendingBlocks、queue.PendingReceipts
 
-+ inflight
+- inflight
 
   inflight 功能用来告诉调用者当前是否有数据正在被下载。提供此功能的方法有：queue.InFlightHeaders、queue.InFlightBlocks、queue.InFlightReceipts
 
-+ shouldThrottle
+- shouldThrottle
 
-  shouldThrottle 功能用来告诉调用者是否该限制（或称为暂停）一下某类数据的下载，其目的是为了防止下载过程中本地内存占用过大。在 Downloader.fetchParts中向某节点发起获取数据请求之前，会进行这种判断。提供此功能的方法有：queue.ShouldThrottleBlocks、queue.ShouldThrottleReceipts
+  shouldThrottle 功能用来告诉调用者是否该限制（或称为暂停）一下某类数据的下载，其目的是为了防止下载过程中本地内存占用过大。在 Downloader.fetchParts 中向某节点发起获取数据请求之前，会进行这种判断。提供此功能的方法有：queue.ShouldThrottleBlocks、queue.ShouldThrottleReceipts
 
-+ reserve
+- reserve
 
   reserve 功能通过构造一个 fetchRequest 结构并返回，向调用者提供指定数量的待下载的数据的信息（queue 内部会将这些数据标记为「正在下载」）。调用者使用返回的 fetchRequest 数据向远程节点发起新的获取数据的请求。提供此功能的方法有：queue.ReserveHeaders、queue.ReserveBodies、queue.ReserveReceipts
 
-+ cancel
+- cancel
 
   cancel 功能与 reserve 相反，用来撤消对 fetchRequest 结构中的数据的下载（queue 内部会将这些数据重新从「正在下载」的状态更改为「等待下载」）。提供此功能的方法有：queue.CancelHeaders、queue.CancelBodies、queue.CancelReceipts
 
-+ expire
+- expire
 
   通过在参数中指定一个时间段，expire 用来告诉调用者下载时间已经超过指定时间的节点 id 和超时的数据条数。提供此功能的方法有：queue.ExpireHeaders、queue.ExpireBodies、queue.ExpireReceipts
 
-+ deliver
+- deliver
 
   当有数据下载成功时，调用者会使用 deliver 功能用来通知 queue 对象。提供此功能的方法有：queue.DeliverHeaders、queue.DeliverBodies、queue.DeliverReceipts
 
 在数据下载完成后，Downloader 对象会调用 queue 中的一些方法，获取下载并组装好的区块数据。这类功能有下面几个：
 
-+ RetrieveHeaders
+- RetrieveHeaders
 
   在填充 skeleton 完成后，queue.RetrieveHeaders 用来获取整个 skeleton 中的所有 header。
 
-+ Results
+- Results
 
   queue.Results 用来获取当前的 header、body 和 receipt（只在 fast 模式下） 都已下载成功的区块（并将这些区块从 queue 内部移除）
 
@@ -115,9 +117,9 @@ func (q *queue) Schedule(headers []*types.Header, hashes []common.Hash, from uin
 
 在 queue 中准备好了 body 和 receipt 相关的数据队列，[Downloader.processHeaders]({{< ref "../downloader/#processHeaders" >}}) 就会通知`Downloader.fetchBodies` 和 `Downloader.fetchReceipts` 可以对各自的数据进行下载了。这俩方法都调用了[Downloader.concurrentFetch]({{< ref "../downloader/#concurrentFetch" >}})，查看一下代码就可以知道，对于 body 和 receipt 数据来说：
 
-+ reserve 给每个空闲的 peer 分配下载任务，最终调用的都是`queue.reserveHeaders`。
-+ request 空闲 peer 发起通过 p2p 协议查询。
-+ deliver 处理收到的数据，最后调用的都是`queue.deliver`。
+- reserve 给每个空闲的 peer 分配下载任务，最终调用的都是`queue.reserveHeaders`。
+- request 空闲 peer 发起通过 p2p 协议查询。
+- deliver 处理收到的数据，最后调用的都是`queue.deliver`。
 
 下面依次看下这几个函数。
 
@@ -246,7 +248,7 @@ func (q *queue) reserveHeaders(p *peerConnection, count int, taskPool map[common
 }
 ```
 
-最后的代码将跳过的数据（skip）再次加入到「task queue」中。如果 progress 变量为true，也就是说有区块数据下载成功了（其实是空数据），则设置 queue.active 进行通知（`queue.Results` 可能会在等待这个信号）。
+最后的代码将跳过的数据（skip）再次加入到「task queue」中。如果 progress 变量为 true，也就是说有区块数据下载成功了（其实是空数据），则设置 queue.active 进行通知（`queue.Results` 可能会在等待这个信号）。
 
 接下来就是构造 fetchRequest 结构并返回了。注意这里的 request 变量与 queue.ReserveHeaders 中的不同，这里没有用到 From 字段（这个字段是下载 header 时才用的）。
 

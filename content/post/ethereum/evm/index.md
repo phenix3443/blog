@@ -9,25 +9,15 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
+categories:
   - ethereum
-  - solidity
+tags:
   - evm
 ---
 
 ## 概述[^1]
 
 以太坊虚拟机（EVM）是以太坊智能合约的运行环境。它不仅是沙盒封装的，而且实际上是完全隔离的，这意味着在 EVM 内运行的代码不能访问网络，文件系统或其他进程。 甚至智能合约之间的访问也是受限的。
-
-## 账户
-
-每个账户都有一个持久的键值存储，将 256 位的字映射到 256 位的字，称为 存储。
-
-## 交易
-
-如果目标账户没有设置（交易没有接收者或接收者被设置为 null）， 交易会创建一个新合约。 正如已经提到的，该合约的地址不是零地址， 而是**从发送者和其发送的交易数量（“nonce”）中得出的地址**。 这种合约创建交易的有效负载被认为是 EVM 字节码并被执行。 该执行的输出数据被永久地存储为合约的代码。 这意味着，为创建一个合约，您**不需要发送实际的合约代码，而是发送能够产生合约代码的代码**。
-
-## GAS
 
 ## 存储、内存和栈
 
@@ -51,4 +41,7 @@ tags:
 
 ## 预编译合约
 
+## 参考
+
 [^1]: [以太坊虚拟机](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-6)
+[^2]: [ETHEREUM VIRTUAL MACHINE](https://ethereum.org/en/developers/docs/evm/)

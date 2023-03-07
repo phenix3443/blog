@@ -9,8 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
+categories:
+  - best-practices
   - windows
+tags:
 ---
 
 ## Remote Desktop

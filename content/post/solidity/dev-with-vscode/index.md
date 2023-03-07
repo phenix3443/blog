@@ -9,11 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
-  - vscode
-  - solc
+categories:
   - ethereum
   - solidity
+tags:
+  - vscode
   - contract
 ---
 

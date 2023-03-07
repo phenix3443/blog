@@ -10,9 +10,11 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - geth
+  - 源码分析
 tags:
-    - geth
-    - ethereum
+  - blockchain
 ---
 
 ## 概述[^1]
@@ -21,7 +23,7 @@ tags:
 
 ## sync-modes
 
-Geth 客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`（前身为`fast`），可以通过命令行参数`--syncmode value` 进行指定。更多参见 [get sync modes]({{< ref " /post/geth/syncmode" >}})。
+Geth 客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`（前身为`fast`），可以通过命令行参数`--syncmode value` 进行指定。更多参见 [get sync modes]({{< ref " /post/ethereum/syncmode" >}})。
 
 - snap：同步所有的区块头、区块体和状态数据，但不对区块中的交易进行重放以生成状态数据，只会在后期对区块中的数据（包括交易）进行校验。
 - full：同步所有的区块头，区块体，并重放区块中的交易以生成状态数据。所有区块和区块中的交易都会被逐一验证。

@@ -8,15 +8,15 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - github
 tags:
-    - 最佳实践
-    - gRPC
+  - gRPC
 ---
-
 
 ## quick start
 
-需要提前安装好`protoc`编译器以及对应的`protoc-gen-go`插件，参见 [protobuf实践](../protobuf-practices/)
+需要提前安装好`protoc`编译器以及对应的`protoc-gen-go`插件，参见 [protobuf 实践](../protobuf-practices/)
 
 `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest`
 

@@ -9,11 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - golang
 tags:
-    - golang
-    - unittest
+  - unittest
 ---
-
 
 ## 概述
 
@@ -224,4 +224,4 @@ pkg.test -test.v -myflag testdata -test.cpuprofile=prof.out
 
 [goconvey](https://github.com/smartystreets/goconvey) 是一款 Go 测试工具。
 
-[^1]: [GoStub框架使用指南](https://www.jianshu.com/p/70a93a9ed186)
+[^1]: [GoStub 框架使用指南](https://www.jianshu.com/p/70a93a9ed186)

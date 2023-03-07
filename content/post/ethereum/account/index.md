@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
-tag:
+categories:
   - ethereum
+tags:
   - account
 ---
 

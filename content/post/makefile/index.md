@@ -1,6 +1,6 @@
 ---
-title: "Makefile 小知识"
-description:
+title: "Makefile pieces"
+description: makefile 拾遗
 slug: makefile
 date: 2023-01-08T16:46:27+08:00
 image:
@@ -9,7 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
-tag:
+categories:
+  - ethereum
+tags:
   - makefile
 ---
 

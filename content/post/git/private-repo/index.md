@@ -9,9 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - github
 tags:
   - golang
-  - github
   - actions
   - private-repo
 ---

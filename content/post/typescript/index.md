@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
+categories:
   - typescript
+tags:
 ---
 
 ## 概述

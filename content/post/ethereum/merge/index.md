@@ -1,6 +1,7 @@
 ---
 title: "The Merge"
 description: 以太坊合并
+slug: ethereum-merge
 date: 2022-09-21T13:59:49+08:00
 image:
 math:
@@ -8,6 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - ethereum
 ---
 
 對 Ethereum 來說，最大的效能瓶頸不是達成共識的速度，也不是網路傳輸的速度，而是交易驗證的速度。

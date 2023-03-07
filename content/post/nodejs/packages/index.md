@@ -9,6 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - javascript
 tags:
   - nodejs
   - npm

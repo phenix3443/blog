@@ -9,21 +9,22 @@ license:
 hidden: false
 comments: true
 draft: true
-tag:
-    - optimism
-    - ethereum
+categories:
+  - ethereum
+  - optimism
+tags:
+  - ethereum
 ---
 
 ## 概述
 
 [optimism](https://www.optimism.io/) 是一个以太坊 layer2 区块链。
 
-+ [社区文档](https://community.optimism.io/)
-+ [工程博客](https://dev.optimism.io/)
+- [社区文档](https://community.optimism.io/)
+- [工程博客](https://dev.optimism.io/)
 
 ## unsafe block
 
 ## safe block
 
 ## finalized block
-

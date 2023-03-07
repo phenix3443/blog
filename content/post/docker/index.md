@@ -1,6 +1,6 @@
 ---
-title: "Docker"
-description:
+title: "Docker Pieces"
+description: docker 拾遗
 slug: docker
 date: 2023-01-11T11:58:33+08:00
 image:
@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
+categories:
   - docker
+tags:
 ---
 
 ## 概述

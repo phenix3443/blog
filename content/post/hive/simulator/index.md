@@ -9,23 +9,24 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - hive
-    - test
+categories:
+  - ethereum
+tags:
+  - hive
+  - test
 ---
 
 ## 引言[^1]
 
-本文解释了如何编写 hive  simulator 。
+本文解释了如何编写 hive simulator 。
 
-simulator 是针对 hive 提供的基于 HTTP simulation  API [^2] 编写的程序。simulator 可以用任何编程语言编写，只要它们可使用 docker 打包。
+simulator 是针对 hive 提供的基于 HTTP simulation API [^2] 编写的程序。simulator 可以用任何编程语言编写，只要它们可使用 docker 打包。
 
 simulator 位于 hive 仓库的 `simulators/` 目录中。每个 simulator 都有一个专用的子目录。当 hive 运行 simulation 时，它首先在 simulator 目录中使用 `docker build` 构建镜像。该镜像必须包含测试所需的所有资源。
 
 当 simulator 容器入口点（entry point）运行时，`HIVE_SIMULATOR` 环境变量被设置为 API 服务器的 URL（参见[源码](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/internal/libhive/run.go#L218))。
 
-simulation  API 采用特定的数据模型，该模型决定了 API 的使用方式。为了使用 API 执行任何操作，simulator 必须首先请求启动测试套件并记住其 ID。测试套件由 simulator 分配名称和描述。API 提供的所有其他资源都在测试套件范围内，并一直保留到 simulator 结束测试套件。
+simulation API 采用特定的数据模型，该模型决定了 API 的使用方式。为了使用 API 执行任何操作，simulator 必须首先请求启动测试套件并记住其 ID。测试套件由 simulator 分配名称和描述。API 提供的所有其他资源都在测试套件范围内，并一直保留到 simulator 结束测试套件。
 
 接下来，simulator 可以启动测试用例。测试用例被命名并且还有一个由 API 服务器分配的 ID。套件中的多个测试用例可随时运行。请注意，测试套件没有总体通过/失败状态，只有测试用例有。一个套件必须至少启动一个测试用例，否则无法报告任何结果。
 
@@ -38,7 +39,7 @@ simulator 必须在结束测试套件之前报告所有正在运行的测试用�
 以下是 hive 在启动 simulator 时设置的所有环境变量的列表。
 
 | Variable            | Meaning                                      | Hive Flag           |
-|---------------------|----------------------------------------------|---------------------|
+| ------------------- | -------------------------------------------- | ------------------- |
 | `HIVE_SIMULATOR`    | URL of the API server                        |                     |
 | `HIVE_TEST_PATTERN` | Regular expression, selects suites/tests     | `--sim.limit`       |
 | `HIVE_PARALLELISM`  | Integer, sets test concurrency               | `--sim.parallelism` |
@@ -106,9 +107,9 @@ func runMyClientTest(t *hivesim.T, c *hivesim.Client) {
 
 测试用例可以用用三种表示：
 
-+ `TestSpec`：默认不启动任何客户端。
-+ `ClientTestSpec`：针对单个客户端的测试，要留意 `Role` 字段的定义和使用：“If no role is specified, the test runs for all available client types.”，如果没有指定该字段，那么 spec.Run 针对命令行中指定的所有 client 都会运行，这可能不是我们想要的。。
-+ 实现`AnyTest` 接口的任何 struct。
+- `TestSpec`：默认不启动任何客户端。
+- `ClientTestSpec`：针对单个客户端的测试，要留意 `Role` 字段的定义和使用：“If no role is specified, the test runs for all available client types.”，如果没有指定该字段，那么 spec.Run 针对命令行中指定的所有 client 都会运行，这可能不是我们想要的。。
+- 实现`AnyTest` 接口的任何 struct。
 
   ```go
   type AnyTest interface {
@@ -132,18 +133,18 @@ type T struct {
 
 `T` 对象中的 `Sim` 字段（它是指向 `Simulation` 实例的指针）特别有用，因为它提供了几种与 hive simulation API 通信的方法，例如：
 
-+ starting / ending test suites and tests
-+ starting / stopping / getting information about a client
-+ creating / removing networks
-+ connecting / disconnecting containers to/from a network
-+ getting the IP address of a container on a specific network
+- starting / ending test suites and tests
+- starting / stopping / getting information about a client
+- creating / removing networks
+- connecting / disconnecting containers to/from a network
+- getting the IP address of a container on a specific network
 
 ### run a test suit
 
 可以在 `Suite` 上调用 `RunSuite()` 或 `MustRunSuite()`，唯一的区别是错误处理：
 
-+ `RunSuite()` 将运行 `Suite` 中的所有测试，失败时返回错误。
-+ `MustRunSuite()` 将运行 `Suite` 中的所有测试，如果执行有问题则退出进程。
+- `RunSuite()` 将运行 `Suite` 中的所有测试，失败时返回错误。
+- `MustRunSuite()` 将运行 `Suite` 中的所有测试，如果执行有问题则退出进程。
 
 这两个函数都采用指向“Simulation”和“Suite”实例的指针。
 
@@ -169,7 +170,7 @@ COPY --from=builder /source/sim /
 ENTRYPOINT ["./sim"]
 ```
 
-## 运行simulation
+## 运行 simulation
 
 最后，回到仓库的根目录运行测试：
 
@@ -183,8 +184,8 @@ ENTRYPOINT ["./sim"]
 
 ## 总结
 
-+ 运行时，simulator 实际上是 simulation 运行的测试环境（host）。
-+ simulator 中可以运行多个 test suit, 每个 suit 可以包含多个 test spec，也就是 test case。
+- 运行时，simulator 实际上是 simulation 运行的测试环境（host）。
+- simulator 中可以运行多个 test suit, 每个 suit 可以包含多个 test spec，也就是 test case。
 
 [^1]: [hive simulator](https://github.com/ethereum/hive/blob/master/docs/simulators.md)
 [^2]: [hive simulation API Reference](https://github.com/ethereum/hive/blob/master/docs/simulators.md#simulation-api-references)

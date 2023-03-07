@@ -8,11 +8,11 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
-  - geth
-  - solc
+categories:
   - ethereum
   - solidity
+tags:
+  - geth
   - contract
 ---
 

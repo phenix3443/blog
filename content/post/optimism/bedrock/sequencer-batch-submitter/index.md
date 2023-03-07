@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - optimism
-    - bedrock
+categories:
+  - ethereum
+  - optimism
+tags:
+  - bedrock
 ---

@@ -9,9 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - github
 tags:
   - actions
-  - github
 ---
 
 ## 概述

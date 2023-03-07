@@ -1,7 +1,7 @@
 ---
-title: "Solidity 拾遗"
-description:
-slug: solidity-start
+title: "Solidity Pieces"
+description: solidity 拾遗
+slug: solidity-pieces
 date: 2022-04-25T18:20:17+08:00
 image: solidity-dev.png
 math:
@@ -9,9 +9,10 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
+categories:
   - ethereum
   - solidity
+tags:
 ---
 
 ## 概述[^1]

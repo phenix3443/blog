@@ -1,17 +1,18 @@
 ---
 title: "go build"
-description: 
+description:
 slug: go-build
 date: 2022-05-12T16:08:06+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - golang
 tags:
-    - golang
-    - test
+  - test
 ---
 
 Usage:
@@ -20,9 +21,9 @@ Usage:
 
 Build 编译由导入路径命名的 package 及其依赖项，但不会安装结果。
 
-如果要构建的参数是来自单个目录的 .go 文件列表，则 build 将它们视为指定的单个 package的源文件列表。
+如果要构建的参数是来自单个目录的 .go 文件列表，则 build 将它们视为指定的单个 package 的源文件列表。
 
-编译 package 时，build 会忽略以 '_test.go' 结尾的文件。
+编译 package 时，build 会忽略以 '\_test.go' 结尾的文件。
 
 编译单个主 package 时，build 将生成的可执行文件写入**以第一个源文件命名**的输出文件（'go build ed.go rx.go' 写入 'ed' 或 'ed.exe'）或源代码目录（ 'go build unix/sam' 写入 'sam' 或 'sam.exe'）。编写 Windows 可执行文件时会添加“.exe”后缀。
 

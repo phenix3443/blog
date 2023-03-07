@@ -9,9 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - geth
-    - ethereum
+categories:
+  - geth
+  - 源码分析
+tags:
+  - backend
 ---
 
 ## 引言
@@ -132,8 +134,8 @@ func (s *Ethereum) Start() error {
 
 启动内部 goroutine ：
 
-+ 启动更新 [eth ENR](https://eips.ethereum.org/EIPS/eip-778) 循环。
-+ 启动管理 ethereum 链协议的[handler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L129) 。
+- 启动更新 [eth ENR](https://eips.ethereum.org/EIPS/eip-778) 循环。
+- 启动管理 ethereum 链协议的[handler](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/handler.go#L129) 。
 
 ## handler {#handler}
 
@@ -163,10 +165,10 @@ nil, inserter, h.removePeer)
 
 定义了一下组件：
 
-+ [downloader]({{< ref "../downloader/downloader" >}})
-+ blockFetcher
-+ txFetcher
-+ chainSync
+- [downloader]({{< ref "../downloader/downloader" >}})
+- blockFetcher
+- txFetcher
+- chainSync
 
 ```go
 func (h *handler) Start(maxPeers int) {
@@ -251,4 +253,3 @@ func (cs *chainSyncer) nextSyncOp() *chainSyncOp {
 ```
 
 从代码可以看出，merge 后，链同步不走这里了。
-

@@ -1,6 +1,6 @@
 ---
 title: "Smart Contract"
-description: 智能合约
+description: "智能合约"
 slug: smart-contract
 date: 2023-03-07T11:09:14+08:00
 image:
@@ -8,10 +8,11 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
+categories:
+  - ethereum
 tags:
   - smart-contract
-  - ethereum
 ---
 
 ## 概述[^1]
@@ -30,7 +31,7 @@ tags:
 
 单独的智能合约无法获得关于 "真实世界 "事件的信息，因为它们不能发送 HTTP 请求。这是设计上的问题。依靠外部信息可能会危及共识，这对安全和去中心化很重要。
 
-有一些方法可以利用[预言机(oracle)]({{< ref ../oracle/ >}})来解决这个问题。
+有一些方法可以利用[预言机(oracle)]({{< ref "../oracle/" >}})来解决这个问题。
 
 智能合约的另一个限制是最大合约大小。一个智能合约的最大容量为 24KB，否则会耗尽能量。这可以通过使用 "[钻石模式(The Diamond Pattern)](https://eips.ethereum.org/EIPS/eip-2535) "来绕过。
 
@@ -47,9 +48,10 @@ Multisig（多重签名）合约是智能合约账户，需要多个有效签名
 - Solidity
 - Vyper
 
+[Smart contract language](https://ethereum.org/en/developers/docs/smart-contracts/languages/) 对比介绍了不同语言的优缺点
+
 ## 总结
 
 ## 参考
 
-[^1]: [INTRODUCTION TO SMART CONTRACTS](https://ethereum.org/en/developers/docs/smart-contracts/) 值得一看。
-[^2]: [Smart contract language](https://ethereum.org/en/developers/docs/smart-contracts/languages/)
+[^1]: [Introduction to Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/)

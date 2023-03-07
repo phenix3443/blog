@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
+categories:
   - ethereum
+tags:
   - uniswap
   - dapp
 ---

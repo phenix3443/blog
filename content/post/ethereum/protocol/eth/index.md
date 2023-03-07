@@ -9,14 +9,15 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - geth
-    - ethereum
+categories:
+  - ethereum
+tags:
+  - geth
 ---
 
 ## 概述
 
-eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 `eth/67`。 这里分析 geth 中对于[eth协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
+eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 `eth/67`。 这里分析 geth 中对于[eth 协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
 
 ## 注册 eth 协议为 p2p 子协议
 
@@ -88,7 +89,7 @@ func MakeProtocols(backend Backend, network uint64, dnsdisc enode.Iterator) []p2
 }
 ```
 
-+ [ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43)指示当前 geth 支持两个版本的 eth 协议：
+- [ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43)指示当前 geth 支持两个版本的 eth 协议：
 
 ```go
 // ProtocolVersions are the supported versions of the `eth` protocol (first
@@ -131,10 +132,10 @@ func NewPeer(version uint, p *p2p.Peer, rw p2p.MsgReadWriter, txpool TxPool) *Pe
 
 peer 实例使用单独的 goroutine 来执行：
 
-+ 广播区块。
-+ 广播交易。
-+ 声明交易。（是否有更好翻译）
-+ 分发上层的请求。
+- 广播区块。
+- 广播交易。
+- 声明交易。（是否有更好翻译）
+- 分发上层的请求。
 
 ### peer 间握手
 
@@ -185,7 +186,7 @@ forkFilter forkid.Filter) error {
 
 与其他 peer 建立连接后，必须发送`Status`消息，其中包括总难度 (TD) 和它们“最佳”已知块的哈希。
 
-同时本地 peer 也会收到其他 peer 发来的 TD 以及最新区块的 head Hash, 具有最差 TD 的客户端继续使用 `GetBlockHeaders` 消息下载 block header 。它验证接收到的 header 中的工作量证明值，并使用 `GetBlockBodies` 消息获取块体。使用以太坊虚拟机执行收到的区块，重新创建 state tree和收据。后面链同步时候继续讲。
+同时本地 peer 也会收到其他 peer 发来的 TD 以及最新区块的 head Hash, 具有最差 TD 的客户端继续使用 `GetBlockHeaders` 消息下载 block header 。它验证接收到的 header 中的工作量证明值，并使用 `GetBlockBodies` 消息获取块体。使用以太坊虚拟机执行收到的区块，重新创建 state tree 和收据。后面链同步时候继续讲。
 
 此处具体与哪些 peer 建立连接，以及连接的建立过程是 p2p 底层协议处理，这里不做进一步分析。
 
@@ -273,7 +274,7 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 
 ### 状态同步（又名“快速同步”）
 
-协议版本 eth/63 到 eth/66 也允许同步 state tree。从协议版本 eth/67 开始，以太坊 state tree不能再使用 eth 协议检索，而是由辅助协议 [snap](https://github.com/ethereum/devp2p/blob/master/caps/snap.md)提供 state 下载。
+协议版本 eth/63 到 eth/66 也允许同步 state tree。从协议版本 eth/67 开始，以太坊 state tree 不能再使用 eth 协议检索，而是由辅助协议 [snap](https://github.com/ethereum/devp2p/blob/master/caps/snap.md)提供 state 下载。
 
 状态同步通常通过下载 block header 链来进行，验证它们的有效性。在链同步部分中请求块体，但不执行交易，仅验证其“数据有效性”。客户端在链头附近选择一个块（`pivot block`）并下载该块的 state。
 

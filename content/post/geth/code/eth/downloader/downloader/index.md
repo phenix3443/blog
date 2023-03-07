@@ -9,9 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
+categories:
   - geth
-  - ethereum
+  - 源码分析
+tags:
+  - downloader
 ---
 
 ## 概述
@@ -27,7 +29,7 @@ downloader 模块的代码位于 `eth/downloader` 目录下。其主要的功能
 
 ### 同步模式
 
-参考之前的[文章]({{< ref " /post/geth/syncmode" >}})
+参考之前的[文章]({{< ref " /post/ethereum/syncmode" >}})
 
 ## 实例化
 

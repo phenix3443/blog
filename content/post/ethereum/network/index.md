@@ -1,5 +1,5 @@
 ---
-title: "ethereum networks"
+title: "Ethereum Networks"
 description: 以太坊网络介绍
 slug: ethereum-networks
 date: 2023-02-22T21:02:39+08:00
@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
+categories:
   - ethereum
+tags:
   - testnets
 ---
 

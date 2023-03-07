@@ -1,16 +1,17 @@
 ---
-title: Geth Tutorial
-description: Geth 客户端使用
-slug: geth-tutorial
+title: "Geth Pieces"
+description: Geth 拾遗
+slug: geth-pieces
 date: 2022-08-18T15:05:26+08:00
 math:
 license:
 hidden: false
 comments: true
 draft: false
-tags:
+categories:
   - geth
-  - 以太坊
+  - 源码分析
+tags:
 ---
 
 所有内容来自 [Geth Documentation](https://geth.ethereum.org/docs/)，如果错漏，请以官方文档为准。

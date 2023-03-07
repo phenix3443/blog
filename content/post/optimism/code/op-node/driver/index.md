@@ -9,10 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - optimism
-    - bedrock
+categories:
+  - ethereum
+  - optimism
+tags:
+  - bedrock
 ---
 
 ## 引言
@@ -100,8 +101,8 @@ func (s *state) loop() {
 
 loop 启动后就会执行一次 reqStep，如果：
 
-+ op-geth 开启 p2p 同步情况下， s.derivation.Step 将触发 L2 状态进行 p2p 同步到最新的 state(happy-path sync[^1])。
-+ op-geth 开启 p2p 同步情况下，应该怎么处理？（todo）
+- op-geth 开启 p2p 同步情况下， s.derivation.Step 将触发 L2 状态进行 p2p 同步到最新的 state(happy-path sync[^1])。
+- op-geth 开启 p2p 同步情况下，应该怎么处理？（todo）
 
 ## 创建新块
 

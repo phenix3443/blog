@@ -9,9 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-  - geth
+categories:
   - ethereum
+tags:
+  - sync
 ---
 
 更详细信息参考 [官方文档](https://geth.ethereum.org/docs/interface/sync-modes)。
@@ -54,7 +55,7 @@ syncing has not finished eth.syncing >> false
 
 注意：快照同步是默认行为，因此如果在启动时没有将 `--syncmode` 值传递给 Geth，Geth 将使用快照同步。 使用 snap 启动的节点一旦赶上链的头部，就会切换到逐块同步。
 
-更多关于 snapShots/snapSync 信息参见[snap in geth]({{< ref "post/geth/snap" >}})。
+更多关于 snapShots/snapSync 信息参见[snap in geth]({{< ref "post/ethereum/snap" >}})。
 
 #### 完全同步（full）
 

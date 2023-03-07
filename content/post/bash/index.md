@@ -9,10 +9,10 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - shell
 tags:
   - bash
-  - shell
-  - script
 ---
 
 ## 概述

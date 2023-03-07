@@ -9,10 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - golang
+  - best-practices
 tags:
-  - vscode
-  - 最佳实践
-  - docker
 ---
 
 所有内容出自[官方文档](https://code.visualstudio.com/docs)。

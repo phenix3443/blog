@@ -8,10 +8,10 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
-  - 源码分析
-  - 以太坊
+categories:
   - geth
+  - 源码分析
+tags:
 ---
 
 代码分析基于 [go-ethereum/v1.10.17](https://github.com/ethereum/go-ethereum/tree/v1.10.17)：

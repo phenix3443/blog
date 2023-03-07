@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
-tags:
+categories:
   - react
+tags:
 ---
 
 ## 概述

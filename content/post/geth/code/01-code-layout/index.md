@@ -8,10 +8,10 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
-  - 源码分析
-  - 以太坊
+categories:
   - geth
+  - 源码分析
+tags:
 ---
 
 ## layout

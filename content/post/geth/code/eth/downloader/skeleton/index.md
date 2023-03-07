@@ -9,9 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - geth
-    - ethereum
+categories:
+  - geth
+  - 源码分析
+tags:
+  - downloader
 ---
 
 ## 概述
@@ -79,7 +81,7 @@ func (s *skeleton) Sync(head *types.Header, force bool) error {
 
 ### subchain
 
-[subchain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L93)是由数据库支持的、连续的、分段的`header chain`，但可能未链接到规范链或侧链。skeleton-syncer可能会在每次重新启动时生成一个新的子链，直到子链增长到足以与先前的子链连接。
+[subchain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/skeleton.go#L93)是由数据库支持的、连续的、分段的`header chain`，但可能未链接到规范链或侧链。skeleton-syncer 可能会在每次重新启动时生成一个新的子链，直到子链增长到足以与先前的子链连接。
 
 subchain 使用完全相同的数据库命名空间，并且彼此不脱节。 因此，将一个扩展为与另一个重叠需要首先减少第二个。 这种组合缓冲区模型用于避免在两个子链连接在一起时必须在磁盘上移动数据。
 
@@ -255,8 +257,8 @@ func (s *skeleton) initSync(head *types.Header) {
 
 `initSync`中主要的事情就是将 head 作为 `skeleton.process.Subchains[0]`(后面统一称为 `lastchain`)，处理逻辑是：
 
-+ 如果之前有未完成同步的`subchains`，并且 head 可以和原有的 `Subchains[0]` 进行合并，就进行合并。
-+ 否则将 head 作为新的 subchains[0]。
+- 如果之前有未完成同步的`subchains`，并且 head 可以和原有的 `Subchains[0]` 进行合并，就进行合并。
+- 否则将 head 作为新的 subchains[0]。
 
 后面的流程都是针对`lastchain`进行同步和回填。
 
@@ -271,9 +273,9 @@ func (s *skeleton) initSync(head *types.Header) {
     s.scratchHead = s.progress.Subchains[0].Tail - 1 // tail must not be 0!
 ```
 
-+ 初始化用于保存同步 head 的内存空间，每次同步可以保存 131072 个 head（`scratchHeaders`)。
-+ head 同步自不同的 peer，每个 peer 可以同步 512 个 head（`requestHeaders`）。`scratchOwners` 记录了每批 head 对应的 peerID 。
-+ `scratchHead` 是 lastchain 末尾 head 可以连接的 parent head number。
+- 初始化用于保存同步 head 的内存空间，每次同步可以保存 131072 个 head（`scratchHeaders`)。
+- head 同步自不同的 peer，每个 peer 可以同步 512 个 head（`requestHeaders`）。`scratchOwners` 记录了每批 head 对应的 peerID 。
+- `scratchHead` 是 lastchain 末尾 head 可以连接的 parent head number。
 
 ### lastchain 可 link
 
@@ -319,8 +321,8 @@ func (b *beaconBackfiller) resume() {
 
 `beaconBackFiller.resume` 逻辑很简单：
 
-+ 修改`filler`本身的状态参数。
-+ 使用单独的 goroutine [启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader.synchronise`同步`lastchain`对应的`state`和链上数据。`downloader.synchronise`函数分析参见[downloader分析]({{< ref "../downloader" >}})）。
+- 修改`filler`本身的状态参数。
+- 使用单独的 goroutine [启动](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/beaconsync.go#L108) `downloader.synchronise`同步`lastchain`对应的`state`和链上数据。`downloader.synchronise`函数分析参见[downloader 分析]({{< ref "../downloader" >}})）。
 
 `downloader.syncWithPeer`中通过`skeleton.Bounds`[了解](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/downloader/downloader.go#L480)此轮同步的边界。
 
@@ -382,11 +384,11 @@ func (s *skeleton) Bounds() (head *types.Header, tail *types.Header, err error) 
     }
 ```
 
-在等待 Downloader 对 lastchain 进行回填过程中，当前 skeleton 继续等待其他 event 发生，如果有 newHeader 到来，就将其整合到 lastchain 中， 返回new header 以及 errSyncReorged 到上一层，循环中开启下一次同步。
+在等待 Downloader 对 lastchain 进行回填过程中，当前 skeleton 继续等待其他 event 发生，如果有 newHeader 到来，就将其整合到 lastchain 中， 返回 new header 以及 errSyncReorged 到上一层，循环中开启下一次同步。
 
 ### lastchain 不可 link
 
-``` go
+```go
     for {
         // Something happened, try to assign new tasks to any idle peers
         if !linked {

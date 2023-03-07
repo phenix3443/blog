@@ -4,8 +4,9 @@ description: Github 上使用多个账号和 SSH key 进行项目开发
 slug: github-multi-accounts
 date: 2022-03-11 00:00:00+0000
 image: github-ssh.png
-tags:
+categories:
   - github
+tags:
   - git
   - ssh
 ---

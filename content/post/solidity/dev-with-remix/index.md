@@ -9,11 +9,12 @@ license:
 hidden: false
 comments: true
 draft: false
-tags:
-  - remix
+categories:
   - ethereum
   - solidity
-  - smart-contract
+tags:
+  - remix
+  - contract
 ---
 
 ## Remix IDE

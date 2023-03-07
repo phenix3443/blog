@@ -3,15 +3,16 @@ title: "Github Best Practices"
 description: 记录 Github 最佳实践
 date: 2022-06-28T01:50:36+08:00
 slug: github-best-practices
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - github
+  - best-practices
 tags:
-    - practices
-    - github
 ---
 
 ## issue

@@ -9,10 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - optimism
-    - bedrock
+categories:
+  - ethereum
+  - optimism
+tags:
+  - bedrock
 ---
 
 ## 引言[^1]
@@ -33,8 +34,8 @@ tag:
 
 为了安全地处理 deposited transactions ，必须首先对 deposit 进行验证：
 
-+ 通过受信任的引擎 API 直接获取（todo: how?）。
-+ 部分同步到受信任的块哈希（通过先前的引擎 API 指令授信(todo: how?)）
+- 通过受信任的引擎 API 直接获取（todo: how?）。
+- 部分同步到受信任的块哈希（通过先前的引擎 API 指令授信(todo: how?)）
 
 绝不能消费交易池中 deposited transactions。deposits-only rollup 中可禁用交易池。
 
@@ -48,9 +49,9 @@ tag:
 
 在 rollup 中，forkchoice 更新的类型转换为：
 
-+ `headBlockHash`: 规范链头部的块哈希。 在用户 JSON-RPC 中标记为 `"unsafe"`。 节点可以提前在带外应用 L2 块，然后在 L1 数据冲突时重新组织。
-+ `safeBlockHash`: 规范链的块哈希，源自 L1 数据，不太可能重组（todo：为什么不太可能重组？L1 重组不可能么？）。
-+ `finalizedBlockHash`: 不可逆区块哈希，匹配争议周期下边界（todo:什么是下边界，这里需要添加文献引用）。
+- `headBlockHash`: 规范链头部的块哈希。 在用户 JSON-RPC 中标记为 `"unsafe"`。 节点可以提前在带外应用 L2 块，然后在 L1 数据冲突时重新组织。
+- `safeBlockHash`: 规范链的块哈希，源自 L1 数据，不太可能重组（todo：为什么不太可能重组？L1 重组不可能么？）。
+- `finalizedBlockHash`: 不可逆区块哈希，匹配争议周期下边界（todo:什么是下边界，这里需要添加文献引用）。
 
 为了支持 rollup 功能，`engine_forkchoiceUpdatedV1` 引入了一个向后兼容的更改：扩展的 `PayloadAttributesV1`。
 
@@ -59,14 +60,9 @@ tag:
 [PayloadAttributesV1](https://github.com/ethereum/execution-apis/blob/769c53c94c4e487337ad0edea9ee0dce49c79bfa/src/engine/specification.md#PayloadAttributesV1) 扩展为：
 
 ```html
-PayloadAttributesV1: {
-    timestamp: QUANTITY
-    random: DATA (32 bytes)
-    suggestedFeeRecipient: DATA (20 bytes)
-    transactions: array of DATA
-    noTxPool: bool
-    gasLimit: QUANTITY or null
-}
+PayloadAttributesV1: { timestamp: QUANTITY random: DATA (32 bytes)
+suggestedFeeRecipient: DATA (20 bytes) transactions: array of DATA noTxPool:
+bool gasLimit: QUANTITY or null }
 ```
 
 此处使用的类型表示法与[以太坊 JSON-RPC API 规范](https://github.com/ethereum/execution-apis)使用的 [HEX value encoding](https://eth.wiki/json-rpc/API#hex-value-encoding)一致，因为此结构需要通过 JSON-RPC 发送。`array` 指的是一个 JSON 数组。
@@ -75,13 +71,13 @@ PayloadAttributesV1: {
 
 `transactions`字段是可选的：
 
-+ 如果为空或缺失：引擎行为没有变化。定序器将（如果启用）通过使用交易池中的交易来构建区块。
-+ 如果存在且非空：必须从这个确切的交易列表开始生成 payload。 [rollup driver]({{< ref "../rollup-node" >}}) 根据确定性的 L1 输入确定交易列表。
+- 如果为空或缺失：引擎行为没有变化。定序器将（如果启用）通过使用交易池中的交易来构建区块。
+- 如果存在且非空：必须从这个确切的交易列表开始生成 payload。 [rollup driver]({{< ref "../rollup-node" >}}) 根据确定性的 L1 输入确定交易列表。
 
 noTxPool 也是可选的，它扩展了交易含义：
 
-+ 如果为 `false`，执行引擎可以在任何交易之后自由地将来自外部来源（例如 tx pool）的其他交易打包到有效负载中。这是 L1 节点实现的默认行为。
-+ 如果为 `true`，执行引擎不得更改给定交易列表的任何内容。
+- 如果为 `false`，执行引擎可以在任何交易之后自由地将来自外部来源（例如 tx pool）的其他交易打包到有效负载中。这是 L1 节点实现的默认行为。
+- 如果为 `true`，执行引擎不得更改给定交易列表的任何内容。
 
 如果存在`transactions`字段，引擎必须按顺序执行交易，如果处理交易时出错，则返回 `STATUS_INVALID`。如果所有交易都可以无误地执行，它必须返回 `STATUS_VALID`。注意：状态转换规则已被修改，因此 deposit 永远不会失败，所以如果 `engine_forkchoiceUpdatedV1` 返回 STATUS_INVALID，那是因为批处理交易无效。
 
@@ -101,33 +97,33 @@ noTxPool 也是可选的，它扩展了交易含义：
 
 但是，为了不让 L1 数据检索速度成为瓶颈，应该启用 P2P 网络功能，服务于：
 
-+ 对等节点发现 ([Disc v5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md))
-+ [eth/66](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)：
-  + 交易池（由定序器节点消耗）。
-  + 状态同步（Happy-path 进行快速无信任数据库复制）。
-  + 历史区块头和主体检索。
-  + 通过共识层（`rollup node`）获取的新块。
+- 对等节点发现 ([Disc v5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md))
+- [eth/66](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)：
+  - 交易池（由定序器节点消耗）。
+  - 状态同步（Happy-path 进行快速无信任数据库复制）。
+  - 历史区块头和主体检索。
+  - 通过共识层（`rollup node`）获取的新块。
 
 无需修改 L1 网络功能，除了配置：
 
-+ `networkID`：将 L2 网络与 L1 和测试网区分开来。 等于 `rollup` 网络的 chainID。
-+ 激活合并分叉：启用引擎 API 并禁用块传播，因为没有共识层就无法验证块头。
-+ `Bootnode` 列表：DiscV5 是一个共享网络，通过 [bootstrap](https://github.com/ethereum/devp2p/blob/master/discv5/discv5-rationale.md) 先连接 L2 节点更快。
+- `networkID`：将 L2 网络与 L1 和测试网区分开来。 等于 `rollup` 网络的 chainID。
+- 激活合并分叉：启用引擎 API 并禁用块传播，因为没有共识层就无法验证块头。
+- `Bootnode` 列表：DiscV5 是一个共享网络，通过 [bootstrap](https://github.com/ethereum/devp2p/blob/master/discv5/discv5-rationale.md) 先连接 L2 节点更快。
 
 ## 同步 {#sync}
 
 执行引擎可通过不同的方式操作同步：
 
-+ Happy-path：rollup 节点将 L1 确定的所需链头通知引擎，通过引擎 P2P 完成。
-+ Worst-case：rollup 节点检测到停止的引擎，完全从 L1 数据完成同步，不需要对等节点。
+- Happy-path：rollup 节点将 L1 确定的所需链头通知引擎，通过引擎 P2P 完成。
+- Worst-case：rollup 节点检测到停止的引擎，完全从 L1 数据完成同步，不需要对等节点。
 
 happy-path 更适合让新节点快速上线，因为引擎实现可以通过 snap-sync 等方法更快地同步状态。
 
 ### Happy-path 同步 {#happy-path-sync}
 
 1. rollup 节点无条件地通知引擎 L2 链头（常规节点操作的一部分）：
-   + 使用从 L1 推导的最新 L2 块调用 `engine_newPayloadV1`。
-   + 使用当前`unsafe/safe/finalized`的 L2 块哈希调用`engine_forkchoiceUpdatedV1`。
+   - 使用从 L1 推导的最新 L2 块调用 `engine_newPayloadV1`。
+   - 使用当前`unsafe/safe/finalized`的 L2 块哈希调用`engine_forkchoiceUpdatedV1`。
 2. 引擎反向请求对等 peer 的区块头，直到父哈希与本地链匹配。
 3. 两种情况说明引擎赶上：
    a) 某种形式的状态同步被激活，同步到到 finalized 或 head 块哈希。

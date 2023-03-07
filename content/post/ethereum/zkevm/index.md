@@ -1,18 +1,18 @@
 ---
 title: "zkemv 学习"
-description: 
+description:
 date: 2022-06-07T22:42:28+08:00
-image: 
-math: 
-license: 
+image:
+math:
+license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - ethereum
 tags:
-    - blockchain
-    - zkevm
+  - zkevm
 ---
-
 
 ## 资料
 
@@ -21,6 +21,7 @@ tags:
 [HAC](https://cacr.uwaterloo.ca/hac/) is another good crypto reference which is like a dictionary for concepts & pseudo-code algorithms.
 
 Some potentially interesting lookup things that could improve the prover performance:
+
 - Caulk - https://eprint.iacr.org/2022/621: Can potentially enable very large lookup tables which can make certain operations in circuits more efficient
 - Standard Plookup - https://eprint.iacr.org/2020/315: Differs from the lookups currently used in halo2. The benefit here would be that the lookups could be done in differently sized columns than the circuit. Though unsure how much this could help combined with the different constraints of zkEVM. Theoretically worse than Caulk but maybe easier to implement.
 

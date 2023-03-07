@@ -9,8 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
+categories:
   - ethereum
+tags:
   - hive
   - test
 ---

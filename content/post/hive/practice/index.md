@@ -9,8 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
+categories:
   - ethereum
+  - best-practices
+tags:
   - hive
   - test
 ---

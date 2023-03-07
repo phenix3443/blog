@@ -9,10 +9,11 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - hive
-    - test
+categories:
+  - ethereum
+tags:
+  - hive
+  - test
 ---
 
 ## 引言[^1]
@@ -23,29 +24,29 @@ tag:
 
 Hive 与其他通用 CI 基础设施的不同之处在于其同太坊客户端及其功能紧密集成。simulator 程序通常不需要关心客户端实现之间的差异，因为 Hive 提供了一个通用接口来启动和配置它们。当前，可以为任何 Ethereum 1 网络定义配置客户端（通过定义创世块和硬分叉激活块号）。simulations 还可以指示客户端加载预定义的测试链并启用挖矿（mining）。可以在 [hive 客户端文档]({{< ref "../client" >}}) 中找到有关客户端配置的更多信息。
 
-Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P网络规范合规性以及大多数 Ethereum 客户端实现的用户 API 支持。您可以在 <https://hivetests.ethdevops.io/> 找到最新的测试结果。
+Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P 网络规范合规性以及大多数 Ethereum 客户端实现的用户 API 支持。您可以在 <https://hivetests.ethdevops.io/> 找到最新的测试结果。
 
 ## 当前 simulators
 
 这是当前在生产环境的 hive 实例上实现和持续运行的一些 simulator 的概述：
 
-+ `devp2p`：该 simulator 运行 “eth”、“snap” 和 “discv4” P2P 协议测试。测试套件（test suits）本身在 go-ethereum 仓库中维护。在它们的 hive 适配代码中，simulator 启动具有已知测试链的客户端，获取其 P2P 端点（`enode://` URL）并向其发送协议消息。客户端的响应由测试套件进行分析，以确保它们符合相应的协议规范。
+- `devp2p`：该 simulator 运行 “eth”、“snap” 和 “discv4” P2P 协议测试。测试套件（test suits）本身在 go-ethereum 仓库中维护。在它们的 hive 适配代码中，simulator 启动具有已知测试链的客户端，获取其 P2P 端点（`enode://` URL）并向其发送协议消息。客户端的响应由测试套件进行分析，以确保它们符合相应的协议规范。
 
-+ `eth2/engine`：TODO：待补充。
+- `eth2/engine`：TODO：待补充。
 
-+ `eth2/testnet`：TODO：待补充。
+- `eth2/testnet`：TODO：待补充。
 
-+ `ethereum/consensus`：该 simulator 针对所有客户端运行 Ethereum 1 共识测试。虽然通常期望客户端实施者自己运行这些测试，但它们可能并不总是运行最新的测试，并且如果花费的时间太长，它们可能会跳过其中的一些测试。在hive simulation 中运行这些测试可确保不会跳过任何测试。
+- `ethereum/consensus`：该 simulator 针对所有客户端运行 Ethereum 1 共识测试。虽然通常期望客户端实施者自己运行这些测试，但它们可能并不总是运行最新的测试，并且如果花费的时间太长，它们可能会跳过其中的一些测试。在 hive simulation 中运行这些测试可确保不会跳过任何测试。
 
-+ `ethereum/engine`：TODO：待补充。
+- `ethereum/engine`：TODO：待补充。
 
-+ `ethereum/graphql`：该 simulator 使用已知测试链初始化客户端并启用 GraphQL API 端点。然后它执行某些查询并将其输出与已知的期望输出进行比较。
+- `ethereum/graphql`：该 simulator 使用已知测试链初始化客户端并启用 GraphQL API 端点。然后它执行某些查询并将其输出与已知的期望输出进行比较。
 
-+ `ethereum/rpc`：该 simulator 为 clique PoA 挖矿配置客户端，并针对 web3 JSON-RPC 接口运行各种测试。这些测试确保客户端能够通过 RPC 接收交易，将它们合并到其链中，并通过标准 API 报告交易结果。
+- `ethereum/rpc`：该 simulator 为 clique PoA 挖矿配置客户端，并针对 web3 JSON-RPC 接口运行各种测试。这些测试确保客户端能够通过 RPC 接收交易，将它们合并到其链中，并通过标准 API 报告交易结果。
 
-+ `ethereum/rpc-compat`：TODO：待补充。
+- `ethereum/rpc-compat`：TODO：待补充。
 
-+ `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 `--client` 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
+- `ethereum/sync`：该 simulator 尝试在所有客户端之间同步区块链。对于每个启用（通过 hive command 中的 `--client` 指定）的客户端实现，它都会创建一个实例作为“源客户端”。“源客户端”使用已知的测试链进行初始化。然后，simulator 针对“源客户端”启动新实例作为“接收客户端”，并检查“接收客户端”是否可以从“源客户端”同步链。
 
 ## 运行原理 {#how-it-works}
 
@@ -138,14 +139,14 @@ go build .
 
 常用的命令行选项有：
 
-+ `--docker.pull`：设置这个选项让 hive 重新拉取所有构建的 docker 容器的基础镜像。
-+ `--docker.output`：这允许将所有 docker 容器输出打印到 stderr。
-+ `--sim.loglevel <level>`：选择客户端实例的日志级别。支持值 0-5，默认为 3。请注意，此值可能会被特定客户端的 simulator 覆盖。这会在客户端容器中设置`HIVE_LOGLEVEL`的默认值。
-+ `--sim.limit <expression>`：指定一个正则表达式以选择性地启用套件和测试用例。这是由 simulator 解释的。它设置 `HIVE_TEST_PATTERN` 环境变量。
-+ `--docker.nocache <expression>`：选择强制重建的 docker 镜像的正则表达式。可以在 simulator 开发期间使用此选项以确保构建新镜像，即使 simulator 代码没有更改也是如此。
-+ `--sim.timelimit <timeout>`：simulation 超时时间。如果超过此时间，Hive 将中止 simulator 。没有默认超时。
+- `--docker.pull`：设置这个选项让 hive 重新拉取所有构建的 docker 容器的基础镜像。
+- `--docker.output`：这允许将所有 docker 容器输出打印到 stderr。
+- `--sim.loglevel <level>`：选择客户端实例的日志级别。支持值 0-5，默认为 3。请注意，此值可能会被特定客户端的 simulator 覆盖。这会在客户端容器中设置`HIVE_LOGLEVEL`的默认值。
+- `--sim.limit <expression>`：指定一个正则表达式以选择性地启用套件和测试用例。这是由 simulator 解释的。它设置 `HIVE_TEST_PATTERN` 环境变量。
+- `--docker.nocache <expression>`：选择强制重建的 docker 镜像的正则表达式。可以在 simulator 开发期间使用此选项以确保构建新镜像，即使 simulator 代码没有更改也是如此。
+- `--sim.timelimit <timeout>`：simulation 超时时间。如果超过此时间，Hive 将中止 simulator 。没有默认超时。
 
-上面的 expression 是 golang regexp 支持[re2语法](https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex)。更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
+上面的 expression 是 golang regexp 支持[re2 语法](https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex)。更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
 
 ```log
 % ./hive --sim devp2p --sim.limit discv4 --client go-ethereum
@@ -221,9 +222,9 @@ Hive simulation 运行的结果存储在 JSON 文件中，Hive 还会创建几�
 
 hivechain 默认生成空块。 如果以下帐户在创世状态下有余额，则该链将包含非空块。 可以在 `hivechain` 源代码中找到相应的私钥。
 
-+ 0x71562b71999873DB5b286dF957af199Ec94617F7
-+ 0x703c4b2bD70c169f5717101CaeE543299Fc946C7
-+ 0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e
+- 0x71562b71999873DB5b286dF957af199Ec94617F7
+- 0x703c4b2bD70c169f5717101CaeE543299Fc946C7
+- 0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e
 
 [^1]: [hive overview](https://github.com/ethereum/hive/blob/master/docs/overview.md)
 [^2]: [hive commandline](https://github.com/ethereum/hive/blob/master/docs/commandline.md)

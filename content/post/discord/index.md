@@ -8,8 +8,10 @@ license:
 hidden: false
 comments: true
 draft: false
+categories:
+  - tools
 tags:
-    - discord
+  - discord
 ---
 
 ## 使用代理

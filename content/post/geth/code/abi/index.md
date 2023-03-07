@@ -10,10 +10,12 @@ license:
 hidden: false
 comments: true
 draft: false
-tag:
-    - ethereum
-    - hive
-    - test
+categories:
+  - geth
+  - 源码分析
+tags:
+  - abi
+
 ---
 
 ## 概述
@@ -33,11 +35,11 @@ Golang 的 [abi package](https://pkg.go.dev/github.com/ethereum/go-ethereum/acco
 func NewType(t string, internalType string, components []ArgumentMarshaling) (typ Type, err error)
 ```
 
-+ `t` 是 [abi 接口规范支持的类型](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#types)，有两个测试用例可以参考：
-  + [TestTypeRegexp](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/accounts/abi/type_test.go#L33) 描述了 t 字段的整数书写规范。
-  + [TestTypeCheck](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/accounts/abi/type_test.go#L119) 描述了 t 字段与 golang 类型映射关系。
-+ `internalType` 是 solidity 0.5.10 开始引入的一个 abi 字段，具体解释参见[这篇文章](https://ethereum.stackexchange.com/questions/76953/what-is-the-purpose-of-internaltype-now-generated-by-the-solidity-compiler-in)。该字段对于 encode/decode 没有影响，只用于 debug，通常设置为空字符串即可。
-+ `components` 用于定义符合字段，常用来定义 struct 的字段或者数组的成员类型。
+- `t` 是 [abi 接口规范支持的类型](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#types)，有两个测试用例可以参考：
+  - [TestTypeRegexp](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/accounts/abi/type_test.go#L33) 描述了 t 字段的整数书写规范。
+  - [TestTypeCheck](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/accounts/abi/type_test.go#L119) 描述了 t 字段与 golang 类型映射关系。
+- `internalType` 是 solidity 0.5.10 开始引入的一个 abi 字段，具体解释参见[这篇文章](https://ethereum.stackexchange.com/questions/76953/what-is-the-purpose-of-internaltype-now-generated-by-the-solidity-compiler-in)。该字段对于 encode/decode 没有影响，只用于 debug，通常设置为空字符串即可。
+- `components` 用于定义符合字段，常用来定义 struct 的字段或者数组的成员类型。
 
 ### 基础类型
 
