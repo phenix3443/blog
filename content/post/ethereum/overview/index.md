@@ -15,6 +15,8 @@ tags:
 
 ## 概述
 
+[INTRO TO ETHEREUM](https://ethereum.org/en/developers/docs/intro-to-ethereum/) 对涉及的相关术语做了简要说明。
+
 ## 架构
 
 [官方介绍](https://geth.ethereum.org/docs/fundamentals/node-architecture)
@@ -23,4 +25,8 @@ tags:
 
 ### Consensus Client
 
-## Validator
+### Validator
+
+## 总结
+
+## 参考
