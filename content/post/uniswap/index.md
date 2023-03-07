@@ -98,141 +98,9 @@ cd v2-periphery && yarn && yarn compile && cp -r build ../uniswap-contracts && c
 
 首先在 `uniswap-contracts`  目录下创建一个文本文件 `deploy.js`，并将下面的代码拷贝进去。
 
-> 注意：常量 **endpoint**  和 **hexPrivateKey**  请自行修改，并保证地址里面有足够的 **ETH**  用于支付 GAS 费用。
+> 注意：常量 `endpoint` 和 `hexPrivateKey` 请自行修改，并保证地址里面有足够的 `ETH`  用于支付 GAS 费用。
 
-```js
-const Web3 = require("web3");
-const WETH9 = require("./build/WETH9.json");
-const Multicall = require("./build/Multicall.json");
-const UniswapV2Pair = require("./build/UniswapV2Pair.json");
-const UniswapV2Factory = require("./build/UniswapV2Factory.json");
-const UniswapV2Router01 = require("./build/UniswapV2Router01.json");
-const UniswapV2Router02 = require("./build/UniswapV2Router02.json");
-
-const endpoint = "<your endpoint url>";
-const hexPrivateKey = "<your private key>";
-
-async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
-  const message = {
-    from: account.address,
-    gas: 5000000,
-    gasPrice: gasPrice,
-    data: data.startsWith("0x") ? data : "0x" + data,
-    nonce: nonce,
-    chainId: chainId,
-  };
-  const transaction = await account.signTransaction(message);
-  return web3.eth.sendSignedTransaction(transaction.rawTransaction);
-}
-
-(async () => {
-  const options = { timeout: 1000 * 30 };
-  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint, options));
-  const account = web3.eth.accounts.privateKeyToAccount(hexPrivateKey);
-
-  const chainId = await web3.eth.getChainId();
-  const gasPrice = await web3.eth.getGasPrice();
-  let nonce = await web3.eth.getTransactionCount(account.address);
-
-  // deploy Multicall contract
-  let multicall = null;
-  {
-    const contract = new web3.eth.Contract(Multicall.abi);
-    const data = contract.deploy({ data: Multicall.bin }).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("Multicall:", (multicall = receipt.contractAddress));
-    nonce = nonce + 1;
-  }
-
-  // deploy WETH contract
-  let weth = null;
-  {
-    const contract = new web3.eth.Contract(WETH9.abi);
-    const data = contract.deploy({ data: WETH9.bytecode }).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("WETH:", (weth = receipt.contractAddress));
-    nonce = nonce + 1;
-  }
-
-  // deploy UniswapV2Factory contract
-  let factory = null;
-  {
-    const contract = new web3.eth.Contract(UniswapV2Factory.abi);
-    const options = {
-      data: UniswapV2Factory.bytecode,
-      arguments: [account.address],
-    };
-    const data = contract.deploy(options).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("UniswapV2Factory:", (factory = receipt.contractAddress));
-    nonce = nonce + 1;
-  }
-
-  // deploy UniswapV2Router01 contract
-  {
-    const contract = new web3.eth.Contract(UniswapV2Router01.abi);
-    const options = {
-      data: UniswapV2Router01.bytecode,
-      arguments: [factory, weth],
-    };
-    const data = contract.deploy(options).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("UniswapV2Router01:", receipt.contractAddress);
-    nonce = nonce + 1;
-  }
-
-  // deploy UniswapV2Router02 contract
-  {
-    const contract = new web3.eth.Contract(UniswapV2Router02.abi);
-    const options = {
-      data: UniswapV2Router02.bytecode,
-      arguments: [factory, weth],
-    };
-    const data = contract.deploy(options).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("UniswapV2Router02:", receipt.contractAddress);
-    nonce = nonce + 1;
-  }
-  let data = UniswapV2Pair.bytecode;
-  if (!data.startsWith("0x")) data = "0x" + data;
-  console.info("INIT_CODE_HASH:", web3.utils.keccak256(data));
-})();
-```
+{{< gist phenix3443 26c0ad020a47a4c9969faf8083a6992c >}}
 
 然后再拉取依赖：
 
@@ -289,54 +157,7 @@ jq '.contracts."src/Multicall.sol:Multicall"' out/dapp.sol.json > ../uniswap-con
 cd -
 ```
 
-使用下面的脚本进行部署：
-
-```js
-const Web3 = require("web3");
-const Multicall = require("../build/Multicall.json");
-
-const endpoint = "";
-const hexPrivateKey = "";
-
-async function sendTransaction(web3, chainId, account, data, nonce, gasPrice) {
-  const message = {
-    from: account.address,
-    gas: 5000000,
-    gasPrice: gasPrice,
-    data: data.startsWith("0x") ? data : "0x" + data,
-    nonce: nonce,
-    chainId: chainId,
-  };
-  const transaction = await account.signTransaction(message);
-  return web3.eth.sendSignedTransaction(transaction.rawTransaction);
-}
-
-(async () => {
-  const options = { timeout: 1000 * 30 };
-  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint, options));
-  const account = web3.eth.accounts.privateKeyToAccount(hexPrivateKey);
-
-  const chainId = await web3.eth.getChainId();
-  const gasPrice = await web3.eth.getGasPrice();
-  let nonce = await web3.eth.getTransactionCount(account.address);
-
-  // deploy Multicall contract
-  let multicall = null;
-  {
-    const contract = new web3.eth.Contract(Multicall.abi);
-    const data = contract.deploy({ data: Multicall.bin }).encodeABI();
-    const receipt = await sendTransaction(
-      web3,
-      chainId,
-      account,
-      data,
-      nonce,
-      gasPrice
-    );
-    console.info("Multicall:", (multicall = receipt.contractAddress));
-  }
-})();
-```
+部署过程在上面的脚本中。
 
 Multicall 部署位置: 0x908c6E870161204C440469FfAC38330b283E7554
 
@@ -350,7 +171,7 @@ ens_register 部署位置: 0x457f57fEF8c189EB688f27A7E0674dc610810897
 
 ## 添加 ChainID 改动
 
-我们需要将 `Uniswap/interface`仓库 tag 切换到 `v2.6.5`，因为后续的版本推出了 **UNI**  代币和治理功能，这里不进行部署。
+我们需要将 `Uniswap/interface`仓库 tag 切换到 `v2.6.5`，因为后续的版本推出了 `UNI` 代币和治理功能，这里不进行部署。
 
 ```shell
 cd interface
@@ -412,11 +233,11 @@ yarn
 
 由于我们部署了新的合约，而前端配置里面还是 uniswap 官方的合约地址，所以需要进行如下修改：
 
-`src/constants/index.ts`  文件中 **ROUTER_ADDRESS**  的值为 `${UniswapV2Router02}`。
+`src/constants/index.ts`  文件中 `ROUTER_ADDRESS`  的值为 `${UniswapV2Router02}`。
 
 ![src/constants/index.ts](image/interface/src/constants/index.ts.png)
 
-`src/state/swap/hooks.ts`文件中 **BAD_RECIPIENT_ADDRESSES**  数组的值为 [`${UniswapV2Factory}`, `${UniswapV2Router01}`, `${UniswapV2Router02}`]。
+`src/state/swap/hooks.ts`文件中 `BAD_RECIPIENT_ADDRESSES`  数组的值为 [`${UniswapV2Factory}`, `${UniswapV2Router01}`, `${UniswapV2Router02}`]。
 
 ![src/state/swap/hooks.ts](image/interface/src/state/swap/hooks.ts.png)
 
