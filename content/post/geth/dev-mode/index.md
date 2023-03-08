@@ -1,7 +1,7 @@
 ---
-title: Geth Developer mode
-description: 使用 Geth developer mode 辅助开发
-slug: geth-developer-mode
+title: Geth Dev mode
+description: 使用 Geth 开发者模式
+slug: geth-dev-mode
 date: 2022-08-18T16:05:26+08:00
 math:
 license:
@@ -10,7 +10,6 @@ comments: true
 draft: true
 categories:
   - geth
-  - 源码分析
 tags:
   - dev-mode
 ---

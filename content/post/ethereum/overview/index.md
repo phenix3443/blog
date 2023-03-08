@@ -23,6 +23,8 @@ tags:
 
 [官方介绍](https://geth.ethereum.org/docs/fundamentals/node-architecture)
 
+[多样的客户端](https://ethereum.org/en/developers/docs/nodes-and-clients/client-diversity/) 这篇文章说明当前客户端的开发状况以及实际运行占比。
+
 ### Execution Client
 
 ### Consensus Client

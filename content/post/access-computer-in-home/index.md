@@ -1,7 +1,7 @@
 ---
-title: "通过域名访问局域网内主机的几种方法"
-description:
-slug: access-private-host
+title: "access host in Lan"
+description: 通过域名访问局域网内主机的几种方法
+slug: access-host-in-lan
 date: 2023-01-26T00:10:13+08:00
 image:
 math:
