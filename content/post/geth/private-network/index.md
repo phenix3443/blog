@@ -16,6 +16,6 @@ tags:
 
 ## 概述
 
-参考[官方教程](https://geth.ethereum.org/docs/fundamentals/private-network)
+参考[官方教程](https://geth.ethereum.org/docs/fundamentals/private-network) End-to-End 最后节点没有互相发现，不知道是什么原因？
 
 ## 总结
