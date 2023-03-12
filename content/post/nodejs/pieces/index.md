@@ -51,3 +51,5 @@ Example:
 ```
 
 更多用法参考[使用说明](https://github.com/nvm-sh/nvm#usage)。
+
+## fnm

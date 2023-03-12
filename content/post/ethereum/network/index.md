@@ -23,7 +23,7 @@ ethereum [网络](https://ethereum.org/en/developers/docs/networks/) 分为主�
 
 ## 主网（mainnet）
 
-## 测试网（testnet)
+## 测试网（testnet）
 
 - [faucetlink](https://faucetlink.to/) faucet 资源聚合网站，支持 goerli & sepolia。
 - [coinbase](https://coinbase.com/faucets) faucet 集合。
