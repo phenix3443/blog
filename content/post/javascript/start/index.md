@@ -118,6 +118,11 @@ test().catch((err) => {
 console.log("main end");
 ```
 
+## 测试
+
+- [mocha](https://mochajs.org/)
+- [chai]()
+
 ## 参考资料
 
 - [MDN web docs](https://developer.mozilla.org/en-US/)

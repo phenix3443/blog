@@ -17,11 +17,9 @@ tags:
 
 ## 概述
 
-[hardhat](https://hardhat.org/) 是以太坊软件的开发环境。它由用于编辑、编译、调试和部署智能合约和 dApp 的不同组件组成，所有这些组件共同创建一个完整的开发环境。 通读[官方文档](https://hardhat.org/hardhat-runner/docs/getting-started#overview) 后，本文补充记录一些注意事项和使用技巧。
+[hardhat](https://hardhat.org/) 由用于编辑、编译、调试和部署智能合约和 dApp 的不同组件组成，所有这些组件共同创建一个完整的以太坊合约开发环境。
 
-1. 什么是 node provider?
-2. 什么是 network accounts
-3. hardhat lock 合约为什么 deploy 代码是怎么生成的？ hardhat.ether lib 如何使用？
+本文是对 [官方文档](https://hardhat.org/hardhat-runner/docs/getting-started#overview) 的实践和补充。
 
 ## Config[^4]
 
@@ -35,16 +33,6 @@ tags:
 
 本地启动 hardhat node， `npx hardhat node`， 然后通过 metamask 添加网络：
 
-![metamask-add-network](images/metamask-add-hardhat.png)
-
-添加网络后，metamask 自动切换网络到 `localhardhat` 网络：
-
-![metamask-connect](images/metamask-connect-hardhat.png)
-
-运行 hardhat node 的控制台也打印出 metamask 连接时候发出的请求。
-
-![metamask-console-log](images/metamask-console-log.png)
-
 ### fork other network[^3]
 
 Hardhat Network 有能力将主网区块链的状态复制到你的本地环境中，包括所有余额和部署的合约。这就是所谓的 "fork other net"。
@@ -53,9 +41,36 @@ Hardhat Network 有能力将主网区块链的状态复制到你的本地环境�
 
 ## test
 
-hardhat 还包括 `hardhat-gas-reporter` 插件，可以根据测试的执行情况，获得 gas 使用量的指标。这有利于性能调优。
+### Chai Matcher
+
+[hardhat-chai-matcher](https://hardhat.org/hardhat-chai-matchers/docs/overview) 在 [Chai](https://www.chaijs.com/) 断言库中增加了 Ethereum 特有的功能，使智能合约测试易于编写和读取。
+
+### hardhat-network-helper
+
+[@nomicfoundation/hardhat-network-helpers](https://hardhat.org/hardhat-network-helpers/docs/reference) 为 Hardhat Network 的 [JSON-RPC](https://hardhat.org/hardhat-network/docs/reference#hardhat-network-methods) 功能提供一个方便的 JavaScript 接口，以便进行快速和简单的互动。其功能包括：挖掘达到一定时间戳或区块编号的区块的能力，操作账户属性的能力（余额、代码、nonce、存储），冒充特定账户的能力，以及拍摄和恢复快照的能力。
+
+其中，[loadFixture(fixture)](https://hardhat.org/hardhat-runner/docs/guides/test-contracts#using-fixtures) 可用于设置测试用例中网络的的初始状态：
+
+- 第一次调用 loadFixture 时，通过调用 `fixture` 函数设置测试网络的初始状态。
+- 在第二次调用时，`loadFixture` 将不再执行 `fixture`，而是回到第一次执行时候的状态，相当于是给测试网络做了一个快照(`snapshot`)。
+
+相比 `mocha.beforeEach`， 这样做更快，而且可以撤销之前测试所做的任何状态改变。
+
+### 测试覆盖率
+
+Hardhat Toolbox 包括 [`solidity-coverage`](https://github.com/sc-forks/solidity-coverage) 插件来显示测试覆盖率：`npm hardhat coverage`
+
+### 测量 Gas 消耗
+
+hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/docs/guides/test-contracts#using-the-gas-reporter) 插件，可以根据测试的执行情况，获得 gas 使用量的指标。这有利于性能调优。
 
 `REPORT_GAS=true npx hardhat test`
+
+### 并行测试
+
+还可以并行执行测试 `npm hardhat test --parallel`
+
+### VSCode 集成
 
 可以使用[Mocha Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-mocha-test-adapter) 直接从 Visual Studio Code 运行测试。[^1]
 
