@@ -1,6 +1,7 @@
 ---
 title: "Flash Swaps"
 description:
+slug: uniswap-flash-swaps
 date: 2023-03-09T17:57:59+08:00
 image:
 math:
@@ -8,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - uniswap
+tags:
 ---
 
 ## 概述

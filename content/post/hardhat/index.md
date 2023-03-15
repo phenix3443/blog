@@ -74,11 +74,28 @@ hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/do
 
 可以使用[Mocha Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-mocha-test-adapter) 直接从 Visual Studio Code 运行测试。[^1]
 
-## Verify Contract
+## Deploy
 
-[A Guide to Smart Contract Verification](https://blog.tenderly.co/guide-to-smart-contract-verification-methods/) 对此有更进一步的说明。
+## Verify Contract {#verify}
 
-[sourcify](https://sourcify.dev/)也有[一篇文章](https://docs.sourcify.dev/blog/verify-contracts-perfectly/) 说明他们是如何验证合约的。
+[以太坊如何合约验证]({{< ref "../ethereum/contract/verify" >}}) 全面介绍了以太坊合约验证的具体细节。
+
+使用 Hardhat 验证合约是一件非常方便的事情，部署完成后，通过命令行即可验证：
+
+`npx hardhat verify --network <network> <address> [constructArguments]`
+
+[hardhat-etherscan](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan) 插件更进一步，将验证自动化：
+
+- 只要提供部署地址和构造参数，该插件就会在本地检测出要验证的合约。
+- 如果合约使用 Solidity 库，该插件将检测并自动处理它们，开发者不需要对它们做任何事（比如 Etherscan 或者 Remix 需要手动 Flat 合约代码）。
+- 验证过程的模拟将在本地运行，插件将检测和发现此过程中的任何错误。
+- 一旦模拟成功，合约将使用 Etherscan API 进行验证。
+
+通过该插件，我们还可以在定制的网络上进行合约验证，参见[Adding support for other networks](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan#adding-support-for-other-networks)
+
+还可以在脚本中执行，要从 Hardhat 任务或脚本中调用验证任务，需要使用“verify:verify”子任务，下面是一个封装好合约验证函数，可以在合约部署完成后调用：
+
+{{< gist phenix3443 dc2fc3e23966d8a4e37b35e30006115f >}}
 
 ## tasks & scripts
 

@@ -17,8 +17,13 @@ tags:
 
 ## 概述
 
+什么是区块链预言机？
+
+为什么需要预言机？
+
 ## 总结
 
 ## 参考
 
 [^1]: [oracle](https://ethereum.org/en/developers/docs/oracles/)
+[^2]: [区块链预言机](https://chain.link/education/blockchain-oracles)

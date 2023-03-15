@@ -1,6 +1,7 @@
 ---
-title: "Core Concepts"
+title: "Swap Token"
 description:
+slug: uniswap-swap
 date: 2023-03-09T17:33:38+08:00
 image:
 math:
@@ -8,6 +9,9 @@ license:
 hidden: false
 comments: true
 draft: true
+categories:
+  - uniswap
+tags:
 ---
 
 ## 简介
