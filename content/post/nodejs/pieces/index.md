@@ -53,3 +53,5 @@ Example:
 更多用法参考[使用说明](https://github.com/nvm-sh/nvm#usage)。
 
 ## fnm
+
+[fnm](https://github.com/Schniz/fnm) 是一个基于 Rust 的 Node.js 版本管理工具，可用于替换 Node Version Manager（nvm）。相比 nvm 速度更快。
