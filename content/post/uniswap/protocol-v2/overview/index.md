@@ -128,7 +128,7 @@ Uniswap V2 是一个二进制智能合约系统。[Core Contracts](https://docs.
 
 这不是 V2 Paris 接受代币的方式。相反，Pairs 在每次互动结束时检查他们的代币余额。然后，在下一次互动开始时，当前的余额与存款的差值，以确定当前互动者发送的代币数量。
 
-关于为什么会这样的原因，请参见[白皮书](https://docs.uniswap.org/whitepaper.pdf)，但要注意的是，在调用任何需要代币的方法之前，必须将代币转移到 Pairs 中（这一规则的一个例外是 `[Flash Swaps](https://docs.uniswap.org/contracts/v2/concepts/core-concepts/flash-swaps)`）。
+关于为什么会这样的原因，请参见[白皮书](https://docs.uniswap.org/whitepaper.pdf)，但要注意的是，在调用任何需要代币的方法之前，必须将代币转移到 Pairs 中（这一规则的一个例外是 [Flash Swaps](https://docs.uniswap.org/contracts/v2/concepts/core-concepts/flash-swaps)）。
 
 #### WETH
 
@@ -140,9 +140,7 @@ Router 完全支持通过 ETH 与任何 WETH Pair 进行交互。
 
 为了改善四舍五入的错误，并增加流动性提供理论上的最小 tick 大小，pairs 燃烧第一个 [MINIMUM_LIQUIDITY](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair#minimum_liquidity) 池代币。对于绝大多数的交易对来说，这将代表一个微不足道的价值。燃烧是在第一次提供流动性时自动发生的，此后，[总供应量](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair-erc-20#totalsupply)将永远受到限制。
 
-## 术语
-
-[https://docs.uniswap.org/contracts/v2/concepts/protocol-overview/glossary](更多术语)
+## 术语[^1]
 
 ### 自动做市商(Automated market maker)
 
@@ -205,3 +203,5 @@ Uniswap 存在所必需的智能合约。升级到新版本的核心将需要流
 恒积公式中的 `k`值。
 
 ## 参考
+
+[^1]: [uniswap glossary](https://docs.uniswap.org/contracts/v2/concepts/protocol-overview/glossary)
