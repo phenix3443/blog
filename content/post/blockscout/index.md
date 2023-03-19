@@ -19,7 +19,7 @@ tags:
 
 [Blockscout](https://www.blockscout.com/) 是一个功能全面的[^1]、开源的 EVM 区块浏览器，为以太坊生态系统内外的 100 多个执行层链和测试网提供服务[^2]。
 
-### 合约文件调用分析
+### 合约代码调用分析
 
 [Sol2Uml](https://github.com/blockscout/blockscout-rs/tree/main/visualizer)
 
