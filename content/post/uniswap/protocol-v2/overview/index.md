@@ -17,13 +17,15 @@ tags:
 
 ## 概述
 
+[Uniswap V2 白皮书中文版](https://zhuanlan.zhihu.com/p/255190320)
+
 ![how-uniswap-works](https://docs.uniswap.org/assets/images/anatomy-d22fb7ab46013a1195f086ee672468c7.jpg)
 
-Uniswap 是一个自动化的流动性协议，由一个[恒定的产品公式](https://docs.uniswap.org/contracts/V2/concepts/protocol-overview/glossary#constant-product-formula)驱动，以太坊区块链上部署成一个不可升级的智能合约系统。它避免了对可信中介的需求，优先考虑了去中心化、抗审查和安全性。Uniswap 是根据 GPL 许可的开源软件。
+Uniswap 是以太坊区块链上的一个自动化的流动性协议，它避免了对可信中介的需求，优先考虑了去中心化、抗审查和安全性。
 
-每个 Uniswap 智能合约(也就是 `pair`)管理着一个由两个 [ERC-20 代币](https://eips.ethereum.org/EIPS/eip-20)储备(`reserves`)组成的流动池。
+每个 Uniswap 智能合约代币对(也就是 `pair`)管理着由两个 [ERC-20](https://eips.ethereum.org/EIPS/eip-20)基础代币(`Token0` 和 `Token1`) 组成的流动池。
 
-任何人都可以通过等值存入池子中的两种基础代币来换取池子的代币，从而成为一个池子的流动性提供者(LP)。这些池子代币跟踪总储备中用户按比例获得的 LP 份额，并可以在任何时候赎回基础资产。
+任何人都可以通过在流动池中存入两种等值代币来换取流动性代币(`LPT`)，从而成为流动池子的流动性提供者(`LP`)。这些流动性代币用于跟踪用户按比例获得的份额，并可以在任何时候赎回基础代币。
 
 ![increase-liquidity](https://docs.uniswap.org/assets/images/lp-c0b1b03ef921f1325971fa8ab6e9a4f1.jpg)
 
@@ -144,7 +146,7 @@ Router 完全支持通过 ETH 与任何 WETH Pair 进行交互。
 
 #### 最小流动性
 
-为了改善四舍五入的错误，并增加流动性提供理论上的最小 tick 大小，pairs 燃烧第一个 [MINIMUM_LIQUIDITY](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair#minimum_liquidity) 池代币。对于绝大多数的交易对来说，这将代表一个微不足道的价值。燃烧是在第一次提供流动性时自动发生的，此后，[总供应量](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair-erc-20#totalsupply)将永远受到限制。
+为了改善四舍五入的错误，并增加流动性提供理论上的最小 tick 大小，pairs 燃烧第一个 [MINIMUM_LIQUIDITY](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair#minimum_liquidity) 流动性代币。对于绝大多数的交易对来说，这将代表一个微不足道的价值。燃烧是在第一次提供流动性时自动发生的，此后，[总供应量](https://docs.uniswap.org/contracts/v2/reference/smart-contracts/pair-erc-20#totalsupply)将永远受到限制。
 
 ## 术语[^1]
 
@@ -228,4 +230,3 @@ Uniswap 存在所必需的智能合约。升级到新版本的核心将需要流
 [^2]: [Uniswap 深度科普](https://zhuanlan.zhihu.com/p/380749685)
 [^3]: [一文读懂 Uniswap V2 改进与创新](https://www.bitpush.news/articles/946109)
 [^4]: [DeFi:Uniswap v2 协议原理解析](https://juejin.cn/post/7178857641421045820)
-[^5]: [Uniswap V2 白皮书中文版](https://zhuanlan.zhihu.com/p/255190320)
