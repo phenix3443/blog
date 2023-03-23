@@ -72,7 +72,7 @@ bridge 通常可以分为以下几类：
 - 通用信息传递 bridge。 这些 bridge 在安全性和跨链传输更复杂数据的能力方面表现出色。通常情况下，它们在成本效益方面也很好。然而，这些优势对于轻型客户 bridge （例如：IBC）来说通常是以连接性为代价的，对于使用欺诈证明的乐观型 bridge （例如：Nomad）来说则是以速度为代价的。
 - 流动性网络。这些 bridge 使用原子互换来转移资产，并且是本地验证系统（即，它们使用底层区块链的验证器来验证交易）。因此，它们在安全性和速度方面都很出色。此外，它们被认为性价比高，并提供良好的连接。然而，主要的权衡是它们无法传递更复杂的数据--因为它们不支持跨链消息传递。
 
-## 的风险
+## 风险
 
 bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，而且仍处于发展的早期阶段。使用任何 bridge 都有以下风险：
 
@@ -81,7 +81,7 @@ bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，
 - 交易对手的风险。一些 bridge 利用可信的设计，要求用户依赖验证者不会串通起来窃取用户资金的假设。用户需要信任这些第三方行为者，这使他们暴露在诸如 rug pull、审查和其他恶意活动的风险中。
 - 未解决的问题。鉴于 bridge 处于发展的初级阶段，有许多未解决的问题与 bridge 在不同的市场条件下的表现有关，如网络拥堵的时候和在不可预见的事件中，如网络级攻击或状态回滚。这种不确定性带来了一定的风险，其程度尚不清楚。
 
-## DAPP 如何使用 bridge
+## DAPP 集成
 
 这里有一些实际的应用，开发者可以考虑关于 bridge 和让如何让 dapp 跨链：
 
@@ -105,7 +105,7 @@ bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，
 
 如果一个应用程序走的是整合 bridge 或聚合器的路线，那么根据整合的深度，有不同的选择。例如，如果它只是一个前端整合，以改善用户的入职体验，一个 dapp 会整合小工具。然而，如果整合是为了探索更深层次的跨链策略，如赌注、 yield farming 等，dapp 会整合 SDK 或 API。
 
-## 在多条链上部署一个 dapp
+### 在多条链上部署一个 dapp
 
 要在多个链上部署一个 dapp，开发人员可以使用 [Alchemy](https://www.alchemy.com/)、[Hardhat](https://hardhat.org/)、[Truffle](https://trufflesuite.com/)、[Moralis](https://moralis.io/) 等开发平台。通常情况下，这些平台都有可组合的插件，可以使 dapp 实现跨链。例如，开发者可以使用 [hardhat-deploy 插件](https://github.com/wighawag/hardhat-deploy)提供的确定性部署代理。
 
@@ -115,9 +115,9 @@ bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，
 - [建立一个跨链的 NFT 市场](https://youtu.be/WZWCzsB1xUE)
 - [Moralis: 构建跨链的 NFT dapps](https://www.youtube.com/watch?v=ehv70kE1QYo)
 
-## 监控跨链的合约活动
+### 监控跨链的合约活动
 
-为了监测跨链的合约活动，开发者可以使用子图和 Tenderly 等开发者平台来实时观察智能合约。这类平台也有一些工具，为跨链活动提供更多的数据监测功能，如检查合同发出的事件等。
+为了监测跨链的合约活动，开发者可以使用 subgraphs 和 Tenderly 等开发者平台来实时观察智能合约。这类平台也有一些工具，为跨链活动提供更多的数据监测功能，如检查合同发出的事件等。
 
 - [The Graph](https://thegraph.com/en/)
 - [Tenderly](https://tenderly.co/)
