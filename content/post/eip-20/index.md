@@ -51,8 +51,6 @@ ERC-20(`Ethereum Request for Comments 20`)，由 Fabian Vogelsteller 在 2015 �
 
 下面通过 OpenZeppelin 说明如何实现并部署自己的 ERC-20 代币。
 
-[Contracts Wizard](https://wizard.openzeppelin.com/) — 是一个交互式的智能合约生成器。
-
 ## 参考
 
 [^1]: [ERC-20 Token Standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
