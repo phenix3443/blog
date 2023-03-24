@@ -1,5 +1,5 @@
 ---
-title: "ERC-20"
+title: "EIP-20"
 description: ERC-20 代币标准
 slug: erc-20
 date: 2023-03-20T17:59:24+08:00
@@ -11,6 +11,7 @@ comments: true
 draft: false
 categories:
   - ethereum
+  - eip
 tags:
   - erc-20
   - openzeppelin
