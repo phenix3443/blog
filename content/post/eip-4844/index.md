@@ -21,7 +21,7 @@ tags:
 
 ## 原因[^1]
 
-- 供 rollup 使用。在短期和中期内，甚至可能在长期内，rollup 是以太坊唯一的无信任扩展解决方案。L1 交易费用是新用户和应用程序的一个重要障碍。EIP-4844 将有助于促进整个生态系统向 rollup 式发展。
+- 供 rollup 使用。在短期和中期内，甚至可能在长期内，rollup 是以太坊唯一的无信任扩展解决方案。L1 交易费用是新用户和应用程序的一个重要障碍。EIP-4844 将有助于促进整个生态系统向 rollup 方向发展。
 - 降低费用。完整的数据分片将需要相当长的时间来完成实施和部署，然而现在 rollup 已经到来。EIP-4844 可以将 rollup 费用降低几个数量级，使以太坊在不牺牲去中心化的情况下保持竞争力。
 - 向前兼容性。Blobs 基于 [KZG 承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html)。
 - 信标节点存储。Blobs 被持久化在信标节点中，而不是在执行层中（例如，在 prysm 中，而不是在 geth 中）。未来的分片工作只需要对信标节点进行修改，使执行层能够并行地进行其他初始工作。
@@ -40,7 +40,7 @@ tags:
 
 - 设置 KZG 信任
 
-  EIP-4844 的一部分涉及使用 KZG 承诺。为了生成这些 seed，将会运行一个基于浏览器的[distributed ceremony](https://github.com/ethereum/KZG-Ceremony)，所以每个人都有机会确保它是正确和安全地生成。
+  EIP-4844 涉及使用 KZG 承诺。为了生成这些 seed，将会运行一个基于浏览器的[distributed ceremony](https://github.com/ethereum/KZG-Ceremony)，所以每个人都有机会确保它是正确和安全地生成。
 
 - 开发网
 
@@ -57,3 +57,6 @@ tags:
 ## 参考
 
 [^1]: [eip4844](https://www.eip4844.com/)
+[^2]: [观点：以太坊距离大规模扩容 ，可能比我们想象的更近](https://www.8btc.com/article/6790012)
+[^3]: [情人节，V 神科普的“Danksharding”到底是什么？](https://www.8btc.com/article/6729076)
+[^4]: [一文了解以太坊的“扩容杀手锏”danksharding](https://www.defidaonews.com/article/6727438)
