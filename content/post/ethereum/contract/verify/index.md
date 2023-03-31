@@ -17,7 +17,7 @@ tags:
 
 ## 概述[^1]
 
-智能合约被设计为“无信任(`trustless`)”的，这意味着用户在与合约互动之前，不应该信任第三方（例如,开发人员和公司）。作为无信任的一个必要条件，用户和其他开发者必须能够验证智能合约的源码。源码验证(`Source code verification`)向用户和开发者保证：公布的合约代码（高级语言编写）与以太坊区块链上的合约地址运行的代码相同。
+智能合约被设计为[“无信任(`trustless`)”](https://www.ethereum.cn/Thinking/trust-model)的，这意味着用户在与合约互动之前，不应该信任第三方（例如,开发人员和公司）。作为无信任的一个必要条件，用户和其他开发者必须能够验证智能合约的源码。源码验证(`Source code verification`)向用户和开发者保证：公布的合约代码（高级语言编写）与以太坊区块链上的合约地址运行的代码相同。
 
 区分“源码验证(source code verification)” 和“形式验证([formal verification](https://ethereum.org/en/developers/docs/smart-contracts/formal-verification/))” 很重要：
 

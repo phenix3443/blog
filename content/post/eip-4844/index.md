@@ -17,16 +17,9 @@ tags:
 
 ## 概述
 
-[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)为以太坊引入了一种新的交易类型，它将“blobs”数据短期存储在信标节点(beacon node)，blob 足够小，以保持磁盘使用的可控性。
+[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)它将“blobs”数据短期存储在信标节点(`beacon node`)。blob 足够小，可以保持磁盘使用的可控性，同时，blob 远大于现在的 calldata，可以更好地支持 rollup 上的高 TPS。
 
-## 原因[^1]
-
-- 供 rollup 使用。在短期和中期内，甚至可能在长期内，rollup 是以太坊唯一的无信任扩展解决方案。L1 交易费用是新用户和应用程序的一个重要障碍。EIP-4844 将有助于促进整个生态系统向 rollup 方向发展。
-- 降低费用。完整的数据分片将需要相当长的时间来完成实施和部署，然而现在 rollup 已经到来。EIP-4844 可以将 rollup 费用降低几个数量级，使以太坊在不牺牲去中心化的情况下保持竞争力。
-- 向前兼容性。Blobs 基于 [KZG 承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html)。
-- 信标节点存储。Blobs 被持久化在信标节点中，而不是在执行层中（例如，在 prysm 中，而不是在 geth 中）。未来的分片工作只需要对信标节点进行修改，使执行层能够并行地进行其他初始工作。
-- 可管理的磁盘使用。blobs 包括 4096 个字段元素，每个字段 32 个字节，长期来看每个区块最多有 16 个 blobs。`4096 * 32 bytes * 16 per block = 2 MiB` 每块最大 2 MiB。单块 blob 上限可以从低开始，并在多次网络升级中增长。
-- 临时存储。每 2 周后会修剪一次 blob。可用时间长到足以让 L2 的所有角色都能检索到它，短到足以让磁盘使用可控。这使得 Blobs 的价格比 CALLDATA 便宜，因为 CALLDATA 永远保存在历史中。
+### 价值[^1]
 
 ## 资源
 
@@ -56,7 +49,6 @@ tags:
 
 ## 参考
 
-[^1]: [eip4844](https://www.eip4844.com/)
 [^2]: [观点：以太坊距离大规模扩容 ，可能比我们想象的更近](https://www.8btc.com/article/6790012)
 [^3]: [情人节，V 神科普的“Danksharding”到底是什么？](https://www.8btc.com/article/6729076)
-[^4]: [一文了解以太坊的“扩容杀手锏”danksharding](https://www.defidaonews.com/article/6727438)
+[^4]: [热度飙升的 EIP-4844 究竟是什么 ？V 神亲自详细解答](https://www.tuoluo.cn/article/detail-10095959.html) 没看懂

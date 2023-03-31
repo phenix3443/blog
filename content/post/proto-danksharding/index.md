@@ -97,6 +97,8 @@ L1 的节点（Beacon Proposer）看到了交易，它会在新的区块提议�
 
 另外，如果节点层面只能短期存储这些数据，那么如何实现长期的储存呢？对此，Vitalik 表示解决方案其实很多。因为这里的安全假设要求不高，是[“1 of N 信任模型”](https://www.ethereum.cn/Thinking/trust-model)，只需有人能够完成真实数据的存储即可。在大的存储硬件只需要 20 美元每 TB 的当下，每年 2.5 TB 的数据存储对于有心人而言只是小问题。另外，其它各种去中心化存储解决方案也会是一种选择，不过 Vitalik 在这里并没有提到具体的项目。
 
+### Blob 的证明[^5]
+
 ## EIP-4844 的影响
 
 在架构层面，EIP-4844 引入了新的交易类型 Blob-carrying Transaction，这是以太坊第一次为 L2 单独构建数据层，也是之后 [Full Danksharding]({{< ref "../danksharding" >}}) 实现的第一步。
@@ -115,3 +117,4 @@ EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完�
 [^2]: [eip4844](https://www.eip4844.com)
 [^3]: [OP in Paris: OP Lab's Protolambda walks us through EIP-4844](https://www.youtube.com/watch?v=KQ_kIlxg3QA)
 [^4]: [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
+[^5]: [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
