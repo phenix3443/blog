@@ -1,6 +1,6 @@
 ---
 title: "EIP-4844"
-description: 以太坊数据扩容方案
+description: Proto-Danksharding
 slug: eip-4844
 date: 2023-03-24T14:07:57+08:00
 image:
@@ -28,7 +28,7 @@ tags:
 - 可管理的磁盘使用。blobs 包括 4096 个字段元素，每个字段 32 个字节，长期来看每个区块最多有 16 个 blobs。`4096 * 32 bytes * 16 per block = 2 MiB` 每块最大 2 MiB。单块 blob 上限可以从低开始，并在多次网络升级中增长。
 - 临时存储。每 2 周后会修剪一次 blob。可用时间长到足以让 L2 的所有角色都能检索到它，短到足以让磁盘使用可控。这使得 Blobs 的价格比 CALLDATA 便宜，因为 CALLDATA 永远保存在历史中。
 
-## 实施
+## 资源
 
 - 规范。
 

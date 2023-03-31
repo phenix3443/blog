@@ -20,7 +20,7 @@ tags:
 
 ## 概述
 
-以太坊合约应用二进制接口 (ABI) 是在以太坊生态系统中与合约交互的标准方式，既可以从区块链外部进行，也可以用于合约间交互。数据根据其类型进行编码。由于编码不是自描述的，因此需要一个说明（也就是 `abi.json`）才能解码。更多参见[合约 ABI 规范](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#basic-design)。
+以太坊合约应用二进制接口 (ABI) 是在以太坊生态系统中与合约交互的标准方式，既可以从区块链下部进行，也可以用于合约间交互。数据根据其类型进行编码。由于编码不是自描述的，因此需要一个说明（也就是 `abi.json`）才能解码。更多参见[合约 ABI 规范](https://docs.soliditylang.org/en/v0.8.13/abi-spec.html#basic-design)。
 
 Golang 的 [abi package](https://pkg.go.dev/github.com/ethereum/go-ethereum/accounts/abi#pkg-overview) 实现了以上规范，通过该 package 不仅可以根据 abi.json 与合约交互，还有对多个参数进行自定义编码。
 
