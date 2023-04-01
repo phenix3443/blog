@@ -1,7 +1,7 @@
 ---
 title: "Danksharding"
 description: 以太坊数据扩容：danksharding
-slug: danksharding
+slug: ethereum-roadmap-danksharding
 date: 2023-03-31T10:33:31+08:00
 image:
 math:
@@ -19,7 +19,7 @@ tags:
 
 `Danksharding` 会使以太坊成为真正可扩展的区块链，但要达到这个目的需要进行若干协议升级。`Proto-Danksharding` 是这条道路上的一个中间步骤。两者都旨在使第二层的交易对用户来说尽可能便宜，并应将以太坊扩展到每秒>100,000 次交易。
 
-## Proto-Danksharding
+## 什么是 Proto-Danksharding？
 
 Proto-Danksharding，也被称为 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)，可以让 [rollups](https://ethereum.org/zh/layer2/#rollups) 更便宜地向区块链添加数据。这个名字来自于提出这个想法的两位研究人员：Protolambda 和 Dankrad Feist。
 
@@ -55,25 +55,15 @@ KZG Ceremony 是一种让整个以太坊社区的许多人一起生成一个秘�
 
 无论是 Danksharding 还是 Proto-Danksharding 都没有遵循传统的 "分片(sharding)" 模式(将区块链分成多个部分)。分片链(Shared chains)不再是路线图的一部分。相反，Danksharding 使用跨 blob 的分布式数据采样来扩展 Ethereum。这在实现上要简单得多。这种模式有时被称为 "数据分储(data-sharding)"。
 
-## Danksharding
+## 什么是 Danksharding？
 
 Danksharding 是 rollup 扩容的全部实现，Proto-Danksharding 只是第一步。Danksharding 将在以太坊上带来大量的空间，供 rollups 存放其压缩的交易数据。这意味着以太坊将能够轻松地支持数百个单独的 rollups，并使每秒数百万次的交易成为现实。
 
 其工作方式是将附加在区块上的 Blobs 从 Proto-Danksharding 的 1 个扩大到 Danksharding 完整的的 64 个。其余所需的变化都是对共识客户端操作方式的更新，以使它们能够处理新的大块。这些变化中有几个已经在路线图上，用于其他独立于“Danksharding”的目的。例如，Danksharding 要求“proposer-builder separation(PBS)”已经实现，该升级将构建块和提出块的任务在不同的验证器之间分开。同样，数据可用性抽样( data availability sampling )也是 Danksharding 所需要的，但它也是开发不储存太多历史数据的非常轻量级客户端，也就是"无状态客户端(stateless clients)"，所需要的。
 
-### proposer
-
-### builder
-
-Builders（数据生成者）是一种新角色，它会聚合所有以太坊 L1 交易以及来自 rollup 的原始数据。当然，可以有很多 Builders，但它仍然带来了一些审查风险。
-
 ### 为什么 Danksharding 要求 PBS?[^2]
 
 要求提出者与构建者分离是为了防止个别验证者不得不为 32MB 的 blob 数据生成昂贵的承诺和证明。这将给 home 验证者带来太大的压力，并要求他们投资更强大的硬件，这将损害去中心化。相反，专门的区块构建者负责这种昂贵的计算工作。然后，他们将他们的区块提供给区块提议者来广播。区块提议者只是选择最有利可图的区块。任何人都可以廉价而快速地验证这些区块，这意味着任何正常的验证者都可以检查区块构建者的行为是否诚实。这使得大的 blobs 可以在不牺牲去中心化的情况下进行处理。行为不端的区块构建者可以简单地从网络中剔除--其他人会步入他们的位置，因为区块构建是一项有利可图的活动。
-
-### 为什么需要 crList？[^2]
-
-如果所有 Builders 都选择审查某些交易怎么办？使用 crList，区块提议者可以强制 Builders 包含交易。
 
 ### 为什么 Danksharding 需要数据可用性采样？
 
@@ -83,8 +73,18 @@ Builders（数据生成者）是一种新角色，它会聚合所有以太坊 L1
 
 完整的 “Danksharding” 还需要几年时间。然而，"Proto-Danksharding"应该会比较快地到来。在撰写本报告时（2023 年 2 月），KZG ceremony 仍在进行，迄今已吸引了超过 50,000 名贡献者。Proto-Danksharding 的 [EIP](https://eips.ethereum.org/EIPS/eip-4844)已经成熟，规范已经达成一致，已经实现了看了护短原型，目前正在进行测试，为生产做好准备。下一步是在公共测试网上实施这些变化。可以使用 [EIP 4844 准备情况检查表](https://github.com/ethereum/pm/blob/master/Breakout-Room/4844-readiness-checklist.md#client-implementation-status)来了解最新情况。
 
+## 进一步阅读
+
+- [Proto-Danksharding notes(opens in a new tab) - Vitalik Buterin](https://notes.ethereum.org/@vbuterin/proto_danksharding_faq)
+- [Dankrad's notes on Danksharding(opens in a new tab)](https://notes.ethereum.org/@dankrad/new_sharding)
+- [Dankrad, Proto and Vitalik discuss Danksharding(opens in a new tab)](https://www.youtube.com/watch?v=N5p0TB77flM)
+- [The KZG ceremony(opens in a new tab)](https://ceremony.ethereum.org/)
+- [Carl Beekhuizen's Devcon talk on trusted setups(opens in a new tab)](https://archive.devcon.org/archive/watch/6/the-kzg-ceremony-or-how-i-learnt-to-stop-worrying-and-love-trusted-setups/?tab=YouTube)
+- [More on data availability sampling for blobs(opens in a new tab)](https://hackmd.io/@vbuterin/sharding_proposal#ELI5-data-availability-sampling)
+- [Dankrad Feist on KZG commitments and proofs(opens in a new tab)](https://youtu.be/8L2C6RDMV9Q)
+- [KZG polynomial commitments(opens in a new tab)↗](https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)
+
 ## 参考
 
 [^1]: [Danksharding](https://ethereum.org/zh/roadmap/danksharding/)
 [^2]: [一文了解以太坊的“扩容杀手锏”danksharding](https://www.defidaonews.com/article/6727438) 文章末尾介绍了一些 danksharding 可以实现许多令人着迷的可能性，可以深入了解，比如说跨 rollup 链进行原子操作的可能性。
-[^3]: [crList：PBS 的抗审查替代解决方案](https://www.ethereum.cn/Eth2/crlist)
