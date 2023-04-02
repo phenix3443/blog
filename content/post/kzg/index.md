@@ -1,6 +1,6 @@
 ---
-title: "KZG"
-description:
+title: "KZG多项式承诺"
+description: 多项式承诺
 slug: kzg
 date: 2023-03-31T10:55:28+08:00
 image:
@@ -15,20 +15,24 @@ tags:
   - kzg
 ---
 
-## 概述
+## KZG
 
-KZG 是作者 Aniket Kate, Gregory M. Zaverucha 和 Ian Goldberg 姓氏的缩写，他们在 2010 年发表了多项式承诺方案论文“Constant-Size Commitments to Polynomials and Their Applications” ，并且这个方案在 plonk-style 的 zk-snark 协议中有很广泛的应用。
+KZG 多项式承诺（KZG Polynomial Commitment）也被称为卡特多项式承诺方案，是三个作者 Aniket Kate, Gregory M. Zaverucha 和 Ian Goldberg 姓氏的缩写，他们在 2010 年发表了多项式承诺方案论文“Constant-Size Commitments to Polynomials and Their Applications” ，并且这个方案在 plonk-style 的 zk-snark 协议中有很广泛的应用。
 
 ![kzg](https://www.chaincatcher.com/upload/image/20230130/1675042608317730.jpg)
 
-参考 Dankrad Feist 演讲中的示意图，KZG root 类似 Merkle root，区别在于 KZG root 承诺一个多项式，即所有 position 都在这个多项式上。基于 proto-danksharding 的场景，KZG root 承诺了一堆数据，其中的任何一个数据都可以被验证属于这个整体
+### 数学原理
 
-这也是为什么 KZG commitment 在兼容性上对后面实现 DAS 更友好。
+详细可参考 Qi Zhou 博士在 Dapp Learning 讲解的关于 [KZG 视频](https://www.youtube.com/watch?v=n4eiiCDhTes)。
+
+在理解 KZG 之前，可以先了解一下多项式、群、环、域、椭圆曲线、生成元、配对公式、朗格朗日插值等数学定义。
 
 KZG commitment 的流程如下：
 
 - Prover：提供证明，计算 data 的 commitment，prover 无法改变给定的多项式，并且用于证明的 commitment 只对当前这一个多项式有效；
 - Verifier：接收 prover 发送的 commitment value 并进行验证，确保 prover 提供了有效的证明。
+
+在这个多项式方案中，证明者计算一个多项式的承诺，并可以在多项式的任意一点进行打开，该承诺方案能证明多项式在特定位置的值与指定的值一致。
 
 ## KZG Commitment 的优势
 
@@ -65,6 +69,6 @@ KZG commitment 的流程如下：
 
 ## 参考
 
-[^1]: [深度解读 EIP-4844：Sharding 的一小步，以太坊扩容的一大步](https://www.chaincatcher.com/article/2086654)
-[^2]: [](https://foresightnews.pro/article/detail/17988)
-[^3]: [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
+- [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html)
+- [深度解读 EIP-4844：Sharding 的一小步，以太坊扩容的一大步](https://www.chaincatcher.com/article/2086654)
+- [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)

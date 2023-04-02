@@ -85,6 +85,8 @@ Builders（数据生成者）是一种新角色，它会聚合所有以太坊 L1
 
 ## 参考
 
+- [情人节，V 神科普的“Danksharding”到底是什么？](https://www.8btc.com/article/6729076)
+- [crList：PBS 的抗审查替代解决方案](https://www.ethereum.cn/Eth2/crlist)
+
 [^1]: [Danksharding](https://ethereum.org/zh/roadmap/danksharding/)
 [^2]: [一文了解以太坊的“扩容杀手锏”danksharding](https://www.defidaonews.com/article/6727438) 文章末尾介绍了一些 danksharding 可以实现许多令人着迷的可能性，可以深入了解，比如说跨 rollup 链进行原子操作的可能性。
-[^3]: [crList：PBS 的抗审查替代解决方案](https://www.ethereum.cn/Eth2/crlist)

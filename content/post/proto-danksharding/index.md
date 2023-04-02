@@ -17,7 +17,7 @@ tags:
   - danksharding
 ---
 
-## 数据可用性引起的 L2 费用瓶颈
+## 数据可用性导致的扩容瓶颈
 
 ### 现状[^1]
 
@@ -25,7 +25,19 @@ tags:
 
 当前以太坊 L2 大多以 [Rollups](https://ethereum.org/zh/layer2/#rollups) 为基本的技术路线，Vitalik 更是将以太坊的更新用[“a rollup-centric roadmap”](https://twitter.com/VitalikButerin/status/1311921668005060608)描述（注意上图中的 the surge 阶段），可见 Rollup 基本已经一统 L2 江湖。
 
-而 Rollup 运行的基本原理，是`将一捆交易在以太坊主链外执行，执行完后将执行结果和交易数据本身经过压缩后发回到 L1 上，以便其他人去验证交易结果的正确性`。显然，如果其他人没有办法读取数据，那就无法完成验证。因此让其他人能够获取交易原始数据这一点至关重要，它也被称为[数据可用性(Data Availability)]({{< ref "../ethereum/data-availability" >}})。
+而 Rollup 运行的基本原理，是`将一捆交易在以太坊主链外执行，执行完后将执行结果和交易数据本身经过压缩后发回到 L1 上，以便其他人去验证交易结果的正确性`。
+
+我们看一笔 rollup 交易包含哪些开销：
+
+- 执行开销 (网络中所有节点执行交易并且验证其有效性的开销)
+- 存储/状态开销 (使用新的值更新区块链 “数据库” 的开销)
+- 数据可用性开销 (将数据发布至 L1 的开销)
+
+其中，前两笔开销都是 Rollup 网络上的花费，占总开销的比例非常低。而数据可用性开销才是扩容的关键瓶颈。
+
+我们为什么需要这种数据呢？
+
+显然，如果其他人没有办法读取数据，那就无法完成验证。因此让其他人能够获取交易原始数据这一点至关重要，它也被称为[数据可用性(Data Availability)]({{< ref "../ethereum/data-availability" >}})。
 
 ![l2-use-calldata](img/l2-calldata.png)
 
@@ -161,11 +173,11 @@ EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完�
 
 ## 参考
 
+- [观点：以太坊距离大规模扩容 ，可能比我们想象的更近](https://www.8btc.com/article/6790012)
+- [热度飙升的 EIP-4844 究竟是什么 ？V 神亲自详细解答](https://www.tuoluo.cn/article/detail-10095959.html) 没看懂
+
 [^1]: [一文读懂 EIP-4844：如何降低 Layer2 费用 100 倍？](https://www.8btc.com/article/6794798)
 [^2]: [eip4844](https://www.eip4844.com)
 [^3]: [OP in Paris: OP Lab's Protolambda walks us through EIP-4844](https://www.youtube.com/watch?v=KQ_kIlxg3QA)
 [^4]: [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
 [^5]: [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
-[^6]: [观点：以太坊距离大规模扩容 ，可能比我们想象的更近](https://www.8btc.com/article/6790012)
-[^7]: [情人节，V 神科普的“Danksharding”到底是什么？](https://www.8btc.com/article/6729076)
-[^8]: [热度飙升的 EIP-4844 究竟是什么 ？V 神亲自详细解答](https://www.tuoluo.cn/article/detail-10095959.html) 没看懂
