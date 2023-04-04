@@ -12,7 +12,7 @@ draft: true
 categories:
   - ethereum
 tags:
-  - kzg
+  - commitments
 ---
 
 ## 密码学中的承诺
@@ -50,7 +50,7 @@ tags:
 
 ### 承诺方案(commitment Scheme)
 
-上面介绍的”公平的远程猜拳“方法用到的实际是密码学的一个重要原型：[承诺方案(Commitment Scheme)](https://en.wikipedia.org/wiki/Commitment_scheme)。它起源于两篇文章：
+上面介绍的“公平的远程猜拳”方法用到的实际是密码学的一个重要原型：[承诺方案(Commitment Scheme)](https://en.wikipedia.org/wiki/Commitment_scheme)。它起源于两篇文章：
 
 - 1979 年 Blum 的 [通电话猜硬币(coin flipping over the telephone)](https://dl.acm.org/doi/10.1145/1008908.1008911)
 - 1981 年 RSA 三巨头的 [通电话玩扑克(Mental Poker)](https://en.wikipedia.org/wiki/Mental_poker)。
@@ -85,11 +85,9 @@ tags:
 
 ## 多项式承诺
 
-我们可以通过[多项式差值](https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC) 或者[多项式拟合](https://zh.wikipedia.org/zh-cn/%E6%9B%B2%E7%B7%9A%E6%93%AC%E5%90%88)等方法，使用多项式代表一组数据，也就是说通过系数表示法或者点值对表示法代表这组数据。
+我们可以通过[多项式拟合](https://zh.wikipedia.org/zh-cn/%E6%9B%B2%E7%B7%9A%E6%93%AC%E5%90%88)将一组数据转化为一个多项式，例如 [consensus-specs 中使用的方法](https://github.com/ethereum/consensus-specs/blob/23d3aeebba3b5da0df4bd25108461b442199f406/specs/eip4844/polynomial-commitments.md#blob_to_polynomial)，然后通过多项式承诺(polynomial commitments)来验证数据没有发生改变。
 
-进而，如果我们需要保证没有改变数据，只需要保证多项式没有改变即可。
-
-多项式承诺(polynomial commitments) 有多种方式，比如最直接的就是把多项式系数承诺出去，这样`多项式在承诺后就不能再改变了`。 这种方式在系数较少即多项式度数较低时适用。
+多项式承诺有多种方式，比如最直接的就是把多项式系数承诺出去，这样`多项式在承诺后就不能再改变了`。 这种方式在系数较少即多项式度数较低时适用。
 
 当系数比较多（比如超过 10 万）承诺结果就会比较大，增加存储与传输的代价。能不能用点值方式做承诺呢？最好适用一个点的值，因为点值用的多了同样也会有上述问题。
 
@@ -97,11 +95,11 @@ tags:
 
 ### 全部揭示
 
-- 承诺生成（Commit）阶段：
+- 承诺(Commit)阶段：
 
-  承诺方选择一个暂不公开的多项式，在某一点 r 处，计算出对应的承诺 c 并公开。`c = f(r)`, 将`(r,c)`公开给验证方
+  承诺方选择一个暂不公开的多项式，在某一点 r 处，计算出对应的承诺 c(`c = f(r)`) 并公开, 将`(r,c)`公开给验证方。
 
-- 承诺揭示（Reveal）阶段：
+- 揭示(Reveal)阶段：
 
   承诺方公布多项式，验证方根据多项式计算 r 处值 c' = f(r)，比较 c'= c，一致则表示验证成功，否则失败。
 
@@ -113,31 +111,33 @@ tags:
 
 上面这种把多项式和盘托出的揭示方式成为`全部揭示`，还有一种`部分揭示`的方式：
 
-- 承诺生成（Commit）阶段：
+- 承诺(Commit)阶段：
 
-  承诺方选择一个暂不公开的多项式，在某一点 r 处，计算出对应的承诺 c 并公开。c = f(r), 将（r，c）公开给验证方
+  承诺方选择一个暂不公开的多项式，在某一点 r 处，计算出对应的承诺 c 并公开。c = f(r), 将（r，c）公开给验证方。
 
 - 挑战（challenge）与证明生成：
 
-  验证方 V 随机选择一个数 z,发给承诺方 P, P 计算在 z 处值 s = f(z)，同时计算出 t(x) = f(x)-s / (x-z),计算 t(x)在 z 处的值 w = t(z)(w 也称为见证 witness) 返回给验证方 V(s,w)
+  验证方 V 随机选择一个数 z,发给承诺方, 承诺方计算在 z 处值 s = f(z)，同时使用多项式 `t(x) = (f(x)-s)/ (x-z)`，计算 t(x)在 z 处的值 w = t(z) (w 也称为见证 witness)，将 `(s,w)` 返回给验证方。
 
-- 验证阶段：
+- 揭示(Reveal)阶段：
 
   验证方验证：s = f(z) --> f(z) - s = 0 --> 方程 f(x)-s = 0 有根 x=z, 即存在 t(x) 使得 f(x) - s = t(x)(x - z), 这个方程是恒等式，所以任意点都成立。
 
-  在 r 处自然也是成立的，所以可以检验 f(r) - s = t(r)(r - z) = c - s = w(r - z ) 通过则验证成功，否则失败。
+  在 r 处自然也是成立的，所以可以检验 f(r) - s = t(r)(r - z) --> c - s = w(r - z ) 通过则验证成功，否则失败。
 
-这种方法采用部分揭示方式验证，使得多项式增加了隐私性，自始至终没有完全暴露最初的多项式。现在已经比较接近 Kate 承诺的方案了
+这种方法采用部分揭示方式验证，使得多项式增加了隐私性，自始至终没有完全暴露最初的多项式。现在已经比较接近 Kate 承诺的方案了。
 
-## 应用场景
+![Partial reveal](img/partial-reveal.webp)
 
-多项式承诺应用方向总结起来可以分为 3 大类
+## 多项式承诺应用场景[^6]
+
+多项式承诺应用方向总结起来可以分为 3 大类：
 
 - 数据可用性（ETH Surge 升级，ETH danksharding，降低 L2 成本，模块化数据可用性项目 Avails）
 - 数据结构优化（MPT 树改为 Verkle 树，ETH Verge 升级，无状态客户端，实现 ETH 的轻量的验证节点）
 - 零知识证明系统（Zksync，Zkswap，Scroll，PSE 给 Zk 提供多项式承诺方案，大大提升链的拓展能力）
 
-## 承诺方案
+## 多项式承诺实现[^5]
 
 ![compare](img/compare.png)
 
@@ -147,14 +147,16 @@ tags:
 - IPA 是 Bulletproof 和 Halo2 零知识算法默认的多项式承诺方案，验证时间相对较长，采用的项目有门罗币，zcash 等，前两者是不需要初始可信设置的。
 - 在证明大小与验证时间上，KZG 多项式承诺的优势比较大，KZG 承诺也是目前应用最广的一种多项式承诺方式。但 KZG 是基于椭圆曲线，配对函数，需要初始可信设置的。
 
-## 参考
+## 延生阅读
 
-- [多项式承诺，正在重塑整个区块链](https://web3caff.com/zh/archives/38949)
-- [多项式承诺 Polynomial commitment 方案汇总](https://blog.csdn.net/mutourend/article/details/125922653)
-- [区块链中的数学 - 多项式承诺](https://learnblockchain.cn/article/2165)
+- [多项式运算](http://accu.cc/content/cryptography/polynomial_math/)
 - [Vitalik：以太坊状态爆炸问题，多项式承诺方案可解决](https://www.8btc.com/article/567865) 建议阅读。
 
-[^1]: [多项式运算](http://accu.cc/content/cryptography/polynomial_math/)
+## 参考
+
+[^1]: [区块链中的数学 - 多项式承诺](https://learnblockchain.cn/article/2165)
 [^2]: [多项式](https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A0%85%E5%BC%8F)
 [^3]: [FFT/IFFT 快速傅里叶变换](https://oi-wiki.org/math/poly/fft/)
 [^4]: [用一点密码学实现远程猜拳 -- 闲聊 commitment scheme](https://zhuanlan.zhihu.com/p/25241252)
+[^5]: [多项式承诺 Polynomial commitment 方案汇总](https://blog.csdn.net/mutourend/article/details/125922653)
+[^6]: [多项式承诺，正在重塑整个区块链](https://web3caff.com/zh/archives/38949)
