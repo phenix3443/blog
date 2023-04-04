@@ -393,12 +393,8 @@ Copyright and related rights waived via CC0.
 
 Please cite this document as:
 
-Vitalik Buterin (@vbuterin), Dankrad Feist (@dankrad), Diederik Loerakker (@protolambda), George Kadianakis (@asn-d6), Matt Garnett (@lightclient), Mofi Taiwo (@Inphi), Ansgar Dietrichs (@adietrichs), "EIP-4844: Shard Blob Transactions [DRAFT]," Ethereum Improvement Proposals, no. 4844, February 2022. [Online serial]. Available: https://eips.ethereum.org/EIPS/eip-4844.
+Vitalik Buterin (@vbuterin), Dankrad Feist (@dankrad), Diederik Loerakker (@protolambda), George Kadianakis (@asn-d6), Matt Garnett (@lightclient), Mofi Taiwo (@Inphi), Ansgar Dietrichs (@adietrichs), "EIP-4844: Shard Blob Transactions [DRAFT]," Ethereum Improvement Proposals, no. 4844, February 2022. [Online serial]. Available: [https://eips.ethereum.org/EIPS/eip-4844].
 
 ## 参考
 
 [^1]: [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
-
-```
-
-```

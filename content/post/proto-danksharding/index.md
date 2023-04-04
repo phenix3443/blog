@@ -171,10 +171,12 @@ KZG Ceremony 是一种让整个以太坊社区的许多人一起生成一个秘�
 
 EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完整版 Danksharding]({{< ref "../danksharding">}}) 中，每个节点都可以直接通过数据可用性采样（Data Availability Sampling），实现对 L2 数据正确性的实时验证。这将会进一步提高 L2 的安全性和性能。
 
-## 参考
+## 延伸阅读
 
 - [观点：以太坊距离大规模扩容 ，可能比我们想象的更近](https://www.8btc.com/article/6790012)
 - [热度飙升的 EIP-4844 究竟是什么 ？V 神亲自详细解答](https://www.tuoluo.cn/article/detail-10095959.html) 没看懂
+
+## 参考
 
 [^1]: [一文读懂 EIP-4844：如何降低 Layer2 费用 100 倍？](https://www.8btc.com/article/6794798)
 [^2]: [eip4844](https://www.eip4844.com)
