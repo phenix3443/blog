@@ -42,9 +42,10 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 
 ## 数学原理
 
-- [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html)
-- [详解 KZG 如何应用于 zk-rollup 以及以太坊 DA 方案](https://www.defidaonews.com/article/6784542)
+- [零知识证明 KZG Commitment 1:Polynomial Commitment](https://www.youtube.com/watch?v=nkrk3jLj8Jw) 强烈推荐阅读。
 - 可参考 Qi Zhou 博士在 Dapp Learning 讲解的关于 [Polynomial Commitment KZG with Examples (part 1)](https://www.youtube.com/watch?v=n4eiiCDhTes)。
+- [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 比较难，看不懂。
+- [详解 KZG 如何应用于 zk-rollup 以及以太坊 DA 方案](https://www.defidaonews.com/article/6784542)
 
 ### trust setup
 
