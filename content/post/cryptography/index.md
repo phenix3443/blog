@@ -32,7 +32,7 @@ tags:
 
 - [椭圆曲线密码学的简单介绍](https://zhuanlan.zhihu.com/p/26029199)
 - [一文读懂 ECDSA 算法如何保护数据](https://zhuanlan.zhihu.com/p/97953640)
-- [椭圆曲线密码学简介（一）：实数域的椭圆曲线及其群运算规则](https://zhuanlan.zhihu.com/p/102807398) 以后后续系列文章。
+- [椭圆曲线密码学简介（一）：实数域的椭圆曲线及其群运算规则](https://zhuanlan.zhihu.com/p/102807398) 以及后续系列文章。
 
 ### 配对
 
