@@ -20,7 +20,8 @@ tags:
 
 ## Docker Daemon
 
-修改镜像默认存储位置：[https://cloud.tencent.com/developer/article/1835999]
+- [修改镜像默认存储位置](https://cloud.tencent.com/developer/article/1835999)
+- [如何配置 docker 通过代理服务器拉取镜像](https://www.lfhacks.com/tech/pull-docker-images-behind-proxy/)
 
 ## Docker Client
 
