@@ -31,7 +31,7 @@ tags:
 
 ## 镜像加速器
 
-修改配置文件可以参考[how to change settings](https://docs.docker.com/desktop/settings/mac/)。
+修改配置文件可以参考[how to change settings](https://docs.docker.com/desktop/settings/mac/)，实际上是编辑 `/etc/docker/daemon.json`。
 
 ```json
 {
