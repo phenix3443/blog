@@ -1,5 +1,5 @@
 # 简介
 
-![deploy](https://img.shields.io/github/workflow/status/phenix3443/blog/Deploy%20to%20Github%20Pages)
+[![Deploy to Github Pages](https://github.com/phenix3443/blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/phenix3443/blog/actions/workflows/deploy.yml)
 
-使用 stack theme of  hugo 搭建的个人博客。
+使用 Hugo Theme Stack 搭建的个人博客。
