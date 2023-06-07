@@ -447,22 +447,23 @@ etherscan 上可以看到相关的交易记录。
 
 ```shell
 yarn add --dev patch-package
-yarn add --dev @uniswap/sdk
+yarn patch-package @uniswap/default-token-list
+yarn patch-package @uniswap/sdk
 ```
 
 此外，还需要升级 @uniswap/sdk 到 3.0.3，因为当前 beta 版本无法进行 patch。
 
 ```bash
-yarn add --dev patch-package postinstall-postinstall
-yarn patch-package @uniswap/default-token-list
-yarn patch-package @uniswap/sdk
+yarn add --dev postinstall-postinstall
 ```
 
 这样, `yarn install` 后直接运行 `yarn patch-package` 就可将之前的 `@uniswap` module 的改动重新应用到当前 `node_modules/@uniswap` 中。
 
+也可以将这个过程作为 npm script 放在 package.json 中：
+
 ![postinstall](image/interface/postinstall.png)
 
-也可以将这个过程作为 npm script 放在 package.json 中，这样运行 `yarn postinstall` 即可
+这样运行 `yarn postinstall` 也可以达到同样的效果。
 
 ### 整合合约部署脚本
 
