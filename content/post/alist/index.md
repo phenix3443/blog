@@ -30,3 +30,7 @@ tags:
 ![WebDAV](images/cloudreve-webdav.png)
 
 相比较而言，推荐使用 webDAV 的方式，通过账号登录，alist 会保存 cookies，可能会过期。
+
+## 添加 115 网盘
+
+配置比较简单，通过 cookie 进行登录。
