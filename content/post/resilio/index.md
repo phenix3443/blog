@@ -23,3 +23,8 @@ tags:
 曾经买过该软件的终身授权版本，很划算，安装过程很简单，需要注意的是二次封装 [linuxserver/resilio-sync](https://hub.docker.com/r/linuxserver/resilio-sync) 镜像要比官方镜像更好配置。
 
 {{< gist phenix3443 74bd4acfdfeac30fce4812eb3524a9d0 >}}
+
+## 使用
+
+- 预留好足够的空间。
+- 删掉的文件是可以从隐藏目录 `.sync` 找回的。
