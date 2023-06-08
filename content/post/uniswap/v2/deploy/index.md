@@ -23,7 +23,7 @@ tags:
 
 该方法也可用于将 Uniswap V2 部署到 Private Network。
 
-## 准备工作[^1]
+## 准备工作
 
 ### Nodejs 版本
 
@@ -71,7 +71,7 @@ git clone https://github.com/makerdao/multicall.git
 
 现在准备工作完成了，下面开始编译并且部署智能合约。
 
-## 编译 uniswap 合约 [^1]
+## 编译 uniswap 合约
 
 接下来我们分别编译 `v2-core` 和 `v2-periphery` 两个仓库的代码，然后将编译后的 JSON 文件拷贝到 `uniswap-contracts`  目录。
 
@@ -93,7 +93,7 @@ cp -r build ../uniswap-contracts && cd -
 cd v2-periphery && yarn && yarn compile && cp -r build ../uniswap-contracts && cd -
 ```
 
-## 部署 uniswap 合约 [^1]
+## 部署 uniswap 合约
 
 编译好的合约代码我们已经全部拷贝到 `uniswap-contracts`  目录。接下来就是部署合约了，这一步稍微麻烦一些，需要我们编写一个脚本。
 
@@ -132,7 +132,7 @@ INIT_CODE_HASH: 0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da34884
 
 前端程序依赖两个合约： multicall 与 ens ，我们分别进行部署。
 
-### multicall[^3]
+### multicall
 
 multicall 使用 [dapp.tools](https://dapp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
 
@@ -191,7 +191,7 @@ yarn
 - 修改涉及上面合约部署地址的地方。
 - 添加 sepolia 网络相关配置。
 
-### 修改 SDK[^2]
+### 修改 SDK
 
 我们需要修改 SDK 中的：
 
@@ -489,12 +489,7 @@ COPY build/ /usr/share/nginx/html
 ## 参考
 
 - [knows-token-decimals](https://medium.com/@nuuneoi/knows-token-decimals-when-1-million-tokens-does-not-always-mean-there-is-only-1-million-tokens-d89c1a8c27ee)
-
-[^1]: [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
-[^2]: [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
-[^3]: [如何使 uniswap v2 去中心化交易所支持以太坊私链](https://segmentfault.com/a/1190000040404602)
-[^4]: [Deploying an Example Application (Uniswap) to Moonbeam](https://moonbeam.network/tutorial/deploying-uniswap-to-moonbeam/)
-
-```
-
-```
+- [在以太坊测试网络部署 uniswap v2 去中心化交易所](https://segmentfault.com/a/1190000040401731)
+- [完整部署 uniswap 合约、前端教程（可部署 uniswap 到 bsc、heco）](https://blog.csdn.net/zgf1991/article/details/109127260)
+- [如何使 uniswap v2 去中心化交易所支持以太坊私链](https://segmentfault.com/a/1190000040404602)
+- [Deploying an Example Application (Uniswap) to Moonbeam](https://moonbeam.network/tutorial/deploying-uniswap-to-moonbeam/)
