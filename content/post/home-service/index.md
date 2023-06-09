@@ -27,7 +27,7 @@ tags:
 - 自动化。好处不言自明，Github Action 搭配 docker compose 部署可以解决。
 - 域名访问。
   - 域名使用之前阿里云申请的十年有效期的域名。 GCP 部署的服务有外网 IP，可以直接在阿里云绑定进行解析。
-  - 家里内网部署的服务，通过 cloudflare tunnel 提供内网穿透功能进行访问。Cloudflare 默认为域名提供 SSL 证书，支持 HTTPS 访问。
+  - 家里内网部署的服务，通过 [cloudflare tunnel 提供内网穿透功能](https://sspai.com/post/79278)进行访问。Cloudflare 默认为域名提供 SSL 证书，支持 HTTPS 访问。
 - 节能。 `7*24` 运行的服务能效比是必须考虑的，相比较 nas 或者 nuc，闲置吃灰的树莓派 4B 功耗只有 5w 左右，是个不错的选择。
 
 ## 业务需求
@@ -63,8 +63,12 @@ tags:
 
 ![arch](arch.drawio.svg)
 
+- raspi 上面的服务通过 docker compose 进行部署，所有的服务共享 home-services 网络，这样就不用对外暴露端口，减少暴露风险
+- collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
+
 ## 进度
 
 - [resilio]({{< ref "../resilio" >}}) 用于资源同步。
 - [cloudreve]({{< ref "../cloudreve" >}}) 私人网盘空间。
 - [alist]({{< ref "../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
+- clash 用于软路由，科学上网。
