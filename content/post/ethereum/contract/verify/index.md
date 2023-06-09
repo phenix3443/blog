@@ -2,7 +2,7 @@
 title: "Verify Smart Contract"
 description: "如何验证智能合约"
 slug: verify-contract
-date: 2023-03-015T11:09:14+08:00
+date: 2023-03-01T11:09:14+08:00
 image:
 math:
 license:
