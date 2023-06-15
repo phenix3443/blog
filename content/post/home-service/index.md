@@ -59,9 +59,21 @@ tags:
 
 多方调研对比后发现 cloudreve 满足上面的需求。
 
-## 基本架构
+## 家庭网络拓扑
 
-![arch](arch.drawio.svg)
+- 为了可互联网访问家庭网络，使用 Cloudflare tunnel 进行内网穿透。
+- 三台 raspi 为了达到通电可用的目的：
+
+  - 设置好 SSH 后通电即可使用。
+  - 通过 WIFI 连接到路由器，在路由器上绑定 mac 和 IP。
+
+- NUC 通过 wlan 唤醒的方式，使用 Microsoft Remote Desktop 工具进行远程访问
+
+![Network topology](images/network-topology.drawio.svg)
+
+## 业务架构
+
+![arch](images/arch.drawio.svg)
 
 - raspi 上面的服务通过 docker compose 进行部署，所有的服务共享 home-services 网络，这样就不用对外暴露端口，减少暴露风险
 - collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
