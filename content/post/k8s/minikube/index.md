@@ -56,4 +56,4 @@ kubernetes-dashboard   kubernetes-dashboard-55c4cbbc7c-g7rzz       1/1     Runni
 
 ## deploy applications
 
-按照教程进行尝试，之后重新打开 dashboard，观察工作负载/服务等的变化。
+按照教程进行尝试，观察 dashboard 中工作负载/服务等的变化。
