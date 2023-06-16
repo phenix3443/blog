@@ -25,7 +25,7 @@ tags:
 
 由于国内网络原因，无法下载相关的镜像，官方给出了[解决办法](https://minikube.sigs.k8s.io/docs/faq/#i-am-in-china-and-i-encounter-errors-when-trying-to-start-minikube-what-should-i-do)：
 
-`minikube start --image-mirror-country='cn'`
+`minikube start --image-mirror-country='cn'` 该方法不可用，需要直接使用代理。
 
 ![minikube start](images/minikube-start.png)
 
