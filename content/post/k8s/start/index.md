@@ -1,5 +1,5 @@
 ---
-title: "Start"
+title: "k8s Start"
 description:
 date: 2023-06-16T09:27:08+08:00
 image:

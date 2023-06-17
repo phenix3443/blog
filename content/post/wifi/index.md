@@ -114,11 +114,11 @@ tags:
   > set_network 0 psk "passphrase"
   > enable_network 0
   > <2>CTRL-EVENT-CONNECTED - Connection to 00:00:00:00:00:00 completed (reauth) [id=0 id_str=]
+  > save_config
   ```
 
   打开配置文件可以看到其中新增了 network 字段，配置文件可以包括一个或多个 network 配置。wpa_supplicant 将根据配置文件中的 network 顺序、网络安全级别（首选 WPA/WPA2）和信号强度自动选择最佳网络。
 
+- 通过 `iw dev wlan0 info` 查看是否已经链接上 SSID 对应的网络
 - 分配 IP: `sudo dhclient wlan0`
-- 验证：
-  - 通过 `iw dev wlan0 info` 查看是否已经链接上 SSID 对应的网络
   - 通过`ip addr show wlan0`查看分配的 IP。
