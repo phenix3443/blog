@@ -16,40 +16,33 @@ tags:
 
 ## 概述
 
-[官方文档](https://docs.docker.com/) 不管是入门示例还是 reference 都很详细。
+- [官方文档](https://docs.docker.com/) 不管是入门示例还是 reference 都很详细。
 
-## Docker Daemon
+- [Install on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
-- [修改镜像默认存储位置](https://cloud.tencent.com/developer/article/1835999)
-- [如何配置 docker 通过代理服务器拉取镜像](https://www.lfhacks.com/tech/pull-docker-images-behind-proxy/)
+## Daemon
 
-## Docker Client
+- [docker daemon configuration](https://docs.docker.com/config/daemon/)
+- [docker daemon configure options](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)
 
-## Docker Desktop
+`sudo vim /etc/docker/daemon.json`：
 
-[Docker Desktop](https://docs.docker.com/desktop/) 是各平台上 docker gui clients 的相关介绍。其中 [mac faqs](https://docs.docker.com/desktop/faqs/macfaqs/) 中有很多值得看的信息。
+{{< gist phenix3443 956568e70d423973144e6a55a1477f32 >}}
 
-## 镜像加速器
-
-修改配置文件可以参考[how to change settings](https://docs.docker.com/desktop/settings/mac/)，实际上是编辑 `/etc/docker/daemon.json`。
-
-```json
-{
-  "registry-mirrors": ["https://dockerproxy.com"]
-}
-```
-
-推荐使用[docker proxy](https://dockerproxy.com/)，支持多个 registry，中科大、阿里等的镜像源都有限制。
+- data-root：默认存储位置
 
 重启 docker daemon:
 
-```shell
-systemctl daemon-reload
-systemctl restart docker
-```
+`sudo systemctl daemon-reload && sudo systemctl restart docker`
 
-验证是否成功：`docker info`，出现 `Registry Mirrors` 字段。
+通过 `docker info`验证配置是否修改成功。
 
-```html
-Registry Mirrors: https://dockerproxy.com/
-```
+## Client
+
+### Config proxy in container
+
+[Configure Docker container to use a proxy server](https://docs.docker.com/network/proxy/)
+
+## Desktop
+
+[Docker Desktop](https://docs.docker.com/desktop/) 是各平台上 docker gui clients 的相关介绍。其中 [mac faqs](https://docs.docker.com/desktop/faqs/macfaqs/) 中有很多值得看的信息。
