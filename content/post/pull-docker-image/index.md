@@ -65,3 +65,5 @@ sudo systemctl show --property=Environment docker
 ```
 
 `Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1`
+
+containerd 也可以用同样的方法。
