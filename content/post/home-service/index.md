@@ -61,7 +61,13 @@ tags:
 
 ## 家庭网络拓扑
 
-- 为了可互联网访问家庭网络，使用 Cloudflare tunnel 进行内网穿透。
+- 为了可互联网访问家庭网络，使用 Cloudflare tunnel 进行内网穿透，注意启动服务
+
+  ```shell
+  sudo systemctl enable cloudflared
+  sudo systemctl restart cloudflared
+  ```
+
 - 三台 raspi 为了达到通电可用的目的：
 
   - 设置好 SSH 后通电即可使用。
@@ -84,3 +90,7 @@ tags:
 - [cloudreve]({{< ref "../cloudreve" >}}) 私人网盘空间。
 - [alist]({{< ref "../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
 - clash 用于软路由，科学上网。
+
+```
+
+```
