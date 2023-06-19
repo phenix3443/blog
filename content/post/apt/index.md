@@ -1,5 +1,5 @@
 ---
-title: "Apt"
+title: "apt pieces"
 description: 使用 apt 管理软件包
 slug: apt
 date: 2023-06-17T19:42:07+08:00

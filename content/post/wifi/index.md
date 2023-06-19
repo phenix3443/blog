@@ -1,5 +1,5 @@
 ---
-title: "Enable WIFI"
+title: "Enable WIFI on Ubuntu"
 description: 启用 WIFI
 slug: enable-wifi
 date: 2023-06-12T21:41:26+08:00
