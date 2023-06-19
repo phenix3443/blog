@@ -398,3 +398,5 @@ sudo systemctl restart kubelet
 ## 参考
 
 - [搭建一个基于 containerd 的高可用 Kubernetes 集群](https://www.rondochen.com/build-your-own-k8s-cluster/)
+- [https://blog.haohtml.com/archives/32728](https://blog.haohtml.com/archives/32728)
+- [手把手教大家使用树莓派 4B 搭建 K8s 集群](https://zhuanlan.zhihu.com/p/390805379)
