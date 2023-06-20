@@ -386,13 +386,25 @@ kubeadm join 192.168.122.12:6443 --token knao8f.3y0su********iq --discovery-toke
 
 如下 kubeadm 可以在 --config 后加的配置文件示例：
 
-## 启动 kubelet 服务
+## kubelet
+
+### 启动服务
 
 最后, 考虑到集群宕机自愈的问题, 还需要设置 kubelet 服务开机自动启动:
 
 ```shell
 sudo systemctl enable kubelet
 sudo systemctl restart kubelet
+```
+
+## kubectl
+
+[在 Linux 系统中安装并设置 kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/)
+
+### 启动自动补全功能
+
+```shell
+echo 'source <(kubectl completion bash)' >>~/.bashrc
 ```
 
 ## 参考
