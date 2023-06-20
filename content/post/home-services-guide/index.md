@@ -1,8 +1,8 @@
 ---
-title: "Home Services"
-description: 搭建家庭服务
-slug: home-services
-date: 2023-06-08T10:35:46+08:00
+title: "家庭服务--架构设计篇"
+description: 家庭服务的整体设计
+slug: home-services-guide
+date: 2023-06-20T10:35:46+08:00
 image:
 math:
 license:
@@ -12,25 +12,45 @@ draft: false
 categories:
   - cloud
 tags:
-  - drive
-  - tune
-  - cloudflare
-  - DDNS
-  - aliyun
+  - home-services
 ---
 
 ## 概述
 
-## 技术需求
+目的是利用家里闲置的硬件资源，搭建一套自用的互联网服务。
 
-- 技术开源。开源软件从一定程度上更能保证安全性。优先选择 GitHub 上的开源项目。
-- 自动化。好处不言自明，Github Action 搭配 docker compose 部署可以解决。
-- 域名访问。
-  - 域名使用之前阿里云申请的十年有效期的域名。 GCP 部署的服务有外网 IP，可以直接在阿里云绑定进行解析。
-  - 家里内网部署的服务，通过 [cloudflare tunnel 提供内网穿透功能](https://sspai.com/post/79278)进行访问。Cloudflare 默认为域名提供 SSL 证书，支持 HTTPS 访问。
-- 节能。 `7*24` 运行的服务能效比是必须考虑的，相比较 nas 或者 nuc，闲置吃灰的树莓派 4B 功耗只有 5w 左右，是个不错的选择。
+## 技术需求以及解决方案
 
-## 业务需求
+### 使用开源技术
+
+开源软件从一定程度上更能保证安全性。优先选择 GitHub 上的开源项目。
+
+### 自动化
+
+好处不言而喻，可通过 Github Action 进行 CI/CD。
+
+### 互联网访问
+
+可互联网访问是必须支持的一个功能点。
+
+- 域名使用之前阿里云申请的十年有效期的域名。 GCP 部署的服务有外网 IP，可以直接在阿里云绑定进行解析。
+- 家里部署的服务，实施过两个方案：
+
+  1. 由于广东电信可以申请外网 IP 地址，所以可以通过路由器端口转发的方式，将互联网请求转发到家庭内网服务。但是缺点如下：
+     - 外网 IP 是动态变化的，需要内网部署 DDNS 服务来更新阿里云域名绑定。
+     - 电信封掉了一下常见的 HTTP 端口，如 80/443，使得访问服务的时候必须要在域名后携带端口号，一点都不优雅。
+     - 需要自己申请 SSL 证书，配置 nginx 代理，为内网服务提供 HTTPS 支持。
+     - 直接将内网服务暴露在外网有安全隐患。
+  2. 通过 [cloudflare tunnel 提供内网穿透功能](https://sspai.com/post/79278)进行访问。优点如下：
+     - 配置简单。
+     - cloudflare 负责解析域名，同时默认为域名提供 SSL 证书，支持 HTTPS 访问。
+     - cloudflare 有访问控制功能，使得内网服务更加安全。
+
+### 能效比
+
+`7*24` 运行的服务能效比是必须考虑的，相比较 nas 或者 nuc，闲置吃灰的树莓派 4B 功耗只有 5w 左右，是个不错的选择。
+
+## 业务需求以及解决方案
 
 ### 同步
 
@@ -81,7 +101,7 @@ tags:
 
 ![arch](images/arch.drawio.svg)
 
-- raspi 上面的服务通过 docker compose 进行部署，所有的服务共享 home-services 网络，这样就不用对外暴露端口，减少暴露风险
+- raspi 上面的服务通过 GitHub action 进行部署.
 - collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
 
 ## 进度
@@ -90,7 +110,3 @@ tags:
 - [cloudreve]({{< ref "../cloudreve" >}}) 私人网盘空间。
 - [alist]({{< ref "../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
 - clash 用于软路由，科学上网。
-
-```
-
-```
