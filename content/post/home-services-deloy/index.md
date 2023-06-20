@@ -1,7 +1,7 @@
 ---
-title: "家庭服务--docker部署篇"
+title: "家庭服务--部署篇"
 description: 家庭服务的整体设计
-slug: home-services-docker
+slug: home-services-deploy
 date: 2023-06-20T19:41:08+08:00
 image:
 math:
@@ -12,11 +12,16 @@ draft: false
 categories:
   - cloud
 tags:
-  - docker
   - home-services
 ---
 
-## 概述
+## v3 k3s 部署
+
+## v2 k8s 部署
+
+[树莓派安装 k8s](../build-k8s-with-raspi/)
+
+## v1 docker compose 部署
 
 [设计原则](../home-services-guide/) 之前已经说清楚了，这里描述的是如何在内网部署服务。
 
