@@ -1,6 +1,7 @@
 ---
-title: "Chatgpt"
-description:
+title: "chatgpt"
+description: chatgpt 使用
+slug: chatgpt
 date: 2023-06-15T22:00:08+08:00
 image:
 math:

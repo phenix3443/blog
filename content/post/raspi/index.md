@@ -1,5 +1,5 @@
 ---
-title: "Raspi Pieces"
+title: "raspi pieces"
 description: 树莓派使用记录
 slug: raspi
 date: 2023-06-15T14:27:28+08:00

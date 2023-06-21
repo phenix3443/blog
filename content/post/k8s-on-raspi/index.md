@@ -1,7 +1,7 @@
 ---
-title: "Build K8s With Raspi"
+title: "deploy K8s on raspi"
 description: 用树莓派搭建 k8s 集群
-slug: build-k8s-with-raspi
+slug: k8s-on-raspi
 date: 2023-06-17T14:53:53+08:00
 image:
 math:
@@ -51,7 +51,20 @@ Operating System: Ubuntu 22.04.2 LTS
 
 关于[容器运行时的对比](https://www.zhangjiee.com/blog/2021/container-runtime.html)，两台安装 containerd，一台安装 cri-o。
 
-## 系统设置
+### 识别 Linux 节点上的 cgroup 版本
+
+[官方说明](https://kubernetes.io/zh-cn/docs/concepts/architecture/cgroups/)
+
+cgroup 版本取决于正在使用的 Linux 发行版和操作系统上配置的默认 cgroup 版本。 要检查你的发行版使用的是哪个 cgroup 版本，请在该节点上运行 stat -fc %T /sys/fs/cgroup/ 命令：
+
+```shell
+stat -fc %T /sys/fs/cgroup/
+```
+
+- 对于 cgroup v2，输出为 cgroup2fs。
+- 对于 cgroup v1，输出为 tmpfs。
+
+对于当前系统版本，默认支持 cgroup v2
 
 ## 安装容器运行时
 
@@ -405,6 +418,26 @@ sudo systemctl restart kubelet
 
 ```shell
 echo 'source <(kubectl completion bash)' >>~/.bashrc
+```
+
+## 部署和访问 Kubernetes 仪表板（Dashboard）
+
+[官方指南](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/)
+
+### 部署 Dashboard UI
+
+默认情况下不会部署 Dashboard。可以通过以下命令部署：
+
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+
+### 访问 Dashboard 用户界面
+
+为了保护你的集群数据，默认情况下，Dashboard 会使用最少的 RBAC 配置进行部署。 当前，Dashboard 仅支持使用 Bearer 令牌登录。 要为此样本演示创建令牌，你可以按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 上的指南进行操作。
+
+```shell
+
 ```
 
 ## 参考

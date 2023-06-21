@@ -1,5 +1,5 @@
 ---
-title: "Pull Docker Image"
+title: "pull docker image by proxy"
 description: 国内拉取 docker 镜像解决办法
 slug: pull-docker-image
 date: 2023-06-17T12:51:09+08:00

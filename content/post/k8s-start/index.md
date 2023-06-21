@@ -16,6 +16,14 @@ tags:
 
 ## 概述
 
-使用 minikube 搭建好本地开发环境，参考 {{< ref "../minikube" >}}。
+## 学习环境
+
+- [minikube]({{< ref "../minikube" >}})
+
+## 生产环境
+
+- [k8s on raspi]({{< ref "../k8s-on-raspi" >}})
+
+## 最佳实践
 
 ## 参考
