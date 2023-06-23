@@ -303,7 +303,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 #### init 失败处理
 
 - 切换至 root 权限：`sudo su`
-- 执行重置命令：`kubeadm reset -f  --cri-socket=unix:///var/run/containerd/containerd.sock`
+- 执行重置命令：`kubeadm reset -f  --cri-socket=unix:///run/containerd/containerd.sock`
 - 删除所有相关数据:
 
   ```shell
@@ -432,13 +432,45 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
-### 访问 Dashboard 用户界面
+默认 dashboard 只能在集群内部访问，为了在集群外部访问，需要将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
+
+```shell
+kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
+```
+
+You should see yaml representation of the service. Change type: ClusterIP to type: NodePort and save file. If it's already changed go to next step.
+
+查看部署状态
+
+```shell
+kubectl get po,svc -n kubernetes-dashboard
+NAME                                             READY   STATUS    RESTARTS         AGE
+pod/dashboard-metrics-scraper-5cb4f4bb9c-s7qn5   1/1     Running   99 (2m27s ago)   22h
+pod/kubernetes-dashboard-6967859bff-gndtg        1/1     Running   83 (2m27s ago)   22h
+
+NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+service/dashboard-metrics-scraper   ClusterIP   10.110.149.173   <none>        8000/TCP        2d4h
+service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        443:30689/TCP   2d4h
+```
+
+Dashboard has been exposed on port 31707 (HTTPS). Now you can access it from your browser at: `https://<control-plane-ip>:31707`. control-plane-ip can be found by executing `kubectl cluster-info`
+
+### 创建示例用户
 
 为了保护你的集群数据，默认情况下，Dashboard 会使用最少的 RBAC 配置进行部署。 当前，Dashboard 仅支持使用 Bearer 令牌登录。 要为此样本演示创建令牌，你可以按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 上的指南进行操作。
 
-```shell
+### 欢迎界面
 
-```
+![dashboard login](images/dashboard-token.png)
+
+输入上一步骤产生的 token 即可登录。
+
+### 删除默认证书
+
+kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
+
+kubectl create secret generic kubernetes-dashboard-certs \
+--from-file=/opt/kubernetes/ssl/server-key.pem --from-file=/opt/kubernetes/ssl/server.pem -n kubernetes-dashboard
 
 ## 参考
 
