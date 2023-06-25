@@ -23,7 +23,7 @@ tags:
 
 注意安装过程中需要用到 root 权限的，不要使用`sudo`，而使用 `sudo su` 切换到 root 用户执行。
 
-## 准备开始
+## 准备工作
 
 硬件和操作系统规格参见[家中的 raspi-4B 设备]({{< ref "../raspi" >}})
 
@@ -31,7 +31,9 @@ tags:
 
 关于[容器运行时的对比](https://www.zhangjiee.com/blog/2021/container-runtime.html)，两台安装 containerd，一台安装 cri-o。
 
-| hostname | 容器运行时 | 角色   |
+### 架构
+
+| hostname | runtime    | role   |
 | -------- | ---------- | ------ |
 | rb1      | containerd | master |
 | rb2      | cri-o      | node   |
@@ -206,9 +208,7 @@ systemctl enable --now cri-docker.socket
 
 ## 使用部署工具安装 Kubernetes
 
-我们选择通过 kubeadm 来引导集群。[官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/)
-
-### 准备工作
+我们选择通过 kubeadm 来引导集群。按照[官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/) 需要做如下准备：
 
 - 操作系统关闭 swap。当前系统并未开启，所以不需要做修改；如需修改，可在 `/etc/fstab` 中注释掉 `swapfile`。
 - 确保每个节点上 MAC 地址，当前系统没有发现 product_uuid，可以忽略。
@@ -412,51 +412,7 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 
 ### 部署 Dashboard UI
 
-默认情况下不会部署 Dashboard。可以通过以下命令部署：
-
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-```
-
-默认 dashboard 只能在集群内部访问，为了在集群外部访问，需要将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
-
-```shell
-kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
-```
-
-You should see yaml representation of the service. Change type: ClusterIP to type: NodePort and save file. If it's already changed go to next step.
-
-查看部署状态
-
-```shell
-kubectl get po,svc -n kubernetes-dashboard
-NAME                                             READY   STATUS    RESTARTS         AGE
-pod/dashboard-metrics-scraper-5cb4f4bb9c-s7qn5   1/1     Running   99 (2m27s ago)   22h
-pod/kubernetes-dashboard-6967859bff-gndtg        1/1     Running   83 (2m27s ago)   22h
-
-NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
-service/dashboard-metrics-scraper   ClusterIP   10.110.149.173   <none>        8000/TCP        2d4h
-service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        443:30689/TCP   2d4h
-```
-
-Dashboard has been exposed on port 31707 (HTTPS). Now you can access it from your browser at: `https://<control-plane-ip>:31707`. control-plane-ip can be found by executing `kubectl cluster-info`
-
-### 创建示例用户
-
-为了保护你的集群数据，默认情况下，Dashboard 会使用最少的 RBAC 配置进行部署。 当前，Dashboard 仅支持使用 Bearer 令牌登录。 要为此样本演示创建令牌，你可以按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 上的指南进行操作。
-
-### 欢迎界面
-
-![dashboard login](images/dashboard-token.png)
-
-输入上一步骤产生的 token 即可登录。
-
-### 删除默认证书
-
-kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
-
-kubectl create secret generic kubernetes-dashboard-certs \
---from-file=/opt/kubernetes/ssl/server-key.pem --from-file=/opt/kubernetes/ssl/server.pem -n kubernetes-dashboard
+默认情况下不会部署 Dashboard。安装配置参见 [k8s-dashboard]({{< ref "../k8s-dashboard" >}})
 
 ## 参考
 
