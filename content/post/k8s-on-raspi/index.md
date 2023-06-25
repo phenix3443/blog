@@ -10,7 +10,7 @@ hidden: false
 comments: true
 draft: true
 categories:
-  - k8s
+  - kubernetes
 tags:
   - raspi
   - k8s
@@ -25,31 +25,17 @@ tags:
 
 ## 准备开始
 
-| hostname | 硬件     | CPU | 内存 | 磁盘          | 系统             | 容器运行时 | 角色   |
-| -------- | -------- | --- | ---- | ------------- | ---------------- | ---------- | ------ |
-| ubuntu   | raspi 4B |     | 8G   | 256GB SSD     | ubuntu 22.04 LTS | containerd | master |
-| rb2      | raspi 4B |     | 8G   | 64GB micro-sd | ubuntu 22.04 LTS | cri-o      | node   |
-| rb4      | raspi 4B |     | 8G   | 64GB micro-sd | ubuntu 22.04 LTS | containerd | node   |
-
-### 更改树莓派名字
-
-将几个树莓派名字就分别改成了 rb1/rb2/rb3/：
-
-```shell
-ubuntu@ubuntu:~$ sudo hostnamectl hostname rb1
-ubuntu@ubuntu:~$ hostnamectl status
- Static hostname: rb1
-       Icon name: computer
-      Machine ID: 7da3fac0bd364c13b961b0f417046494
-         Boot ID: 6f52ccfc62704383a852e47839e6c543
-Operating System: Ubuntu 22.04.2 LTS
-          Kernel: Linux 5.15.0-1024-raspi
-    Architecture: arm64
-```
+硬件和操作系统规格参见[家中的 raspi-4B 设备]({{< ref "../raspi" >}})
 
 ### 运行时选择
 
 关于[容器运行时的对比](https://www.zhangjiee.com/blog/2021/container-runtime.html)，两台安装 containerd，一台安装 cri-o。
+
+| hostname | 容器运行时 | 角色   |
+| -------- | ---------- | ------ |
+| rb1      | containerd | master |
+| rb2      | cri-o      | node   |
+| rb4      | containerd | node   |
 
 ### 识别 Linux 节点上的 cgroup 版本
 
