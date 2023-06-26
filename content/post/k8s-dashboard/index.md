@@ -27,7 +27,7 @@ tags:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
-## 配置
+## 部署
 
 默认 dashboard 只能在集群内部访问，为了在集群外部访问，需要将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
 
@@ -50,21 +50,19 @@ service/dashboard-metrics-scraper   ClusterIP   10.110.149.173   <none>        8
 service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        443:31707/TCP   2d4h
 ```
 
-Dashboard has been exposed on port 31707 (HTTPS).
+浏览器打开 `https://<control-plane-ip>:31707`，可以看到登录界面。control-plane-ip 可以通过执行 `kubectl cluster-info` 看到。
 
-### 创建示例用户
+![dashboard login](images/token.png)
 
-为了保护你的集群数据，默认情况下，Dashboard 会使用最少的 RBAC 配置进行部署。 当前，Dashboard 仅支持使用 Bearer 令牌登录。
+## 创建示例用户
+
+为了保护你的集群数据，默认情况下，Dashboard 会使用最少的 [RBAC]() 配置进行部署。 当前，Dashboard 仅支持使用 Bearer 令牌登录。
 
 可以按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 上的为管理员用户创建令牌。
 
 创建以下资源清单文件：
 
-dashboard.admin-user.yml
-
 {{< gist phenix3443 122e758c289090eadc94873beda35f8a >}}
-
-dashboard.admin-user-role.yml
 
 {{< gist phenix3443 81024fee19684a1db7d567a3131ae7c2 >}}
 
@@ -80,19 +78,13 @@ kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
 sudo kubectl -n kubernetes-dashboard create token admin-user
 ```
 
-### 欢迎界面
-
-浏览器打开 `https://<control-plane-ip>:31707`，可以看到登录界面。
-
-![dashboard login](images/token.png)
-
-control-plane-ip 可以通过执行 `kubectl cluster-info` 看到。
-
-输入上一步骤产生的 token 即可登录查看集群信息。
+在浏览器中输入产生的 token 即可登录查看集群信息。
 
 ![cluster info](images/cluster-info.png)
 
-### 删除默认证书
+## SSL 证书
+
+删除默认证书
 
 ```shell
 kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
@@ -100,3 +92,5 @@ kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard
 kubectl create secret generic kubernetes-dashboard-certs \
 --from-file=/opt/kubernetes/ssl/server-key.pem --from-file=/opt/kubernetes/ssl/server.pem -n kubernetes-dashboard
 ```
+
+## 域名访问
