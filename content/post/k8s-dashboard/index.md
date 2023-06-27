@@ -22,7 +22,7 @@ tags:
 ## Manifest 部署
 
 ```shell
-sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
 官方推荐使用[helm 部署](https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard)。
@@ -30,7 +30,7 @@ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.
 ### 运行状态
 
 ```shell
-sudo kubectl -n kubernetes-dashboard get pods,svc
+kubectl -n kubernetes-dashboard get pods,svc
 
 NAME                                            READY   STATUS    RESTARTS   AGE
 pod/dashboard-metrics-scraper-7bc864c59-rpzk7   1/1     Running   0          107m
@@ -50,7 +50,7 @@ service/dashboard-metrics-scraper   ClusterIP   10.43.204.81    <none>        80
 将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
 
 ```shell
-sudo kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
+kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
 ```
 
 在服务对应的配置文件中，将 `type: ClusterIP` 修改为 `type: NodePort`。
@@ -58,7 +58,7 @@ sudo kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
 查看部署状态
 
 ```shell
-sudo kubectl -n kubernetes-dashboard get svc,pods
+kubectl -n kubernetes-dashboard get svc,pods
 
 NAME                                             READY   STATUS    RESTARTS         AGE
 pod/dashboard-metrics-scraper-5cb4f4bb9c-s7qn5   1/1     Running   99 (2m27s ago)   22h
@@ -80,7 +80,7 @@ service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        4
 {{< gist phenix3443 459b9d083ac6fc0ea2967bdbac0bb1e0 >}}
 
 ```shell
-sudo kubectl apply -f ingress.yaml
+kubectl apply -f ingress.yaml
 echo "192.168.12.11 k3s" | sudo tee /etc/hosts
 ```
 
@@ -91,13 +91,13 @@ echo "192.168.12.11 k3s" | sudo tee /etc/hosts
 可以通过设定包含 TLS 私钥和证书的 Secret 来保护 Ingress。 Ingress 只支持单个 TLS 端口 443，并假定 TLS 连接终止于 Ingress 节点（与 Service 及其 Pod 之间的流量都以明文传输）。
 
 ```shell
-sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-ingress-tls --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
+kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-ingress-tls --key example.com.cf.key --cert example.com.cf.pem
 ```
 
 {{< gist phenix3443 1b501124b31aff7e9e011e3a8d0f9b23 >}}
 
 ```shell
-sudo kubectl apply -f ingress.yaml
+kubectl apply -f ingress.yaml
 echo "192.168.12.11 k3s-dashboard.example.com" | sudo tee /etc/hosts
 ```
 
@@ -105,11 +105,63 @@ echo "192.168.12.11 k3s-dashboard.example.com" | sudo tee /etc/hosts
 
 ## Helm 部署
 
+### k3s
+
+由于 Helm kubeconfig 的默认位置是 `$HOME/.kube/config`，所以需要做如下配置：
+
 ```shell
-# Add kubernetes-dashboard repository
+mkdir -p $HOME/.kube
+sudo cp -i /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### 部署
+
+关于 helm，参见 [使用 Helm 管理 kubernetes 应用]({{< ref "../helm" >}})。
+
+```shell
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-# Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
+```
+
+可以看到当前的版本是：
+
+```shell
+helm search repo kubernetes-dashboard
+
+NAME                                            CHART VERSION   APP VERSION     DESCRIPTION
+kubernetes-dashboard/kubernetes-dashboard       6.0.8           v2.7.0          General-purpose web UI for Kubernetes clusters
+```
+
+还是自己生成 TLS，这一步也可以直接用系统生成的。
+
+```shell
+kubectl create secret tls kubernetes-dashboard-ingress-tls --key example.com.cf.key --cert example.com.cf.pem
+```
+
+values.yaml 是 Helm 部署需要的配置：
+
+{{< gist phenix3443 de94f0122c593a10afe4b89831b7547c >}}
+
+```shell
 helm install -f values.yaml kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard
+```
+
+执行成功后提示如下：
+
+```shell
+Release "kubernetes-dashboard" has been upgraded. Happy Helming!
+NAME: kubernetes-dashboard
+LAST DEPLOYED: Tue Jun 27 23:37:45 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 8
+TEST SUITE: None
+NOTES:
+*********************************************************************************
+*** PLEASE BE PATIENT: kubernetes-dashboard may take a few minutes to install ***
+*********************************************************************************
+From outside the cluster, the server URL(s) are:
+     https://k3s-dashboard.example.com
 ```
 
 ## 创建用户
@@ -122,7 +174,7 @@ helm install -f values.yaml kubernetes-dashboard kubernetes-dashboard/kubernetes
 为了保护集群数据，默认情况下，Dashboard 会使用最少的 [RBAC](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/) 配置进行部署。
 
 ```shell
-sudo kubectl -n kubernetes-dashboard get role
+kubectl -n kubernetes-dashboard get role
 
 NAME                   CREATED AT
 kubernetes-dashboard   2023-06-27T05:25:31Z
@@ -131,7 +183,7 @@ kubernetes-dashboard   2023-06-27T05:25:31Z
 可以看到默认只创建了 `kubernetes-dashboard` 这一个角色(role)，该角色也只能管理 kubernetes-dashboard 命名空间内的资源。
 
 ```shell
-sudo kubectl -n kubernetes-dashboard describe role kubernetes-dashboard
+kubectl -n kubernetes-dashboard describe role kubernetes-dashboard
 
 Name:         kubernetes-dashboard
 Labels:       k8s-app=kubernetes-dashboard
@@ -171,7 +223,7 @@ kubectl create -f admin-user.yaml -f admin-user-bind.yaml
 当前，Dashboard 仅支持使用 Bearer 令牌登录。获取管理员令牌：
 
 ```shell
-sudo kubectl -n kubernetes-dashboard create token admin-user
+kubectl -n kubernetes-dashboard create token admin-user
 ```
 
 在浏览器中输入产生的 token ，系统会认为是 admin-user 登录，进而可以操作集群。

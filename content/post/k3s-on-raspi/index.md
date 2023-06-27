@@ -63,7 +63,8 @@ sudo apt install -y linux-modules-extra-raspi
 
 {{< gist phenix3443 4768186a97f4db5e3d89e73e18872631 >}}
 
-由于 traefik 在处理 HTTPS backend service 方面不方便，使用 nginx-ingress 替代。
+- 任何账户执行官方脚本安装的 kubectl 默认的 kubeconfig 都是 `/etc/rancher/k3s/k3s.yaml`，而不是 `~/.kube/config`，所以这里最好设置 `write-kubeconfig-mode: 644`。
+- 由于 traefik 在处理 HTTPS backend service 方面不方便，使用 nginx-ingress 替代。
 
 ```shell
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
@@ -108,7 +109,7 @@ ingress-nginx-controller-7d98bbddbd-5tzh7   1/1     Running     0          78s
 查看集群中当前的 ingress 设置：
 
 ```shell
-sudo kubectl get ingressclass
+kubectl get ingressclass
 ```
 
 ### 删除代理
