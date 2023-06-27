@@ -15,16 +15,26 @@ tags:
   - dashboard
 ---
 
-## dashboard
+## 概述
 
-[dashboard](https://github.com/kubernetes/dashboard) Kubernetes Dashboard 是一个通用的、基于 Web 的 Kubernetes 集群的用户界面。它允许用户管理集群中运行的应用程序，并对其进行故障排除，以及管理集群本身。
+[Kubernetes Dashboard](https://github.com/kubernetes/dashboard) 是一个通用的、基于 Web 的 Kubernetes 集群的用户界面。它允许用户管理集群中运行的应用程序，并对其进行故障排除，以及管理集群本身。
 
 ## 部署
 
-可以通过以下命令部署：
-
 ```shell
 sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+
+官方推荐使用[helm 部署](https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard)：
+
+### 运行状态
+
+```shell
+sudo kubectl -n  kubernetes-dashboard get pods
+
+NAME                                        READY   STATUS    RESTARTS   AGE
+dashboard-metrics-scraper-7bc864c59-rpzk7   1/1     Running   0          64s
+kubernetes-dashboard-6c7ccbcf87-nmnds       1/1     Running   0          64s
 ```
 
 ## NodePort 访问
@@ -32,7 +42,7 @@ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.
 默认 dashboard 只能在集群内部访问，为了在集群外部访问，需要将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
 
 ```shell
-kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
+sudo kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
 ```
 
 在服务对应的配置文件中，将 `type: ClusterIP` 修改为 `type: NodePort`，保存文件。
@@ -53,6 +63,12 @@ service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        4
 浏览器打开 `https://<control-plane-ip>:31707`，可以看到登录界面。control-plane-ip 可以通过执行 `kubectl cluster-info` 看到。
 
 ![dashboard login](images/token.png)
+
+## Ingress 访问
+
+通过 ingress-nginx 配置访问：
+
+{{< gist phenix3443 459b9d083ac6fc0ea2967bdbac0bb1e0 >}}
 
 ## 创建示例用户
 
@@ -101,13 +117,6 @@ sudo kubectl -n kubernetes-dashboard get svc,pods
 sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-tls --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
 ```
 
-安装 nginx-ingress
-
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
-sudo kubectl get ingressclass
-```
-
 ## 域名访问
 
 通过 NodePort 部署的 service 最终映射到外部的 port 还是具有不确定性，如果手动指定又可能会产生冲突。解决这个问题就需要用到 [ingress](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/)。
@@ -119,5 +128,5 @@ sudo kubectl get ingressclass
 
 ## 参考
 
-- https://cloudnative.to/blog/general-kubernetes-dashboard/
-- https://blog.51cto.com/u_1472521/5001874
+- [a](https://cloudnative.to/blog/general-kubernetes-dashboard/)
+- [b](https://blog.51cto.com/u_1472521/50018740)
