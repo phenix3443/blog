@@ -24,7 +24,7 @@ tags:
 可以通过以下命令部署：
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
 ## NodePort 访问
@@ -98,14 +98,14 @@ sudo kubectl -n kubernetes-dashboard get svc,pods
 使用自己的证书重新生成：
 
 ```shell
-sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-certs --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
+sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-tls --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
 ```
 
 安装 nginx-ingress
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/deploy.yaml
-sudo kubectl get ingressclasses
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
+sudo kubectl get ingressclass
 ```
 
 ## 域名访问

@@ -48,8 +48,11 @@ sudo apt install -y linux-modules-extra-raspi
 
 按照[快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
 
+使用 nginx-ingress 替代 traefik。
+
 ```shell
-curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable traefik" sh  -
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 确认 k3s 服务运行状态 `systemctl status k3s`
