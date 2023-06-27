@@ -19,24 +19,24 @@ tags:
 
 ## 概述
 
-之前 [部署 k8s]({{< ref "../k8s-on-raspi" >}}) control-panel 的 raspi4B 没有任何任务的情况下，单机负载经常到 9-13，都无法正常 SSH 登录，所以决定还是切换到 k3s 来使用 kubernetes 部署家庭服务。
+之前[在树莓派集群上部署了 k8s]({{< ref "../k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
 
 当前 k3s 版本：`v1.26.5+k3s1 (7cefebea)`。
 
-## 准备工作
+## 系统架构
 
-### vxlan
+整体架构使用[带有嵌入式数据库的单服务器](https://docs.k3s.io/zh/architecture#%E5%B8%A6%E6%9C%89%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8D%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%BE%E7%BD%AE)形式。
 
-当前树莓派环境参见[家中的树莓派 4B]({{< ref "../raspi" >}})。
+![带有嵌入式数据库的单服务器](https://docs.k3s.io/zh/img/k3s-architecture-single-server-dark.svg)
 
-k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C)，但当前操作系统(ubuntu 22.04 LTS) 不支持，需要进行安装，参见[GitHub 上的相关讨论](https://github.com/k3s-io/k3s/issues/4234)。
+## 部署准备
 
-```shell
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y linux-modules-extra-raspi
-```
+- 根据[安装要求](https://docs.k3s.io/zh/installation/requirements)检查准备工作。
+- [树莓派注意事项](https://docs.k3s.io/zh/advanced#raspberry-pi)。
 
-### 系统架构
+### 网络拓扑
+
+使用[家中闲置树莓派 4B]({{< ref "../raspi" >}})来搭建整个集群。
 
 | hostname | role   |
 | -------- | ------ |
@@ -44,16 +44,85 @@ sudo apt install -y linux-modules-extra-raspi
 | rb2      | agent  |
 | rb3      | agent  |
 
-## 部署 sever
+### 软件支持
 
-按照[快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
+#### vxlan
 
-使用 nginx-ingress 替代 traefik。
+k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C)管理集群网络，从 Ubuntu 21.10 开始，对 Raspberry Pi 的 vxlan 支持已移至单独的内核模块中。
 
 ```shell
-curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable traefik" sh  -
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y linux-modules-extra-raspi
 ```
+
+## 部署 sever
+
+参考 [快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
+
+使用[配置文件](https://docs.k3s.io/zh/installation/configuration#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)控制安装：
+
+{{< gist phenix3443 4768186a97f4db5e3d89e73e18872631 >}}
+
+由于 traefik 在处理 HTTPS backend service 方面不方便，使用 nginx-ingress 替代。
+
+```shell
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+
+### 设置代理
+
+[nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/) 启动的 pods 需要从国内无法访问的 `registry.k8s.io` 拉取镜像，给 containerd 临时配置[配置 HTTP 代理](https://docs.k3s.io/zh/advanced#%E9%85%8D%E7%BD%AE-http-%E4%BB%A3%E7%90%86) 可以解决该问题。
+
+```shell
+# cat /etc/systemd/system/k3s.service.env
+CONTAINERD_HTTP_PROXY=http://clash:7890
+CONTAINERD_HTTPS_PROXY=http://clash:7890
+CONTAINERD_NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+```
+
+重新启动 k3s 服务：
+
+```shell
+sudo systemctl restart k3s
+```
+
+### 安装 ingress-nginx
+
+安装 ingress-nginx
+
+```shell
+sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
+```
+
+确认 pod 状态：
+
+```shell
+sudo kubectl -n  ingress-nginx get pods
+
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-hptjl        0/1     Completed   0          78s
+ingress-nginx-admission-patch-bg8jr         0/1     Completed   1          78s
+ingress-nginx-controller-7d98bbddbd-5tzh7   1/1     Running     0          78s
+```
+
+查看集群中当前的 ingress 设置：
+
+```shell
+sudo kubectl get ingressclass
+```
+
+### 删除代理
+
+```shell
+sudo rm /etc/systemd/system/k3s.service.env
+sudo systemctl restart k3s
+```
+
+### 注意事项
+
+- [rootless 模式运行 server](https://docs.k3s.io/zh/advanced#%E4%BD%BF%E7%94%A8-rootless-%E6%A8%A1%E5%BC%8F%E8%BF%90%E8%A1%8C-server%E5%AE%9E%E9%AA%8C%E6%80%A7) 比较复杂，不建议使用。
+
+### 运行状态
 
 确认 k3s 服务运行状态 `systemctl status k3s`
 
@@ -77,6 +146,6 @@ sudo cat  /var/lib/rancher/k3s/server/node-token
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://192.168.122.11:6443 K3S_TOKEN=xxxxxx sh -
 ```
 
-## dashboard
+## Next
 
-默认情况下不会部署 Dashboard。安装配置参见 [k8s-dashboard]({{< ref "../k8s-dashboard" >}})
+- 默认情况下不会部署 Dashboard。安装配置参见 [k8s-dashboard]({{< ref "../k8s-dashboard" >}})
