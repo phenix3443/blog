@@ -25,32 +25,41 @@ tags:
 sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
-官方推荐使用[helm 部署](https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard)：
+官方推荐使用[helm 部署](https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard)。
 
 ### 运行状态
 
 ```shell
-sudo kubectl -n  kubernetes-dashboard get pods
+sudo kubectl -n kubernetes-dashboard get pods,svc
 
-NAME                                        READY   STATUS    RESTARTS   AGE
-dashboard-metrics-scraper-7bc864c59-rpzk7   1/1     Running   0          64s
-kubernetes-dashboard-6c7ccbcf87-nmnds       1/1     Running   0          64s
+NAME                                            READY   STATUS    RESTARTS   AGE
+pod/dashboard-metrics-scraper-7bc864c59-rpzk7   1/1     Running   0          107m
+pod/kubernetes-dashboard-6c7ccbcf87-nmnds       1/1     Running   0          107m
+
+NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes-dashboard        ClusterIP   10.43.159.137   <none>        443/TCP    107m
+service/dashboard-metrics-scraper   ClusterIP   10.43.204.81    <none>        8000/TCP   107m
 ```
 
-## NodePort 访问
+## 集群外部访问
 
-默认 dashboard 只能在集群内部访问，为了在集群外部访问，需要将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
+默认 dashboard 只能在集群内部访问，有两种方法支持集群外部访问。
+
+### NodePort
+
+将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
 
 ```shell
 sudo kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
 ```
 
-在服务对应的配置文件中，将 `type: ClusterIP` 修改为 `type: NodePort`，保存文件。
+在服务对应的配置文件中，将 `type: ClusterIP` 修改为 `type: NodePort`。
 
 查看部署状态
 
 ```shell
-kubectl get po,svc -n kubernetes-dashboard
+sudo kubectl -n kubernetes-dashboard get svc,pods
+
 NAME                                             READY   STATUS    RESTARTS         AGE
 pod/dashboard-metrics-scraper-5cb4f4bb9c-s7qn5   1/1     Running   99 (2m27s ago)   22h
 pod/kubernetes-dashboard-6967859bff-gndtg        1/1     Running   83 (2m27s ago)   22h
@@ -64,22 +73,79 @@ service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        4
 
 ![dashboard login](images/token.png)
 
-## Ingress 访问
+### Ingress
 
-通过 ingress-nginx 配置访问：
+[Ingress](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/) 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。可以提供负载均衡、SSL 终结和基于名称的虚拟托管。
 
 {{< gist phenix3443 459b9d083ac6fc0ea2967bdbac0bb1e0 >}}
 
-## 创建示例用户
+```shell
+sudo kubectl apply -f ingress.yaml
+echo "192.168.12.11 k3s" | sudo tee /etc/hosts
+```
 
-为了保护集群数据，默认情况下，Dashboard 会使用最少的 [RBAC](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/) 配置进行部署。我们知道：
+浏览器打开 `http://k3s` 也可以看到登录界面。
+
+#### TLS
+
+可以通过设定包含 TLS 私钥和证书的 Secret 来保护 Ingress。 Ingress 只支持单个 TLS 端口 443，并假定 TLS 连接终止于 Ingress 节点（与 Service 及其 Pod 之间的流量都以明文传输）。
+
+```shell
+sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-ingress-tls --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
+```
+
+{{< gist phenix3443 1b501124b31aff7e9e011e3a8d0f9b23 >}}
+
+```shell
+sudo kubectl apply -f ingress.yaml
+echo "192.168.12.11 k3s-dashboard.example.com" | sudo tee /etc/hosts
+```
+
+浏览器打开 `https://k3s-dashboard.example.com` 也可以看到登录界面。
+
+## 创建用户
+
+我们知道：
 
 - kubernetes 所有的资源都是通过 API 进行访问。
 - 命名空间下的所有资源都是通过 Role 进行授权访问的。
 
-所以 dashboard 需要 通过 apiserver 查询集群的所有信息，必然需要满足对应的[身份认证](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/)需求，这就涉及到了 [ServiceAccount](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/service-accounts-admin/) 相关知识。
+为了保护集群数据，默认情况下，Dashboard 会使用最少的 [RBAC](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/) 配置进行部署。
 
-按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 为 dashboard service 创建管理员(admin-user)服务账户(ServiceAccount)，该服务账号通过 ClusterRoleBinding 到系统的 cluster-admin role 上，进而有权限可以管理集群所有资源。
+```shell
+sudo kubectl -n kubernetes-dashboard get role
+
+NAME                   CREATED AT
+kubernetes-dashboard   2023-06-27T05:25:31Z
+```
+
+可以看到默认只创建了 `kubernetes-dashboard` 这一个角色(role)，该角色也只能管理 kubernetes-dashboard 命名空间内的资源。
+
+```shell
+sudo kubectl -n kubernetes-dashboard describe role kubernetes-dashboard
+
+Name:         kubernetes-dashboard
+Labels:       k8s-app=kubernetes-dashboard
+Annotations:  <none>
+PolicyRule:
+  Resources       Non-Resource URLs  Resource Names                     Verbs
+  ---------       -----------------  --------------                     -----
+  secrets         []                 [kubernetes-dashboard-certs]       [get update delete]
+  secrets         []                 [kubernetes-dashboard-csrf]        [get update delete]
+  secrets         []                 [kubernetes-dashboard-key-holder]  [get update delete]
+  configmaps      []                 [kubernetes-dashboard-settings]    [get update]
+  services/proxy  []                 [dashboard-metrics-scraper]        [get]
+  services/proxy  []                 [heapster]                         [get]
+  services/proxy  []                 [http:dashboard-metrics-scraper]   [get]
+  services/proxy  []                 [http:heapster:]                   [get]
+  services/proxy  []                 [https:heapster:]                  [get]
+  services        []                 [dashboard-metrics-scraper]        [proxy]
+  services        []                 [heapster]                         [proxy]
+```
+
+如果 dashboard 需要通过 apiserver 管理集群就需要满足对应的[身份认证](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/)需求，这就涉及到了 [ServiceAccount](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/service-accounts-admin/) 相关知识。
+
+按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 为 dashboard service 以服务账户(ServiceAccount)方式创建管理员(admin-user)，该服务账号通过 ClusterRoleBinding 到系统的 cluster-admin role 上，进而有权限可以管理集群所有资源。
 
 创建以下资源清单文件：
 
@@ -90,7 +156,7 @@ service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        4
 部署 admin-user 配置：
 
 ```shell
-kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
+kubectl create -f admin-user.yaml -f admin-user-bind.yaml
 ```
 
 当前，Dashboard 仅支持使用 Bearer 令牌登录。获取管理员令牌：
@@ -102,31 +168,3 @@ sudo kubectl -n kubernetes-dashboard create token admin-user
 在浏览器中输入产生的 token ，系统会认为是 admin-user 登录，进而可以操作集群。
 
 ![cluster info](images/cluster-info.png)
-
-## SSL 证书
-
-由于 dashboard 安装时默认生成了证书，所以需要先删除默认证书：
-
-```shell
-sudo kubectl -n kubernetes-dashboard get svc,pods
-```
-
-使用自己的证书重新生成：
-
-```shell
-sudo kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-tls --key panghuli.tech.cf.key --cert panghuli.tech.cf.pem
-```
-
-## 域名访问
-
-通过 NodePort 部署的 service 最终映射到外部的 port 还是具有不确定性，如果手动指定又可能会产生冲突。解决这个问题就需要用到 [ingress](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/)。
-
-- k8s 需要先手动部署[ingress controller](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress-controllers/)
-- k3s 默认安装了[traefik-ingress-controller](https://docs.k3s.io/zh/networking#traefik-ingress-controller)
-
-为 dashboard service 编写一个 ingress。
-
-## 参考
-
-- [a](https://cloudnative.to/blog/general-kubernetes-dashboard/)
-- [b](https://blog.51cto.com/u_1472521/50018740)
