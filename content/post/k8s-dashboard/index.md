@@ -19,7 +19,7 @@ tags:
 
 [Kubernetes Dashboard](https://github.com/kubernetes/dashboard) 是一个通用的、基于 Web 的 Kubernetes 集群的用户界面。它允许用户管理集群中运行的应用程序，并对其进行故障排除，以及管理集群本身。
 
-## 部署
+## Manifest 部署
 
 ```shell
 sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
@@ -41,11 +41,11 @@ service/kubernetes-dashboard        ClusterIP   10.43.159.137   <none>        44
 service/dashboard-metrics-scraper   ClusterIP   10.43.204.81    <none>        8000/TCP   107m
 ```
 
-## 集群外部访问
+### 集群外部访问
 
 默认 dashboard 只能在集群内部访问，有两种方法支持集群外部访问。
 
-### NodePort
+#### NodePort
 
 将 service 从 ClusterIP 改为 NodePort，为此[编辑 kubernetes-dashboard service](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#nodeport)：
 
@@ -73,7 +73,7 @@ service/kubernetes-dashboard        NodePort    10.100.197.19    <none>        4
 
 ![dashboard login](images/token.png)
 
-### Ingress
+#### Ingress
 
 [Ingress](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress/) 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。可以提供负载均衡、SSL 终结和基于名称的虚拟托管。
 
@@ -86,7 +86,7 @@ echo "192.168.12.11 k3s" | sudo tee /etc/hosts
 
 浏览器打开 `http://k3s` 也可以看到登录界面。
 
-#### TLS
+##### TLS
 
 可以通过设定包含 TLS 私钥和证书的 Secret 来保护 Ingress。 Ingress 只支持单个 TLS 端口 443，并假定 TLS 连接终止于 Ingress 节点（与 Service 及其 Pod 之间的流量都以明文传输）。
 
@@ -102,6 +102,15 @@ echo "192.168.12.11 k3s-dashboard.example.com" | sudo tee /etc/hosts
 ```
 
 浏览器打开 `https://k3s-dashboard.example.com` 也可以看到登录界面。
+
+## Helm 部署
+
+```shell
+# Add kubernetes-dashboard repository
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+# Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
+helm install -f values.yaml kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard
+```
 
 ## 创建用户
 

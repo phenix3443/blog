@@ -18,3 +18,5 @@ tags:
 ## 概述
 
 [Helm](https://helm.sh/zh/) 是 kubernetes 的包管理工具。
+
+Helm 安装 charts 到 Kubernetes 集群中，每次安装都会创建一个新的 release。你可以在 Helm 的 chart repositories 中寻找新的 chart。
