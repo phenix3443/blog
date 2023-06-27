@@ -17,9 +17,11 @@ tags:
 
 ## v3 k3s 部署
 
+[树莓派部署 k3s]({{< ref "../k3s-on-raspi" >}})
+
 ## v2 k8s 部署
 
-[树莓派安装 k8s](../build-k8s-with-raspi/)
+[树莓派部署 k8s]({{< ref "../k8s-on-raspi" >}})
 
 ## v1 docker compose 部署
 

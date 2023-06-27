@@ -95,8 +95,6 @@ tags:
 
 - NUC 通过 wlan 唤醒的方式，使用 Microsoft Remote Desktop 工具进行远程访问
 
-![Network topology](images/network-topology.drawio.svg)
-
 ## 业务架构
 
 ![arch](images/arch.drawio.svg)
