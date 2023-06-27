@@ -148,4 +148,4 @@ curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIR
 
 ## Next
 
-- 默认情况下不会部署 Dashboard。安装配置参见 [k8s-dashboard]({{< ref "../k8s-dashboard" >}})
+- [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k3s 不会部署 Dashboard，可以安装来管理集群。

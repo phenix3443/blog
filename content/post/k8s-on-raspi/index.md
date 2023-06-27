@@ -406,16 +406,6 @@ sudo systemctl restart kubelet
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 ```
 
-## 部署和访问 Kubernetes 仪表板（Dashboard）
+## Next
 
-[官方指南](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/)
-
-### 部署 Dashboard UI
-
-默认情况下不会部署 Dashboard。安装配置参见 [k8s-dashboard]({{< ref "../k8s-dashboard" >}})
-
-## 参考
-
-- [搭建一个基于 containerd 的高可用 Kubernetes 集群](https://www.rondochen.com/build-your-own-k8s-cluster/)
-- [https://blog.haohtml.com/archives/32728](https://blog.haohtml.com/archives/32728)
-- [手把手教大家使用树莓派 4B 搭建 K8s 集群](https://zhuanlan.zhihu.com/p/390805379)
+- [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k8s 不会部署 Dashboard，可以安装来管理集群。

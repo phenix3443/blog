@@ -168,3 +168,7 @@ sudo kubectl -n kubernetes-dashboard create token admin-user
 在浏览器中输入产生的 token ，系统会认为是 admin-user 登录，进而可以操作集群。
 
 ![cluster info](images/cluster-info.png)
+
+## Next
+
+- [helm]({{< ref "../helm" >}})
