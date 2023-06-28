@@ -36,4 +36,4 @@ Github 通过 [project](https://docs.github.com/en/issues/trying-out-the-new-pro
 
 ## 代理
 
-[ghproxy](https://ghproxy.com/)
+- [ghproxy](https://ghproxy.com/) github 代理，可用于临时下载 github 文件。
