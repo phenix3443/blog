@@ -1,7 +1,7 @@
 ---
 title: "Github Actions"
-slug: use-github-actions
-description: Github CI/CD Tools
+description: 使用 Github Action 进行持续集成
+slug: github-actions
 date: 2022-06-21T15:57:20+08:00
 image:
 math:

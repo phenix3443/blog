@@ -1,8 +1,8 @@
 ---
-title: "Github Best Practices"
-description: 记录 Github 最佳实践
+title: "github pieces"
+description: Github 使用记录
+slug: github-pieces
 date: 2022-06-28T01:50:36+08:00
-slug: github-best-practices
 image:
 math:
 license:
@@ -11,7 +11,6 @@ comments: true
 draft: false
 categories:
   - github
-  - best-practices
 tags:
 ---
 
@@ -34,3 +33,7 @@ Github 通过 [project](https://docs.github.com/en/issues/trying-out-the-new-pro
 ## badges
 
 [shileds](https://github.com/badges/shields) 用来在添加仓库的各种展示图标，如编译情况，代码覆盖率等。
+
+## 代理
+
+[ghproxy](https://ghproxy.com/)
