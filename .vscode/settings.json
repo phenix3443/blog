@@ -33,6 +33,7 @@
     "MIPI",
     "Mofi",
     "netfilter",
+    "nftables",
     "nmnds",
     "Ralf",
     "rhyirdmiq",
@@ -45,6 +46,7 @@
     "Taiwo",
     "Tigera",
     "tmpfs",
+    "tpclash",
     "vxlan",
     "zcash"
   ]
