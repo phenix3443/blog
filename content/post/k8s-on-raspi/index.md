@@ -182,7 +182,7 @@ pause_image="registry.aliyuncs.com/google_containers/pause:3.9"
 启动 service
 
 ```shell
-systemctl enable crio && systemctl start crio
+systemctl enable --now crio
 ```
 
 ### docker
@@ -202,7 +202,7 @@ install -o root -g root -m 0755 cri-dockerd /usr/local/bin/cri-dockerd
 install packaging/systemd/* /etc/systemd/system
 sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
 systemctl daemon-reload
-systemctl enable cri-docker.service
+systemctl enable --now cri-docker.service
 systemctl enable --now cri-docker.socket
 ```
 
@@ -392,8 +392,7 @@ kubeadm join 192.168.122.12:6443 --token knao8f.3y0su********iq --discovery-toke
 最后, 考虑到集群宕机自愈的问题, 还需要设置 kubelet 服务开机自动启动:
 
 ```shell
-sudo systemctl enable kubelet
-sudo systemctl restart kubelet
+sudo systemctl enable --now kubelet
 ```
 
 ## kubectl

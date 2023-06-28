@@ -89,6 +89,8 @@ tags:
   sudo systemctl restart wpa_supplicant@wlan0.service
   ```
 
+  关于 systemd unit 文件的编写参见[systemd 使用单元](https://wiki.archlinuxcn.org/wiki/Systemd?rdfrom=https%3A%2F%2Fwiki.archlinux.org%2Findex.php%3Ftitle%3DSystemd_%28%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587%29%26redirect%3Dno#.E7.BC.96.E5.86.99.E5.8D.95.E5.85.83.E6.96.87.E4.BB.B6)。
+
 - 通过命令 `wpa_cli` 添加网络，wpa_cli 使用详见[wpa_cli](https://man.archlinux.org/man/wpa_cli.8)：
 
   `wpa_cli`启动后会显示一个交互提示符 (`>`)，同时带有 tab 补全及命令描述功能。

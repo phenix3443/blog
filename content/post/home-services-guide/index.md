@@ -81,13 +81,7 @@ tags:
 
 ## 家庭网络拓扑
 
-- 为了可互联网访问家庭网络，使用 Cloudflare tunnel 进行内网穿透，注意启动服务
-
-  ```shell
-  sudo systemctl enable cloudflared
-  sudo systemctl restart cloudflared
-  ```
-
+- 为了可互联网访问家庭网络，使用 Cloudflare tunnel 进行内网穿透，注意使用 `svc.sh` 脚本安装并启动服务。
 - 三台 raspi 为了达到通电可用的目的：
 
   - 设置好 SSH 后通电即可使用。
