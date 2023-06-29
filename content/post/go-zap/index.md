@@ -1,7 +1,7 @@
 ---
 title: "zap"
-slug: zap-logging
-description:
+description: go 日志工具 -- zap
+slug: go-zap
 date: 2022-07-06T20:45:04+08:00
 image:
 math:
@@ -10,8 +10,9 @@ hidden: false
 comments: true
 draft: false
 categories:
-  - golang
+  - go
 tags:
+  - log
   - zap
 ---
 

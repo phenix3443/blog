@@ -1,11 +1,11 @@
 ---
-title: "linting golang"
+title: "go lint"
+description: go 格式检查工具
+slug: go-lint
 date: 2022-07-12T14:05:21+08:00
-lastmod: 2022-07-12T14:05:21+08:00
-slug: linting-golang
 draft: false
 categories:
-  - golang
+  - go
 tags:
   - lint
 ---
@@ -71,4 +71,6 @@ golangci-lint 支持多种 linter，具体应该选择应该根据项目而定�
 
 {{< gist phenix3443 e02515ea525fa50ec8e26ab303f2acaa >}}
 
-[^1]: [A guide to linting Go programs](https://freshman.tech/linting-golang/)
+## 参考
+
+- [A guide to linting Go programs](https://freshman.tech/linting-golang/)

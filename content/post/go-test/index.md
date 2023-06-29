@@ -1,6 +1,6 @@
 ---
 title: "go test"
-description: how to do unittest in golang
+description: 进行 go 代码测试
 slug: go-test
 date: 2022-07-15T15:08:52+08:00
 image:
@@ -10,9 +10,9 @@ hidden: false
 comments: true
 draft: false
 categories:
-  - golang
+  - go
 tags:
-  - unittest
+  - test
 ---
 
 ## 概述
