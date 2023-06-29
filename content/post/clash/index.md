@@ -104,6 +104,19 @@ TPClash 启动成功后, 当前机器的透明代理就搭建完成了。
 
 ![clashx-tune](images/clashx-tun.png)
 
+### clash for windows
+
+[CFW](https://docs.cfw.lbyczf.com/) 是 Clash 的 Windows/macOS/Linux 图形客户端，相比 clashx，更具跨平台性，也更加可配置。
+
+#### 配置说明
+
+CFW 启动的过程会使用到两个配置文件，分别是：
+
+- ${Home}/config.yaml 该文件是 Clash 的启动文件，如果此文件有错，则 Clash 核心将无法启动。
+- ${Home}/profiles/xxxx.yaml，该目录下的文件均由用户导入，CFW 统一生成的，一般命名为时间戳。该目录下的文件不建议添加 `tun/dns/hosts` 等字段。
+
+配置加载过程参见[官方说明](https://docs.cfw.lbyczf.com/contents/configfile.html#%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B)。
+
 ## 参考
 
 - [Linux Tun/Tap 介绍](https://www.zhaohuabing.com/post/2020-02-24-linux-taptun/)
