@@ -129,6 +129,8 @@ Operating System: Ubuntu 22.04.2 LTS
 - [树莓派 99%的故障来自于 5V 电源](http://www.shumeipai.net/thread-13938-1-1.html)。
 - [《树莓派实战秘籍》——1.9 　技巧 09 解决电源问题](https://developer.aliyun.com/article/98470)
 
+实际使用的时候发现华为 66W/6A 的快充可以持续稳定的给 SSD/移动硬盘供电，电压一直保持在 5V 以上，非华为原装充电器电压会低于树莓派的规定电压。
+
 ### 关机
 
 不要直接拔电源关机或重启，先关闭操作系统。
