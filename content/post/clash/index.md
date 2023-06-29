@@ -57,6 +57,8 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 
 ## 透明代理
 
+### 配置
+
 [TProxy](https://liqiang.io/post/tproxy-in-linux) 是 Linux 一种用于支持透明代理的，常见的实现方式是[iptables](https://liqiang.io/post/dive-in-iptables)以及 nftables。
 
 clash 与透明代理相关的配置：
@@ -70,6 +72,8 @@ TPClash 配置：
 
 {{< gist phenix3443 b619938d79dec3451c72889eda2e4079 >}}
 
+### 开机启动
+
 TPClash 通过 systemd 进行管理：
 
 {{< gist phenix3443 ad7c24c63a17afd0b55bff615ed02521 >}}
@@ -78,7 +82,27 @@ TPClash 通过 systemd 进行管理：
 
 TPClash 启动成功后, 当前机器的透明代理就搭建完成了。
 
-其他主机可以将其网关指向当前 TPClash 服务器 IP 即可实现透明代理；对于其他主机请使用默认路由器 IP 或者类似 114 等公共 DNS 作为主机 DNS。 请不要将其他主机的 DNS 也设置为 TPClash 服务器 IP, 因为当前 Clash 可能并未监听 53 端口（上面的配置中设置的是 1053）。
+### 其他
+
+在本机开启透明代理的请情况下：
+
+- 其他主机可以将其网关指向当前 TPClash 服务器 IP 即可实现透明代理；对于其他主机请使用默认路由器 IP 或者类似 114 等公共 DNS 作为主机 DNS。 请不要将其他主机的 DNS 也设置为 TPClash 服务器 IP, 因为当前 Clash 可能并未监听 53 端口（上面的配置中设置的是 1053）。
+
+- 浏览器中的 Proxy SwitchyOmega 可以禁用或设置为 Direct 模式。
+
+## 客户端
+
+### clashx
+
+可以通过 icloud 保存配置文件，方便在多个 apple 终端同步同步。`Settings`->`Use iCloud to store config files`
+
+使用下面的配置文件：
+
+{{< gist phenix3443 133cecbdf5ade2c819b32d84021a6a30 >}}
+
+启动 enhanced-mode，生效如下：
+
+![clashx-tune](images/clashx-tun.png)
 
 ## 参考
 
