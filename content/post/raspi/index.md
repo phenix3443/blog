@@ -131,6 +131,8 @@ Operating System: Ubuntu 22.04.2 LTS
 
 实际使用的时候发现华为 66W/6A 的快充可以持续稳定的给 SSD/移动硬盘供电，电压一直保持在 5V 以上，非华为原装充电器电压会低于树莓派的规定电压。
 
+可以通过华为官网[保修期及权益查询](https://consumer.huawei.com/cn/support/warranty-query/) 查询闲鱼淘的充电器是否原装。
+
 ### 关机
 
 不要直接拔电源关机或重启，先关闭操作系统。
