@@ -144,11 +144,21 @@ sudo systemctl restart systemd-resolved
 
 #### DNS
 
+同样添加 systemd-resolved 服务的配置：
+
 {{< gist phenix3443 80101f7cea29d14f6d237df8738dc3c1 >}}
 
 #### 默认网关
 
+通过 `ip route` 命令临时添加网关，注意该方法重启失效：
+
 {{< gist phenix3443 c95539f6de911c7d3b0c15b113d8700b >}}
+
+当前 ubuntu 系统使用 [netplan](https://linux.fasionchan.com/zh_CN/latest/administration/network/netplan.html) 设置网络，想要永久生效，需要做如下修改：
+
+{{< gist phenix3443 9a6f47ddf4582a4fc354343a2657d447 >}}
+
+执行`sudo netplan apply`生效。注意：`/etc/netplan/` 下的文件名可能不一样。
 
 ## 客户端
 

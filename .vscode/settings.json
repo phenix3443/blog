@@ -44,6 +44,7 @@
     "MIPI",
     "Mofi",
     "netfilter",
+    "netplan",
     "nftables",
     "nmnds",
     "nslookup",
