@@ -1,6 +1,6 @@
 ---
-title: "Clash"
-description: 使用 clash 搭建透明代理
+title: "clash"
+description: clash 使用记录
 slug: clash
 date: 2023-06-28T08:53:53+08:00
 image:
@@ -20,7 +20,7 @@ tags:
 [Clash](https://github.com/Dreamacro/clash) 是一款网络代理工具。阅读本文前请先阅读[官方文档](https://dreamacro.github.io/clash/configuration/introduction.html)，本文主要涉及：
 
 - 官方文档中容易忽略的事项以及周边技术资料。
-- 如何使用 TPClash 搭建透明代理。
+- 如何使用 TPClash 搭建局域网内的透明代理。
 
 ## 代理服务器
 
