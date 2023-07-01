@@ -82,13 +82,73 @@ TPClash 通过 systemd 进行管理：
 
 TPClash 启动成功后, 当前机器的透明代理就搭建完成了。
 
-### 其他
+## 局域网网关
 
-在本机开启透明代理的请情况下：
+### 路由转发
 
-- 其他主机可以将其网关指向当前 TPClash 服务器 IP 即可实现透明代理；对于其他主机请使用默认路由器 IP 或者类似 114 等公共 DNS 作为主机 DNS。 请不要将其他主机的 DNS 也设置为 TPClash 服务器 IP, 因为当前 Clash 可能并未监听 53 端口（上面的配置中设置的是 1053）。
+该主机要作为局域网内的网关，需要开启 kernel 路由转发功能：
 
-- 浏览器中的 Proxy SwitchyOmega 可以禁用或设置为 Direct 模式。
+临时开启：
+
+```shell
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
+永久生效需要编辑 `/etc/sysctl.conf` 文件中的相关字段。
+
+### DNS 劫持
+
+如果操作系统通过 [systemd-resolved](https://wiki.archlinux.org/title/systemd-resolved) 管理本地 DNS 解析，比如 Ubuntu，还需要做如下设置，否则可以跳过下面的配置。
+
+首先通过 [resolvectl](http://www.jinbuguo.com/systemd/resolvectl.html) 查看当前的 dns 设置。
+
+{{< gist phenix3443 e372a18662b3796221db0626a0f4981b >}}
+
+查看 github.com 的域名解析：
+
+{{< gist phenix3443 ed4ae8a7bbe09c63b709357e19fb022a >}}
+
+可以 github.com 通过本地 127.0.0.53 这个虚拟 DNS 服务器解析为公网地址，不是 clash 劫持 DNS 后分配的地址（198.18.x.x）。
+
+为使配置中的 DNS 劫持生效，需要给 systemd-resolved 服务添加公网 DNS 设置：
+
+```shell
+sudo mkdir /etc/systemd/resolved.conf.d
+sudo vim /etc/systemd/resolved.conf.d/clash.conf
+```
+
+{{< gist phenix3443 55abd84255eb54e8003a72ee1d6e1ae4 >}}
+
+重启服务：
+
+```shell
+sudo systemctl restart systemd-resolved
+```
+
+再次系统 DNS 配置：
+
+{{< gist phenix3443 2a274d3f1acfff3f30780540315c3d2a >}}
+
+再次查看 github 域名解析：
+
+{{< gist phenix3443 5e8b8d8d1d8fcb32c29ef84369ccb2ba >}}
+
+看到对应的域名解析已经变为`198.18.0.8`，说明 clash 配置的 DNS 劫持已经生效。
+
+### 其他主机设置
+
+其他主机可以通过两个步骤使用透明代理：
+
+- 使用 TPClash 服务器 IP 作为网关。
+- 使用 TPClash 服务器 IP 作为 DNS 服务器。
+
+#### DNS
+
+{{< gist phenix3443 80101f7cea29d14f6d237df8738dc3c1 >}}
+
+#### 默认网关
+
+{{< gist phenix3443 c95539f6de911c7d3b0c15b113d8700b >}}
 
 ## 客户端
 
