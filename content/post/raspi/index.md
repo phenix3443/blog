@@ -76,7 +76,15 @@ tags:
 
 ### raspi-config
 
-[raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config) 是 Raspberry Pi 配置工具，最初由 Alex Bradbury 编写。
+[raspi-config](https://www.raspberrypi.com/documentation/computers/configuration.html#raspi-config) 可以配置 Raspberry Pi 的视频、启动引导顺序等方面。
+
+### rpi-eeprom
+
+更新系统引导程序：
+
+```shell
+sudo rpi-eeprom-update
+```
 
 ## 实际使用
 
@@ -129,7 +137,7 @@ Operating System: Ubuntu 22.04.2 LTS
 - [树莓派 99%的故障来自于 5V 电源](http://www.shumeipai.net/thread-13938-1-1.html)。
 - [《树莓派实战秘籍》——1.9 　技巧 09 解决电源问题](https://developer.aliyun.com/article/98470)
 
-实际使用的时候发现华为 66W/6A 的快充可以持续稳定的给 SSD/移动硬盘供电，电压一直保持在 5V 以上，非华为原装充电器电压会低于树莓派的规定电压。
+实际使用的时候发现华为 66W/6A 的快充可以持续稳定的给 SSD/移动硬盘供电，电压一直保持在 5V 以上，非华为原装充电器电压会低于树莓派的规定电压，而且只有`HW-110600C00` 这个型号可以， `HW-110600C02` 都不可以。
 
 可以通过华为官网[保修期及权益查询](https://consumer.huawei.com/cn/support/warranty-query/) 查询闲鱼淘的充电器是否原装。
 
