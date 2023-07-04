@@ -98,19 +98,33 @@ sudo sysctl -w net.ipv4.ip_forward=1
 
 ### DNS 劫持
 
-如果操作系统通过 [systemd-resolved](https://wiki.archlinux.org/title/systemd-resolved) 管理本地 DNS 解析，比如 Ubuntu，还需要做如下设置，否则可以跳过下面的配置。
+如果 clash 的 DNS 劫持没有生效，可能需要系统默认的 DNS 配置。
 
-首先通过 [resolvectl](http://www.jinbuguo.com/systemd/resolvectl.html) 查看当前的 dns 设置。
+#### 确认没有生效
+
+可以通过 [resolvectl](http://www.jinbuguo.com/systemd/resolvectl.html) 查看当前的 dns 设置。
 
 {{< gist phenix3443 e372a18662b3796221db0626a0f4981b >}}
 
-查看 github.com 的域名解析：
+可以看到当前默认的 DNS 是路由器下发的 192.168.122.1。
+
+也可以查看 github.com 的域名解析：
 
 {{< gist phenix3443 ed4ae8a7bbe09c63b709357e19fb022a >}}
 
 可以 github.com 通过本地 127.0.0.53 这个虚拟 DNS 服务器解析为公网地址，不是 clash 劫持 DNS 后分配的地址（198.18.x.x）。
 
-为使配置中的 DNS 劫持生效，需要给 systemd-resolved 服务添加公网 DNS 设置：
+为使配置中的 DNS 劫持生效，这里有两种方法修改 DNS 配置：
+
+#### netplan
+
+如果系统使用 netplan 管理网络，在配置文件中添加 nameservers 相关设置。推荐使用 netplan 管理网络设置。
+
+{{< gist phenix3443 3df45d7c8d86c5a91bd38e65068e91a2 >}}
+
+#### resolved
+
+如果没有使用 netplan 管理网络，修改系统 [systemd-resolved](https://wiki.archlinux.org/title/systemd-resolved)，可以如下设置：
 
 ```shell
 sudo mkdir /etc/systemd/resolved.conf.d
@@ -125,7 +139,9 @@ sudo vim /etc/systemd/resolved.conf.d/clash.conf
 sudo systemctl restart systemd-resolved
 ```
 
-再次系统 DNS 配置：
+#### 确认生效
+
+查看系统 DNS 配置：
 
 {{< gist phenix3443 2a274d3f1acfff3f30780540315c3d2a >}}
 
@@ -142,23 +158,11 @@ sudo systemctl restart systemd-resolved
 - 使用 TPClash 服务器 IP 作为网关。
 - 使用 TPClash 服务器 IP 作为 DNS 服务器。
 
-#### DNS
-
-同样添加 systemd-resolved 服务的配置：
-
-{{< gist phenix3443 80101f7cea29d14f6d237df8738dc3c1 >}}
-
-#### 默认网关
-
-通过 `ip route` 命令临时添加网关，注意该方法重启失效：
-
-{{< gist phenix3443 c95539f6de911c7d3b0c15b113d8700b >}}
-
-当前 ubuntu 系统使用 [netplan](https://linux.fasionchan.com/zh_CN/latest/administration/network/netplan.html) 设置网络，想要永久生效，需要做如下修改：
+使用 [netplan](https://linux.fasionchan.com/zh_CN/latest/administration/network/netplan.html) 可以通过编辑`/etc/netplan/`下的配置文件设置 DNS 和默认网关：
 
 {{< gist phenix3443 9a6f47ddf4582a4fc354343a2657d447 >}}
 
-执行`sudo netplan apply`生效。注意：`/etc/netplan/` 下的文件名可能不一样。
+执行`sudo netplan apply`生效。
 
 ## 客户端
 
