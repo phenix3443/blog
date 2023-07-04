@@ -55,7 +55,9 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y linux-modules-extra-raspi
 ```
 
-## 部署 sever
+## 部署
+
+### 安装 server
 
 参考 [快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
 
@@ -70,9 +72,27 @@ sudo apt install -y linux-modules-extra-raspi
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
-### 设置代理
+### 设置 kubeconfig
 
-[nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/) 启动的 pods 需要从国内无法访问的 `registry.k8s.io` 拉取镜像，给 containerd 临时配置[配置 HTTP 代理](https://docs.k3s.io/zh/advanced#%E9%85%8D%E7%BD%AE-http-%E4%BB%A3%E7%90%86) 可以解决该问题。
+为当前用户设置 kubeconfig，这个配置虽然不会被 k3s 安装的 kubectl 用到，但是下面的 helm 会用到。
+
+```shell
+mkdir -p $HOME/.kube
+sudo cp -i /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### 安装 helm
+
+{{< gist phenix3443 9122aa42bd7e012f667234d3d5042bf2 >}}
+
+关于 helm 参与[使用 helm 管理 kubernetes 应用]({{< ref "../helm" >}})
+
+### 部署 ingress-nginx
+
+#### 设置代理
+
+[nginx-ingress](https://kubernetes.github.io/ingress-nginx/) 启动的 pods 需要从国内无法访问的 `registry.k8s.io` 拉取镜像，给 containerd 临时配置[配置 HTTP 代理](https://docs.k3s.io/zh/advanced#%E9%85%8D%E7%BD%AE-http-%E4%BB%A3%E7%90%86) 可以解决该问题。
 
 ```shell
 # cat /etc/systemd/system/k3s.service.env
@@ -87,32 +107,23 @@ CONTAINERD_NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
 sudo systemctl restart k3s
 ```
 
-### 安装 ingress-nginx
+#### 安装 ingress-nginx
 
-安装 ingress-nginx
-
-```shell
-sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.0/deploy/static/provider/cloud/deploy.yaml
-```
-
-确认 pod 状态：
+按照[官方文档](https://kubernetes.github.io/ingress-nginx/deploy/)安装，这里我们选择使用 helm 安装。
 
 ```shell
-sudo kubectl -n  ingress-nginx get pods
-
-NAME                                        READY   STATUS      RESTARTS   AGE
-ingress-nginx-admission-create-hptjl        0/1     Completed   0          78s
-ingress-nginx-admission-patch-bg8jr         0/1     Completed   1          78s
-ingress-nginx-controller-7d98bbddbd-5tzh7   1/1     Running     0          78s
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 ```
 
-查看集群中当前的 ingress 设置：
+确认部署结果：
 
-```shell
-kubectl get ingressclass
-```
+{{< gist phenix3443 2404bdd045dfad3b2614cbd9db38d25c >}}
 
-### 删除代理
+#### 删除代理
+
+如果之前给 containerd 安装了代理，最好删掉，避免影响服务。
 
 ```shell
 sudo rm /etc/systemd/system/k3s.service.env
