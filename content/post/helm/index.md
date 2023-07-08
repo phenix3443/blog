@@ -53,6 +53,7 @@ helm pull kubernetes-dashboard/kubernetes-dashboard -untar=true
 ## 调试模板
 
 - helm lint 是验证 chart 是否遵循最佳实践的首选工具。[Helm Intellisense](https://marketplace.visualstudio.com/items?itemName=Tim-Koehler.helm-intellisense) 是 vscode 的扩展。
+
 - helm template --debug 在本地测试渲染 chart 模板。
 - helm install --dry-run --debug：我们已经看到过这个技巧了，这是让服务器渲染模板的好方法，然后返回生成的清单文件。
 - helm get manifest: 这是查看安装在服务器上的模板的好方法。

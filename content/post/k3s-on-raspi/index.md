@@ -152,8 +152,21 @@ sudo systemctl restart k3s
 
 按照[快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
 
+安装依赖
+
 ```shell
-sudo cat  /var/lib/rancher/k3s/server/node-token
+sudo apt install -y linux-modules-extra-raspi
+```
+
+查找 agent-token:
+
+```shell
+sudo cat  /var/lib/rancher/k3s/server/agent-token
+```
+
+加入集群
+
+```shell
 
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://192.168.122.11:6443 K3S_TOKEN=xxxxxx sh -
 ```
