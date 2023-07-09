@@ -174,3 +174,4 @@ curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIR
 ## Next
 
 - [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k3s 不会部署 Dashboard，可以安装来管理集群。
+- [如何使用 longhorn 构建分布式存储]({{< ref "../longhorn" >}})，通过 longhorn 将磁盘资源进行整合。

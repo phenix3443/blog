@@ -408,3 +408,4 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 ## Next
 
 - [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k8s 不会部署 Dashboard，可以安装来管理集群。
+- [树莓派部署 k3s 构建 kubernetes 集群]({{< ref "../k3s-on-raspi" >}})。k3s 更适合树莓派这种低性能设备。

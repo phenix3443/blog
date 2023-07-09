@@ -57,3 +57,7 @@ helm pull kubernetes-dashboard/kubernetes-dashboard -untar=true
 - helm template --debug 在本地测试渲染 chart 模板。
 - helm install --dry-run --debug：我们已经看到过这个技巧了，这是让服务器渲染模板的好方法，然后返回生成的清单文件。
 - helm get manifest: 这是查看安装在服务器上的模板的好方法。
+
+## Next
+
+- 目前的云平台部署都需要付费，可以学习[如何在 Raspi 上部署 k8s 集群]({{< ref "../k8s-on-raspi" >}})。
