@@ -24,8 +24,9 @@ tags:
 
 按照[官方指南](https://longhorn.io/docs/1.4.2/deploy/install/install-with-helm/) 可以很顺利的进行安装。
 
-因为要集群外部访问，定义 ingress：
+{{< gist phenix3443 94c598c1a80738ab343bb98a1669bf82 >}}
 
-{{< gist phenix3443 4e60d32e1df2aa10a93d10efb99969a9 >}}
+- 为了节省磁盘空间只开启 2 个 replica 。
+- 需要集群外访问可以开启 ingress。
 
 ## 配置
