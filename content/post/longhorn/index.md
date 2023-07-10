@@ -29,4 +29,14 @@ tags:
 - 为了节省磁盘空间只开启 2 个 replica 。
 - 需要集群外访问可以开启 ingress。
 
-## 配置
+## 实践
+
+将 longhorn 作为 mysql 的持久存储：
+
+{{< gist phenix3443 d0e1ef1adefd08c404880efba93b5401 >}}
+
+如果 mysql 反复重启，可以尝试增加了几个 probe 的 initDelay 来解决。
+
+{{< gist phenix3443 7924a5991a8fad601854fb3766dfeeb9 >}}
+
+可以根据提示来来创建客户端，连接 mysql 数据库。
