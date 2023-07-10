@@ -93,7 +93,10 @@ tags:
 
 ![arch](images/arch.drawio.svg)
 
-- raspi 上面的服务通过 GitHub action 进行部署.
+- [raspi 4b 组成集群]({{< ref "../raspi" >}})作为硬件支撑.
+- [clash]{{< ref "../clash" >}} 搭建透明代理，处理整个家庭的网络，解决部署过程中的镜像问题。
+- 通过 [kubernetes]({{< ref "../k3s-on-raspi" >}}) 管理服务。
+- [longhorn]({{< ref "../longhorn" >}}) 将 raspi 的硬盘资源在 k8s 池化。
 - collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
 
 ## 进度
