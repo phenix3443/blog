@@ -35,22 +35,22 @@ brew install minikube
 
 需要直接使用代理，可以参考[使用 clash 设置透明代理]({{< ref "../clash" >}})
 
-启动集群
+启动有三个 Node 的集群，同时启用插件 dashboard：
 
-![minikube start](images/start.png)
+```shell
+minikube start --addons=metrics-server,dashboard  --nodes=3
+```
+
+{{< gist phenix3443 c3a7dd5d71a109eef5d847565cd75cbe >}}
 
 该命令会在 kubectl 的配置文件(`${HOME}/.kube/config`)中添加 minikube 相关的信息，并将 current-context 设置为 minikube，方便进一步做测试。
 
-![change kubeconfig](images/change-kubeconfig.png)
+{{< gist phenix3443 8ae2e396ab86859bc7202ccd9d52cf92 >}}
 
 ### 查看集群信息
 
 查看一下当前集群信息：
 ![cluster info](images/cluster-info.png)
-
-当前已经部署的 pods：
-
-![get pods](images/get-pods.png)
 
 ### 启动控制面板
 
@@ -89,7 +89,5 @@ minikube service kubernetes-dashboard -n kubernetes-dashboard
 minikube 内置了可以轻松部署的应用程序和服务列表，例如 Istio 或 Ingress。
 
 ```shell
-minikube addons enable metrics-server
 minikube addons enable ingress
-minikube addons enable dashboard
 ```
