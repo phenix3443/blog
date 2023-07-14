@@ -40,3 +40,7 @@ tags:
 {{< gist phenix3443 7924a5991a8fad601854fb3766dfeeb9 >}}
 
 可以根据提示来来创建客户端，连接 mysql 数据库。
+
+## Next
+
+- [通过 prometheus 监控集群状态]({{< ref "../prometheus" >}})

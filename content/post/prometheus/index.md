@@ -1,6 +1,6 @@
 ---
-title: "prometheus & grafana"
-description: 使用 Prometheus & grafana 进行数据可视化
+title: "prometheus"
+description: 使用 Prometheus 监控系统
 slug: prometheus
 date: 2023-07-11T21:46:43+08:00
 image:
@@ -8,24 +8,23 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 categories:
   - monitor
 tags:
   - prometheus
-  - grafana
 ---
 
-## Prometheus
+## 概述
 
 [prometheus](https://prometheus.io/docs/introduction/overview/)
 
-{{< gist phenix3443 03617913d6d8d1577a202a91c9921c80>}}
+### 部署
 
 ```shell
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts &&
     helm repo update &&
-    helm upgrade prometheus prometheus-community/prometheus -f prometheus/values.yaml --install
+    helm upgrade prometheus prometheus-community/prometheus -f prometheus/values.yaml --install --namespace monitor --create-namespace
 ```
 
 浏览器打开:
@@ -34,18 +33,12 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 kubectl port-forward services/prometheus-server 6789:80
 ```
 
-## Grafana
+{{< gist phenix3443 03617913d6d8d1577a202a91c9921c80>}}
 
-{{< gist phenix3443 5cad23af76232780c8141e9a9c5bec66 >}}
+## 参考
 
-```shell
-helm repo add grafana https://grafana.github.io/helm-charts &&
-    helm repo update &&
-    helm upgrade grafana grafana/grafana -f grafana/values.yaml --install
-```
+- [prometheus book](https://yunlzheng.gitbook.io/prometheus-book/)
 
-浏览器打开：
+## Next
 
-```shell
-kubectl port-forward services/grafana 6789:80
-```
+- [使用 grafana 进行数据可视化]({{< ref "../grafana" >}})
