@@ -124,7 +124,7 @@ Targets 页面查看当前所有的监控任务（定义在[configuration]({{< r
 
 ## PromQL{#PromQL}
 
-Prometheus Server 对外提供了自定义的 PromQL 语言，实现对数据的查询以及分析。
+PromQL 是 Prometheus 内置的数据查询语言，其提供对时间序列数据丰富的查询，聚合以及逻辑运算能力的支持。并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。可以这么说，PromQL 是 Prometheus 所有应用场景的基础，理解和掌握 PromQL 是 Prometheus 入门的第一课。
 
 ## 配置{#config}
 
