@@ -34,3 +34,7 @@ helm repo add grafana https://grafana.github.io/helm-charts &&
 ```shell
 kubectl port-forward services/grafana 6789:80
 ```
+
+## Dashboard
+
+[共享 dashboard](https://grafana.com/grafana/dashboards/)
