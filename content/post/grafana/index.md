@@ -17,6 +17,8 @@ tags:
 
 ## 概述
 
+[grafana](https://grafana.com/docs/grafana/latest/)
+
 ## 部署
 
 {{< gist phenix3443 5cad23af76232780c8141e9a9c5bec66 >}}
