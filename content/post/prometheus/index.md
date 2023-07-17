@@ -130,13 +130,13 @@ Targets 页面查看当前所有的监控任务（定义在[configuration]({{< r
 
 Prometheus Server 可以通过静态配置管理监控目标，也可以配合使用 Service Discovery 的方式动态管理监控目标，并从这些监控目标中获取数据。
 
-### Job
+具体配置参考 [Configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
 
-### Instance
+编辑好的配置可以通过 promtool 工具检查：
 
-静态定义 vs 服务发现
-
-### reload
+```shell
+promtool check rules /path/to/example.rules.yml
+```
 
 ## 高级
 
