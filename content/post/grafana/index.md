@@ -40,3 +40,11 @@ kubectl port-forward services/grafana 6789:80
 ## Dashboard
 
 [共享 dashboard](https://grafana.com/grafana/dashboards/)
+
+## 树莓派监控
+
+![raspi](images/raspi.png)
+
+## k3s 监控
+
+## Next
