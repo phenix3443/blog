@@ -166,9 +166,21 @@ Alertmanager 可处理 Prometheus 服务器等客户端应用程序发送的警�
 
 #### route
 
+route 用来对告警进行分组设置
+
 #### template
 
 详见[template](https://prometheus.io/docs/alerting/latest/notifications/)
+
+### web UI
+
+alertmanager 也有一个 web 页面：
+
+```shell
+kubectl port-forward services/prometheus-alertmanager 6789:9093
+```
+
+![alertmanager ui](images/alertmanager.png)
 
 ## WEB UI
 
