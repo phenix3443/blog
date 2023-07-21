@@ -17,7 +17,7 @@ tags:
 
 ## 概述
 
-[prometheus](https://prometheus.io/docs/introduction/overview/) 是目前 kubernetes 监控的事实标准。
+[prometheus](https://prometheus.io/docs/introduction/overview/) 是一个开源的系统和服务的监控系统。它周期性采集 metrics 指标，匹配规则和展示结果，以及触发某些条件的告警发送。
 
 ## 时间序列
 
@@ -29,7 +29,7 @@ prometheus 使用的数据模型是[时间序列（time series）](https://prome
 
 ### metric
 
-每个时间序列都由其 metric name 以及一组 labels 构成唯一标识。
+每个时间序列都由其 metric 以及 label 集合构成唯一标识。
 
 metric 的[类型](https://prometheus.io/docs/concepts/metric_types/)有：
 
@@ -46,7 +46,7 @@ metric 发生的时间。
 
 所有 metric 取值都是 float64 类型。
 
-## 部署
+## 部署{#deploy}
 
 可以通过 helm 安装到 k8s 集群。
 
@@ -163,6 +163,8 @@ Alertmanager 可处理 Prometheus 服务器等客户端应用程序发送的警�
 ### 配置
 
 详见[configuration](https://prometheus.io/docs/alerting/latest/configuration/)
+
+#### route
 
 #### template
 
