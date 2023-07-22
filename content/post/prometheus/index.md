@@ -234,7 +234,7 @@ Targets 页面查看当前所有的监控任务（定义在[configuration]({{< r
 
 [告警规则](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
 
-### template
+### notify template
 
 [规则模板](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/#templating)
 
@@ -264,4 +264,4 @@ Prometheus 的告警分为两个部分。Prometheus 服务器中的[alert rule](
 
 ## Next
 
-- Prometheus UI 提供了快速验证 PromQL 以及临时可视化支持的能力，而在大多数场景下监控系统通常还需要可以长期使用的监控数据可视化面板（Dashboard）。这时用户可以考虑使用第三方的可视化工具如 [Grafana]({{< ref "../grafana" >}})，Grafana 是一个开源的可视化平台，并且提供了对 Prometheus 的完整支持。
+- Prometheus UI 提供了快速验证 PromQL 以及临时可视化支持的能力，而在大多数场景下监控系统通常还需要可以长期使用的监控数据可视化面板（Dashboard）。这时用户可以考虑使用第三方的可视化工具如 [Grafana]({{< ref "../grafana" >}})
