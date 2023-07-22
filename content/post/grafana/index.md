@@ -17,7 +17,7 @@ tags:
 
 ## 概述
 
-[grafana](https://grafana.com/docs/grafana/latest/)
+[grafana](https://grafana.com/docs/grafana/latest/introduction/) 能够查询、可视化、预警和探索您的 metrics、logs 和 traces。将时间序列转化为具有洞察力的图标和可视化的数据。
 
 ## 部署
 
@@ -39,12 +39,28 @@ kubectl port-forward services/grafana 6789:80
 
 ## Dashboard
 
-[共享 dashboard](https://grafana.com/grafana/dashboards/)
+[导入和导出 dashboard](https://grafana.com/docs/grafana/latest/dashboards/share-dashboards-panels/#dashboard-export) 可以方便的使用他人已经配置好的 dashboard。
 
-## 树莓派监控
+## 配置
+
+参考 [configuration](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/)
+
+## 告警
+
+![alert](images/alert.png)
+
+## 应用
+
+### 树莓派监控
 
 ![raspi](images/raspi.png)
 
-## k3s 监控
+### k3s 监控
+
+![k3s](images/k3s.png)
+
+## mlt
+
+[intro-to-mlt](https://github.com/grafana/intro-to-mlt)
 
 ## Next
