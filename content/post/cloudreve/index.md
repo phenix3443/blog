@@ -27,6 +27,16 @@ tags:
 
 {{< gist phenix3443 ffc578c0b88303639559b50fc8f133bd >}}
 
+### 重置密码
+
+登录运行主机，进入 cloudreve 程序所在目录，然后执行以下指令
+
+```shell
+./cloudreve --database-script ResetAdminPassword
+```
+
+会出现重置后的密码。
+
 ## wopi
 
 cloudreve 中关于[文档预览/编辑的相关说明](https://docs.cloudreve.org/use/wopi)，这里有个坑：如果 cloudreve 开启了 HTTPS ，那么 WOPI 服务也要使用 HTTPS，否则浏览器(Firefox/chrome) 会由于[Mixed Content](https://support.mozilla.org/en-US/kb/mixed-content-blocking-firefox)风险阻止 WOPI 服务。
