@@ -19,21 +19,19 @@ tags:
 
 [Actions](https://docs.github.com/en/actions) 是 Github 用于 CI/CD 的工具。
 
-可以将 GitHub Actions 工作流程（`workflows`）配置为在存储库中发生事件（`events`）时触发，例如打开拉取请求（`pull request`）或创建 `issue`。工作流包含一个或多个可以按顺序或并行运行的作业（`jobs`）。 每个作业都将在其自己的虚拟机运行器（`runner`）或容器内运行，并具有一个或多个步骤（`steps`），这些步骤要么运行自定义的脚本，要么运行一个操作（`action`），action 这是一种可重复使用的扩展，可以简化工作流程。
-
-后续文中直接使用相关的专业术语进行描述。
+当 `repository` 发生 `events`时触发 GitHub Actions `workflows`，例如`open pull request` 或 `create issue`。workflow 包含一个或多个可以按顺序或并行运行的`jobs`。 每个 job 都将在其自己的`runner`内运行，并具有一个或多个`steps`，这些步骤要么运行自定义的脚本，要么运行一个`action`，action 是一种可重复使用的扩展，可以简化工作流程。
 
 ### Workflow
 
-`workflow`是一个可配置的自动化过程，它将运行一个或多个`job`。`workflow`由`repo`中的 YAML 文件定义，由`repo`中的`event`触发运行，也可以手动触发，按定时计划触发。
+`workflow`定义在`repo`的`.github/workflows`目录中，由`repo`中的`event`触发运行，也可以手动触发，按定时触发。
 
-`workflow`定义在`repo`的`.github/workflows`目录中，一个`repo`可以有多个`workflow`，每个`workflow`可以执行一组不同的任务。 例如，可以有一个`workflow`来拉取请求，执行构建和测试，另一个`workflow`在每次创建发布时部署应用程序，还有另一个`workflow`在每次有人打开新问题时添加标签。
+`repo`可以有多个`workflow`，每个`workflow`可以执行一组不同的任务。 例如，一个`workflow`来拉取请求，执行构建和测试，另一个`workflow`在每次创建发布时部署应用程序，还有另一个`workflow`在每次有人打开新问题时添加标签。
 
-可以在另一个工作流中引用一个工作流，请参阅 [Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)
+workflow 可以互相引用，请参阅 [Reusing workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)
 
 ### Event
 
-`event`是`repo`中触发`workflow`运行的特定活动。活动可能源自 GitHub，例如，当有人创建拉取请求、打开问题或将提交推送到`repo`。
+`event`是`repo`中触发`workflow`运行的特定活动。活动可能源自 GitHub，例如，当有人创建拉取请求、打开 issue 或将提交推送到`repo`。
 
 也可以通过执行定时任务、调用 github REST API 或者手动触发`workflow`的执行。
 
@@ -41,9 +39,9 @@ tags:
 
 `job`是`workflow`中在同一`runner`上执行的一组`step`。
 
-每个`step`要么是一个将要执行的 shell 脚本，要么是一个将要运行的`action`。`step`按顺序执行并且相互依赖。由于每个`step`都在同一个`runner`上执行，因此可以将数据从一个`step`共享到另一个`step`。例如，可以有一个构建应用程序的`step`，然后是一个测试已构建应用程序的`step`。
+每个`step`要么是一个将要执行的 shell 脚本，要么是一个将要运行的`action`。`step`按顺序执行并且相互依赖。由于每个`step`都在同一个`runner`上执行，因此 step 直接拿可以共享数据。例如，可以有一个构建应用程序的`step`，然后是一个测试已构建应用程序的`step`。
 
-可以配置一个`job`与其他`job`的依赖关系；默认情况下，`job`没有依赖关系并且彼此并行运行。当一个`job`依赖于另一个`job`时，等待依赖的`job`完成后它才能运行。 例如，可能有多个不同架构的`build jobs`，它们之间没有依赖关系，以及依赖于这些`job`的`packaging jobs`。`build jobs`将并行运行，当它们全部成功完成后，`packaging job`才运行。
+可以配置一个`job`间的依赖关系；默认情况下，`job`没有依赖关系并且彼此并行运行。 例如，可能有多个不同架构的`build jobs`，它们之间没有依赖关系，但是`packaging jobs`依赖它们。`packaging job`等待`build jobs`全部运行完成后才会运行。
 
 ### Actions
 
@@ -51,7 +49,7 @@ tags:
 
 可以编写自己的`action`，也可以在 [GitHub Marketplace](https://github.com/marketplace?type=actions) 中找到想要的`action`。详见 [Finding and customizing actions](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions)
 
-使用`action`来帮助减少`workflow`文件中编写的重复代码。
+通过`action`来减少`workflow`文件中的重复代码。
 
 ### Runners
 
@@ -65,8 +63,10 @@ tags:
 
 为了使 workflow 更快、更高效，可以为依赖项（比如 go module）和其他经常重用的文件创建和使用缓存。详见 [Caching dependencies to speed up workflows](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)。
 
-## deploy[^1]
+## deploy
 
-- [ ] deploy on cloud provider。
+[About continuous deployment](https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment)
 
-[^1]: [About continuous deployment](https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment)
+## 参考
+
+- [Run workflow, step, or job based on file changes GitHub Actions](https://how.wtf/run-workflow-step-or-job-based-on-file-changes-github-actions.html)
