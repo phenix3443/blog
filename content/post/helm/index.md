@@ -97,6 +97,8 @@ helm install alist ./alist -f values.yaml
 
 名为 `artifacthub-repo.yml`的元数据文件可用于设置验证发布者或所有权声明等功能。请注意，该文件必须与 chart 仓库下的 `index.yaml` 文件位于同一级别，而且必须由 chart 仓库 HTTP 服务器提供。
 
+- [如何查找 github repository ID]({{< ref "../github#repositoryID" >}})
+
 ### add annotations
 
 Artifact Hub 使用 Chart.yaml 文件中的元数据，通常情况下，所需的大部分信息都已经存在，因此 chart 维护者不需要额外的工作就能将它们列在 Artifact Hub 上。
