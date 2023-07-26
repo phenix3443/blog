@@ -18,14 +18,31 @@ tags:
 
 ## Config
 
-## Deploy
+查看当前网站的配置：
 
-## Themes
+```shell
+hugo config --format yaml
+```
+
+查看 mounts 的 config：
+
+```shell
+hugo config mounts
+```
+
+## modules
+
+- [Hugo Modules: everything you need to know!](https://www.thenewdynamic.com/article/hugo-modules-everything-from-imports-to-create/)
+
+## Host on Github Pages
+
+[Host on GitHub pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
+
+## themes
 
 - [bootstrap](https://github.com/razonyang/hugo-theme-bootstrap)
 - [even](https://github.com/olOwOlo/hugo-theme-even)，经典，但是时间久了没有更新。
 - [eureka](https://github.com/wangchucheng/hugo-eureka)
 - [DoIt](https://github.com/HEIGE-PCloud/DoIt)
-- [fixit](https://fixit.lruihao.cn/zh-cn/) 和 DoIt 有点像。
+- [fixit](https://github.com/hugo-fixit/FixIt) 和 DoIt 有点像。
 - [meme](https://github.com/reuixiy/hugo-theme-meme)
-- [stack](https://github.com/CaiJimmy/hugo-theme-stack)
