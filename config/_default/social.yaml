@@ -1,34 +1,33 @@
 # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-email: user@domain.tld
-facebook: yourfacebookusername
-github: razonyang/hugo-theme-bootstrap
-gitlab: yourgitlabusername
-linkedin: yourlinkedinusername
-xing: yourxingusername
-stackoverflow: yourstackoverflowuserid
-twitter: yourtwitterusername
-weibo: yourweibousername
-zhihu: yourzhihuusername
-instagram: yourinstagramusername
-quora: yourquorausername
-tumblr: yourtumblrusername
-reddit: yourredditusername
-telegram: yourtelegramusername
-qq: yourqqnumber
-dockerhub: yourdockerhubusername
-bitbucket: yourbitbucketworkspaceid
-kaggle: yourkaggleusername
-medium: yourmediumusername # Medium username or custom domain(e.g. https://custom.domain.tld).
-lastfm: yourlastfmusername
-bilibili: yourbilibiliuserid
-youtube: youryoutubechannelid
-discord: yourdiscordinvitecode
+email: phenix3443
+facebook: phenix3443
+github: phenix3443
+gitlab: phenix3443
+linkedin: phenix3443
+stackoverflow: phenix3443
+twitter: phenix3443
+# weibo:
+# zhihu:
+# instagram:
+# quora:
+# tumblr:
+# reddit:
+telegram: phenix3443
+qq: 344300476
+dockerhub: phenix3443
+# bitbucket:
+# kaggle:
+medium: phenix3443 # Medium username or custom domain(e.g. https://custom.domain.tld).
+# lastfm:
+# bilibili:
+# youtube: phenix3443
+# discord: phenix3443
 discourse: https://yourforum.tld
-facebookgroup: yourfacebookgroupname
-tiktok: yourtiktokusername
-pinterest: yourpinterestusername
-mastodon: yourmastodonusername
-liberapay: yourliberapayaccount
-paypal: razonyang
-patreon: razonyang
-tipeee: yourtipeeeaccount-fr
+# facebookgroup:
+# tiktok:
+# pinterest:
+# mastodon:
+# liberapay:
+paypal: phenix3443
+# patreon:
+# tipeee:

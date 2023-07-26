@@ -1,17 +1,15 @@
-name: Razon Yang
+name: phenix3443
 # avatar: images/profile.png # Avatar image. Default to "images/profile.webp".
-bio: 'Gopher, PHPer, Full Stack Engineer.'
-company: Company # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
-location: Earth # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
-# about: https://razonyang.com # The external about page. The internal about page will be used if not set.
-params: {
-  # layout: compact
-}
-# See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
+bio: "Gopher, Full Stack Engineer."
+company: Tencent # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
+location: Shenzhen,china # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
+# about: https://phenix3443.com # The external about page. The internal about page will be used if not set.
+params: {}
+# layout: compact
+# See https://hbs.phenix3443.com/v1/en/docs/widgets/social-links/.
 social:
-  email: razonyang@gmail.com
-  github: razonyang/hugo-theme-bootstrap
-  twitter: razonyang
-  patreon: razonyang
-  paypal: razonyang
+  email: phenix3443@gmail.com
+  github: phenix3443
+  twitter: phenix3443
+  paypal: phenix3443
   rss: "" # Remove RSS

@@ -7,4 +7,4 @@ postDate = false
 readingTime = false
 +++
 
-Hi there, I'm XXX.
+Hi there, I'm 胖狐狸.

@@ -1,6 +1,6 @@
 main:
   - name: 文档
     identifier: documentations
-    url: https://hbs.razonyang.com/v1/zh-hans/docs/
+    url: https://blog.panghuli.cn
     params:
       icon: '<i class="fas fa-fw fa-book"></i>'

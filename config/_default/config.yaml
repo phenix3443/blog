@@ -1,7 +1,7 @@
 baseURL: https://blog.panghuli.cn
-title: panghuli's blog
+title: phenix3443's blog
 theme: github.com/razonyang/hugo-theme-bootstrap
-copyright: "Copyright © 2016-{year} Alex Liu. All Rights Reserved."
+copyright: "Copyright © 2016-{year} phenix3443. All Rights Reserved."
 defaultContentLanguage: en
 hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
 # defaultContentLanguageInSubdir: true
