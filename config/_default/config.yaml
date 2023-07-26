@@ -1,9 +1,9 @@
-baseURL: /
-title: Hugo Bootstrap Skeleton
+baseURL: https://blog.panghuli.cn
+title: panghuli's blog
 theme: github.com/razonyang/hugo-theme-bootstrap
-copyright: 'Copyright © 2016-{year} Razon Yang. All Rights Reserved.'
+copyright: "Copyright © 2016-{year} Alex Liu. All Rights Reserved."
 defaultContentLanguage: en
-# hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
+hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
 # defaultContentLanguageInSubdir: true
 # disableLanguages:
 #  - fr
@@ -15,7 +15,7 @@ enableRobotsTXT: true
 enableEmoji: true
 pygmentsUseClasses: true
 # googleAnalytics: UA-123-45
-# disqusShortname: yourdiscussshortname
+disqusShortname: phenix3443
 
 blackfriday:
   hrefTargetBlank: true
@@ -32,6 +32,5 @@ build:
 permalinks:
   news: /news/:year/:month/:title/
   blog: /blog/:year/:month/:title/
-
 # module:
-  # proxy: https://goproxy.cn
+# proxy: https://goproxy.cn
