@@ -1,21 +1,27 @@
 main:
-  - identifier: home
-    name: Home
+  - name: Home
+    identifier: home
+    pageRef: /
     weight: 1
-    url: "https://panghuli.cn/"
     params:
       icon: <i class="fas fa-home"></i>
-  - identifier: blog
-    name: Blog
+  - name: Blog
+    identifier: blog
     weight: 2
     params:
       icon: <i class="fas fa-fw fa-blog"></i>
+  - name: About
+    identifier: about
+    pageRef: /about
+    weight: 3
+    params:
+      icon: <i class="fas fa-info-circle"></i>
   - name: Support
     identifier: support
     weight: 40
     params:
       description: The HBS Support Community
-      icon: <i class="fas fa-fw fa-info-circle"></i>
+      icon: <i class="fas fa-fw fa-question-circle"></i>
   - name: Repository
     identifier: repository
     parent: support
