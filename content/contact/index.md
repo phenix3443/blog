@@ -1,4 +1,4 @@
-+++
-title = "联系我们"
-layout = "contact"
-+++
+---
+title: "联系我们"
+layout: "contact"
+---

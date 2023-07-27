@@ -1,5 +1,5 @@
 ---
-title: Series
+title: 专栏
 menu:
   main:
     parent: blog

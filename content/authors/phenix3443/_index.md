@@ -1,6 +1,6 @@
 ---
 title: phenix3443
-description: Gopher,  Full Stack Engineer.
+description: Gopher, Full Stack Engineer.
 social:
   github: phenix3443
   twitter: phenix3443
