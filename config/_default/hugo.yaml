@@ -1,0 +1,36 @@
+baseURL: https://blog.panghuli.cn
+title: phenix3443's blog
+copyright: "Copyright © 2016-{year} phenix3443. All Rights Reserved."
+defaultContentLanguage: zh-hans
+hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
+# defaultContentLanguageInSubdir: true
+# disableLanguages:
+#  - fr
+#  - zh-cn
+#  - zh-tw
+paginate: 10
+# paginatePath: page
+enableRobotsTXT: true
+enableEmoji: true
+pygmentsUseClasses: true
+# googleAnalytics: UA-123-45
+disqusShortname: phenix3443
+
+blackfriday:
+  hrefTargetBlank: true
+
+taxonomies:
+  category: categories
+  series: series
+  tag: tags
+
+build:
+  writeStats: true
+
+permalinks:
+  news: /news/:year/:month/:title/
+  blog: /blog/:year/:month/:title/
+
+module:
+  imports:
+    - path: github.com/razonyang/hugo-theme-bootstrap
