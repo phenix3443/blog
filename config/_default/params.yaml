@@ -35,7 +35,7 @@ palette: purple # Default palette. Optional. You'll need to clear the browser ca
 # color: dark # light, dark or auto. Default to auto.
 
 fullWidth: false # Full width.
-fixedHeader: false # Turn on/off fixed header.
+fixedHeader: true # Turn on/off fixed header.
 
 dateFormat: ":date_long"
 
