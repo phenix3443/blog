@@ -203,7 +203,7 @@ search:
 # debug: true
 
 reward:
-  alipay: images/reward/alipay.png
+  alipay: images/reward/alipay.jpg
   wechat: images/reward/wechat.png
   #paypal: images/reward/paypal.png
   #patreon: images/reward/patreon.png
