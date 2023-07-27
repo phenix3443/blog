@@ -62,7 +62,10 @@
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-go-template": "^0.0.15"
+  },
   "name": "blog",
   "version": "0.1.0"
 }
