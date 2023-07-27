@@ -34,6 +34,28 @@ hugo config mounts
 
 - [Hugo Modules: everything you need to know!](https://www.thenewdynamic.com/article/hugo-modules-everything-from-imports-to-create/)
 
+## template
+
+If you're using plain `*.html` files, you'll have to override the used parser inside your `.prettierrc` file:
+
+```shell
+npm install --save-dev prettier prettier-plugin-go-template
+```
+
+```json
+{
+  "plugins": ["prettier-plugin-go-template"],
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "options": {
+        "parser": "go-template"
+      }
+    }
+  ]
+}
+```
+
 ## Host on Github Pages
 
 [Host on GitHub pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
