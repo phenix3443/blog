@@ -6,5 +6,5 @@ social:
   twitter: phenix3443
   email: phenix3443@gmail.com
   website: https://blog.panghuli.tech/
-  paypal: phenix3443
+  paypal:
 ---
