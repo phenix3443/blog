@@ -1,8 +1,8 @@
 {{- if default true .Params.sidebar }}
   <aside class="col-xxl-4 sidebar d-flex">
     <div class="container d-flex flex-column">
-      {{- partialCached "sidebar/profile" . .Site }}
       {{ partial "hooks/sidebar-begin" . }}
+      {{- partialCached "sidebar/profile" . .Site }}
       {{- if ne "content" .Site.Params.tocPosition }}
         {{- partial "sidebar/toc" . }}
       {{- end }}
