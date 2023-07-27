@@ -1,5 +1,5 @@
 name: phenix3443
-avatar: images/profile.png # Avatar image. Default to "images/profile.webp".
+avatar: images/profile.webp # Avatar image. Default to "images/profile.webp".
 bio: "Gopher, Full Stack Engineer."
 # company: Tencent # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
 location: Shenzhen,china # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
