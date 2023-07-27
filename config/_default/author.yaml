@@ -3,7 +3,7 @@ name: phenix3443
 bio: "Gopher, Full Stack Engineer."
 company: Tencent # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
 location: Shenzhen,china # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
-# about: https://phenix3443.com # The external about page. The internal about page will be used if not set.
+# about: https://blog.panghuli.cn # The external about page. The internal about page will be used if not set.
 params: {}
 # layout: compact
 # See https://hbs.phenix3443.com/v1/en/docs/widgets/social-links/.
@@ -11,5 +11,5 @@ social:
   email: phenix3443@gmail.com
   github: phenix3443
   twitter: phenix3443
-  paypal: phenix3443
+  # paypal: phenix3443
   rss: "" # Remove RSS

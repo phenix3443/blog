@@ -1,7 +1,6 @@
 mainSections:
-  - blog
+  # - blog
   - posts
-  - news
 
 # titleSeparator: '|' # Title separator. Default to -.
 
@@ -20,28 +19,28 @@ brand: phenix3443
 palette: purple # Default palette. Optional. You'll need to clear the browser cache after modifying this.
 # Available palettes. Default to ALL. Empty array means disable.
 # palettes:
-#  - blue
-#  - blue-gray
-#  - brown
-#  - cyan
-#  - green
-#  - indigo
-#  - orange
-#  - pink
-#  - purple
-#  - red
-#  - teal
-#  - yellow
+#   - blue
+#   - blue-gray
+#   - brown
+#   - cyan
+#   - green
+#   - indigo
+#   - orange
+#   - pink
+#   - purple
+#   - red
+#   - teal
+#   - yellow
 
 # color: dark # light, dark or auto. Default to auto.
 
-# fullWidth: true # Full width.
-# fixedHeader: false # Turn on/off fixed header.
+fullWidth: false # Full width.
+fixedHeader: false # Turn on/off fixed header.
 
 dateFormat: ":date_long"
 
 # Google Adsense
-googleAdsense:
+# googleAdsense:
 
 # math: true # Enable math globally.
 # toc: false # Disable TOC globally.
@@ -114,9 +113,9 @@ post:
   # tocStyleType: decimal # The TOC's CSS list-style-type property.
   # imageTitleAsCaption: true
   # panel: false # Disable the post panel.
-  # nav: false # Disable post navigations.
+  # nav: false # Disable post navigators.
   # The page position after clicking the read more button, read more from content if true. Default to the beginning of page.
-  # It supports only of the manual summaries spliting via <!--more-->.
+  # It supports only of the manual summaries splitting via <!--more-->.
   # readMoreFromContent: true
 
 archive:
@@ -144,7 +143,7 @@ creativeCommons:
   # sa: true # Adaptations must be shared under the same terms.
 
 # utterances:
-# repo: razonyang/hugo-theme-bootstrap-skeleton # Replace with your repository.
+# repo: phenix3443 # Replace with your repository.
 #issueTerm: pathname # pathname, url, title, og:title
 # label: comment
 # By default, light and dark mode correspond to github-light and github-dark, respectively.
@@ -160,7 +159,7 @@ creativeCommons:
 #sorting: desc # Default to asc.
 #reCaptchaKey: "" # The reCaptcha site key.
 #reCaptchaSecret: "" # The reCaptcha encrypted secret. You'll need to encrypt plain secret via https://yourstaticmaninstance/v3/encrypt/PLAINSECRET.
-#extraFields: # Extra fields. Available fiedls: url.
+#extraFields: # Extra fields. Available fields: url.
 #  - url
 #requiredFields: # Extra required fields. Available fields: email and the extra fields.
 #  - email
@@ -169,18 +168,18 @@ creativeCommons:
 #moderation: false # Same as Staticman's moderation.
 
 # See https://giscus.app
-giscus:
-  repo: "razonyang/hugo-theme-bootstrap-skeleton" # required.
-  repoId: "R_kgDOHJi95g" # required.
-  category: "General" # required.
-  categoryId: "DIC_kwDOHJi95s4CTy6q" # required.
-  # theme: "dark" # Default to auto.
-  # mapping: "title" # Default to pathname.
-  # inputPosition: "bottom" # Default to top.
-  # reactions: false # Disable reactions.
-  # metadata: true # Emit discussion metadata.
-  # lang: "en" # Specify language, default to site language.
-  # lazyLoading: false # Default to true.
+# giscus:
+#   repo: "razonyang/hugo-theme-bootstrap-skeleton" # required.
+#   repoId: "R_kgDOHJi95g" # required.
+#   category: "General" # required.
+#   categoryId: "DIC_kwDOHJi95s4CTy6q" # required.
+# theme: "dark" # Default to auto.
+# mapping: "title" # Default to pathname.
+# inputPosition: "bottom" # Default to top.
+# reactions: false # Disable reactions.
+# metadata: true # Emit discussion metadata.
+# lang: "en" # Specify language, default to site language.
+# lazyLoading: false # Default to true.
 
 search:
   paginate: 5 # Pagination. Default to 10.
@@ -195,7 +194,7 @@ search:
     # distance: 100
     # useExtendedSearch: true
 
-#docsearch:
+# docsearch:
 # https://docsearch.algolia.com/docs/api
 # container: ".search-bar" # replace it if necessary, default to '.search-bar'.
 # appId: ""
@@ -248,7 +247,7 @@ contact:
   # siteKey: ""
 
 repo:
-  url: https://github.com/razonyang/hugo-theme-bootstrap-skeleton
+  url: https://github.com/phenix3443/
   branch: main
   # subPath: exampleSite
   # dateFormat: 02/01/2006, 15:04:05 PM
@@ -256,12 +255,11 @@ repo:
 topAppBar:
   # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
   social:
-    github: razonyang/hugo-theme-bootstrap
-    patreon: razonyang
-    paypal: razonyang
+    github: phenix3443
+    twitter: phenix3443
 #docs:
 # nav:
-# expand: true # Expand docs navigations.
+# expand: true # Expand docs navigators.
 
 #feeds:
 # content: true

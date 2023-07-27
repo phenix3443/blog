@@ -1,6 +1,0 @@
-main:
-  - name: Documentations
-    identifier: documentations
-    url: https://blog.panghuli.cn
-    params:
-      icon: '<i class="fas fa-fw fa-book"></i>'

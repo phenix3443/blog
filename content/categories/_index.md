@@ -1,5 +1,5 @@
 ---
-title: Categories
+title: 分类
 menu:
   main:
     parent: blog

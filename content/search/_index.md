@@ -1,3 +1,3 @@
 +++
-title = "Search"
+title = "搜索"
 +++
