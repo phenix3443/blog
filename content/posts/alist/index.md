@@ -23,12 +23,6 @@ tags:
 
 ## 添加 cloudreve
 
-有两种方法进行添加
-
-![账号登录](images/cloudreve.png)
-
-![WebDAV](images/cloudreve-webdav.png)
-
 相比较而言，推荐使用 webDAV 的方式，通过账号登录，alist 会保存 cookies，可能会过期。
 
 ## 添加 115 网盘
