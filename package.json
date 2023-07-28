@@ -44,7 +44,7 @@
     "@popperjs/core": "^2.11.2",
     "algoliasearch": "^4.14.2",
     "autoprefixer": "^10.4.2",
-    "bootstrap": "^5.3.0-alpha3",
+    "bootstrap": "^5.3.1",
     "date-fns": "^2.29.3",
     "fuse.js": "^6.5.3",
     "katex": "^0.16.4",
@@ -62,10 +62,7 @@
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2"
   },
-  "devDependencies": {
-    "prettier": "^3.0.0",
-    "prettier-plugin-go-template": "^0.0.15"
-  },
+  "devDependencies": {},
   "name": "blog",
   "version": "0.1.0"
 }
