@@ -2,7 +2,7 @@ zh-hans:
   languageName: 简体中文
   weight: 4
   params:
-    description: phenix3443 的个人网站
+    description: 记录成长和生活的美好
     keywords: "Hugo, blog"
     archive:
       dateFormat: 01-02
