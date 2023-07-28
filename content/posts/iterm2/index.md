@@ -1,6 +1,6 @@
 ---
 title: "iTerm2"
-description: MacOS下高效使用 iTerm2
+description: MacOS 下高效使用 iTerm2
 slug: iterm2
 date: 2023-06-29T09:31:43+08:00
 image:
@@ -13,11 +13,16 @@ categories:
   - macos
 tags:
   - iterm2
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文介绍如何使用 iTerm2。
+
+<!--more-->
 ## 概述
 
-[iTerm2](https://iterm2.com/) 是一款 macos 下使用的终端工具，用来替代系统默认的 terminal，本文针对日常使用配置做整理，请先阅读[官方文档](https://iterm2.com/documentation.html) 。
+[iTerm2](https://iterm2.com/) 是一款 macos 下使用的终端工具，用来替代系统默认的 terminal，本文针对日常使用配置做整理，请先阅读 [官方文档](https://iterm2.com/documentation.html) 。
 
 ## window && tab && panel
 
@@ -47,7 +52,7 @@ tags:
 
 ### Hotkey Window
 
-注册一个热键，当在另一个应用程序中时将 iTerm2 带到前台。个人不常用，通过系统默认的快捷键(`cmd-tab`)进行切换。
+注册一个热键，当在另一个应用程序中时将 iTerm2 带到前台。个人不常用，通过系统默认的快捷键 (`cmd-tab`) 进行切换。
 
 ## Search
 
@@ -126,7 +131,7 @@ iTerm2 支持用户定义的触发器，即在收到与正则表达式相匹配�
 
 ### Copy Mode
 
-[Copy Mode](https://iterm2.com/documentation-copymode.html)支持通过键盘选择文本，是键盘党非常实用的功能。
+[Copy Mode](https://iterm2.com/documentation-copymode.html) 支持通过键盘选择文本，是键盘党非常实用的功能。
 
 ![Copy Mode](https://iterm2.com/img/screenshots/copy_mode.png)
 
@@ -142,7 +147,7 @@ iTerm2 可以与 unix [Shell 集成](https://iterm2.com/documentation-shell-inte
 - 当前命令完成运行时发出警报。
 - 可以右键单击远程主机上的文件名（例如，在 ls 的输出中）来下载它。
 
-  - iTerm2 根据主机名字猜测 ssh host 中的名字，但二者可能不同，这会导致 ssh 连接失败，参考[how-can-i-override-the-hostname](https://gitlab.com/gnachman/iterm2/-/wikis/scp-not-connecting#how-can-i-override-the-hostname)，解决办法：
+  - iTerm2 根据主机名字猜测 ssh host 中的名字，但二者可能不同，这会导致 ssh 连接失败，参考 [how-can-i-override-the-hostname](https://gitlab.com/gnachman/iterm2/-/wikis/scp-not-connecting#how-can-i-override-the-hostname)，解决办法：
 
     Edit your login script on the remote machine (~/.login, ~/.profile, ~/.bash_profile, ~/.zshrc, or ~/.config/fish/config.fish, depending on your shell). You should see a line like this:
 
@@ -208,7 +213,7 @@ iTerm2 的内置密码管理器将密码加密存储在 macOS 的钥匙串中。
 
 ![Badges](https://iterm2.com/img/screenshots/v3-screen-shots/iterm2-badges.png)
 
-非常实用的功能，可以高亮提示当前 host 的登录信息。详见[badges](https://iterm2.com/documentation-badges.html)
+非常实用的功能，可以高亮提示当前 host 的登录信息。详见 [badges](https://iterm2.com/documentation-badges.html)
 
 ## Captured Output
 
@@ -216,8 +221,8 @@ iTerm2 的内置密码管理器将密码加密存储在 macOS 的钥匙串中。
 
 ![Captured Output](https://iterm2.com/img/screenshots/v3-screen-shots/iterm2-captured-output.gif)
 
-非常实用的功能。详见[Captured Output](https://iterm2.com/documentation-captured-output.html)。
+非常实用的功能。详见 [Captured Output](https://iterm2.com/documentation-captured-output.html)。
 
 ## Status Bar
 
-iTerm2 提供了一个可配置、可编写脚本的[Status Bar](https://iterm2.com/documentation-status-bar.html)。目的是显示有关正在工作的环境的最新信息，并在适当的情况下提供有用的交互。
+iTerm2 提供了一个可配置、可编写脚本的 [Status Bar](https://iterm2.com/documentation-status-bar.html)。目的是显示有关正在工作的环境的最新信息，并在适当的情况下提供有用的交互。

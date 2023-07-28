@@ -15,6 +15,10 @@ tags:
   - nginx
 ---
 
+本文介绍如何使用 ingress controller。
+
+<!--more-->
+
 ## 概述
 
 [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)

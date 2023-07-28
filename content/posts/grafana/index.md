@@ -13,8 +13,13 @@ categories:
   - monitor
 tags:
   - grafana
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文通过监控树莓派和 K3S 集群介绍 Grafana 的安装、配置和使用。
+
+<!--more-->
 ## 概述
 
 [grafana](https://grafana.com/docs/grafana/latest/introduction/) 能够查询、可视化、预警和探索您的 metrics、logs 和 traces。将时间序列转化为具有洞察力的图标和可视化的数据。

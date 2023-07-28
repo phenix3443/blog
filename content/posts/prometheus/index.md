@@ -13,15 +13,19 @@ categories:
   - monitor
 tags:
   - prometheus
+
 ---
 
+本文介绍如何在 k3s 中使用 Prometheus。
+
+<!--more-->
 ## 概述
 
 [prometheus](https://prometheus.io/docs/introduction/overview/) 是一个开源的系统和服务的监控系统。它周期性采集 metrics 指标，匹配规则和展示结果，以及触发某些条件的告警发送。
 
 ## 时间序列
 
-prometheus 使用的数据模型是[时间序列（time series）](https://prometheus.io/docs/concepts/data_model/):
+prometheus 使用的数据模型是 [时间序列（time series）](https://prometheus.io/docs/concepts/data_model/):
 
 ```shell
 <metric name>{<label name>=<label value>, ...}@timestamp value
@@ -31,7 +35,7 @@ prometheus 使用的数据模型是[时间序列（time series）](https://prome
 
 每个时间序列都由其 metric 以及 label 集合构成唯一标识。
 
-metric 的[类型](https://prometheus.io/docs/concepts/metric_types/)有：
+metric 的 [类型](https://prometheus.io/docs/concepts/metric_types/) 有：
 
 - counter
 - gauge
@@ -96,27 +100,27 @@ global 指定在所有其他配置上下文中有效的参数。它们还用作�
 
 #### scrape_configs
 
-[scrape_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) 指定采集目标和相关参数。可以通过[静态配置(static config)](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#static_config)管理监控目标，也可以配合使用服务发现（比如 [kubernetes 服务发现配置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#kubernetes_sd_config)）的方式动态管理监控目标。
+[scrape_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) 指定采集目标和相关参数。可以通过 [静态配置 (static config)](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#static_config) 管理监控目标，也可以配合使用服务发现（比如 [kubernetes 服务发现配置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#kubernetes_sd_config)）的方式动态管理监控目标。
 
 此外，[relabel_configs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config) 允许在采集前对任何目标及其标签进行高级修改。
 
 #### rule_files
 
-指定包含 recording rules 和 alert rules 的文件。详见[规则]({{< ref "#rules" >}})。
+指定包含 recording rules 和 alert rules 的文件。详见 [规则]({{< ref "#rules" >}})。
 
 #### alerting{#alerting}
 
-与 [Alertmanager]({{< ref "#alert_manager" >}})交互相关的配置。
+与 [Alertmanager]({{< ref "#alert_manager" >}}) 交互相关的配置。
 
 ## Jobs/exporters
 
 在 Prometheus 中，用于暴露 metrics 的程序称为 [exporter](https://prometheus.io/docs/instrumenting/exporters/)。
 
-每一个可以抓取监控样本数据的 endpoint 称为一个实例(Instance)，通常对应单个进程。例如在当前主机上运行的 node exporter 可以被称为一个实例。
+每一个可以抓取监控样本数据的 endpoint 称为一个实例 (Instance)，通常对应单个进程。例如在当前主机上运行的 node exporter 可以被称为一个实例。
 
 具有相同目的的实例集合（例如，为了可扩展性或可靠性而复制的进程）称为 job。
 
-本次部署中，因为有三个 raspi 作为 DateNode，所以 prometheus 启动了三个 export 来搜集对应的 Node 相关的 machine metrics。详见[Node Exporter](https://quay.io/repository/prometheus/node-exporter)。
+本次部署中，因为有三个 raspi 作为 DateNode，所以 prometheus 启动了三个 export 来搜集对应的 Node 相关的 machine metrics。详见 [Node Exporter](https://quay.io/repository/prometheus/node-exporter)。
 
 通过 describe pod 的相关信息：
 
@@ -126,7 +130,7 @@ global 指定在所有其他配置上下文中有效的参数。它们还用作�
 
 浏览器 `http://192.168.122.16:9100/metrics` 可以看到该 node-exporter 上报的信息，可以通过 cpu/memory/load 搜索到相关的 metric。
 
-prometheus-kube-state-metrics 通过监听 kubernetes apiserver 获得各种资源对象的 metrics。详见[github 介绍](https://github.com/kubernetes/kube-state-metrics)
+prometheus-kube-state-metrics 通过监听 kubernetes apiserver 获得各种资源对象的 metrics。详见 [github 介绍](https://github.com/kubernetes/kube-state-metrics)
 
 ## Push Gateway
 
@@ -144,7 +148,7 @@ Alertmanager 可处理 Prometheus 服务器等客户端应用程序发送的警�
 
 作为用户，只希望看到一个告警通知，同时还能看到受影响的服务实例。因此，可对进行配置，按群集和警报名称对警报进行分组，这样就能发送一个简洁的通知。
 
-警报分组、分组通知的时间以及这些通知的接收者都是通过配置文件中的路由树(route tree)来配置的。
+警报分组、分组通知的时间以及这些通知的接收者都是通过配置文件中的路由树 (route tree) 来配置的。
 
 #### 抑制
 
@@ -162,7 +166,7 @@ Alertmanager 可处理 Prometheus 服务器等客户端应用程序发送的警�
 
 ### 配置
 
-详见[configuration](https://prometheus.io/docs/alerting/latest/configuration/)
+详见 [configuration](https://prometheus.io/docs/alerting/latest/configuration/)
 
 #### route
 
@@ -170,7 +174,7 @@ route 用来对告警进行分组设置
 
 #### template
 
-详见[template](https://prometheus.io/docs/alerting/latest/notifications/)
+详见 [template](https://prometheus.io/docs/alerting/latest/notifications/)
 
 ### web UI
 
@@ -200,19 +204,19 @@ kubectl port-forward services/prometheus-server 6789:80
 
 ### Status
 
-Status 系统运行状态的相关信息，比如 prometheus server 编译信息、tsdb 数据库状态、sever 命令行参数、server 配置、数据来源(target)、服务发现等信息。
+Status 系统运行状态的相关信息，比如 prometheus server 编译信息、tsdb 数据库状态、sever 命令行参数、server 配置、数据来源 (target)、服务发现等信息。
 
 #### Configuration{#Configuration}
 
-server 配置，参见[服务端配置说明]({{< ref "#server_config" >}})。
+server 配置，参见 [服务端配置说明]({{< ref "#server_config" >}})。
 
 #### Rules
 
-显示当前配置的规则，详见[配置 Rules]({{< ref "#rules" >}})
+显示当前配置的规则，详见 [配置 Rules]({{< ref "#rules" >}})
 
 #### Targets
 
-Targets 页面查看当前所有的监控任务（定义在[configuration]({{< ref "#Configuration" >}})），以及各个任务下所有实例(instances)的状态：
+Targets 页面查看当前所有的监控任务（定义在 [configuration]({{< ref "#Configuration" >}})），以及各个任务下所有实例 (instances) 的状态：
 
 ![targets](images/targets.png)
 
@@ -248,13 +252,13 @@ promtool check rules /path/to/example.rules.yml
 
 ## Alert
 
-Prometheus 的告警分为两个部分。Prometheus 服务器中的[alert rule]({{< ref "#alert_rules" >}})向 [alert manager]({{< ref "#alert_manager" >}})发送告警。 Alertmanager 管理这些告警，包括静音、抑制、聚合以及通过电子邮件、值班通知系统和聊天平台等方式发送通知。
+Prometheus 的告警分为两个部分。Prometheus 服务器中的 [alert rule]({{< ref "#alert_rules" >}}) 向 [alert manager]({{< ref "#alert_manager" >}}) 发送告警。 Alertmanager 管理这些告警，包括静音、抑制、聚合以及通过电子邮件、值班通知系统和聊天平台等方式发送通知。
 
 设置告警和通知的主要步骤如下：
 
 - 设置和配置 [Alertmanager]({{< ref "#alert_manager" >}})
 - [配置 Prometheus 与 Alertmanager 对话]({{< ref "#alerting" >}})
-- 在 Prometheus 中创建[告警规则]({{< ref "#alert_rules" >}})
+- 在 Prometheus 中创建 [告警规则]({{< ref "#alert_rules" >}})
 
 ## 高级
 

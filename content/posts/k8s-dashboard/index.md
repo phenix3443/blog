@@ -13,8 +13,13 @@ categories:
   - kubernetes
 tags:
   - dashboard
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文介绍 kubernetes dashboard 的安装和使用。
+
+<!--more-->
 ## 概述
 
 [Kubernetes Dashboard](https://github.com/kubernetes/dashboard) 是一个通用的、基于 Web 的 Kubernetes 集群的用户界面。它允许用户管理集群中运行的应用程序，并对其进行故障排除，以及管理集群本身。
@@ -49,7 +54,7 @@ kubectl -n kubernetes-dashboard create secret tls kubernetes-dashboard-ingress-t
 kubectl -n kubernetes-dashboard get pods,svc,ingress
 ```
 
-显示如下:
+显示如下：
 {{< gist phenix3443 7916caa56883ac0d7135e39ef03de05e >}}
 
 浏览器打开 `https://k3s-dashboard.example.com` 也可以看到登录界面。
@@ -72,7 +77,7 @@ NAME                   CREATED AT
 kubernetes-dashboard   2023-06-27T05:25:31Z
 ```
 
-可以看到默认只创建了 `kubernetes-dashboard` 这一个角色(role)，该角色也只能管理 kubernetes-dashboard 命名空间内的资源。
+可以看到默认只创建了 `kubernetes-dashboard` 这一个角色 (role)，该角色也只能管理 kubernetes-dashboard 命名空间内的资源。
 
 ```shell
 kubectl -n kubernetes-dashboard describe role kubernetes-dashboard
@@ -98,9 +103,9 @@ PolicyRule:
   services        []                 [heapster]                         [proxy]
 ```
 
-如果 dashboard 需要通过 apiserver 管理集群就需要满足对应的[身份认证](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/)需求，这就涉及到了 [ServiceAccount](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/service-accounts-admin/) 相关知识。
+如果 dashboard 需要通过 apiserver 管理集群就需要满足对应的 [身份认证](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/) 需求，这就涉及到了 [ServiceAccount](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/service-accounts-admin/) 相关知识。
 
-按照[创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 为 dashboard service 以服务账户(ServiceAccount)方式创建管理员(admin-user)，该服务账号通过 ClusterRoleBinding 到系统的 cluster-admin role 上，进而有权限可以管理集群所有资源。
+按照 [创建示例用户](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 为 dashboard service 以服务账户 (ServiceAccount) 方式创建管理员 (admin-user)，该服务账号通过 ClusterRoleBinding 到系统的 cluster-admin role 上，进而有权限可以管理集群所有资源。
 
 创建以下资源清单文件：
 

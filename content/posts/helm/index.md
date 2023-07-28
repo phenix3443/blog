@@ -13,8 +13,13 @@ categories:
   - kubernetes
 tags:
   - helm
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文介绍如何使用 helm 管理 kubernetes 应用。
+
+<!--more-->
 ## 概述
 
 [Helm](https://helm.sh/zh/) 是 kubernetes 的包管理工具。有三个重要的概念：
@@ -37,17 +42,17 @@ Helm 安装 charts 到 Kubernetes 集群中，每次安装都会创建一个新�
 - `helm uninstall <release>` 卸载 release。
 - `helm upgrade <release> <repo>/<chart>` 更新 release。
 
-更多命令参见[helm cheatsheet](https://helm.sh/zh/docs/intro/cheatsheet/)
+更多命令参见 [helm cheatsheet](https://helm.sh/zh/docs/intro/cheatsheet/)
 
 ## write chart
 
 通过阅读下面的资料了解如何编写 chart。
 
 - [chart 指南](https://helm.sh/zh/docs/topics/charts/) 阐述了使用 chart 的工作流。
-- [Go 模板文档](https://pkg.go.dev/text/template)说明了模板语法的细节。
+- [Go 模板文档](https://pkg.go.dev/text/template) 说明了模板语法的细节。
 - [Chart 模板指南](https://helm.sh/zh/docs/chart_template_guide/getting_started/) 循序渐进的介绍了如何编写 chart 中的模板。
 - [Sprig](https://github.com/Masterminds/sprig) 提供了 chart template 使用 60 多个模板函数。
-- [Chart 开发提示和技巧](https://helm.sh/zh/docs/howto/charts_tips_and_tricks/)提供了编写模板时候一些额外注意的细节和技巧。
+- [Chart 开发提示和技巧](https://helm.sh/zh/docs/howto/charts_tips_and_tricks/) 提供了编写模板时候一些额外注意的细节和技巧。
 - [Helm Intellisense](https://marketplace.visualstudio.com/items?itemName=Tim-Koehler.helm-intellisense) 在 vscode 提供自动补全、lint 功能。
 
 ### alist chart
@@ -64,7 +69,7 @@ helm create alist
 helm template alist ./alist --debug
 ```
 
-渲染结果会显示在标准输出中，查看不是很方便，但可以通过[schelm](https://github.com/databus23/schelm) 将渲染结果保存在不同的文件中：
+渲染结果会显示在标准输出中，查看不是很方便，但可以通过 [schelm](https://github.com/databus23/schelm) 将渲染结果保存在不同的文件中：
 
 ```shell
 go install github.com/databus23/schelm@latest
@@ -103,13 +108,13 @@ helm install alist ./alist -f values.yaml
 
 Artifact Hub 使用 Chart.yaml 文件中的元数据，通常情况下，所需的大部分信息都已经存在，因此 chart 维护者不需要额外的工作就能将它们列在 Artifact Hub 上。
 
-不过，有时可能需要提供更多的上下文，以帮助改善用户在 Artifact Hub 中的体验。这可以使用 Chart.yaml 文件中的一些[特殊 annotation](https://artifacthub.io/docs/topics/annotations/helm/) 来实现。
+不过，有时可能需要提供更多的上下文，以帮助改善用户在 Artifact Hub 中的体验。这可以使用 Chart.yaml 文件中的一些 [特殊 annotation](https://artifacthub.io/docs/topics/annotations/helm/) 来实现。
 
 阅读 [Artifact Hub 保存 helm chart repositories](https://artifacthub.io/docs/topics/repositories/helm-charts/) 了解更多。
 
 ### check
 
-开发完成 helm chart repo 后，可以使用 [Artifact Hub 命令行工具(ah)](https://artifacthub.io/docs/topics/cli/) 的 lint 子命令检查是否已准备好在 Artifact Hub 上出现。
+开发完成 helm chart repo 后，可以使用 [Artifact Hub 命令行工具 (ah)](https://artifacthub.io/docs/topics/cli/) 的 lint 子命令检查是否已准备好在 Artifact Hub 上出现。
 
 ```shell
 brew install artifacthub/cmd/ah
@@ -120,7 +125,7 @@ ah lint
 
 ## kubernetes-dashboard 源码
 
-通过 [kubernetes-dashboard](https://github.com/kubernetes/dashboard/tree/master/charts)的 chart 学习如何编写 helm chart。
+通过 [kubernetes-dashboard](https://github.com/kubernetes/dashboard/tree/master/charts) 的 chart 学习如何编写 helm chart。
 
 直接下载并解压 chart 源码。
 
@@ -132,4 +137,4 @@ helm pull kubernetes-dashboard/kubernetes-dashboard --untar=true
 
 ## Next
 
-- 目前的云平台部署都需要付费，可以学习[如何在 Raspi 上部署 k8s 集群]({{< ref "../k8s-on-raspi" >}})。
+- 目前的云平台部署都需要付费，可以学习 [如何在 Raspi 上部署 k8s 集群]({{< ref "../k8s-on-raspi" >}})。

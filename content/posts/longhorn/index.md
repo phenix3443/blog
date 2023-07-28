@@ -14,15 +14,20 @@ categories:
   - distribute-storage
 tags:
   - longhorn
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文介绍如何通过 longhorn 来将 raspi 挂载的硬盘在 k3s 中池化。
+
+<!--more-->
 ## 概述
 
-如何将所有工作节点上磁盘在 kubernetes 池化使用？分布式块存储系统[longhorn](https://longhorn.io/docs/1.4.2/what-is-longhorn/)提供一种解决方案。
+如何将所有工作节点上磁盘在 kubernetes 池化使用？分布式块存储系统 [longhorn](https://longhorn.io/docs/1.4.2/what-is-longhorn/) 提供一种解决方案。
 
 ## 安装
 
-按照[官方指南](https://longhorn.io/docs/1.4.2/deploy/install/install-with-helm/) 可以很顺利的进行安装。
+按照 [官方指南](https://longhorn.io/docs/1.4.2/deploy/install/install-with-helm/) 可以很顺利的进行安装。
 
 {{< gist phenix3443 94c598c1a80738ab343bb98a1669bf82 >}}
 

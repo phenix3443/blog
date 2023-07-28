@@ -13,18 +13,23 @@ categories:
   - proxy
 tags:
   - clash
+series:
+  - 如何一步步搭建家庭网络服务
 ---
 
+本文介绍如何使用 clash 搭建透明代理。
+
+<!--more-->
 ## 概述
 
-[Clash](https://github.com/Dreamacro/clash) 是一款网络代理工具。阅读本文前请先阅读[官方文档](https://dreamacro.github.io/clash/configuration/introduction.html)，本文主要涉及：
+[Clash](https://github.com/Dreamacro/clash) 是一款网络代理工具。阅读本文前请先阅读 [官方文档](https://dreamacro.github.io/clash/configuration/introduction.html)，本文主要涉及：
 
 - 官方文档中容易忽略的事项以及周边技术资料。
 - 如何使用 TPClash 搭建局域网内的透明代理。
 
 ## 代理服务器
 
-[proxy-groups](https://dreamacro.github.io/clash/configuration/outbound.html#proxy-groups)可以方便的对代理进行组合：
+[proxy-groups](https://dreamacro.github.io/clash/configuration/outbound.html#proxy-groups) 可以方便的对代理进行组合：
 
 - relay：多个代理服务形成中继链来处理代理请求。
 - utl-test：clash 通过多方面测试选择最适合的代理服务器。
@@ -38,7 +43,7 @@ proxy-groups 搭配 proxy-providers 可聚合（多个）机场提供的代理�
 
 ## 代理规则
 
-[代理规则](https://dreamacro.github.io/clash/configuration/rules.html#rules)的基本语法是：
+[代理规则](https://dreamacro.github.io/clash/configuration/rules.html#rules) 的基本语法是：
 
 ```shell
 TYPE,ARGUMENT,POLICY(,no-resolve)
@@ -59,7 +64,7 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 
 ### 配置
 
-[TProxy](https://liqiang.io/post/tproxy-in-linux) 是 Linux 一种用于支持透明代理的，常见的实现方式是[iptables](https://liqiang.io/post/dive-in-iptables)以及 nftables。
+[TProxy](https://liqiang.io/post/tproxy-in-linux) 是 Linux 一种用于支持透明代理的，常见的实现方式是 [iptables](https://liqiang.io/post/dive-in-iptables) 以及 nftables。
 
 clash 与透明代理相关的配置：
 
@@ -80,7 +85,7 @@ TPClash 通过 systemd 进行管理：
 
 可通过 yacd( `http://{{external-controller}}/ui` ) 对 clash 进行管理。
 
-TPClash 启动成功后, 当前机器的透明代理就搭建完成了。
+TPClash 启动成功后，当前机器的透明代理就搭建完成了。
 
 ## 局域网网关
 
@@ -189,7 +194,7 @@ CFW 启动的过程会使用到两个配置文件，分别是：
 - ${Home}/config.yaml 该文件是 Clash 的启动文件，如果此文件有错，则 Clash 核心将无法启动。
 - ${Home}/profiles/xxxx.yaml，该目录下的文件均由用户导入，CFW 统一生成的，一般命名为时间戳。该目录下的文件不建议添加 `tun/dns/hosts` 等字段。
 
-配置加载过程参见[官方说明](https://docs.cfw.lbyczf.com/contents/configfile.html#%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B)。
+配置加载过程参见 [官方说明](https://docs.cfw.lbyczf.com/contents/configfile.html#%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B)。
 
 ## 参考
 
