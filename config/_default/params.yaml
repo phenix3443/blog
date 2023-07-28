@@ -189,7 +189,7 @@ search:
     # ignoreLocation: true
     # location: 0
     # isCaseSensitive: false
-    # minMatchCharLength: 1
+    minMatchCharLength: 3
     threshold: 0.1
     # distance: 100
     # useExtendedSearch: true
