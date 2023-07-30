@@ -1,7 +1,7 @@
 ---
-title: "TypeScript Start"
-description: TypScript 拾遗
-slug: typescript-start
+title: "TypeScript"
+description: TypScript 学习总结
+slug: typescript
 date: 2023-02-23T22:11:08+08:00
 image:
 math:
@@ -13,6 +13,10 @@ categories:
   - typescript
 tags:
 ---
+
+本文介绍 typescript 学习资源。
+
+<!---->
 
 ## 概述
 
