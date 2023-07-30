@@ -34,3 +34,9 @@ permalinks:
 module:
   imports:
     - path: github.com/razonyang/hugo-theme-bootstrap
+
+markup:
+  tableOfContents:
+    endLevel: 4
+    ordered: false
+    startLevel: 1
