@@ -29,12 +29,12 @@ tags:
 
 ## typescript
 
-[Adding Typescript](https://create-react-app.dev/docs/adding-typescript/)
-
-## 创建项目
+通过 [create-react-app](https://create-react-app.dev/docs/adding-typescript/) 创建 typescript 项目：
 
 ```shell
 npx create-react-app my-app --template typescript
 ```
+
+## 创建项目
 
 ## 参考

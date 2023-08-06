@@ -24,17 +24,32 @@ tags:
 
 ## 安装
 
-安装编译器： `npm install -g typescript`
+在项目中使用单独的 typescript、tslint、[ts-node](https://www.npmjs.com/package/ts-node) 配置
 
-查看版本 `tsc --version`
+```shell
+mkdir test && cd test
+npm init
+npm install --save-dev typescript tslint @types/ts-node
+```
 
-编译代码文件 `tsc hello.ts`, 然后通过 `node hello.js` 运行代码。或者直接通过 [ts-node](https://www.npmjs.com/package/ts-node) 运行 `ts-node hello.ts`。
+查案当前 typescript 编译器版本：
+
+```shell
+npx tsc --version
+```
+
+编译代码文件 `tsc hello.ts`, 然后通过 `node hello.js` 运行代码。
+
+```shell
+npx ts-node hello.ts
+```
+
+或者直接通过 运行 `ts-node hello.ts`。
 
 ## 语法
 
 - 类型是一种集合。[^1]
 - 多种多样的 for 循环语法。c-for, for-in, for-of, forEach, every, some.
-- 各种语法的 export 与 import: [https://segmentfault.com/a/1190000018249137]
 
 ## 资料
 
@@ -42,4 +57,8 @@ tags:
 - [TypeScript 入门教程](https://ts.xcatliu.com/)
 - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
 
+## 参考
+
 [^1]: [Types as Sets](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)
+
+## Next
