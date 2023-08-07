@@ -1,8 +1,8 @@
 ---
-title: "Node.js Pieces"
-description: "Nodejs 拾遗"
+title: "NodeJS"
+description: "NodeJS 使用"
 date: 2023-02-22T22:45:03+08:00
-slug: nodejs-pieces
+slug: nodejs
 image:
 math:
 license:
@@ -26,12 +26,12 @@ tags:
 
 常用命令：
 
-- 查看可安装版本: `nvm ls-remote`
+- 查看可安装版本：`nvm ls-remote`
 - 查看已安装版本：`nvm ls`
 - 安装指定版本 Nodejs: `nvm install <version>`，比如最新的 `lts` 版本：`nvm install --lts`
-- 使用指定版本: `nvm use --lts`，项目中可以使用 [.nvmrc](https://github.com/nvm-sh/nvm#nvmrc) 文件进行版本控制。
-- 显示当前使用版本: `nvm current`
-- 在指定版本上运行 `command` ：`nvm exec [<version>] [<command>]`,如果使用了 `.nvmrc` 文件，`version`参数可以不用指定，比如 `nvm exec yarn start`
+- 使用指定版本：`nvm use --lts`，项目中可以使用 [.nvmrc](https://github.com/nvm-sh/nvm#nvmrc) 文件进行版本控制。
+- 显示当前使用版本：`nvm current`
+- 在指定版本上运行 `command` ：`nvm exec [<version>] [<command>]`, 如果使用了 `.nvmrc` 文件，`version`参数可以不用指定，比如 `nvm exec yarn start`
 - Run `node` on `version` with `args` as arguments. `nvm run [<version>] [<args>]`, Uses `.nvmrc` if available and version is omitted.
 - 取消当前 `shell` 行的 nvm 效果：`nvm deactivate`
 
@@ -50,7 +50,7 @@ Example:
   nvm use --lts                         Use the latest LTS version
 ```
 
-更多用法参考[使用说明](https://github.com/nvm-sh/nvm#usage)。
+更多用法参考 [使用说明](https://github.com/nvm-sh/nvm#usage)。
 
 ## fnm
 

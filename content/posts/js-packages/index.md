@@ -25,19 +25,24 @@ tags:
 
 [npm](https://www.npmjs.com/) 是当前最大的软件 registry。
 
+### registry
+
 ### client
 
 [npm cli](https://docs.npmjs.com/cli/v9/commands) 工具可和 registry 进行交互。常用的命令有：
 
-#### install
+- init
 
-可以安装多种形式的 package。关于 [package.json](https://docs.npmjs.com/cli/v9/configuring-npm/package-json)。
+  创建新的 npm package。
 
-#### npx
+- install
 
-[npx 使用教程](https://www.ruanyifeng.com/blog/2019/02/npx.html)
+  可以安装多种形式的 package。关于 [package.json](https://docs.npmjs.com/cli/v9/configuring-npm/package-json)。
 
-#### config
+- uninstall
+- upgrade
+
+### config
 
 npm 通过 [`.npmrc`](https://docs.npmjs.com/cli/v9/configuring-npm/npmrc) 来管理配置，该文件有四个级别：
 
@@ -54,9 +59,9 @@ npm 通过 [`.npmrc`](https://docs.npmjs.com/cli/v9/configuring-npm/npmrc) 来�
 
 但这种方法搜索 package 时需要添加`--registry=https://registry.npmjs.org`。
 
-### patch-package
+### npx
 
-可用于修改第三方 package 后生成 patch，方便后续使用或者分发。
+[npx 使用教程](https://www.ruanyifeng.com/blog/2019/02/npx.html)。
 
 ## yarn
 
