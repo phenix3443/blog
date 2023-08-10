@@ -19,9 +19,11 @@ tags:
 
 本文介绍日常开发中和私有仓库相关的问题。
 
+<!---->
+
 ## Go module[^1]
 
-虽然 Go 模块通常从其源代码仓库中分发，但 Go 团队还运行一些[中央 Go 模块服务](https://proxy.golang.org/)，以确保原始仓库发生问题时模块可以继续使用。默认情况下，Go 被配置为使用这些服务，但是当尝试下载私有模块时，它们可能会导致问题，因为它们无权访问这些私有模块。要告诉 Go 某些导入路径是私有的并且它不应该尝试使用中央 Go 服务，您可以使用`GOPRIVATE`环境变量。`GOPRIVATE`环境变量是导入路径前缀的逗号分隔列表，当遇到时，Go 工具将尝试直接访问它们，而不是通过中央服务。详见[官方说明](https://pkg.go.dev/cmd/go#hdr-Configuration_for_downloading_non_public_code)
+虽然 Go 模块通常从其源代码仓库中分发，但 Go 团队还运行一些 [中央 Go 模块服务](https://proxy.golang.org/)，以确保原始仓库发生问题时模块可以继续使用。默认情况下，Go 被配置为使用这些服务，但是当尝试下载私有模块时，它们可能会导致问题，因为它们无权访问这些私有模块。要告诉 Go 某些导入路径是私有的并且它不应该尝试使用中央 Go 服务，您可以使用`GOPRIVATE`环境变量。`GOPRIVATE`环境变量是导入路径前缀的逗号分隔列表，当遇到时，Go 工具将尝试直接访问它们，而不是通过中央服务。详见 [官方说明](https://pkg.go.dev/cmd/go#hdr-Configuration_for_downloading_non_public_code)
 
 为了使用私有模块，通过在`GOPRIVATE`变量中设置它来告诉 Go 将哪个路径视为私有的。例如`github.com/your_github_username/mysecret`。这样有个问题：需要将每个私有存储库单独添加到`GOPRIVATE`，如下所示：
 
@@ -49,7 +51,7 @@ repository, see https://golang.org/doc/faq#git_https for additional information.
 
 ## Github Token[^2]
 
-对于用户，可以使用用户凭证而不是 public key 访问仓库。详见[](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)，注意用户凭证只能用于 HTTPS 访问。
+对于用户，可以使用用户凭证而不是 public key 访问仓库。详见 [](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)，注意用户凭证只能用于 HTTPS 访问。
 
 ## GitHub Actions[^3]
 
