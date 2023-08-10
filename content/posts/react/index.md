@@ -27,14 +27,16 @@ tags:
 
 ### jsx
 
-## typescript
+## create-react-app
 
-通过 [create-react-app](https://create-react-app.dev/docs/adding-typescript/) 创建 typescript 项目：
+[create-react-app](https://create-react-app.dev/) 是官方支持的创建单页 React 应用程序的方法。它提供了无需配置的现代构建设置。
+
+可以通过`--template`直接从模板创建项目，比如创建 typescript 项目：
 
 ```shell
 npx create-react-app my-app --template typescript
 ```
 
-## 创建项目
+[官方文档](https://create-react-app.dev/docs/documentation-intro) 介绍了很多方便 react 开发的设置，可以翻一下。
 
-## 参考
+## Next
