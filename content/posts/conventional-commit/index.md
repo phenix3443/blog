@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [如何构建高效的开发工具链]
-categories: [code-style]
-tags: [git, github]
+categories: [CD]
+tags: [git, github, code-style]
 images: []
 ---
 
@@ -116,3 +116,7 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
 ### vscode extension
 
 可以搭配 vscode extension [commitlint](https://marketplace.visualstudio.com/items?itemName=joshbolduc.commitlint) 一起使用，该扩展需要设置 project 或者 vscode 级别的 commitlint 配置。
+
+## Next
+
+- 使用 [release please]({{< ref "../release-please" >}}) 自动生成 changelog，自动更新版本。
