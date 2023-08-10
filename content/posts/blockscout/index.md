@@ -15,13 +15,17 @@ tags:
   - explorer
 ---
 
+本文介绍如何使用 blockscout 搭建自己的区块浏览器。
+
+<!---->
+
 ## 概述
 
-[Blockscout](https://www.blockscout.com/) 是一个功能全面的[^1]、开源的 EVM 区块浏览器，为以太坊生态系统内外的 100 多个执行层链和测试网提供服务[^2]。
+[Blockscout](https://www.blockscout.com/) 是一个功能全面的 [^1]、开源的 EVM 区块浏览器，为以太坊生态系统内外的 100 多个执行层链和测试网提供服务 [^2]。
 
 ### 合约代码调用分析
 
-[Sol2Uml](https://github.com/blockscout/blockscout-rs/tree/main/visualizer)
+[Sol2Uml](https://github.com/blockscout/blockscout-rs/tree/main/visualizer) 是一个 Rust 服务，基于 sol2uml（Node.js 包）为 Solidity 合约生成统一建模语言 (UML) 类图和存储图。
 
 ### 合约交互
 
@@ -35,7 +39,7 @@ tags:
 
 ## 配置
 
-blockscout 很多功能配置是通过环境变量[^3]来进行控制，所有区块链都必须定义一些环境变量[^4]，除此之外，剩余的配置（比如修改图标什么的）在 [Configuration Options](https://docs.blockscout.com/for-developers/configuration-options) 有说明。
+blockscout 很多功能配置是通过环境变量 [^3] 来进行控制，所有区块链都必须定义一些环境变量 [^4]，除此之外，剩余的配置（比如修改图标什么的）在 [Configuration Options](https://docs.blockscout.com/for-developers/configuration-options) 有说明。
 
 ## 本地部署
 
