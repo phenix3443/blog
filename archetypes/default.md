@@ -1,5 +1,7 @@
 ---
 title: {{ replace .Name "-" " " | title }}
+description:
+slug: {{ lower .Name }}
 date: {{ .Date }}
 featured: false
 draft: true
