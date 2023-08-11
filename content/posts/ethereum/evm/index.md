@@ -15,9 +15,13 @@ tags:
   - evm
 ---
 
-## 概述[^1]
+本文介绍以太坊虚拟机。
 
-以太坊虚拟机（EVM）是以太坊智能合约的运行环境。它不仅是沙盒封装的，而且实际上是完全隔离的，这意味着在 EVM 内运行的代码不能访问网络，文件系统或其他进程。 甚至智能合约之间的访问也是受限的。
+<!--more-->
+
+## 概述
+
+[以太坊虚拟机 (EVM)](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-6) 是以太坊智能合约的运行环境。它不仅是沙盒封装的，而且实际上是完全隔离的，这意味着在 EVM 内运行的代码不能访问网络，文件系统或其他进程。 甚至智能合约之间的访问也是受限的。
 
 ## 存储、内存和栈
 
@@ -45,5 +49,4 @@ The EVM executes as a stack machine with a depth of 1024 items. Each item is a 2
 
 ## 参考
 
-[^1]: [以太坊虚拟机](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-6)
 [^2]: [ETHEREUM VIRTUAL MACHINE](https://ethereum.org/en/developers/docs/evm/)

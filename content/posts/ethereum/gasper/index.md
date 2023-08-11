@@ -16,6 +16,10 @@ tags:
   - gasper
 ---
 
+本文介绍 gasper 共识机制。
+
+<!--more-->
+
 ## 前置知识
 
 - [共识机制]({{< ref "../consensus" >}})
