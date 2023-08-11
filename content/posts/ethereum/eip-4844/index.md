@@ -16,7 +16,11 @@ tags:
   - sharding
 ---
 
-## 摘要 (Abstract)[^1]
+本文介绍 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)。
+
+<!--more-->
+
+## 摘要 (Abstract)
 
 为“blob-carrying transaction”引入一种新的交易格式，其中包含大量无法通过 EVM 执行访问的数据，但其承诺 (commitment) 可以被访问。该格式旨在与完全分片 (full sharding) 所用格式完全兼容。
 
@@ -26,7 +30,7 @@ tags:
 
 然而，即使这些费用对许多用户来说也太贵了。解决该问题长期解决方案一直是数据分片 (data sharding)，这将为 rollups 可以使用的链上的块增加大约 16MB 的专用数据空间。然而，数据分片仍将需要相当长的时间来完成实施和部署。
 
-本 EIP 通过实现分片中使用的交易格式，在这之前提供了一个权宜之计，但实际上没有分片这些交易。相反，这种交易格式的数据只是信标链的一部分，并被所有共识节点完全下载（但只在相对较短的延迟后可以被删除）。与完全的数据分片相比，这种 EIP 对可以包含的这些交易数量的上限有所降低，对应于每个区块的目标是 ~0.25MB，上限是 ~0.5MB。
+本 EIP 通过实现分片中使用的交易格式，在这之前提供了一个权宜之计，但实际上没有分片这些交易。相反，这种交易格式的数据只是信标链的一部分，并被所有共识节点完全下载（但只在相对较短的延迟后可以被删除）。与完全的数据分片相比，这种 EIP 对可以包含的这些交易数量的上限有所降低，对应于每个区块的目标是 `~0.25MB`，上限是 `~0.5MB`。
 
 ## 规范 (Specification)
 
@@ -394,7 +398,3 @@ Copyright and related rights waived via CC0.
 Please cite this document as:
 
 Vitalik Buterin (@vbuterin), Dankrad Feist (@dankrad), Diederik Loerakker (@protolambda), George Kadianakis (@asn-d6), Matt Garnett (@lightclient), Mofi Taiwo (@Inphi), Ansgar Dietrichs (@adietrichs), "EIP-4844: Shard Blob Transactions [DRAFT]," Ethereum Improvement Proposals, no. 4844, February 2022. [Online serial]. Available: [https://eips.ethereum.org/EIPS/eip-4844].
-
-## 参考
-
-[^1]: [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)

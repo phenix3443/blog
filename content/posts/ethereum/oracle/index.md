@@ -15,13 +15,13 @@ tags:
   - oracle
 ---
 
-本文介绍以太坊预言机--oracles。
+本文介绍以太坊预言机。
 
 <!--more-->
 
 ## 概述
 
-[Oracle](https://ethereum.org/en/developers/docs/oracles/) 作为“桥梁”将区块链上的智能合约与链下的数据提供者连接起来。通过 Oracle ，不仅可以“拉取 (`pull`)”链下数据并在以太坊上广播，还可以从区块链上“推送 (`push`)”信息到外部系统。
+[Oracle](https://ethereum.org/en/developers/docs/oracles/) 作为“桥梁”将区块链上的智能合约与链下的数据提供者连接起来。通过 Oracle，不仅可以“拉取 (`pull`)”链下数据并在以太坊上广播，还可以从区块链上“推送 (`push`)”信息到外部系统。
 
 Oracle 可以从不同角度进行分类：
 
