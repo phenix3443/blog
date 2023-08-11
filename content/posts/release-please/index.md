@@ -1,6 +1,6 @@
 ---
 title: Release Please
-description:
+description: 使用 release please 实现 github 自动发版
 slug: release-please
 date: 2023-08-10T23:09:34+08:00
 featured: false
@@ -24,6 +24,7 @@ images: []
 
 [release please](https://github.com/googleapis/release-please/)Release Please 自动生成 CHANGELOG、创建 GitHub 版本以及项目的版本更新。
 
-## CI
+- 可以通过 [cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md) 通过命令行执行。
+- 可以通过 [release-please-action](https://github.com/google-github-actions/release-please-action) 集成到 Github Action 中。
 
 ## Next
