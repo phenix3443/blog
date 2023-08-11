@@ -13,13 +13,18 @@ categories:
   - ethereum
 tags:
   - data
+  - bridge
 ---
 
-## 概述[^1]
+本文描述以太坊跨链相关知识。
+
+<!--more-->
+
+## 概述
 
 随着 L1 区块链和 L2 扩展解决方案的激增，以及越来越多的去中心化应用程序进行跨链，跨链通信和资产转移的需求已成为网络基础设施的重要组成部分。
 
-区块链本身彼此孤立，也就是说无法跨链进行交易和通信，这限制了生态系统内的重大活动和创新。通过 bridge， 代币、消息、任意数据，甚至智能合约调用都可以跨链进行。
+区块链本身彼此孤立，也就是说无法跨链进行交易和通信，这限制了生态系统内的重大活动和创新。通过 [bridge](https://ethereum.org/en/developers/docs/bridges/)，代币、消息、任意数据，甚至智能合约调用都可以跨链进行。
 
 ## 好处
 
@@ -39,15 +44,15 @@ tags:
 
 虽然有许多类型的 bridge 设计，但有三种资产跨链转移的方式非常突出：
 
-- 锁定和造币(lock and mint)：在源链上锁定资产，在目的链上造币。
-- 烧毁和造币(burn and mint)：在源链上烧毁资产，在目的链上铸造资产。
-- 原子交换(atomic swap)：用源链上的资产与另一方交换目的链上的资产。
+- 锁定和造币 (lock and mint)：在源链上锁定资产，在目的链上造币。
+- 烧毁和造币 (burn and mint)：在源链上烧毁资产，在目的链上铸造资产。
+- 原子交换 (atomic swap)：用源链上的资产与另一方交换目的链上的资产。
 
 ## 类型
 
 bridge 通常可以分为以下几类：
 
-- 原生 bridge。这类 bridge 通常是为了在特定的区块链上引导流动性，使用户更容易将资金转移到生态系统中。例如，[Arbitrum bridge](https://bridge.arbitrum.io/) 的建立是为了方便用户从以太坊主网 bridge 到 Arbitrum。类似的还有 Polygon PoS bridge，[Optimism Gateway](https://app.optimism.io/bridge)等。
+- 原生 bridge。这类 bridge 通常是为了在特定的区块链上引导流动性，使用户更容易将资金转移到生态系统中。例如，[Arbitrum bridge](https://bridge.arbitrum.io/) 的建立是为了方便用户从以太坊主网 bridge 到 Arbitrum。类似的还有 Polygon PoS bridge，[Optimism Gateway](https://app.optimism.io/bridge) 等。
 - 基于验证器或 oracle 的 bridge。这类 bridge 依靠外部验证器组或 oracle 来验证跨链传输。比如：Multichain 和 Across。
 - 通用信息传递 bridge。这类 bridge 可以跨链传输资产，以及信息和任意数据。比如 Nomad 和 LayerZero。
 - 流动性网络。这类 bridge 主要侧重于通过原子交换将资产从一个链转移到另一个链。一般来说，它们不支持跨链信息传递。例如 Connext 和 Hop。
@@ -74,7 +79,7 @@ bridge 通常可以分为以下几类：
 
 ## 风险
 
-bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，而且仍处于发展的早期阶段。使用任何 bridge 都有以下风险：
+bridge 占了 DeFi 最大黑客的 [前三名](https://rekt.news/leaderboard/)，而且仍处于发展的早期阶段。使用任何 bridge 都有以下风险：
 
 - 智能合约风险。虽然许多 bridge 已经成功通过审计，但只要智能合约有一个缺陷，资产就会暴露在黑客面前（例如：[Solana 的虫洞 bridge](https://rekt.news/wormhole-rekt/)）。
 - 系统性金融风险。许多 bridge 使用包装的资产在新的链上铸造原始资产。这使生态系统面临系统性风险，因为我们已经看到包装好的代币被利用。
@@ -107,7 +112,7 @@ bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，
 
 ### 在多条链上部署一个 dapp
 
-要在多个链上部署一个 dapp，开发人员可以使用 [Alchemy](https://www.alchemy.com/)、[Hardhat](https://hardhat.org/)、[Truffle](https://trufflesuite.com/)、[Moralis](https://moralis.io/) 等开发平台。通常情况下，这些平台都有可组合的插件，可以使 dapp 实现跨链。例如，开发者可以使用 [hardhat-deploy 插件](https://github.com/wighawag/hardhat-deploy)提供的确定性部署代理。
+要在多个链上部署一个 dapp，开发人员可以使用 [Alchemy](https://www.alchemy.com/)、[Hardhat](https://hardhat.org/)、[Truffle](https://trufflesuite.com/)、[Moralis](https://moralis.io/) 等开发平台。通常情况下，这些平台都有可组合的插件，可以使 dapp 实现跨链。例如，开发者可以使用 [hardhat-deploy 插件](https://github.com/wighawag/hardhat-deploy) 提供的确定性部署代理。
 
 实例：
 
@@ -121,7 +126,3 @@ bridge 占了 DeFi 最大黑客的[前三名](https://rekt.news/leaderboard/)，
 
 - [The Graph](https://thegraph.com/en/)
 - [Tenderly](https://tenderly.co/)
-
-## 参考
-
-[^1]: [bridge](https://ethereum.org/en/developers/docs/bridges/)

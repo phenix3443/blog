@@ -1,19 +1,24 @@
 ---
 title: "Foundry"
 description:
-slug: foundry
+slug: 使用 foundry 编写智能合约
 date: 2023-03-15T10:17:15+08:00
 image:
 math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
+series: [以太坊开发工具链]
 categories:
   - ethereum
 tags:
   - foundry
 ---
+
+本文介绍如何使用 Foundry 编写智能合约。
+
+<!--more-->
 
 ## 概述
 
@@ -35,7 +40,7 @@ foundry 由以下部分组成：
 - [Forge](https://github.com/foundry-rs/foundry/blob/master/forge): 以太坊测试框架（如 Truffle, Hardhat 和 DappTools）。
 - [Cast](https://github.com/foundry-rs/foundry/blob/master/cast): 用于与 EVM 智能合约互动，发送交易和获取链上数据，可用于合约调试。
 - [Anvil](https://github.com/foundry-rs/foundry/blob/master/anvil): 本地以太坊节点，类似于 Ganache、Hardhat 网络。
-- [Chisel](https://github.com/foundry-rs/foundry/blob/master/chisel):快速、功利、冗长的 solidity REPL。
+- [Chisel](https://github.com/foundry-rs/foundry/blob/master/chisel): 快速、功利、冗长的 solidity REPL。
 
 ## 使用
 

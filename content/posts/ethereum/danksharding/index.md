@@ -99,4 +99,3 @@ Builders（数据生成者）是一种新角色，它会聚合所有以太坊 L1
 
 - [多项式承诺]({{< ref "../kzg" >}})
 - [proto-danksharding]({{< ref "../proto-danksharding" >}})
-- [eip-4844]({{< ref "../eip-4844" >}})

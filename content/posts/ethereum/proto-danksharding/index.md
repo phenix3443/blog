@@ -66,9 +66,9 @@ Blob 是一个用于放置 `L2 压缩数据`的“大数据块”，`存在共�
 Blob 是由共识层的节点进行存储的，而不是像 Calldata 那样在会直接上主链，这也带来了 Blob 的两个核心特点：
 
 - 不能像 Calldata 那样被 EVM 所读取，这也意味着未来的分片工作只需要对信标节点 (beacon node) 进行修改。
-- 有生命周期。每 2 周后会修剪一次 blob。可用时间长到足以让 L2 的所有角色都能检索到它，短到足以让磁盘使用可控。这使得 Blobs 的价格比 CALLDATA 便宜，因为 CALLDATA 永远保存在历史中。[^2]
+- 有生命周期。每 2 周后会修剪一次 blob。可用时间长到足以让 L2 的所有角色都能检索到它，短到足以让磁盘使用可控。这使得 Blobs 的价格比 CALLDATA 便宜，因为 CALLDATA 永远保存在历史中。
 
-更细节一点的来说 [^4]：
+更细节一点的来说：
 
 - Blob 本身，是一个由 4096 个元素所构成的向量 (Vector)，每个元素 32 个字节，每个 blob 约为`4096 * 32 bytes=128kB`。单块 blob 上限可以从低开始，并在多次网络升级中增长。
 
@@ -179,7 +179,9 @@ EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完�
 ## 参考
 
 [^1]: [一文读懂 EIP-4844：如何降低 Layer2 费用 100 倍？](https://www.8btc.com/article/6794798)
-[^2]: [eip4844](https://www.eip4844.com)
 [^3]: [OP in Paris: OP Lab's Protolambda walks us through EIP-4844](https://www.youtube.com/watch?v=KQ_kIlxg3QA)
-[^4]: [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
 [^5]: [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
+
+## Next
+
+- [eip-4844]({{< ref "../eip-4844" >}})
