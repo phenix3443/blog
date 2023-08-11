@@ -22,7 +22,7 @@ images: []
 
 ## 概述
 
-[release please](https://github.com/googleapis/release-please/)Release Please 自动生成 CHANGELOG、创建 GitHub 版本以及项目的版本更新。
+[release please](https://github.com/googleapis/release-please/) 自动生成 CHANGELOG、创建 GitHub 版本以及项目的版本更新。
 
 - 可以通过 [cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md) 通过命令行执行。
 - 可以通过 [release-please-action](https://github.com/google-github-actions/release-please-action) 集成到 Github Action 中。

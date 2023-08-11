@@ -87,6 +87,7 @@ commitlint 配置文件可以有多种文件 [格式](https://github.com/convent
 ```shell
 npm install --save-dev @commitlint/cli @commitlint/config-conventional husky
 npx husky install
+npm pkg set scripts.prepare="husky install"
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
 
