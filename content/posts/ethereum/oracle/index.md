@@ -1,6 +1,6 @@
 ---
-title: "Oracles"
-description: 以太坊预言机介绍
+title: "Ethereum Oracles"
+description: 以太坊预言机
 slug: ethereum-oracle
 date: 2023-03-07T11:14:15+08:00
 image:
@@ -15,22 +15,26 @@ tags:
   - oracle
 ---
 
-## 概述[^1]
+本文介绍以太坊预言机--oracles。
 
-Oracle 作为“桥梁”将区块链上的智能合约与链下的数据提供者连接起来。通过 Oracle ，不仅可以“拉取(`pull`)”链下数据并在以太坊上广播，还可以从区块链上“推送(`push`)”信息到外部系统。
+<!--more-->
+
+## 概述
+
+[Oracle](https://ethereum.org/en/developers/docs/oracles/) 作为“桥梁”将区块链上的智能合约与链下的数据提供者连接起来。通过 Oracle ，不仅可以“拉取 (`pull`)”链下数据并在以太坊上广播，还可以从区块链上“推送 (`push`)”信息到外部系统。
 
 Oracle 可以从不同角度进行分类：
 
 - 基于数据来源：一个或多个来源
 - 信任模型：中心化或分布式
 - 系统架构：
-  - 即时读取(immediate-read)
-  - 发布-订阅(publish-subscribe)
-  - 请求-响应(request-response)
+  - 即时读取 (immediate-read)
+  - 发布-订阅 (publish-subscribe)
+  - 请求-响应 (request-response)
 - 数据流向：
-  - 输入型(input oracles)：是否否检索外部数据供链上合约使用
-  - 输出型(output oracles)：从区块链上发送信息给链下应用
-  - 计算型(computational oracles)：在链下执行计算任务
+  - 输入型 (input oracles)：是否否检索外部数据供链上合约使用
+  - 输出型 (output oracles)：从区块链上发送信息给链下应用
+  - 计算型 (computational oracles)：在链下执行计算任务
 
 ## 为什么需要 Oracle
 
@@ -46,11 +50,11 @@ Oracles 通过从链下来源获取信息并将其存储在区块链上供智能
 
 为了做到这一点，Oracle 通常是由一个运行在链上的智能合约和一些链下的组件组成的。链上合约接收来自其他智能合约的数据请求，并将其传递给链下组件（称为`Oracle Node`）。`Oracle Node`可以查询数据源并发送交易，将请求的数据存储在链上的 Oracle 智能合约中。
 
-从本质上讲，Oracle 弥合了区块链和外部环境之间的信息差距，创造了“混合智能合约(`hybrid smart contracts`)”。混合智能合约基于链上合约代码和链下基础设施的组合而运作。之前描述的去中心化的预测市场价格的合约就是混合智能合约的一个很好的例子。
+从本质上讲，Oracle 弥合了区块链和外部环境之间的信息差距，创造了“混合智能合约 (`hybrid smart contracts`)”。混合智能合约基于链上合约代码和链下基础设施的组合而运作。之前描述的去中心化的预测市场价格的合约就是混合智能合约的一个很好的例子。
 
 ## Oracle 面临问题
 
-通过将链下信息其存储在交易(`transaction`)的数据有效载荷(`payload`)中，就可以让智能合约访问链下数据。但这带来了新的问题：
+通过将链下信息其存储在交易 (`transaction`) 的数据有效载荷 (`payload`) 中，就可以让智能合约访问链下数据。但这带来了新的问题：
 
 - 如何验证 payload 的信息是从正确的来源提取的，或者没有被篡改过？
 - 如何确保这些数据始终可用并定期更新？
@@ -58,7 +62,7 @@ Oracles 通过从链下来源获取信息并将其存储在区块链上供智能
 所谓的`Oracle Problem`展示了使用 Oracle 向智能合约时出现的问题：
 
 - 必须确保来自 Oracle 的数据是正确的，否则智能合约的执行将产生错误的结果；
-- 无信任(`trustlessness`)同样重要：如果必须信任 Oracle 操作者可靠地提供准确的信息，也就使智能合约失去了其最具决定性的品质。
+- 无信任 (`trustlessness`) 同样重要：如果必须信任 Oracle 操作者可靠地提供准确的信息，也就使智能合约失去了其最具决定性的品质。
 
 不同的 Oracle 在解决上述问题的方法上有所不同，我们将在后面探讨这些方法。虽然没有一个 Oracle 是完美的，但可以通过它们如何处理以下挑战来判断其优劣：
 
@@ -84,7 +88,7 @@ Oracles 通过从链下来源获取信息并将其存储在区块链上供智能
 
 Oracle Contract 是 Oracle 服务的链上组件：它监听来自其他合约的数据请求，将数据查询转发给`Oracle Node`，并将返回的数据经过处理广播给客户合约。
 
-Oracle Contract 对外提供一些供客户合约请求时调用的功能。在收到一个新的查询后，智能合约将发出一个包含数据请求细节的[日志事件(log event)](https://ethereum.org/en/developers/docs/smart-contracts/anatomy/#events-and-logs)。这将通知订阅（通常使用类似 `JSON-RPC eth_subscribe` 命令）了日志的链下节点，由这些节点检索日志事件中定义的数据。
+Oracle Contract 对外提供一些供客户合约请求时调用的功能。在收到一个新的查询后，智能合约将发出一个包含数据请求细节的 [日志事件 (log event)](https://ethereum.org/en/developers/docs/smart-contracts/anatomy/#events-and-logs)。这将通知订阅（通常使用类似 `JSON-RPC eth_subscribe` 命令）了日志的链下节点，由这些节点检索日志事件中定义的数据。
 
 Pedro Costa 上 [Oracle Contract](https://medium.com/@pedrodc/implementing-a-blockchain-oracle-on-ethereum-cedc7e26b49e) 是一个简单的 Oracle 服务，可以根据其他智能合约的请求查询链下 API，并将请求的信息存储在区块链上。
 
@@ -92,7 +96,7 @@ Pedro Costa 上 [Oracle Contract](https://medium.com/@pedrodc/implementing-a-blo
 
 `Oracle Node`是 Oracle 服务的链下组件：它从外部来源（如第三方服务器上托管的 API）提取信息，并将其放在链上供智能合约消费。Oracle Node 监听来自链上 Oracle Contract 的事件，并着手完成日志中描述的任务。
 
-`Oracle Node`的一个常见任务是向 API 服务发送 `HTTP GET` 请求，解析响应以提取相关数据，转换为区块链可读的输出，并通过将其纳入到 Oracle Contract 的交易中在链上发送。`Oracle Node`也可能被要求使用“真实性证明(authenticity proofs)”来证明所提交信息的有效性和完整性，这一点将在后面探讨。
+`Oracle Node`的一个常见任务是向 API 服务发送 `HTTP GET` 请求，解析响应以提取相关数据，转换为区块链可读的输出，并通过将其纳入到 Oracle Contract 的交易中在链上发送。`Oracle Node`也可能被要求使用“真实性证明 (authenticity proofs)”来证明所提交信息的有效性和完整性，这一点将在后面探讨。
 
 计算型 Oracle 也依靠链下节点来执行密集的计算任务，考虑到 Gas 成本和区块大小的限制，这些任务在链上执行是不现实的。
 
@@ -170,11 +174,11 @@ Oracle 有不同的类型，包括即时读取、发布-订阅和请求-响应�
 
 [`Schelling point`](<https://en.wikipedia.org/wiki/Focal_point_(game_theory)>) 是一个博弈论的概念，它假设多个实体在没有任何交流的情况下总是默认为一个共同的解决方案。Schelling point 机制经常被用于去中心化的 Oracle 网络中，以使各节点对数据请求的答案达成共识。
 
-一个早期的例子是 [SchellingCoin](https://blog.ethereum.org/2014/03/28/schellingcoin-a-minimal-trust-universal-data-feed/)，这是一个提议的数据源，参与者提交对“scalar”问题（答案由量级描述的问题，例如，"ETH 的价格是多少？"）的回应，同时也提交押金。得分在 25-75 [分位数](https://en.wikipedia.org/wiki/Percentile)之间的用户会得到奖励，而那些数值基本偏离中位数的用户会受到惩罚。
+一个早期的例子是 [SchellingCoin](https://blog.ethereum.org/2014/03/28/schellingcoin-a-minimal-trust-universal-data-feed/)，这是一个提议的数据源，参与者提交对“scalar”问题（答案由量级描述的问题，例如，"ETH 的价格是多少？"）的回应，同时也提交押金。得分在 25-75 [分位数](https://en.wikipedia.org/wiki/Percentile) 之间的用户会得到奖励，而那些数值基本偏离中位数的用户会受到惩罚。
 
-虽然 SchellingCoin 今天并不存在，但一些去中心化的 Oracle(特别是 [Maker Protocol 的 Oracle](https://docs.makerdao.com/smart-contract-modules/oracle-modules))使用 schelling point 机制来提高 Oracle 数据的准确性。每个 Maker Oracle 由一个链下的提交质押资产的市场价格的 P2P 网络节点（"relayers" and "feeds"）以及一个链上计算所有提供价值的中值的“Medianizer”合约组成。一旦指定的截止日期结束，这个中值将成为相关资产的新参考价格。
+虽然 SchellingCoin 今天并不存在，但一些去中心化的 Oracle（特别是 [Maker Protocol 的 Oracle](https://docs.makerdao.com/smart-contract-modules/oracle-modules)) 使用 schelling point 机制来提高 Oracle 数据的准确性。每个 Maker Oracle 由一个链下的提交质押资产的市场价格的 P2P 网络节点（"relayers" and "feeds"）以及一个链上计算所有提供价值的中值的“Medianizer”合约组成。一旦指定的截止日期结束，这个中值将成为相关资产的新参考价格。
 
-其他使用 Schelling point 机制的 Oracle 的例子包括[Chainlink Off-Chain Reporting](https://docs.chain.link/docs/off-chain-reporting/)和 Witnet。在这两个系统中，点对点网络中的 Oracle Node 的响应被汇总成总值，如平均值或中位数。节点根据其响应与总值的一致或偏离程度而受到奖惩。
+其他使用 Schelling point 机制的 Oracle 的例子包括 [Chainlink Off-Chain Reporting](https://docs.chain.link/docs/off-chain-reporting/) 和 Witnet。在这两个系统中，点对点网络中的 Oracle Node 的响应被汇总成总值，如平均值或中位数。节点根据其响应与总值的一致或偏离程度而受到奖惩。
 
 Schelling point 机制是有吸引力的，因为它们最大限度地减少了链上的操作（只需要发送一笔交易），同时保证去中心化。
 
@@ -188,9 +192,9 @@ Oracle Contract 可以依赖多个节点（这些节点也依赖多个数据源�
 
 #### 良好的激励兼容性
 
-去中心化的 Oracle 实现了各种激励设计，以防止`Oracle Node`之间的[拜占庭错误](https://en.wikipedia.org/wiki/Byzantine_fault)。具体来说，他们实现了可归属性和问责制。
+去中心化的 Oracle 实现了各种激励设计，以防止`Oracle Node`之间的 [拜占庭错误](https://en.wikipedia.org/wiki/Byzantine_fault)。具体来说，他们实现了可归属性和问责制。
 
-- 去中心化的`Oracle Node`通常被要求对其提供的数据进行签名，以回应数据请求。这些信息有助于评估`Oracle Node`的历史表现，这样，用户在提出数据请求时就可以过滤掉不可靠的`Oracle Node`。一个例子是 Chainlink 的 [Oracle 信誉](https://oracle.reputation.link/)或 Witnet 的[算法信誉系统](https://docs.witnet.io/intro/about/architecture#algorithmic-reputation-system)。
+- 去中心化的`Oracle Node`通常被要求对其提供的数据进行签名，以回应数据请求。这些信息有助于评估`Oracle Node`的历史表现，这样，用户在提出数据请求时就可以过滤掉不可靠的`Oracle Node`。一个例子是 Chainlink 的 [Oracle 信誉](https://oracle.reputation.link/) 或 Witnet 的 [算法信誉系统](https://docs.witnet.io/intro/about/architecture#algorithmic-reputation-system)。
 
 - 去中心化的 Oracle 可能要求节点对他们提交的数据的真实性进行质押。如果数据被证实，这个质押可以和诚实服务的奖励一起被退回；如果数据被证伪，它会受到惩罚。
 
@@ -204,7 +208,7 @@ Oracle Contract 可以依赖多个节点（这些节点也依赖多个数据源�
 
 例如，如果你计划建立一个 DeFi 借贷协议，需要查询作为质押品存入的资产（如 ETH）的当前市场价格。
 
-DeFi 中流行的“Price Oracle”包括 Chainlink Price Feeds、Compound Protocol 的 [Open Price Feed](https://compound.finance/docs/prices)、Uniswap 的 [Time-Weighted Average Prices(TWAPs)]({{< ref "../../uniswap/v2/core-concepts/oracles">}}) 和 [Maker Oracles](https://docs.makerdao.com/smart-contract-modules/oracle-module)。在将这些 Price Oracle 集成到项目之前，最好了解这些 Oracle 所带来的注意事项。本文详细分析了计划使用上述任何一种价格神器时需要考虑的问题。
+DeFi 中流行的“Price Oracle”包括 Chainlink Price Feeds、Compound Protocol 的 [Open Price Feed](https://compound.finance/docs/prices)、Uniswap 的 [Time-Weighted Average Prices(TWAPs)]({{< ref "../uniswap/v2/core-concepts/oracles">}}) 和 [Maker Oracles](https://docs.makerdao.com/smart-contract-modules/oracle-module)。在将这些 Price Oracle 集成到项目之前，最好了解这些 Oracle 所带来的注意事项。本文详细分析了计划使用上述任何一种价格神器时需要考虑的问题。
 
 下面是一个例子，说明你如何在智能合约中使用 Chainlink 价格源检索最新的 ETH 价格。
 
@@ -247,7 +251,7 @@ contract PriceConsumerV3 {
 
 某些区块链应用，如基于区块链的游戏或彩票计划，需要高水平的不可预测性和随机性才能有效工作。然而，区块链的确定性执行消除了任何随机性的来源。
 
-通常的做法是使用伪随机加密函数，如 blockhash，但这很容易[被其他行为者操纵](https://ethereum.stackexchange.com/questions/3140/risk-of-using-blockhash-other-miners-preventing-attack#:~:text=So%20while%20the%20miners%20can,to%20one%20of%20the%20players.)，即解决工作证明算法的矿工。另外，以太坊转向[PoS](https://ethereum.org/en/upgrades/merge/)意味着开发者不能再依靠区块链来实现链上随机性（不过 Beacon Chain 的 RANDAO 机制提供了另一种随机性来源）。
+通常的做法是使用伪随机加密函数，如 blockhash，但这很容易 [被其他行为者操纵](https://ethereum.stackexchange.com/questions/3140/risk-of-using-blockhash-other-miners-preventing-attack#:~:text=So%20while%20the%20miners%20can,to%20one%20of%20the%20players.)，即解决工作证明算法的矿工。另外，以太坊转向 [PoS](https://ethereum.org/en/upgrades/merge/) 意味着开发者不能再依靠区块链来实现链上随机性（不过 Beacon Chain 的 RANDAO 机制提供了另一种随机性来源）。
 
 在链下生成随机值并将其发送到链上是可能的，但这样做对用户提出了很高的信任要求。他们必须相信这个值确实是通过不可预测的机制产生的，并且在传输过程中没有被改变。
 
@@ -267,7 +271,7 @@ Oracle 服务使创建响应现实世界事件的智能合约成为可能，它�
 
 一些去中心化的 Oracle 网络提供自动化服务，允许链下`Oracle Node`根据用户定义的参数来触发智能合约功能。通常情况下，这需要在 Oracle 服务中“注册”目标合约，提供资金来支付 Oracle 操作，并指定触发合约的条件或时间。
 
-一个例子是 Chainlink 的 [Keeper 网络](https://chain.link/keepers)，它为智能合约提供了选择，以信任最小化和去中心化的方式外包定期维护任务。阅读[官方 Keeper 文档](https://docs.chain.link/docs/chainlink-keepers/introduction/)，了解使你的合约与 Keeper 兼容和使用 Upkeep 服务的信息。
+一个例子是 Chainlink 的 [Keeper 网络](https://chain.link/keepers)，它为智能合约提供了选择，以信任最小化和去中心化的方式外包定期维护任务。阅读 [官方 Keeper 文档](https://docs.chain.link/docs/chainlink-keepers/introduction/)，了解使你的合约与 Keeper 兼容和使用 Upkeep 服务的信息。
 
 ## 可用的 Oracle
 
@@ -282,7 +286,3 @@ Oracle 服务使创建响应现实世界事件的智能合约成为可能，它�
 - [Paralink](https://paralink.network/) - Paralink 为在以太坊和其他流行的区块链上运行的智能合约提供一个开源和去中心化的 Oracle 平台。
 - [Dos.Network](https://dos.network/) - DOS Network 是一个去中心化的 Oracle 服务网络，以现实世界的数据和计算能力提升区块链的可用性。
 - [Pyth 网络](https://pyth.network/) - Pyth 网络是一个第一方金融 Oracle 网络，旨在在一个防篡改、去中心化和可自我维持的环境中发布链上的连续真实世界数据。
-
-## 参考
-
-[^1]: [oracle](https://ethereum.org/en/developers/docs/oracles/)

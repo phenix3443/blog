@@ -1,6 +1,7 @@
 ---
-title: "Cryptography"
+title: "Cryptography In blockchain"
 description: 区块链中的密码学
+slug: cryptography-in-blockchain
 date: 2023-04-04T22:18:38+08:00
 image:
 math:
@@ -8,11 +9,16 @@ license:
 hidden: false
 comments: true
 draft: false
+series: [以太坊中的密码学]
 categories:
   - ethereum
 tags:
   - cryptography
 ---
+
+本文介绍区块链中的密码学知识。
+
+<!--more-->
 
 ## 哈希函数
 
@@ -38,8 +44,6 @@ tags:
 
 参考：
 
-- [Exploring Elliptic Curve Pairings](https://medium.com/@VitalikButerin/exploring-elliptic-curve-pairings-c73c1864e627), 简体中文版[探索椭圆曲线配对](https://zhuanlan.zhihu.com/p/592591301)，[繁体中文版](https://medium.com/cryptocow/exploring-elliptic-curve-pairings-e322a3f029e8)
-
-## 延伸阅读
+- [Exploring Elliptic Curve Pairings](https://medium.com/@VitalikButerin/exploring-elliptic-curve-pairings-c73c1864e627), 简体中文版 [探索椭圆曲线配对](https://zhuanlan.zhihu.com/p/592591301)，[繁体中文版](https://medium.com/cryptocow/exploring-elliptic-curve-pairings-e322a3f029e8)
 
 ## 参考

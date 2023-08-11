@@ -18,7 +18,7 @@ tags:
 
 ## 前置知识
 
-- [共识机制]({{< ref "../ethereum/consensus" >}})
+- [共识机制]({{< ref "../consensus" >}})
 
 ## Gasper
 

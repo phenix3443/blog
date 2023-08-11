@@ -14,14 +14,12 @@ tags:
   - discord
 ---
 
-## 使用代理
+本文介绍 discord 使用。
 
-方法一：开启 Surge for Mac 或者 ClashX Pro`enhanced mode`是最省心的方式。
+<!--more-->
 
-方法二：直接使用网页版(推荐)。
+## 代理
 
-## 增强模式
-
-todo: 待补充
-
-[^1]: https://console.bywa.art/clientarea.php
+- 开启 Surge for Mac 或者 ClashX Pro`enhanced mode`是最省心的方式。
+- 或者使用 [透明代理]({{< ref "../clash" >}})。
+- 使用网页版。

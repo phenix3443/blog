@@ -52,7 +52,7 @@ Hardhat Network 有能力将主网区块链的状态复制到你的本地环境�
 其中，[loadFixture(fixture)](https://hardhat.org/hardhat-runner/docs/guides/test-contracts#using-fixtures) 可用于设置测试用例中网络的的初始状态：
 
 - 第一次调用 loadFixture 时，通过调用 `fixture` 函数设置测试网络的初始状态。
-- 在第二次调用时，`loadFixture` 将不再执行 `fixture`，而是回到第一次执行时候的状态，相当于是给测试网络做了一个快照(`snapshot`)。
+- 在第二次调用时，`loadFixture` 将不再执行 `fixture`，而是回到第一次执行时候的状态，相当于是给测试网络做了一个快照 (`snapshot`)。
 
 相比 `mocha.beforeEach`， 这样做更快，而且可以撤销之前测试所做的任何状态改变。
 
@@ -72,13 +72,13 @@ hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/do
 
 ### VSCode 集成
 
-可以使用[Mocha Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-mocha-test-adapter) 直接从 Visual Studio Code 运行测试。[^1]
+可以使用 [Mocha Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-mocha-test-adapter) 直接从 Visual Studio Code 运行测试。[^1]
 
 ## Deploy
 
 ## Verify Contract {#verify}
 
-[以太坊如何合约验证]({{< ref "../ethereum/contract/verify" >}}) 全面介绍了以太坊合约验证的具体细节。
+[以太坊如何合约验证]({{< ref "../contract/verify" >}}) 全面介绍了以太坊合约验证的具体细节。
 
 使用 Hardhat 验证合约是一件非常方便的事情，部署完成后，通过命令行即可验证：
 
@@ -91,7 +91,7 @@ hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/do
 - 验证过程的模拟将在本地运行，插件将检测和发现此过程中的任何错误。
 - 一旦模拟成功，合约将使用 Etherscan API 进行验证。
 
-通过该插件，我们还可以在定制的网络上进行合约验证，参见[Adding support for other networks](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan#adding-support-for-other-networks)
+通过该插件，我们还可以在定制的网络上进行合约验证，参见 [Adding support for other networks](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan#adding-support-for-other-networks)
 
 还可以在脚本中执行，要从 Hardhat 任务或脚本中调用验证任务，需要使用“verify:verify”子任务，下面是一个封装好合约验证函数，可以在合约部署完成后调用：
 
@@ -109,9 +109,9 @@ console 的执行环境与任务、脚本和测试是一样的。这意味着 `h
 
 为了使事情变得更容易，Hardhat 的控制台支持顶级的 `await` 语句（例如，`console.log(await ethers.getSigners())`）。
 
-## 命令行补全[^5]
+## 命令行补全 [^5]
 
-Hardhat 有一个配套的 npm 包(`hardhat-shorthand`)， 作为 npx hardhat 的简写(`hh`)，同时，它可以在你的终端中实现命令行补全。可以将其全局安装，运行本地安装的 hardhat。
+Hardhat 有一个配套的 npm 包 (`hardhat-shorthand`)， 作为 npx hardhat 的简写 (`hh`)，同时，它可以在你的终端中实现命令行补全。可以将其全局安装，运行本地安装的 hardhat。
 
 `npm install --global hardhat-shorthand`
 

@@ -9,22 +9,26 @@ license:
 hidden: false
 comments: true
 draft: false
+series: [以太坊中的密码学]
 categories:
   - ethereum
 tags:
   - kzg
-  - commitments
   - cryptography
 ---
 
+本文介绍 KZG 多项式承诺。
+
+<!--more-->
+
 ## 前置知识
 
-- 阅读[多项式承诺]({{< ref "../polynomial-commitments" >}})，了解什么是密码学中的承诺方案，以及什么是多项式承诺。
-- 阅读[区块链中的密码学]({{< ref "../cryptography" >}})，可以先了解一下多项式、群、环、域、椭圆曲线、生成元、配对公式、朗格朗日插值等数学定义。
+- 阅读 [多项式承诺]({{< ref "../polynomial-commitments" >}})，了解什么是密码学中的承诺方案，以及什么是多项式承诺。
+- 阅读 [区块链中的密码学]({{< ref "../cryptography" >}})，可以先了解一下多项式、群、环、域、椭圆曲线、生成元、配对公式、朗格朗日插值等数学定义。
 
 ## KZG 多项式承诺
 
-KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory M. Zaverucha 和 Ian Goldberg 在 2010 年发表了多项式承诺方案论文[“Constant-Size Commitments to Polynomials and Their Applications”](https://www.iacr.org/archive/asiacrypt2010/6477178/6477178.pdf)，也被称为卡特多项式承诺方案，该方案在 plonk-style 的 zk-snark 协议中有很广泛的应用。
+KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory M. Zaverucha 和 Ian Goldberg 在 2010 年发表了多项式承诺方案论文 [“Constant-Size Commitments to Polynomials and Their Applications”](https://www.iacr.org/archive/asiacrypt2010/6477178/6477178.pdf)，也被称为卡特多项式承诺方案，该方案在 plonk-style 的 zk-snark 协议中有很广泛的应用。
 
 它具有以下优点：
 
@@ -58,7 +62,7 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 
 ## KZG Ceremony
 
-[kzg ceremony](https://ceremony.ethereum.org/) 将为 EIP-4844（又名 proto-danksharding）等以太坊扩容工作提供密码学基础，这些类型的事件也被称为“可信设置(trust setup)”。
+[kzg ceremony](https://ceremony.ethereum.org/) 将为 EIP-4844（又名 proto-danksharding）等以太坊扩容工作提供密码学基础，这些类型的事件也被称为“可信设置 (trust setup)”。
 
 ![kzg ceremony](https://www.chaincatcher.com/upload/image/20230130/1675042683843709.jpg)
 
