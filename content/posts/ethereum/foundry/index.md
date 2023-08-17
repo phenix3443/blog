@@ -65,6 +65,53 @@ curl -L https://foundry.paradigm.xyz | bash
 
 一个好的做法是将 `test_Revert[If|When]_Condition` 与 `expectRevert` cheatcode 结合使用（下一节将更详细地解释作弊代码）。
 
+### 不变量测试 (invariant test)
+
+不变式测试允许对一组不变式表达式进行测试，测试的对象是来自预定义合约的预定义函数调用随机序列。在执行每次函数调用后，都会对所有已定义的不变式进行断言。
+
+不变式测试是暴露协议中不正确逻辑的有力工具。由于函数调用序列是随机的，并且有模糊输入，因此不变式测试可以揭示边缘情况和高度复杂协议状态中的错误假设和不正确逻辑。
+
+不变式测试活动有两个维度：运行和深度：
+
+运行：函数调用序列生成和运行的次数。
+深度：特定运行中函数调用的次数。每次函数调用后，都会断言所有已定义的不变式。如果函数调用回退，深度计数器仍会递增。
+此处将对这些变量和其他不变式配置方面进行说明。
+
+与在 Foundry 中运行标准测试时在函数名前缀上 test 相似，不变式测试也是在函数名前缀上 invariant（例如，函数 invariant_A()）。
+
+配置不变式测试的执行
+用户可通过 Forge 配置原语控制不变式测试的执行参数。配置可以全局应用，也可以按测试应用。有关此主题的详细信息，请参阅 📚 全局配置 和 📚 在线配置。
+
+### 差异测试 (Differential Testing)
+
+Forge 可用于 differential testing 和 differential fuzzing。甚至可以使用 [ffi cheatcode](https://book.getfoundry.sh/cheatcodes/ffi.html) 对非 EVM 可执行文件进行测试。
+
+#### 背景
+
+[differential testing](https://en.wikipedia.org/wiki/Differential_testing) 通过比较每个函数的输出，交叉引用同一函数的多个实现。假设我们有一个函数规范 F(X)，以及该规范的两个实现：f1(X) 和 f2(X)。我们希望 `f1(x) == f2(x)` 适用于输入空间中的所有 x。如果 `f1(x) != f2(x)`，我们就知道至少有一个函数错误地实现了 F(X)。这个测试相等性和识别差异的过程是 differential testing 的核心。
+
+differential fuzzing 是 differential testing 的扩展。differential fuzzing 以编程方式生成许多 x 值，以发现人工选择的输入可能无法揭示的差异和边缘情况。
+
+> 注意：这里的 `==` 运算符可以是自定义的相等定义。例如，如果测试浮点实现，可以使用具有一定容差的近似相等。
+
+这类测试在现实生活中的一些应用包括：
+
+- 比价升级前后的实现
+- 根据已知参考实现测试代码
+- 确认与第三方工具和依赖关系的兼容性
+
+以下是 Forge 用于差异测试的一些示例。
+
+入门： ffi 作弊码
+
+[ffi](https://book.getfoundry.sh/cheatcodes/ffi.html) 允许您执行任意 shell 命令并捕获输出。这是一个模拟示例：
+
+## Cast
+
+## Anvil
+
+## Chisel
+
 ## 总结
 
 ## 参考
