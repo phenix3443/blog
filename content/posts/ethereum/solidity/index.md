@@ -30,11 +30,6 @@ tags:
 
 {{< gist phenix3443 868da315757b9f430b417d27b297b3a6 >}}
 
-## 工具链
-
-- [hardhat]({{< ref "../hardhat" >}})
-- [foundry]({{< ref "../foundry" >}})
-
 ## vscode 扩展
 
 推荐安装以下扩展：
@@ -50,6 +45,11 @@ tags:
 [solidity-visual-auditor](https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor) 为 Visual Studio Code 提供了以安全为中心的语法和语义高亮显示、详细的类大纲、专门的视图、高级 Solidity 代码洞察和增强。
 
 主要可以用来生成调用图。
+
+## 工具链
+
+- [hardhat]({{< ref "../hardhat" >}})
+- [foundry]({{< ref "../foundry" >}})
 
 ## 延伸阅读
 
