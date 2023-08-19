@@ -104,6 +104,8 @@ hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/do
 
 ## console
 
+Hardhat 内置一个交互式 JavaScript 控制台。你可以通过运行 `npx hardhat console`使用。
+
 console 的执行环境与任务、脚本和测试是一样的。这意味着 `hardhat config` 已被处理，`hre` 已被初始化并注入全局范围。
 
 与 Ethereum 网络互动，都是异步操作。因此，大多数 API 和库使用 JavaScript 的 Promise 来返回值。

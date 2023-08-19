@@ -35,7 +35,7 @@ tags:
 
 可以进一步参考这个文章： [https://learnblockchain.cn/2019/10/05/evm-data]，不过这篇文章关于 mload 说法有错误，后续需要自己更正一下（todo）。
 
-被调用的合约（可以与调用者是同一个合约）将收到一个新清空的**内存实例**， 并可以访问调用的有效负载-由被称为 calldata 的独立区域所提供的数据。 在它执行完毕后，它可以返回数据，这些数据将被存储在**调用者内存中由调用者预先分配的位置**。 所有这样的调用都是完全**同步**的。
+被调用的合约（可以与调用者是同一个合约）将收到一个新清空的内存实例， 并可以访问调用的有效负载-由被称为 calldata 的独立区域所提供的数据。 在它执行完毕后，它可以返回数据，这些数据将被存储在调用者内存中由调用者预先分配的位置。 所有这样的调用都是完全同步的。
 
 ## 指令集
 
@@ -53,7 +53,14 @@ tags:
 
 ## 预编译合约
 
+## 实现
+
+EVM 的所有实现都必须遵守 [以太坊黄皮书](https://ethereum.github.io/yellowpaper/paper.pdf) 中描述的规范。
+
+在以太坊九年的发展历程中，EVM 经历了数次修订，目前已有多种编程语言实现了 EVM。参见 [Ethereum execution clients](https://ethereum.org/en/developers/docs/nodes-and-clients/#execution-clients)。
+
 ## 衍生阅读
 
-- [ETHEREUM VIRTUAL MACHINE](https://ethereum.org/en/developers/docs/evm/)
+- [以太坊官方 evm 介绍](https://ethereum.org/en/developers/docs/evm/)
 - [Ethereum EVM illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)
+- [solidity 的 evm 介绍](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-6)

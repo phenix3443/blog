@@ -26,9 +26,17 @@ tags:
 
 [中文文档](https://docs.soliditylang.org/zh/latest/)
 
-部署 [官方示例](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html):
+## 语法
+
+- [官方文档](https://docs.soliditylang.org/zh/latest/index.html)
+- [code-style](https://docs.soliditylang.org/zh/latest/natspec-format.html#natspec)
+- [官方合约示例](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html)
 
 {{< gist phenix3443 868da315757b9f430b417d27b297b3a6 >}}
+
+## 编译器
+
+solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/installing-solidity.html) 编译后才可以由 evm 执行。虽然很多工具，如 [hardhat]({{< ref "../hardhat" >}})、[foundry]({{< ref "../foundry" >}}) 可以直接编译部署，但是了解 [编译器的配置](https://docs.soliditylang.org/zh/latest/using-the-compiler.html) 更有助于理解这些工具的相关设置。
 
 ## vscode 扩展
 
