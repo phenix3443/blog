@@ -34,11 +34,11 @@ tags:
 
 ## 编译器
 
-solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/installing-solidity.html) 编译后才可以由 evm 执行。虽然很多工具，如 [hardhat]({{< ref "../hardhat" >}})、[foundry]({{< ref "../foundry" >}}) 可以直接编译部署，但是了解 [编译器的配置](https://docs.soliditylang.org/zh/latest/using-the-compiler.html) 更有助于理解这些工具的相关设置。
+solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/installing-solidity.html) 编译后才可以由 [evm]({{< ref "../evm" >}}) 执行。虽然很多工具，如 [hardhat]({{< ref "../hardhat" >}})、[foundry]({{< ref "../foundry" >}}) 可以直接编译部署，但是了解 [编译器的配置](https://docs.soliditylang.org/zh/latest/using-the-compiler.html) 更有助于理解这些工具的相关设置。
 
 ## linters
 
-[solhint](https://github.com/protofire/solhint) 和 [ethlint](https://github.com/duaraghav8/Ethlint) 都是 Solidity [linting](<https://en.wikipedia.org/wiki/Lint_(software)>) 工具，但从 [nmm trends](https://npmtrends.com/ethlint-vs-solhint-vs-solium) 可以看出 solhint 使用次数遥遥领先。所以 lint 工具采用 solhint。
+[solhint](https://github.com/protofire/solhint) 和 [ethlint](https://github.com/duaraghav8/Ethlint) 都是 Solidity [linting](<https://en.wikipedia.org/wiki/Lint_(software)>) 工具，但从 [nmm trends](https://npmtrends.com/ethlint-vs-solhint-vs-solium) 可以看出 solhint 使用次数遥遥领先。所以选择 solhint 作为 lint 工具。
 
 ### solhint
 
@@ -61,10 +61,6 @@ npx solhint --init
 更多配置规则参见 [solhint Rules](https://protofire.github.io/solhint/docs/rules.html)。
 
 要忽略不需要验证的文件，可以使用 `.solhintignore` 文件。它支持 `.gitignore` 格式的规则。
-
-```shell
-node_modules/
-```
 
 #### script
 
