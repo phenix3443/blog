@@ -133,20 +133,25 @@ differential fuzzing 是 differential testing 的扩展。differential fuzzing �
 
 ### 部署
 
-部署合约：
+可以通过 [forge create](https://book.getfoundry.sh/reference/forge/forge-create) 命令部署合约：
 
-```shell
-forge create --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 src/hello-world.sol:HelloWorld
-```
+{{< gist phenix3443 868da315757b9f430b417d27b297b3a6 >}}
+{{< gist phenix3443 5ea8620ec1457eeaa5d3316180b7ba14 >}}
+{{< gist phenix3443 d4bd06898a1e22af839a777e970369ae >}}
 
-显示如下内容：
+但是 `forge create` 命令不支持动态链接：如果代码引入了库合约，应该预部署库合约，并通过 `--libraries` 手动指定库合约的地址，这无疑是件麻烦的事情。
 
-```shell
-[⠘] Compiling... No files changed, compilation skipped
-Deployer: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-Deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
-Transaction hash: 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6c35efa322921b9158461eb6dec
-```
+[Solidity Script](https://book.getfoundry.sh/tutorials/solidity-scripting) 是一种使用 Solidity 声明式部署合约的方法，相比较`forge create`限制更少，也更加友好。
+
+{{< gist phenix3443 63a443fea5660f37a7343fae51dc9e38 >}}
+
+{{< gist phenix3443 b2086c7e86b8c127e3503304a87f1fb0 >}}
+
+{{< gist phenix3443 6e14fec106f1909ba4091219d27d8422 >}}
+
+{{< gist phenix3443 e176ea52c457d3157f4c3ff50c3bd7fa >}}
+
+{{< gist phenix3443 b254a4c5718fbaba5cffa730eaca41d4 >}}
 
 ## Cast
 
@@ -164,7 +169,6 @@ cast balance --rpc-url http://127.0.0.1:8545 -e 0xf39Fd6e51aad88F6F4ce6aB8827279
 
 ```shell
 cast tx --rpc-url http://127.0.0.1:8545 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6c35efa322921b9158461eb6dec --json
-
 ```
 
 查看上面合约部署的结果：
@@ -192,6 +196,10 @@ cast tx --rpc-url http://127.0.0.1:8545 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6
   "chainId": "0x7a69"
 }
 ```
+
+### 调用函数
+
+{{< gist phenix3443 7053c482e1b219e8830742ccc0a746bf >}}
 
 更多详细信息参见 [cast reference](https://book.getfoundry.sh/reference/cast/)。
 
