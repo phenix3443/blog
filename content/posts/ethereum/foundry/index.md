@@ -131,6 +131,8 @@ differential fuzzing 是 differential testing 的扩展。differential fuzzing �
 
 [ffi](https://book.getfoundry.sh/cheatcodes/ffi.html) 允许您执行任意 shell 命令并捕获输出。这是一个模拟示例：
 
+#### Script{#forge_script}
+
 ### 部署
 
 可以通过 [forge create](https://book.getfoundry.sh/reference/forge/forge-create) 命令部署合约：

@@ -54,7 +54,9 @@ images: []
 
 代理模式有三种常见的变体，我们将在下文中讨论。
 
-## 简单代理模式
+## 代理模式
+
+### 简单代理
 
 简单代理模式 (Simple Proxy Pattern) 的结构如下所示。
 
@@ -88,7 +90,7 @@ images: []
 
 解决这个问题的方法就是 “透明 (transparent)”代理模式，[Open Zeppelin 已经推广了这种模式](https://blog.openzeppelin.com/the-transparent-proxy-pattern)。
 
-## 透明代理模式{#transparent}
+### 透明代理{#transparent}
 
 透明代理模式 (Transparent Proxy Pattern) 是指终端用户（调用者）发起的函数调用总是被路由到逻辑合约而不是代理合约。但是，如果调用者是代理的管理员，代理就会知道要调用自己的管理功能。这很直观，因为只有管理员才能调用代理合约中的管理功能来管理升级和其他管理任务，如果发生冲突，可以合理推定管理员有意调用代理合约的功能，而不是逻辑合约的功能。但是，如果调用者是任何其他非管理员地址，代理总是会将调用委托给相关的逻辑合约。我们可以通过检查 `message.sender` 值来识别调用者。
 
@@ -98,7 +100,7 @@ images: []
 
 透明代理模式有一些缺点。如果处理不慎，它们很容易发生函数选择器冲突，运行成本也会更高（因为 EVM 需要额外的 gas 为每次委托调用加载逻辑合约地址），以这种模式部署代理合约也会花费更多 gas。
 
-## UUPS 模式{#uups}
+### UUPS 代理{#uups}
 
 `通用可升级代理标准（Universal Upgradable Proxy Standard,UUPS）` 是在 [EIP1822](https://eips.ethereum.org/EIPS/eip-1822) 中提出的，目的是为代理合约创建一个与所有合约普遍兼容的标准。它克服了代理函数选择器冲突的问题。这种模式也使用了 Solidity 的`delegatecall`操作，但在简单/透明代理模式中，所有升级都由代理合约管理，而在 UUPS 中，升级由逻辑合约（特别是逻辑合约继承的“可代理（proxiable）”的智能合约）处理。
 
@@ -112,7 +114,7 @@ UUPS 代理模式也有缺点。虽然这种模式的部署成本更低（gas �
 
 不过，这个问题也有好处：UUPS 模式允许通过不再继承可代理合约来取消升级功能，而这是透明代理模式所不具备的。这也是 OpenZeppelin 和其他公司 [推荐](https://docs.openzeppelin.com/contracts/4.x/api/proxy#transparent-vs-uups) 使用 UUPS 而不是透明代理的原因，尽管在撰写本文时，透明代理仍然更受欢迎。
 
-## Transparent vs UUPS Proxies
+### 透明代理 vs UUPS 代理
 
 OpenZeppelin 最初的代理服务器采用的是 [透明代理模式（Transparent Proxy Pattern）]({{< ref "#transparent" >}})。虽然这种模式仍在提供，但我们现在的建议是转向 [UUPS 代理模式]({{< ref "#uups" >}})，它既轻便又通用。
 
@@ -140,7 +142,9 @@ UUPS 代理使用 [ERC1967Proxy](https://docs.openzeppelin.com/contracts/4.x/api
 
 {{< gist phenix3443 868da315757b9f430b417d27b297b3a6 >}}
 
-我们通过 [@openzeppelin/contracts-upgradeable](https://docs.openzeppelin.com/contracts/4.x/upgradeable) 将 [之前]({{< ref "../solidity/#example" >}}) 使用的`Counter`合约修改为可升级的`UpgradeableCounterV1`合约：
+我们通过 [@openzeppelin/contracts-upgradeable](https://docs.openzeppelin.com/contracts/4.x/upgradeable) 将 [之前]({{< ref "../solidity/#example" >}}) 使用的`Counter`合约修改为可升级的`CounterV1`合约。
+
+首先安装需要用到的 openzeppelin 依赖：
 
 ```shell
 forge install openzeppelin-contracts/contracts --no-commit
@@ -154,123 +158,25 @@ forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
 @openzeppelin/contracts-upgradeable=lib/openzeppelin-contracts-upgradeable/contracts/
 ```
 
-在`.env`文件中设置必要的环境变量，并通过`source .env`导入。
+在`.env`文件中设置必要的环境变量：
 
 {{< gist phenix3443  034f9b4de8775d8bc30ef9a50c91e0b7 >}}
 
-### Smart Contract Code
+通过`source .env`将这些环境变量导入当前终端环境中，以便后续合约部署和测试。
 
-在使用 OpenZeppelin Upgrades 处理可升级合约时，编写 Solidity 代码时需要注意一些小问题。
+### 智能合约
 
-值得一提的是，这些限制源于以太坊虚拟机的工作方式，适用于所有使用可升级合约的项目，而不仅仅是 OpenZeppelin Upgrades。
-
-#### Initializers
-
-您可以将 Solidity 合约与 OpenZeppelin Upgrades 结合使用，无需进行任何修改，但其构造函数除外。基于代理的可升级合约中不能使用构造函数。要了解这一限制背后的原因，参阅 [Proxies](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies#the-constructor-caveat)。
-
-这意味着，当合约搭配 OpenZeppelin Upgrades 使用时，需要将其构造函数更改为常规函数，通常命名为 `initialize`，并在其中运行所有设置逻辑。
-
-```solidity
-// NOTE: Do not use this code snippet, it's incomplete and has a critical vulnerability!
-
-pragma solidity ^0.6.0;
-
-contract MyContract {
-    uint256 public x;
-
-    function initialize(uint256 _x) public {
-        x = _x;
-    }
-}
-```
-
-虽然 Solidity 能确保构造函数在合约生命周期内只被调用一次，但普通函数却可以被调用很多次。为了防止合约被多次初始化，你需要添加一个检查以确保初始化函数只被调用一次。
-
-```solidity
-// contracts/MyContract.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-contract MyContract {
-    uint256 public x;
-    bool private initialized;
-
-    function initialize(uint256 _x) public {
-        require(!initialized, "Contract instance has already been initialized");
-        initialized = true;
-        x = _x;
-    }
-}
-```
-
-由于这种模式在编写可升级合约时非常常见，因此 OpenZeppelin Contracts 提供了一个`Initializable` 基础合约，它有 `initializer modifier` 来处理此问题：
-
-```solidity
-// contracts/MyContract.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-
-contract MyContract is Initializable {
-    uint256 public x;
-
-    function initialize(uint256 _x) public initializer {
-        x = _x;
-    }
-}
-```
-
-构造函数与普通函数的另一个区别是，Solidity 会自动调用合约所有祖先的构造函数。在编写 initializer 时，你需要特别注意手动调用所有基础合约的 initializer。请注意，即使在使用继承时，初始化修饰符也只能调用一次，因此父契约应使用 `onlyInitializing` 修饰符：
-
-```solidity
-// contracts/MyContract.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-
-contract BaseContract is Initializable {
-    uint256 public y;
-
-    function initialize() public onlyInitializing {
-        y = 42;
-    }
-}
-
-contract MyContract is BaseContract {
-    uint256 public x;
-
-    function initialize(uint256 _x) public initializer {
-        BaseContract.initialize(); // Do not forget this call!
-        x = _x;
-    }
-}
-```
-
-#### UpgradeableCounter
+在使用 OpenZeppelin Upgrades 处理可升级合约时，编写 Solidity 代码时需要注意一些小问题，详见[OpenZeppelin: Writing Upgradeable Contracts](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable)。
 
 {{< gist phenix3443 a12ba30c5d2d542a256f3588ec828a98 >}}
 
-更多知识参见 [OpenZeppelin: Writing Upgradeable Contracts](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable)
-
 ### Deploy Script
 
-使用以下脚本部署此逻辑合约：
+通过 [forge script]({{< ref "../foundry#forge_script" >}})部署此逻辑合约：
 
 {{< gist phenix3443 ab528785ae6e86e00803fb4204215034 >}}
 
-执行下面的命令部署合约：
-
-```shell
-forge script scripts/deploy_CounterV1.s.sol --rpc-url ${RPC_URL} --broadcast -vvvv
-```
-
-{{< gist phenix3443 aeeadd703cc233393d78466e3fccbcd0 >}}
-
-可以在以后升级已部署的合约实例。默认情况下，只有最初部署合约的地址才有权升级合约。
-
-`deployProxy` 将创建以下交易：
+部署脚本将创建以下交易：
 
 - 部署逻辑合约（我们的 UpgradeableCounter 合约）。
 - 部署代理合约并运行任何初始化函数。
@@ -278,9 +184,15 @@ forge script scripts/deploy_CounterV1.s.sol --rpc-url ${RPC_URL} --broadcast -vv
 
 我们可以使用以下命令运行部署脚本，将合约部署到本地测试网。
 
-这样，终端中会出现类似下图的确认信息，但合同地址不同。记下这个合约地址。注意，这是代理合约的地址，而不是逻辑合约的地址。我们需要代理合约的地址，因为它是我们用来与逻辑合约交互的稳定（不变）地址。
+```shell
+forge script scripts/deploy_CounterV1.s.sol --rpc-url ${RPC_URL} --broadcast -vvvv
+```
 
-您可以在 [此处](https://docs.openzeppelin.com/upgrades-plugins/1.x/api-hardhat-upgrades#common-options) 学习 `deployProxy()` 的文档及其配置选项。请注意，默认模式为“transparent”，但可以通过明确设置该配置选项，指定希望代理遵循 UUPS 模式。
+这样，终端中会出现类似下图的确认信息，可能合约地址有所不同：
+
+{{< gist phenix3443 aeeadd703cc233393d78466e3fccbcd0 >}}
+
+从 Traces 部分可以看到代理/逻辑合约部署的详细信息，可以在以后升级已部署的合约实例。默认情况下，只有最初部署合约的地址才有权升级合约。
 
 ### Cast console
 
@@ -290,11 +202,15 @@ forge script scripts/deploy_CounterV1.s.sol --rpc-url ${RPC_URL} --broadcast -vv
 
 ### Upgraded Logic Contract
 
-现在，让我们来整理出一个更新的逻辑合约，它具有一些新增功能。请看下面的 UpgradeableCounterV2。你会注意到以下变化：
+现在，让我们来整理出一个更新的逻辑合约，它具有一些新增功能。请看下面的 UpgradeableCounterV2。
 
-- 新增了一个名为 price 的公共存储变量，其类型为 int，用于存储检索到的价格。
+{{< gist phenix3443 01466258a7d5f70d68621f8631f78a05 >}}
 
-在这个阶段，我们必须注意一个有关存储变量的重要技术问题。你会看到，管理状态变量被保留在完全相同的位置上，而新增变量则在其后声明。这是因为在更新逻辑合约时，不能改变状态变量的声明顺序，否则会导致存储冲突（也称为存储碰撞），因为 storage context 在代理合约中（如上文所述）。这是因为状态变量一般是在代理合约的上下文中 [分配存储布局“插槽（slot）”](https://docs.soliditylang.org/zh/latest/internals/layout_in_storage.html) 的，而这些插槽在逻辑合约升级时必须保持不变。因此，我们不能替换存储槽或在其间插入新的存储槽。所有新的状态变量都必须在最后添加到之前未被占用的槽中。OpenZeppellin 使用 [EIP1967](https://eips.ethereum.org/EIPS/eip-1967) 存储槽 (storage slot) 来避免逻辑合约中的存储冲突。有关 OpenZeppelin 代理模式和存储的更多详细信息，请点击 [此处](https://blog.openzeppelin.com/proxy-patterns/)。
+你会注意到以下变化：
+
+- 状态变量会将初始化为 `v2`。
+
+在这个阶段，我们必须注意一个有关存储变量的重要技术问题。在很多可升级的合约代码中，你会看到，管理状态变量被保留在完全相同的位置上，而新增变量则在其后声明。这是因为在更新逻辑合约时，不能改变状态变量的声明顺序，否则会导致存储冲突（也称为存储碰撞），因为 storage context 在代理合约中（如上文所述）。这是因为状态变量一般是在代理合约的上下文中 [分配存储布局“插槽（slot）”](https://docs.soliditylang.org/zh/latest/internals/layout_in_storage.html) 的，而这些插槽在逻辑合约升级时必须保持不变。因此，我们不能替换存储槽或在其间插入新的存储槽。所有新的状态变量都必须在最后添加到之前未被占用的槽中。OpenZeppellin 使用 [EIP1967](https://eips.ethereum.org/EIPS/eip-1967) 存储槽 (storage slot) 来避免逻辑合约中的存储冲突。有关 OpenZeppelin 代理模式和存储的更多详细信息，请点击 [此处](https://blog.openzeppelin.com/proxy-patterns/)。
 
 ### Deploy Script for Upgrade Contract
 
