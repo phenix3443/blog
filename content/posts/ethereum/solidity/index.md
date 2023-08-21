@@ -9,7 +9,9 @@ license:
 hidden: false
 comments: true
 draft: false
-series: [以太坊开发工具链]
+series:
+  - 以太坊开发工具链
+  - 以太坊合约开发
 categories:
   - ethereum
 tags:
