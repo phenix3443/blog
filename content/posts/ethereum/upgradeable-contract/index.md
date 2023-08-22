@@ -118,6 +118,8 @@ UUPS 代理模式也有缺点。虽然这种模式的部署成本更低（gas �
 
 下面，我们将通过使用 [OpenZeppelin]({{< ref "../openzeppelin" >}}) 和 [Foundry]({{< ref "../foundry" >}}) 从头开始创建和部署一个可升级的智能合约。
 
+在开始之前，强烈建议阅读 [OpenZeppelin: Using with Upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
+
 如果你使用 Hardhat，可以参考 [Upgradable Smart Contracts: What They Are and How To Deploy Your Ow](https://blog.chain.link/upgradable-smart-contracts/)
 
 ### 项目设置
@@ -329,6 +331,5 @@ UUPS 代理使用 [ERC1967Proxy](https://docs.openzeppelin.com/contracts/4.x/api
 
 ## 参考
 
-- [OpenZeppelin: Using with Upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
 - [Foundry 教程：使用多种方式编写可升级的智能合约（上）](https://blog.wongssh.cf/2022/07/18/foundry-contract-upgrade-part1/)
 - [Foundry 教程：使用多种方式编写可升级的智能合约（下）](https://blog.wssh.trade/posts/foundry-contract-upgrade-part2/)
