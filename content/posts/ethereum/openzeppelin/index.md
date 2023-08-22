@@ -7,11 +7,11 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 categories:
-  - openzeppelin
   - solidity
 tags:
+  - openzeppelin
 ---
 
 ## 概述
