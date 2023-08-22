@@ -59,6 +59,8 @@ curl -L https://foundry.paradigm.xyz | bash
 
 ## forge
 
+- `forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge` 添加自动补全。参见[zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})
+
 ### 创建项目
 
 ### 管理依赖

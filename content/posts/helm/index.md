@@ -32,6 +32,7 @@ Helm 安装 charts 到 Kubernetes 集群中，每次安装都会创建一个新�
 
 ## 常用命令
 
+- `helm completion zsh > $(brew --prefix)/share/zsh/site-functions/_helm` 为 zsh 安装自动补全，参见[zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
 - `helm repo list` 已经安装的 repo 列表。
 - `helm repo add <repo> <repo-url>` 添加新的 repo。
 - `helm search repo <chart>` 在当前所有已添加的 repo 中查找 chart。

@@ -23,13 +23,25 @@ tags:
 
 [hugo](https://gohugo.io/) 号称“世界上最快的静态网站生成器”。
 
-## 配置
+## 使用
+
+为 zsh 安装自动补全：
+
+```shell
+hugo completion zsh > $(brew --prefix)/share/zsh/site-functions/_hugo
+```
+
+参见[zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
+
+其他shell安装参见[hugo completion](https://gohugo.io/commands/hugo_completion/)
 
 查看当前站点的配置：
 
 ```shell
 hugo config --format yaml
 ```
+
+更多命令行使用参见[cli](https://gohugo.io/commands/)
 
 ### modules
 
