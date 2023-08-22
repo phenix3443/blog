@@ -69,7 +69,7 @@ npx solhint --init
 编辑 package.json 以包含用于运行 Solhint 的新脚本：
 
 ```json
-"lint:sol": "npx solhint src/**/*.sol"
+"lint:sol": "npx solhint src/**/*.sol scripts/**/*.sol",
 ```
 
 执行 `npm run lint:sol` 来检查代码是否符合配置的规则。
@@ -100,7 +100,7 @@ npm install --save-dev prettier prettier-plugin-solidity
 package.json 添加 script:
 
 ```json
-"format:sol": "prettier --write src/*.sol"
+"format:sol": "prettier --write src/**/*.sol scripts/**/*.sol"
 ```
 
 ### git-hook
