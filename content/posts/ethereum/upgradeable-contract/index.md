@@ -72,7 +72,7 @@ images: []
 
 不过，要把 [消息调用 (message calls)](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-12) 传递给正确的合约，还有一个巧妙的技巧。代理合约并不只是对逻辑合约进行普通的函数调用，它还使用了一种叫做 [委托调用（delegatecall）](https://docs.soliditylang.org/zh/latest/introduction-to-smart-contracts.html#index-13) 的方法。 委托调用与普通函数调用类似，只不过目标地址的代码是在调用合约的上下文中执行的。如果逻辑合约的代码更改了 storage 变量，这些更改就会反映在代理合约的 storage 变量中，即反映在代理合约的状态中。
 
-那么，委托调用逻辑在代理合约中处于什么位置呢？答案就在代理合约的 [fallback 函数](https://docs.soliditylang.org/zh/latest/contracts.html#fallback) 中。当代理合约收到它不支持的函数调用时，代理合约的 fallback 函数将被调用来处理该函数。代理合约在其 fallback 函数中使用自定义逻辑，将调用重定向到逻辑合约。可以参考 [OpenZeppelin 关于 Proxy 实现 ](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/fd81a96f01cc42ef1c9a5399364968d0e07e9e90/contracts/proxy/Proxy.sol)
+那么，委托调用逻辑在代理合约中处于什么位置呢？答案就在代理合约的 [fallback 函数](https://docs.soliditylang.org/zh/latest/contracts.html#fallback) 中。当代理合约收到它不支持的函数调用时，代理合约的 fallback 函数将被调用来处理该函数。代理合约在其 fallback 函数中使用自定义逻辑，将调用重定向到逻辑合约。可以参考 [OpenZeppelin 关于 Proxy 实现](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/fd81a96f01cc42ef1c9a5399364968d0e07e9e90/contracts/proxy/Proxy.sol)
 
 将这一原则应用于代理和逻辑合约，delegatecall 将调用逻辑合约的代码，但该代码会在代理合约的执行上下文中运行。这意味着逻辑合约中的代码有权更改代理合约中的状态--它可以更改 [状态变量](https://docs.soliditylang.org/zh/latest/structure-of-a-contract.html#structure-state-variables) 和存储在代理合约中的其他数据。这就有效地将应用程序的状态与执行的代码分离开来。代理合约有效地保存了 dApp 的所有状态，这意味着可以在不丢失状态的情况下更改逻辑。
 
@@ -239,7 +239,7 @@ COUNTER_V1=0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 本节使用 UUPS 代理模式部署可升级的逻辑合约。
 
-#### 逻辑合约
+#### 逻辑合约 <!-- markdownlint-disable-line -->
 
 {{< gist phenix3443 48f9cf6f7f96a52ce16af7421222bd87 >}}
 
@@ -248,7 +248,7 @@ COUNTER_V1=0x5FbDB2315678afecb367f032d93F642f64180aa3
 - 由于升级操作为了逻辑合约中，而且只能由 owner 来进行升级，所以逻辑合约需要继承`OwnableUpgradeable`。
 - 新增了 `_authorizeUpgrade` 函数，这个函数是继承`UUPSUpgradeable` 必须实现的。
 
-#### 部署逻辑合约
+#### 部署逻辑合约 <!-- markdownlint-disable-line -->
 
 通过 [forge script]({{< ref "../foundry#forge_script" >}}) 部署此逻辑合约：
 
@@ -269,13 +269,13 @@ COUNTER_V1=0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 参见 [确认 CounterV1 部署结果]({{< ref "#verify_deploy_counter_v1" >}})
 
-#### 更新逻辑合约
+#### 更新逻辑合约 <!-- markdownlint-disable-line -->
 
 现在，让我们更新逻辑合约：
 
 {{< gist phenix3443 07c86943c7c32cf118fe21d01f8a78ba >}}
 
-#### 升级逻辑合约
+#### 升级逻辑合约 <!-- markdownlint-disable-line -->
 
 {{< gist phenix3443 4903d5aaa70d0c7c9c36ec8cf9e61086 >}}
 
