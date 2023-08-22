@@ -80,14 +80,12 @@ commitlint 配置文件可以有多种文件 [格式](https://github.com/convent
 
 更多配置选项参见参考 [配置文件](https://commitlint.js.org/#/reference-configuration)。
 
-### 本地安装
+### 使用
 
-参考 [官方文档](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint) 集成到 git-hook 进行安装测试：
+参考 [官方文档](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint) , 通过 [husky]({{< ref "../husky" >}}) 集成到 git-hook 进行安装测试：
 
 ```shell
-npm install --save-dev husky
-npm pkg set scripts.prepare="husky install"
-npx run prepare
+npm install --save-dev commitlint @commitlint/config-conventional
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
 
