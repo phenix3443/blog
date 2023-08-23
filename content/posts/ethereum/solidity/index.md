@@ -59,7 +59,7 @@ npm install --save-dev @commitlint/cli @commitlint/config-conventional
 [Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，可与 [solhint]({{< ref "../solhint" >}}) 协同工作。它能帮助自动修复 Solhint 发现的许多错误，尤其是缩进和代码样式等简单错误。
 
 ```shell
-npm install --save-dev prettier prettier-plugin-solidity
+npm install --save-dev solhint solhint-plugin-prettier prettier prettier-plugin-solidity
 ```
 
 将下面的配置添加到 `.solhint.json` 对应的位置：
@@ -89,15 +89,42 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 ## vscode 扩展
 
-- [Juan Blanco Solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+### Juan Blanco Solidity
 
-- [Nomic Foundation Solidity](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity)，
+推荐安装。
 
-  - 有更多实用的功能，比如自动修复 SPDX 声明等。
-  - 当前版本 (0.7.3) 直接导入 (direct import) 查找路径是 `./node_modules`， 这个不能指定就太难受了，也不能支持 import 声明中文件的跳转，不推荐使用。
+[Juan Blanco Solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) 提供代码高亮，自动补全等功能。
 
-- [Solidity Contract Flattener](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-solidity-flattener)
-- [Solidity Visual Developer](https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor) 为 Visual Studio Code 提供了以安全为中心的语法和语义高亮显示、详细的类大纲、专门的视图、高级 Solidity 代码洞察和增强。
+### Nomic Foundation Solidity
+
+[Nomic Foundation Solidity](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity)，
+
+- 有更多实用的功能，比如自动修复 SPDX 声明等。
+- 当前版本 (0.7.3) 直接导入 (direct import) 查找路径是 `./node_modules`， 这个不能指定就太难受了，也不能支持 import 声明中文件的跳转，不推荐使用。
+
+### Solidity Visual Developer
+
+推荐安装。
+
+[Solidity Visual Developer](https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor) 为 Visual Studio Code 提供：
+
+- 以安全为中心的语法和语义高亮显示
+- inline codelens，图示调用、继承关系，UML 展示
+- Code Augmentation / Annotations / Hover / Tooltip
+- 详细的 outline。
+- 通过 [surya](https://github.com/ConsenSys/surya) 输出专门的视图，Surya 是一款用于智能合约系统的实用工具。它提供大量可视化输出和合约结构信息。它还支持以多种方式查询函数调用图，以帮助人工检查合约。
+
+  - graph 输出调用视图。
+  - ftrace 命令输出一个树状的函数调用跟踪，该跟踪源于定义的 "CONTRACT::FUNCTION"，并遍历 "所有|内部|外部 "类型的调用。外部调用用橙色标记，内部调用不着色。
+  - uml 生成类图。该功能依赖 [PlantUML](https://plantuml.com/zh/)，macos 安装：
+
+    ```shell
+    brew install --cask temurin
+    brew install graphviz
+    ```
+
+- 高级 Solidity 代码洞察和增强。
+- flatten 命令输出源代码的 flatten 版本，所有导入语句都替换为相应的源代码。引用已导入文件的导入语句将被简单地注释掉。
 
 ## 集成测试工具
 
@@ -107,7 +134,8 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 - [Consensys 的最佳实践](https://consensys.github.io/smart-contract-best-practices/) 相当广泛，包括可以学习的 [成熟模式](https://consensys.github.io/smart-contract-best-practices/development-recommendations/) 和可以避免的 [已知陷阱](https://consensys.github.io/smart-contract-best-practices/attacks/)
 
-## Next
+## contract-starter
 
-- [hardhat]({{< ref "../hardhat" >}})
-- [foundry]({{< ref "../foundry" >}})
+[contract-starter](https://github.com/phenix3443/contract_starter) 包含了上面所有的配置，可以直接 [使用该项目作为合约项目的仓库模板](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)。
+
+## Next
