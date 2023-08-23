@@ -56,11 +56,12 @@ Hugo module 由 Go module 提供支持。有关 Go module 的更多信息，请�
 
 我们可以 [通过 module 来使用 theme](https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme)，比如当前博客主题就是通过 module 挂载的：
 
-```yaml
+{{< code-toggle >}}
 module:
   imports:
     - path: github.com/razonyang/hugo-theme-bootstrap
-```
+
+{{< /code-toggle >}}
 
 [Hugo Modules: everything you need to know!](https://www.thenewdynamic.com/article/hugo-modules-everything-from-imports-to-create/)
 

@@ -70,13 +70,12 @@ commitlint 配置文件可以有多种文件 [格式](https://github.com/convent
 
 配置文件中可以 [直接引用](https://commitlint.js.org/#/concepts-shareable-config) npm 上其他人共享的配置。比如官方提供的 [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/config-conventional/index.js)
 
-```json
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  }
+```yaml
+extends:
+  - "@commitlint/config-conventional"    
 ```
+
+可以通过 `npx commitlint --print-config` 验证配置是否生效。
 
 更多配置选项参见参考 [配置文件](https://commitlint.js.org/#/reference-configuration)。
 

@@ -57,6 +57,15 @@ curl -L https://foundry.paradigm.xyz | bash
 
 ## 配置
 
+{{< gist phenix3443 333a25e2168cdba73ca7098efd95c8a4 >}}
+
+我并不喜欢 foundry 使用 git来管理依赖，这会导致很多问题：
+
+- mono 项目中依赖难以升级。
+- 依赖的 import 路径与 repository name 不一致，需要额外编写 remappings.txt 来解决。
+
+结合 npm 管理依赖是更好的解决办法。
+
 ## forge
 
 添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
