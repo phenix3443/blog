@@ -59,7 +59,11 @@ curl -L https://foundry.paradigm.xyz | bash
 
 ## forge
 
-- `forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge` 添加自动补全。参见[zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})
+添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
+
+```shell
+forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge
+```
 
 ### 创建项目
 
@@ -159,6 +163,12 @@ differential fuzzing 是 differential testing 的扩展。differential fuzzing �
 
 ## Cast
 
+添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
+
+```shell
+cast completions zsh > $(brew --prefix)/share/zsh/site-functions/_cast
+```
+
 ### 查看余额
 
 ```shell
@@ -208,6 +218,12 @@ cast tx --rpc-url http://127.0.0.1:8545 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6
 更多详细信息参见 [cast reference](https://book.getfoundry.sh/reference/cast/)。
 
 ## Anvil
+
+添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
+
+```shell
+anvil completions zsh > $(brew --prefix)/share/zsh/site-functions/_anvil
+```
 
 Anvil 是 Foundry 附带的本地测试网节点。可以使用它从前端测试您的合约或通过 RPC 进行交互。类似于 [hardhat network]({{< ref "../hardhat#network" >}})
 
