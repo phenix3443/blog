@@ -331,5 +331,6 @@ UUPS 代理使用 [ERC1967Proxy](https://docs.openzeppelin.com/contracts/4.x/api
 
 ## 参考
 
+- [OpenZepplin: Proxy Patterns](https://blog.openzeppelin.com/proxy-patterns)
 - [Foundry 教程：使用多种方式编写可升级的智能合约（上）](https://blog.wongssh.cf/2022/07/18/foundry-contract-upgrade-part1/)
 - [Foundry 教程：使用多种方式编写可升级的智能合约（下）](https://blog.wssh.trade/posts/foundry-contract-upgrade-part2/)
