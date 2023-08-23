@@ -24,25 +24,25 @@ tags: [danksharding, eip-4844]
 
 ## Proto-Danksharding
 
-Proto-Danksharding，也被称为 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)，可以让 [rollups](https://ethereum.org/zh/layer2/#rollups) 更便宜地向区块链添加数据。这个名字来自于提出这个想法的两位研究人员：Protolambda 和 Dankrad Feist。
+Proto-Danksharding，也被称为 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)，可以让 [rollup](https://ethereum.org/zh/layer2/#rollup) 更便宜地向区块链添加数据。这个名字来自于提出这个想法的两位研究人员：Protolambda 和 Dankrad Feist。
 
 当前，rollup 通过 `CALLDATA` 提交数据，这限制了其降低用户交易费用的能力。尽管 rollup 交易只需要临时数据，但要目前数据会被所有以太坊节点处理，并永远活在链上，这就使交易费昂贵的原因。Proto-Danksharding 引入了可以被发送并附加到区块上的 data blobs。这些 blob 中的数据是 EVM 无法访问的，并且在一个固定的时间段（1-3 个月）后会自动删除。这意味着 rollup 可以更便宜地发送数据，并以更便宜的交易形式将节省的资金转给最终用户。
 
-### 为什么 blobs 能使 rollups 更便宜？
+### 为什么 blobs 能使 rollup 更便宜？
 
-Rollups 是一种通过在链下批量处理交易，然后将结果发布到以太坊的方式来扩展以太坊。一个 rollups 本质上由两部分组成：数据和执行检查。数据是被 rollups 处理的全部交易序列，处理结果作为以太坊的状态变化被发布到链上。执行检查是由一些诚实的行为者，也就是验证者 (`prover`)，重新执行这些交易，以确保提议的状态变化是正确的。为了进行执行检查，交易数据必须有足够长的时间供任何人下载和检查。这意味着任何由 rollups sequencer 的不诚实行为都可以被验证者识别和质疑。然而，blobs 不需要永远可用。
+Rollup 是一种通过在链下批量处理交易，然后将结果发布到以太坊的方式来扩展以太坊。一个 rollup 本质上由两部分组成：数据和执行检查。数据是被 rollup 处理的全部交易序列，处理结果作为以太坊的状态变化被发布到链上。执行检查是由一些诚实的行为者，也就是验证者 (`prover`)，重新执行这些交易，以确保提议的状态变化是正确的。为了进行执行检查，交易数据必须有足够长的时间供任何人下载和检查。这意味着任何由 rollup sequencer 的不诚实行为都可以被验证者识别和质疑。然而，blobs 不需要永远可用。
 
 ### 为什么删除 blob 数据是可以的？
 
-Rollups 在链上发布对其交易数据的承诺 (`commitment`)，同时也在 data blob 中提供实际数据。这意味着验证者可以检查承诺是否有效，或者挑战他们认为错误的数据。在节点层面，data blobs 被保存在共识客户端。共识客户端证明他们已经看到了这些数据，并且这些数据已经在网络上传播。如果数据被永远保存，这些客户端会膨胀，并导致运行节点的大量硬件需求。相反，数据每隔 1-3 个月就会自动从节点上剪除。共识客户端证明表明，证明人有足够的机会来验证数据。实际数据可以由 rollups 运营商、用户或其他人在链下存储。
+rollup 在链上发布对其交易数据的承诺 (`commitment`)，同时也在 data blob 中提供实际数据。这意味着验证者可以检查承诺是否有效，或者挑战他们认为错误的数据。在节点层面，data blobs 被保存在共识客户端。共识客户端证明他们已经看到了这些数据，并且这些数据已经在网络上传播。如果数据被永远保存，这些客户端会膨胀，并导致运行节点的大量硬件需求。相反，数据每隔 1-3 个月就会自动从节点上剪除。共识客户端证明表明，证明人有足够的机会来验证数据。实际数据可以由 rollup 运营商、用户或其他人在链下存储。
 
 ### 如何验证 blob 数据？
 
-Rollups 在 data blob 中发布他们执行的交易，还公布了对数据的“承诺 (`commitment`)”：通过将数据 [拟合](https://blog.csdn.net/qq_27586341/article/details/90170839) 一个多项式函数 (`KZG`) 来实现。之后，可以在不同的点上计算这个函数对应的数值。例如，如果我们定义一个极其简单的函数 `f(x)=2x-1`，那么我们可以在 `x=1、x=2、x=3` 的情况下计算这个函数，得到 `1、3、5` 的结果。一个验证者将从数据拟合出同样的函数，并在相同的点上进行计算。如果原始数据被改变，该函数将不完全相同，因此在每个点上计算的值也不完全相同。在现实中，承诺和证明更为复杂，因为它们被包裹在加密函数中。
+rollup 在 data blob 中发布他们执行的交易，还公布了对数据的“承诺 (`commitment`)”：通过将数据 [拟合](https://blog.csdn.net/qq_27586341/article/details/90170839) 一个多项式函数 (`KZG`) 来实现。之后，可以在不同的点上计算这个函数对应的数值。例如，如果我们定义一个极其简单的函数 `f(x)=2x-1`，那么我们可以在 `x=1、x=2、x=3` 的情况下计算这个函数，得到 `1、3、5` 的结果。一个验证者将从数据拟合出同样的函数，并在相同的点上进行计算。如果原始数据被改变，该函数将不完全相同，因此在每个点上计算的值也不完全相同。在现实中，承诺和证明更为复杂，因为它们被包裹在加密函数中。
 
 ### 什么是 KZG？
 
-KZG 是 `Kate-Zaverucha-Goldberg` 的缩写--这是三个 [原始作者](https://link.springer.com/chapter/10.1007/978-3-642-17373-8_11) 的名字，他们的方案将一团数据简化为一个小的 [加密 "承诺 (commitment)"](https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)。rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。KZG 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollups 和最终以太坊协议的其他部分所使用的零知识技术兼容。
+KZG 是 `Kate-Zaverucha-Goldberg` 的缩写--这是三个 [原始作者](https://link.springer.com/chapter/10.1007/978-3-642-17373-8_11) 的名字，他们的方案将一团数据简化为一个小的 [加密 "承诺 (commitment)"](https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)。rollup 提交的 data blobs 必须经过验证，以确保 rollup 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。KZG 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollup 和最终以太坊协议的其他部分所使用的零知识技术兼容。
 
 更多信息参考 [多项式承诺]({{< ref "../kzg" >}})
 
@@ -52,7 +52,7 @@ KZG 是 `Kate-Zaverucha-Goldberg` 的缩写--这是三个 [原始作者](https:/
 
 ### KZG Ceremony 的随机数是用来做什么的？
 
-当一个 rollups 在 blob 中发布数据时，他们提供了一个链上 "承诺"。这个承诺是在某些点上对数据进行多项式拟合计算的结果。这些点是由 KZG Ceremony 中生成的随机数定义的。然后，证明者 (Provers) 可以在相同的点上计算多项式，以验证数据--如果他们得出相同的值，那么数据就是正确的。
+当一个 rollup 在 blob 中发布数据时，他们提供了一个链上 "承诺"。这个承诺是在某些点上对数据进行多项式拟合计算的结果。这些点是由 KZG Ceremony 中生成的随机数定义的。然后，证明者 (Provers) 可以在相同的点上计算多项式，以验证数据--如果他们得出相同的值，那么数据就是正确的。
 
 ### 为什么 KZG 的随机数据必须秘密的？
 
@@ -62,7 +62,7 @@ KZG 是 `Kate-Zaverucha-Goldberg` 的缩写--这是三个 [原始作者](https:/
 
 ## Danksharding
 
-Danksharding 是 rollup 扩容的全部实现，Proto-Danksharding 只是第一步。Danksharding 将在以太坊上带来大量的空间，供 rollups 存放其压缩的交易数据。这意味着以太坊将能够轻松地支持数百个单独的 rollups，并使每秒数百万次的交易成为现实。
+Danksharding 是 rollup 扩容的全部实现，Proto-Danksharding 只是第一步。Danksharding 将在以太坊上带来大量的空间，供 rollup 存放其压缩的交易数据。这意味着以太坊将能够轻松地支持数百个单独的 rollup，并使每秒数百万次的交易成为现实。
 
 其工作方式是将附加在区块上的 Blobs 从 Proto-Danksharding 的 1 个扩大到 Danksharding 完整的的 64 个。其余所需的变化都是对共识客户端操作方式的更新，以使它们能够处理新的大块。这些变化中有几个已经在路线图上，用于其他独立于“Danksharding”的目的。例如，Danksharding 要求“proposer-builder separation(PBS)”已经实现，该升级将构建块和提出块的任务在不同的验证器之间分开。同样，数据可用性抽样 ( data availability sampling ) 也是 Danksharding 所需要的，但它也是开发不储存太多历史数据的非常轻量级客户端，也就是"无状态客户端 (stateless clients)"，所需要的。
 
