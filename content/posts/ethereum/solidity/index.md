@@ -44,7 +44,7 @@ solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/insta
 
 ### lint code
 
-通过 [solhint]({{< ref "../solhint" >}}) 来检查代码。
+通过 [solidity lint 工具]({{< ref "../solidity-lint" >}}) 来检查代码。
 
 ### lint commit
 

@@ -55,11 +55,23 @@ curl -L https://foundry.paradigm.xyz | bash
 
 这将安装 `fourndryup`，然后只需按照屏幕上的说明进行操作，执行 `fourndryup` 命令将安装 foundry 的其他组件。
 
+### 自动补全
+
+foundry 带有 [shell 自动补全](https://book.getfoundry.sh/config/shell-autocompletion) 功能。
+
+添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
+
+```shell
+forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge
+cast completions zsh > $(brew --prefix)/share/zsh/site-functions/_cast
+anvil completions zsh > $(brew --prefix)/share/zsh/site-functions/_anvil
+```
+
 ## 配置
 
 {{< gist phenix3443 333a25e2168cdba73ca7098efd95c8a4 >}}
 
-我并不喜欢 foundry 使用 git来管理依赖，这会导致很多问题：
+我并不喜欢 foundry 使用 git 来管理依赖，这会导致很多问题：
 
 - mono 项目中依赖难以升级。
 - 依赖的 import 路径与 repository name 不一致，需要额外编写 remappings.txt 来解决。
@@ -67,12 +79,6 @@ curl -L https://foundry.paradigm.xyz | bash
 结合 npm 管理依赖是更好的解决办法。
 
 ## forge
-
-添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
-
-```shell
-forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge
-```
 
 ### 创建项目
 
@@ -172,12 +178,6 @@ differential fuzzing 是 differential testing 的扩展。differential fuzzing �
 
 ## Cast
 
-添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
-
-```shell
-cast completions zsh > $(brew --prefix)/share/zsh/site-functions/_cast
-```
-
 ### 查看余额
 
 ```shell
@@ -227,12 +227,6 @@ cast tx --rpc-url http://127.0.0.1:8545 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6
 更多详细信息参见 [cast reference](https://book.getfoundry.sh/reference/cast/)。
 
 ## Anvil
-
-添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
-
-```shell
-anvil completions zsh > $(brew --prefix)/share/zsh/site-functions/_anvil
-```
 
 Anvil 是 Foundry 附带的本地测试网节点。可以使用它从前端测试您的合约或通过 RPC 进行交互。类似于 [hardhat network]({{< ref "../hardhat#network" >}})
 
