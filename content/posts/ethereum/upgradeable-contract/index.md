@@ -329,6 +329,8 @@ UUPS 代理使用 [ERC1967Proxy](https://docs.openzeppelin.com/contracts/4.x/api
 
 我们已经介绍了如何升级智能合约、为什么要升级，以及围绕升级智能合约的新兴实践。我们了解了一些设计模式、一些可能会绊倒你的问题，还运行了一些代码来部署和升级一个简单的智能合约。如果遇到任何问题，可以留言等待解答。
 
+最终优化的代码位于 [contract-starter](https://github.com/phenix3443/contract_starter)，这是一个自己开发的 solidity starter template repository，欢迎 star。
+
 ## 参考
 
 - [OpenZepplin: Proxy Patterns](https://blog.openzeppelin.com/proxy-patterns)

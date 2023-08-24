@@ -56,15 +56,11 @@ npm install --save-dev @commitlint/cli @commitlint/config-conventional
 
 ### format code
 
-[Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，可与 [solhint]({{< ref "../solhint" >}}) 协同工作。它能帮助自动修复 Solhint 发现的许多错误，尤其是缩进和代码样式等简单错误。
+[Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，用于自动格式化 solidity 代码。
 
 ```shell
-npm install --save-dev solhint solhint-plugin-prettier prettier prettier-plugin-solidity
+npm install --save-dev prettier prettier-plugin-solidity
 ```
-
-将下面的配置添加到 `.solhint.json` 对应的位置：
-
-{{< gist phenix3443 d87cf11df0bcf9c448f43488639a7ed8 >}}
 
 对应的也需要更新 prettier 配置：
 
@@ -74,7 +70,7 @@ package.json 添加用于格式化项目中的 solidity 文件的 script：
 
 ```json
 {
-  "format:sol": "prettier --write src/**/*.sol script/**/*.sol test/**/*.sol"
+  "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol"
 }
 ```
 
@@ -94,6 +90,14 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 推荐安装。
 
 [Juan Blanco Solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) 提供代码高亮，自动补全等功能。
+
+该扩展将自己作为 solidity 文件的默认 formatter，但是不能支持 format-on-save，我们需要在 vscode 配置中做如下修改：
+
+```json
+"[solidity]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+```
 
 ### Nomic Foundation Solidity
 
@@ -128,7 +132,19 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 ## 集成测试工具
 
+### foundry
+
 [foundry]({{< ref "../foundry" >}}) 相比 [hardhat]({{< ref "../hardhat" >}}) 编译合约更加快速，也不用额外学习 js/ts 脚本来部署和编写测试用例。
+
+## 第三方库
+
+### OpenZepplin
+
+[OpenZepplin]({{< ref "../openzeppelin" >}}) 是合约开发的常用库，提前安装。
+
+```shell
+pnpm install @openzeppelin/contracts @openzeppelin/contracts-upgradeable
+```
 
 ## 延伸阅读
 

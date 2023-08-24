@@ -34,7 +34,7 @@ images: []
 npm install --save-dev solhint
 ```
 
-生成[配置](https://protofire.github.io/solhint/#configuration)文件 `.solhint.json`：
+生成 [配置](https://protofire.github.io/solhint/#configuration) 文件 `.solhint.json`：
 
 ```shell
 npx solhint --init
