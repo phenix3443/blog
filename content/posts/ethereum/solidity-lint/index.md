@@ -118,13 +118,19 @@ slither .
 slither tests/uninitialized.sol
 ```
 
-### Github action
+#### 禁用
+
+在某些代码位置禁用检查：
+
+- 在问题前添加 `//slither-disable-next-line DETECTOR_NAME`
+- 在代码周围添加 `// slither-disable-start [detector] ...` 在代码周围添加 `// slither-disable-end [detector]` 以禁用大段的检测器
+- 在变量声明前添加 `@custom:security non-reentrant`，向 Slither 表明该变量的外部调用是非 reentrant 的。
+
+#### CI
+
+[vscode-slither](https://marketplace.visualstudio.com/items?itemName=trailofbits.slither-vscode) 为 Slither 提供了 Visual Studio 代码集成，该扩展解决了命令行工具不能快速跳转到对应代码行的问题。
 
 [slither-action](https://github.com/marketplace/actions/slither-action) 可以在 GitHub Actions 工作流中针对项目运行 Slither 静态分析器。
-
-### vscode-slither
-
-[vscode-slither](https://marketplace.visualstudio.com/items?itemName=trailofbits.slither-vscode) 为 Slither 提供了 Visual Studio 代码集成。
 
 ## mythril
 
@@ -138,18 +144,22 @@ slither tests/uninitialized.sol
 
 ### 安装
 
-请注意，您需要将 rust 切换为 nightly 版本以安装 mythril：
+如果同时使用 mythril 和 slither ，二者都是用 python 编写的，二者在一些依赖上存在版本冲突，所以 mythril 使用 docker 安装和使用。
 
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup default nightly
-pip3 install mythril
+docker pull mythril/myth
 ```
 
 ### 使用
 
 ```shell
 myth analyze src/Contract.sol --solc-json mythril.config.json
+```
+
+如果通过 docker 安装：
+
+```shell
+docker run -v $(pwd):/code --workdir /code  mythril/myth analyze src/*.sol --solc-json mythril.config.json
 ```
 
 有关详细信息，请参阅 [mythril 文档](https://mythril-classic.readthedocs.io/en/develop/)。
