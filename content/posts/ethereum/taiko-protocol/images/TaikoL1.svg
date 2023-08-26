@@ -1,0 +1,561 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="884pt" height="1913pt" viewBox="0.00 0.00 884.29 1913.00">
+<g id="graph0" class="graph" transform="translate(30.449914489527373,1793.410103441249) scale(0.9990375709865235)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-1909 880.29,-1909 880.29,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterTaikoL1">
+
+<path fill="#445773" stroke="#445773" d="M20,-981C20,-981 720.97,-981 720.97,-981 726.97,-981 732.97,-987 732.97,-993 732.97,-993 732.97,-1748 732.97,-1748 732.97,-1754 726.97,-1760 720.97,-1760 720.97,-1760 20,-1760 20,-1760 14,-1760 8,-1754 8,-1748 8,-1748 8,-993 8,-993 8,-987 14,-981 20,-981" style=""/>
+<text text-anchor="middle" x="370.48" y="-1743.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">TaikoL1</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterEssentialContract">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M574.23,-896C574.23,-896 664.72,-896 664.72,-896 670.72,-896 676.72,-902 676.72,-908 676.72,-908 676.72,-961 676.72,-961 676.72,-967 670.72,-973 664.72,-973 664.72,-973 574.23,-973 574.23,-973 568.23,-973 562.23,-967 562.23,-961 562.23,-961 562.23,-908 562.23,-908 562.23,-902 568.23,-896 574.23,-896" style=""/>
+<text text-anchor="middle" x="619.48" y="-956.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">EssentialContract</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterLibVerifying">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M562.06,-757C562.06,-757 675.9,-757 675.9,-757 681.9,-757 687.9,-763 687.9,-769 687.9,-769 687.9,-876 687.9,-876 687.9,-882 681.9,-888 675.9,-888 675.9,-888 562.06,-888 562.06,-888 556.06,-888 550.06,-882 550.06,-876 550.06,-876 550.06,-769 550.06,-769 550.06,-763 556.06,-757 562.06,-757" style=""/>
+<text text-anchor="middle" x="618.98" y="-871.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibVerifying</text>
+</g>
+<g id="clust5" class="cluster" data-name="clusterLibProposing">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M558.3,-618C558.3,-618 679.65,-618 679.65,-618 685.65,-618 691.65,-624 691.65,-630 691.65,-630 691.65,-737 691.65,-737 691.65,-743 685.65,-749 679.65,-749 679.65,-749 558.3,-749 558.3,-749 552.3,-749 546.3,-743 546.3,-737 546.3,-737 546.3,-630 546.3,-630 546.3,-624 552.3,-618 558.3,-618" style=""/>
+<text text-anchor="middle" x="618.98" y="-732.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibProposing</text>
+</g>
+<g id="clust6" class="cluster" data-name="clusterLibProving">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M554.54,-479C554.54,-479 683.41,-479 683.41,-479 689.41,-479 695.41,-485 695.41,-491 695.41,-491 695.41,-598 695.41,-598 695.41,-604 689.41,-610 683.41,-610 683.41,-610 554.54,-610 554.54,-610 548.54,-610 542.54,-604 542.54,-598 542.54,-598 542.54,-491 542.54,-491 542.54,-485 548.54,-479 554.54,-479" style=""/>
+<text text-anchor="middle" x="618.98" y="-593.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibProving</text>
+</g>
+<g id="clust7" class="cluster" data-name="clusterLibEthDepositing">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M533.63,-340C533.63,-340 704.32,-340 704.32,-340 710.32,-340 716.32,-346 716.32,-352 716.32,-352 716.32,-459 716.32,-459 716.32,-465 710.32,-471 704.32,-471 704.32,-471 533.63,-471 533.63,-471 527.63,-471 521.63,-465 521.63,-459 521.63,-459 521.63,-352 521.63,-352 521.63,-346 527.63,-340 533.63,-340" style=""/>
+<text text-anchor="middle" x="618.98" y="-454.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibEthDepositing</text>
+</g>
+<g id="clust8" class="cluster" data-name="clusterLibTaikoToken">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M528.27,-201C528.27,-201 709.68,-201 709.68,-201 715.68,-201 721.68,-207 721.68,-213 721.68,-213 721.68,-320 721.68,-320 721.68,-326 715.68,-332 709.68,-332 709.68,-332 528.27,-332 528.27,-332 522.27,-332 516.27,-326 516.27,-320 516.27,-320 516.27,-213 516.27,-213 516.27,-207 522.27,-201 528.27,-201" style=""/>
+<text text-anchor="middle" x="618.98" y="-315.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibTaikoToken</text>
+</g>
+<g id="clust9" class="cluster" data-name="clusterLibUtils">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M546.52,-8C546.52,-8 691.43,-8 691.43,-8 697.43,-8 703.43,-14 703.43,-20 703.43,-20 703.43,-181 703.43,-181 703.43,-187 697.43,-193 691.43,-193 691.43,-193 546.52,-193 546.52,-193 540.52,-193 534.52,-187 534.52,-181 534.52,-181 534.52,-20 534.52,-20 534.52,-14 540.52,-8 546.52,-8" style=""/>
+<text text-anchor="middle" x="618.98" y="-176.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LibUtils</text>
+</g>
+<g id="clust10" class="cluster" data-name="clusterTaikoData.State">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M290.47,-896C290.47,-896 440.76,-896 440.76,-896 446.76,-896 452.76,-902 452.76,-908 452.76,-908 452.76,-961 452.76,-961 452.76,-967 446.76,-973 440.76,-973 440.76,-973 290.47,-973 290.47,-973 284.47,-973 278.47,-967 278.47,-961 278.47,-961 278.47,-908 278.47,-908 278.47,-902 284.47,-896 290.47,-896" style=""/>
+<text text-anchor="middle" x="365.62" y="-956.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">TaikoData.State</text>
+</g>
+<g id="clust11" class="cluster" data-name="clusterTaikoConfig">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M764.97,-1251C764.97,-1251 856.29,-1251 856.29,-1251 862.29,-1251 868.29,-1257 868.29,-1263 868.29,-1263 868.29,-1316 868.29,-1316 868.29,-1322 862.29,-1328 856.29,-1328 856.29,-1328 764.97,-1328 764.97,-1328 758.97,-1328 752.97,-1322 752.97,-1316 752.97,-1316 752.97,-1263 752.97,-1263 752.97,-1257 758.97,-1251 764.97,-1251" style=""/>
+<text text-anchor="middle" x="810.63" y="-1311.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">TaikoConfig</text>
+</g>
+<g id="clust12" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="44.13,-1768 44.13,-1897 400.62,-1897 400.62,-1768 44.13,-1768" style=""/>
+<text text-anchor="middle" x="222.37" y="-1880.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- TaikoL1.&lt;Receive Ether&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="TaikoL1.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="117.13" cy="-1601" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-1596.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- TaikoL1.depositEtherToL2 -->
+<g id="node6" class="node" pointer-events="visible" data-name="TaikoL1.depositEtherToL2">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="365.62" cy="-1493" rx="81.1" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1488.8" font-family="Times,serif" font-size="14.00" style="">depositEtherToL2</text>
+</g>
+<!-- TaikoL1.&lt;Receive Ether&gt;&#45;&gt;TaikoL1.depositEtherToL2 -->
+<g id="edge1" class="edge" data-name="TaikoL1.&lt;Receive Ether&gt;-&gt;TaikoL1.depositEtherToL2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M143.52,-1582.74C170,-1564.48 213.28,-1536.77 254.25,-1520 265.11,-1515.56 276.89,-1511.72 288.56,-1508.45" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="289.44,-1511.84 298.21,-1505.89 287.65,-1505.07 289.44,-1511.84" style=""/>
+</g>
+<!-- TaikoL1.address -->
+<g id="node19" class="node" pointer-events="visible" data-name="TaikoL1.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="365.62" cy="-1709" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1704.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- TaikoL1.&lt;Receive Ether&gt;&#45;&gt;TaikoL1.address -->
+<g id="edge2" class="edge" data-name="TaikoL1.&lt;Receive Ether&gt;-&gt;TaikoL1.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M143.52,-1619.26C170,-1637.52 213.28,-1665.23 254.25,-1682 273.09,-1689.71 294.68,-1695.59 313.73,-1699.86" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="312.98,-1703.28 323.49,-1701.94 314.44,-1696.43 312.98,-1703.28" style=""/>
+</g>
+<!-- TaikoL1.init -->
+<g id="node2" class="node" pointer-events="visible" data-name="TaikoL1.init">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="365.62" cy="-1385" rx="27" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1380.8" font-family="Times,serif" font-size="14.00" style="">init</text>
+</g>
+<!-- TaikoL1.getConfig -->
+<g id="node17" class="node" pointer-events="visible" data-name="TaikoL1.getConfig">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-1277" rx="49.82" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-1272.8" font-family="Times,serif" font-size="14.00" style="">getConfig</text>
+</g>
+<!-- TaikoL1.init&#45;&gt;TaikoL1.getConfig -->
+<g id="edge5" class="edge" data-name="TaikoL1.init-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M393.13,-1380.68C415.9,-1376.47 449.33,-1369.07 476.98,-1358 514.99,-1342.79 555.18,-1318.82 582.89,-1300.89" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="584.62,-1303.94 591.06,-1295.53 580.78,-1298.09 584.62,-1303.94" style=""/>
+</g>
+<!-- EssentialContract._init -->
+<g id="node22" class="node" pointer-events="visible" data-name="EssentialContract._init">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-922" rx="28.99" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-917.8" font-family="Times,serif" font-size="14.00" style="">_init</text>
+</g>
+<!-- TaikoL1.init&#45;&gt;EssentialContract._init -->
+<g id="edge3" class="edge" data-name="TaikoL1.init-&gt;EssentialContract._init">
+
+<path fill="none" stroke="white" stroke-width="2" d="M393.8,-1386.53C419.34,-1386.34 456.61,-1381.58 476.98,-1358 532.58,-1293.65 465.58,-1047.61 512.98,-977 528.08,-954.51 555.41,-940.61 578.4,-932.41" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="579.32,-935.79 587.74,-929.36 577.15,-929.13 579.32,-935.79" style=""/>
+</g>
+<!-- LibVerifying.init -->
+<g id="node23" class="node" pointer-events="visible" data-name="LibVerifying.init">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-783" rx="27" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-778.8" font-family="Times,serif" font-size="14.00" style="">init</text>
+</g>
+<!-- TaikoL1.init&#45;&gt;LibVerifying.init -->
+<g id="edge4" class="edge" data-name="TaikoL1.init-&gt;LibVerifying.init">
+
+<path fill="none" stroke="white" stroke-width="2" d="M393.95,-1386.65C419.6,-1386.56 456.95,-1381.87 476.98,-1358 555.44,-1264.52 435.08,-903.94 512.98,-810 528.55,-791.23 555.25,-784.54 577.84,-782.52" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="577.73,-786.03 587.52,-781.97 577.34,-779.04 577.73,-786.03" style=""/>
+</g>
+<!-- TaikoL1.proposeBlock -->
+<g id="node3" class="node" pointer-events="visible" data-name="TaikoL1.proposeBlock">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="365.62" cy="-1601" rx="64.86" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1596.8" font-family="Times,serif" font-size="14.00" style="">proposeBlock</text>
+</g>
+<!-- TaikoL1.proposeBlock&#45;&gt;TaikoL1.getConfig -->
+<g id="edge6" class="edge" data-name="TaikoL1.proposeBlock-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M429.15,-1595.61C446.08,-1591.66 463.45,-1585.03 476.98,-1574 499.42,-1555.72 574.8,-1379.98 605.16,-1307.76" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="608.31,-1309.29 608.94,-1298.71 601.85,-1306.58 608.31,-1309.29" style=""/>
+</g>
+<!-- TaikoL1.AddressResolver -->
+<g id="node20" class="node" pointer-events="visible" data-name="TaikoL1.AddressResolver">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-1547" rx="77.03" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-1542.8" font-family="Times,serif" font-size="14.00" style="">AddressResolver</text>
+</g>
+<!-- TaikoL1.proposeBlock&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge8" class="edge" data-name="TaikoL1.proposeBlock-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M409.83,-1586.48C444.5,-1577.51 494.17,-1566.47 536.29,-1558.18" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="536.69,-1561.67 545.84,-1556.33 535.36,-1554.8 536.69,-1561.67" style=""/>
+</g>
+<!-- TaikoL1.proposeBlock&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge10" class="edge" data-name="TaikoL1.proposeBlock-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M427.14,-1593.87C467.12,-1586.47 519.26,-1575.25 558.93,-1565.51" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="559.56,-1568.96 568.41,-1563.14 557.86,-1562.17 559.56,-1568.96" style=""/>
+</g>
+<!-- LibVerifying.verifyBlocks -->
+<g id="node24" class="node" pointer-events="visible" data-name="LibVerifying.verifyBlocks">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-837" rx="60.84" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-832.8" font-family="Times,serif" font-size="14.00" style="">verifyBlocks</text>
+</g>
+<!-- TaikoL1.proposeBlock&#45;&gt;LibVerifying.verifyBlocks -->
+<g id="edge9" class="edge" data-name="TaikoL1.proposeBlock-&gt;LibVerifying.verifyBlocks">
+
+<path fill="none" stroke="white" stroke-width="2" d="M431.37,-1598.91C448.65,-1595.07 465.66,-1587.67 476.98,-1574 573.8,-1457.12 431.02,-1019.73 512.98,-892 523.88,-875.02 541.82,-862.98 559.82,-854.59" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="560.97,-857.9 568.8,-850.77 558.23,-851.46 560.97,-857.9" style=""/>
+</g>
+<!-- LibProposing.proposeBlock -->
+<g id="node25" class="node" pointer-events="visible" data-name="LibProposing.proposeBlock">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-698" rx="64.86" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-693.8" font-family="Times,serif" font-size="14.00" style="">proposeBlock</text>
+</g>
+<!-- TaikoL1.proposeBlock&#45;&gt;LibProposing.proposeBlock -->
+<g id="edge7" class="edge" data-name="TaikoL1.proposeBlock-&gt;LibProposing.proposeBlock">
+
+<path fill="none" stroke="white" stroke-width="2" d="M431.44,-1598.97C448.73,-1595.13 465.72,-1587.72 476.98,-1574 534.92,-1503.42 464.01,-830.07 512.98,-753 523.52,-736.41 540.82,-724.54 558.35,-716.18" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="559.59,-719.46 567.37,-712.27 556.8,-713.04 559.59,-719.46" style=""/>
+</g>
+<!-- TaikoL1.proveBlock -->
+<g id="node4" class="node" pointer-events="visible" data-name="TaikoL1.proveBlock">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="365.62" cy="-1547" rx="56.18" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1542.8" font-family="Times,serif" font-size="14.00" style="">proveBlock</text>
+</g>
+<!-- TaikoL1.proveBlock&#45;&gt;TaikoL1.getConfig -->
+<g id="edge11" class="edge" data-name="TaikoL1.proveBlock-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M421.46,-1542.42C440.49,-1538.66 461.03,-1531.94 476.98,-1520 550.06,-1465.31 591.64,-1360.72 608.72,-1308.41" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="611.96,-1309.78 611.63,-1299.19 605.28,-1307.68 611.96,-1309.78" style=""/>
+</g>
+<!-- TaikoL1.proveBlock&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge13" class="edge" data-name="TaikoL1.proveBlock-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M420.54,-1541.34C452.93,-1540.23 494.88,-1539.97 531.78,-1540.56" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="531.5,-1544.05 541.57,-1540.74 531.63,-1537.05 531.5,-1544.05" style=""/>
+</g>
+<!-- TaikoL1.proveBlock&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge15" class="edge" data-name="TaikoL1.proveBlock-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M420.54,-1552.66C452.93,-1553.77 494.88,-1554.03 531.78,-1553.44" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="531.63,-1556.95 541.57,-1553.26 531.5,-1549.95 531.63,-1556.95" style=""/>
+</g>
+<!-- TaikoL1.proveBlock&#45;&gt;LibVerifying.verifyBlocks -->
+<g id="edge14" class="edge" data-name="TaikoL1.proveBlock-&gt;LibVerifying.verifyBlocks">
+
+<path fill="none" stroke="white" stroke-width="2" d="M423.26,-1546.42C443.19,-1543.18 463.86,-1535.77 476.98,-1520 566.4,-1412.55 437.23,-1009.48 512.98,-892 523.91,-875.05 541.87,-863.01 559.87,-854.62" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="561.01,-857.93 568.84,-850.8 558.27,-851.49 561.01,-857.93" style=""/>
+</g>
+<!-- LibProving.proveBlock -->
+<g id="node27" class="node" pointer-events="visible" data-name="LibProving.proveBlock">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-559" rx="56.18" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-554.8" font-family="Times,serif" font-size="14.00" style="">proveBlock</text>
+</g>
+<!-- TaikoL1.proveBlock&#45;&gt;LibProving.proveBlock -->
+<g id="edge12" class="edge" data-name="TaikoL1.proveBlock-&gt;LibProving.proveBlock">
+
+<path fill="none" stroke="white" stroke-width="2" d="M423.12,-1546.59C443.15,-1543.39 463.94,-1535.96 476.98,-1520 540.74,-1442 459.13,-699.14 512.98,-614 524.13,-596.37 542.92,-584.08 561.54,-575.66" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="562.65,-578.99 570.56,-571.94 559.98,-572.52 562.65,-578.99" style=""/>
+</g>
+<!-- TaikoL1.verifyBlocks -->
+<g id="node5" class="node" pointer-events="visible" data-name="TaikoL1.verifyBlocks">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="365.62" cy="-1655" rx="60.84" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1650.8" font-family="Times,serif" font-size="14.00" style="">verifyBlocks</text>
+</g>
+<!-- TaikoL1.verifyBlocks&#45;&gt;TaikoL1.getConfig -->
+<g id="edge18" class="edge" data-name="TaikoL1.verifyBlocks-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M426.6,-1651.4C444.65,-1647.62 463.27,-1640.63 476.98,-1628 514.19,-1593.72 494.93,-1567.27 512.98,-1520 542.58,-1442.49 582.65,-1353.46 603.7,-1307.7" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="606.82,-1309.28 607.84,-1298.73 600.47,-1306.35 606.82,-1309.28" style=""/>
+</g>
+<!-- TaikoL1.verifyBlocks&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge19" class="edge" data-name="TaikoL1.verifyBlocks-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M419.5,-1645.24C438.03,-1641 458.76,-1635.29 476.98,-1628 514.07,-1613.16 553.23,-1589.98 580.85,-1572.21" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="582.58,-1575.26 589.04,-1566.86 578.75,-1569.4 582.58,-1575.26" style=""/>
+</g>
+<!-- TaikoL1.L1_INVALID_PARAM -->
+<g id="node21" class="node" pointer-events="visible" data-name="TaikoL1.L1_INVALID_PARAM">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-1655" rx="105.99" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-1650.8" font-family="Times,serif" font-size="14.00" style="">L1_INVALID_PARAM</text>
+</g>
+<!-- TaikoL1.verifyBlocks&#45;&gt;TaikoL1.L1_INVALID_PARAM -->
+<g id="edge16" class="edge" data-name="TaikoL1.verifyBlocks-&gt;TaikoL1.L1_INVALID_PARAM">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M427.79,-1655C449.32,-1655 474.32,-1655 498.97,-1655" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="498.78,-1658.5 508.78,-1655 498.78,-1651.5 498.78,-1658.5" style=""/>
+</g>
+<!-- TaikoL1.verifyBlocks&#45;&gt;LibVerifying.verifyBlocks -->
+<g id="edge17" class="edge" data-name="TaikoL1.verifyBlocks-&gt;LibVerifying.verifyBlocks">
+
+<path fill="none" stroke="white" stroke-width="2" d="M427.65,-1653.72C446.2,-1650.13 464.87,-1642.68 476.98,-1628 529.09,-1564.85 468.9,-960.99 512.98,-892 523.84,-875 541.78,-862.96 559.78,-854.56" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="560.93,-857.88 568.76,-850.75 558.19,-851.44 560.93,-857.88" style=""/>
+</g>
+<!-- TaikoL1.depositEtherToL2&#45;&gt;TaikoL1.getConfig -->
+<g id="edge21" class="edge" data-name="TaikoL1.depositEtherToL2-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M437.35,-1483.36C451.23,-1479.41 465.14,-1473.84 476.98,-1466 537.87,-1425.68 582.36,-1349.78 603.75,-1307.46" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="606.78,-1309.21 608.06,-1298.7 600.5,-1306.12 606.78,-1309.21" style=""/>
+</g>
+<!-- TaikoL1.depositEtherToL2&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge22" class="edge" data-name="TaikoL1.depositEtherToL2-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M427.14,-1506C463.17,-1513.74 509.06,-1523.6 546.81,-1531.71" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="545.8,-1535.07 556.31,-1533.75 547.27,-1528.23 545.8,-1535.07" style=""/>
+</g>
+<!-- LibEthDepositing.depositEtherToL2 -->
+<g id="node29" class="node" pointer-events="visible" data-name="LibEthDepositing.depositEtherToL2">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-420" rx="81.1" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-415.8" font-family="Times,serif" font-size="14.00" style="">depositEtherToL2</text>
+</g>
+<!-- TaikoL1.depositEtherToL2&#45;&gt;LibEthDepositing.depositEtherToL2 -->
+<g id="edge20" class="edge" data-name="TaikoL1.depositEtherToL2-&gt;LibEthDepositing.depositEtherToL2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M444.61,-1487.34C457.1,-1482.98 468.64,-1476.25 476.98,-1466 546.57,-1380.57 454.24,-568.22 512.98,-475 522.6,-459.73 537.96,-448.47 553.99,-440.26" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="555.37,-443.48 562.96,-436.08 552.42,-437.13 555.37,-443.48" style=""/>
+</g>
+<!-- TaikoL1.depositTaikoToken -->
+<g id="node7" class="node" pointer-events="visible" data-name="TaikoL1.depositTaikoToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1439" rx="86.26" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1434.8" font-family="Times,serif" font-size="14.00" style="">depositTaikoToken</text>
+</g>
+<!-- TaikoL1.depositTaikoToken&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge24" class="edge" data-name="TaikoL1.depositTaikoToken-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M431.77,-1451.72C446.87,-1455.54 462.7,-1460.28 476.98,-1466 514.07,-1480.84 553.23,-1504.02 580.85,-1521.79" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="578.75,-1524.6 589.04,-1527.14 582.58,-1518.74 578.75,-1524.6" style=""/>
+</g>
+<!-- LibTaikoToken.depositTaikoToken -->
+<g id="node31" class="node" pointer-events="visible" data-name="LibTaikoToken.depositTaikoToken">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-281" rx="86.26" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-276.8" font-family="Times,serif" font-size="14.00" style="">depositTaikoToken</text>
+</g>
+<!-- TaikoL1.depositTaikoToken&#45;&gt;LibTaikoToken.depositTaikoToken -->
+<g id="edge23" class="edge" data-name="TaikoL1.depositTaikoToken-&gt;LibTaikoToken.depositTaikoToken">
+
+<path fill="none" stroke="white" stroke-width="2" d="M447.69,-1432.23C458.99,-1427.87 469.33,-1421.42 476.98,-1412 552.4,-1319.15 449.35,-437.3 512.98,-336 522.41,-321 537.37,-309.86 553.08,-301.7" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="554.3,-304.99 561.84,-297.55 551.3,-298.66 554.3,-304.99" style=""/>
+</g>
+<!-- TaikoL1.withdrawTaikoToken -->
+<g id="node8" class="node" pointer-events="visible" data-name="TaikoL1.withdrawTaikoToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1331" rx="94.91" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1326.8" font-family="Times,serif" font-size="14.00" style="">withdrawTaikoToken</text>
+</g>
+<!-- TaikoL1.withdrawTaikoToken&#45;&gt;TaikoL1.AddressResolver -->
+<g id="edge26" class="edge" data-name="TaikoL1.withdrawTaikoToken-&gt;TaikoL1.AddressResolver">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M443.42,-1342.48C455.24,-1346.26 466.87,-1351.3 476.98,-1358 537.72,-1398.22 582.14,-1473.83 603.58,-1516.21" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="600.36,-1517.59 607.92,-1525.01 606.64,-1514.49 600.36,-1517.59" style=""/>
+</g>
+<!-- LibTaikoToken.withdrawTaikoToken -->
+<g id="node32" class="node" pointer-events="visible" data-name="LibTaikoToken.withdrawTaikoToken">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-227" rx="94.91" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-222.8" font-family="Times,serif" font-size="14.00" style="">withdrawTaikoToken</text>
+</g>
+<!-- TaikoL1.withdrawTaikoToken&#45;&gt;LibTaikoToken.withdrawTaikoToken -->
+<g id="edge25" class="edge" data-name="TaikoL1.withdrawTaikoToken-&gt;LibTaikoToken.withdrawTaikoToken">
+
+<path fill="none" stroke="white" stroke-width="2" d="M452.04,-1322.42C461.63,-1318.13 470.33,-1312.19 476.98,-1304 550.62,-1213.42 439.88,-345.01 512.98,-254 516.3,-249.87 520.16,-246.32 524.4,-243.27" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="526.16,-246.3 533.03,-238.22 522.63,-240.25 526.16,-246.3" style=""/>
+</g>
+<!-- TaikoL1.canDepositEthToL2 -->
+<g id="node9" class="node" pointer-events="visible" data-name="TaikoL1.canDepositEthToL2">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1169" rx="89.19" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1164.8" font-family="Times,serif" font-size="14.00" style="">canDepositEthToL2</text>
+</g>
+<!-- TaikoL1.canDepositEthToL2&#45;&gt;TaikoL1.getConfig -->
+<g id="edge28" class="edge" data-name="TaikoL1.canDepositEthToL2-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M432.93,-1182.01C447.68,-1185.79 463.06,-1190.43 476.98,-1196 514.99,-1211.21 555.18,-1235.18 582.89,-1253.11" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="580.78,-1255.91 591.06,-1258.47 584.62,-1250.06 580.78,-1255.91" style=""/>
+</g>
+<!-- LibEthDepositing.canDepositEthToL2 -->
+<g id="node30" class="node" pointer-events="visible" data-name="LibEthDepositing.canDepositEthToL2">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-366" rx="89.19" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-361.8" font-family="Times,serif" font-size="14.00" style="">canDepositEthToL2</text>
+</g>
+<!-- TaikoL1.canDepositEthToL2&#45;&gt;LibEthDepositing.canDepositEthToL2 -->
+<g id="edge27" class="edge" data-name="TaikoL1.canDepositEthToL2-&gt;LibEthDepositing.canDepositEthToL2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M449.22,-1161.48C459.89,-1157.15 469.64,-1150.9 476.98,-1142 582.98,-1013.42 407.74,-522.2 512.98,-393 516.93,-388.15 521.63,-384.1 526.81,-380.73" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="528.21,-383.95 535.38,-376.15 524.91,-377.78 528.21,-383.95" style=""/>
+</g>
+<!-- TaikoL1.getBlockFee -->
+<g id="node10" class="node" pointer-events="visible" data-name="TaikoL1.getBlockFee">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1115" rx="59.69" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1110.8" font-family="Times,serif" font-size="14.00" style="">getBlockFee</text>
+</g>
+<!-- TaikoL1.getBlockFee&#45;&gt;TaikoL1.getConfig -->
+<g id="edge30" class="edge" data-name="TaikoL1.getBlockFee-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M421.76,-1122.6C440.09,-1126.63 460.12,-1132.75 476.98,-1142 526.15,-1168.98 570.67,-1217.49 596,-1248.42" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="593.26,-1250.59 602.25,-1256.21 598.72,-1246.21 593.26,-1250.59" style=""/>
+</g>
+<!-- LibUtils.getBlockFee -->
+<g id="node33" class="node" pointer-events="visible" data-name="LibUtils.getBlockFee">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-142" rx="59.69" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-137.8" font-family="Times,serif" font-size="14.00" style="">getBlockFee</text>
+</g>
+<!-- TaikoL1.getBlockFee&#45;&gt;LibUtils.getBlockFee -->
+<g id="edge29" class="edge" data-name="TaikoL1.getBlockFee-&gt;LibUtils.getBlockFee">
+
+<path fill="none" stroke="white" stroke-width="2" d="M426.57,-1113.99C445.51,-1110.5 464.68,-1103.04 476.98,-1088 539.72,-1011.31 459.99,-280.72 512.98,-197 523.86,-179.81 541.99,-167.7 560.15,-159.3" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="561.37,-162.59 569.23,-155.48 558.65,-156.14 561.37,-162.59" style=""/>
+</g>
+<!-- TaikoL1.getTaikoTokenBalance -->
+<g id="node11" class="node" pointer-events="visible" data-name="TaikoL1.getTaikoTokenBalance">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="117.13" cy="-1385" rx="101.25" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-1380.8" font-family="Times,serif" font-size="14.00" style="">getTaikoTokenBalance</text>
+</g>
+<!-- TaikoL1.getBlock -->
+<g id="node12" class="node" pointer-events="visible" data-name="TaikoL1.getBlock">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1277" rx="45.8" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1272.8" font-family="Times,serif" font-size="14.00" style="">getBlock</text>
+</g>
+<!-- TaikoL1.getBlock&#45;&gt;TaikoL1.getConfig -->
+<g id="edge32" class="edge" data-name="TaikoL1.getBlock-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M412.72,-1277C452.62,-1277 510.71,-1277 554.91,-1277" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="554.83,-1280.5 564.83,-1277 554.83,-1273.5 554.83,-1280.5" style=""/>
+</g>
+<!-- LibProposing.getBlock -->
+<g id="node26" class="node" pointer-events="visible" data-name="LibProposing.getBlock">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-644" rx="45.8" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-639.8" font-family="Times,serif" font-size="14.00" style="">getBlock</text>
+</g>
+<!-- TaikoL1.getBlock&#45;&gt;LibProposing.getBlock -->
+<g id="edge31" class="edge" data-name="TaikoL1.getBlock-&gt;LibProposing.getBlock">
+
+<path fill="none" stroke="white" stroke-width="2" d="M412.71,-1277.75C435.54,-1275.51 461.48,-1268.54 476.98,-1250 559.68,-1151.11 430.86,-770.38 512.98,-671 524.41,-657.17 541.9,-649.89 559.34,-646.21" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="559.66,-649.7 568.95,-644.62 558.52,-642.8 559.66,-649.7" style=""/>
+</g>
+<!-- TaikoL1.getForkChoice -->
+<g id="node13" class="node" pointer-events="visible" data-name="TaikoL1.getForkChoice">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1223" rx="68.36" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1218.8" font-family="Times,serif" font-size="14.00" style="">getForkChoice</text>
+</g>
+<!-- TaikoL1.getForkChoice&#45;&gt;TaikoL1.getConfig -->
+<g id="edge34" class="edge" data-name="TaikoL1.getForkChoice-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M421.16,-1234.72C462.77,-1243.66 519.89,-1255.93 561.88,-1264.95" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="560.92,-1268.32 571.43,-1267 562.39,-1261.48 560.92,-1268.32" style=""/>
+</g>
+<!-- LibProving.getForkChoice -->
+<g id="node28" class="node" pointer-events="visible" data-name="LibProving.getForkChoice">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-505" rx="68.36" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-500.8" font-family="Times,serif" font-size="14.00" style="">getForkChoice</text>
+</g>
+<!-- TaikoL1.getForkChoice&#45;&gt;LibProving.getForkChoice -->
+<g id="edge33" class="edge" data-name="TaikoL1.getForkChoice-&gt;LibProving.getForkChoice">
+
+<path fill="none" stroke="white" stroke-width="2" d="M434.52,-1220.16C450.7,-1216.13 466.34,-1208.83 476.98,-1196 571.33,-1082.27 419.3,-646.29 512.98,-532 519.84,-523.63 528.92,-517.66 538.87,-513.43" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="539.73,-516.84 548.01,-510.23 537.42,-510.23 539.73,-516.84" style=""/>
+</g>
+<!-- TaikoL1.getCrossChainBlockHash -->
+<g id="node14" class="node" pointer-events="visible" data-name="TaikoL1.getCrossChainBlockHash">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1061" rx="110.63" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1056.8" font-family="Times,serif" font-size="14.00" style="">getCrossChainBlockHash</text>
+</g>
+<!-- TaikoL1.getCrossChainBlockHash&#45;&gt;TaikoL1.getConfig -->
+<g id="edge36" class="edge" data-name="TaikoL1.getCrossChainBlockHash-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M448.31,-1074.12C458.43,-1077.69 468.27,-1082.23 476.98,-1088 537.87,-1128.32 582.36,-1204.22 603.75,-1246.54" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="600.5,-1247.88 608.06,-1255.3 606.78,-1244.79 600.5,-1247.88" style=""/>
+</g>
+<!-- LibUtils.getL2ChainData -->
+<g id="node34" class="node" pointer-events="visible" data-name="LibUtils.getL2ChainData">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-88" rx="74.72" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-83.8" font-family="Times,serif" font-size="14.00" style="">getL2ChainData</text>
+</g>
+<!-- TaikoL1.getCrossChainBlockHash&#45;&gt;LibUtils.getL2ChainData -->
+<g id="edge35" class="edge" data-name="TaikoL1.getCrossChainBlockHash-&gt;LibUtils.getL2ChainData">
+
+<path fill="none" stroke="white" stroke-width="2" d="M457.28,-1049.81C464.78,-1045.81 471.55,-1040.64 476.98,-1034 541.64,-954.86 448.8,-194.52 512.98,-115 518.73,-107.88 526.07,-102.49 534.21,-98.44" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="535.42,-101.72 543.35,-94.69 532.77,-95.24 535.42,-101.72" style=""/>
+</g>
+<!-- TaikoL1.getCrossChainSignalRoot -->
+<g id="node15" class="node" pointer-events="visible" data-name="TaikoL1.getCrossChainSignalRoot">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="365.62" cy="-1007" rx="111.23" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-1002.8" font-family="Times,serif" font-size="14.00" style="">getCrossChainSignalRoot</text>
+</g>
+<!-- TaikoL1.getCrossChainSignalRoot&#45;&gt;TaikoL1.getConfig -->
+<g id="edge38" class="edge" data-name="TaikoL1.getCrossChainSignalRoot-&gt;TaikoL1.getConfig">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M450.38,-1019.72C459.88,-1023.37 469.01,-1028.03 476.98,-1034 550.06,-1088.69 591.64,-1193.28 608.72,-1245.59" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="605.28,-1246.32 611.63,-1254.81 611.96,-1244.22 605.28,-1246.32" style=""/>
+</g>
+<!-- TaikoL1.getCrossChainSignalRoot&#45;&gt;LibUtils.getL2ChainData -->
+<g id="edge37" class="edge" data-name="TaikoL1.getCrossChainSignalRoot-&gt;LibUtils.getL2ChainData">
+
+<path fill="none" stroke="white" stroke-width="2" d="M453.97,-995.06C462.81,-990.63 470.79,-984.76 476.98,-977 536.78,-902.07 452.67,-189.51 512.98,-115 518.74,-107.89 526.09,-102.51 534.23,-98.45" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="535.44,-101.74 543.37,-94.71 532.79,-95.26 535.44,-101.74" style=""/>
+</g>
+<!-- TaikoL1.getStateVariables -->
+<g id="node16" class="node" pointer-events="visible" data-name="TaikoL1.getStateVariables">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="117.13" cy="-1061" rx="79.29" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-1056.8" font-family="Times,serif" font-size="14.00" style="">getStateVariables</text>
+</g>
+<!-- TaikoData.State.getStateVariables -->
+<g id="node36" class="node" pointer-events="visible" data-name="TaikoData.State.getStateVariables">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="365.62" cy="-922" rx="79.29" ry="18" style=""/>
+<text text-anchor="middle" x="365.62" y="-917.8" font-family="Times,serif" font-size="14.00" style="">getStateVariables</text>
+</g>
+<!-- TaikoL1.getStateVariables&#45;&gt;TaikoData.State.getStateVariables -->
+<g id="edge39" class="edge" data-name="TaikoL1.getStateVariables-&gt;TaikoData.State.getStateVariables">
+
+<path fill="none" stroke="white" stroke-width="2" d="M184.87,-1050.46C196.72,-1046.58 208.4,-1041.27 218.25,-1034 242.37,-1016.22 232.02,-997.09 254.25,-977 269.63,-963.11 289.15,-951.86 307.5,-943.24" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="308.86,-946.46 316.56,-939.19 306,-940.07 308.86,-946.46" style=""/>
+</g>
+<!-- TaikoConfig.getConfig -->
+<g id="node37" class="node" pointer-events="visible" data-name="TaikoConfig.getConfig">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="810.63" cy="-1277" rx="49.82" ry="18" style=""/>
+<text text-anchor="middle" x="810.63" y="-1272.8" font-family="Times,serif" font-size="14.00" style="">getConfig</text>
+</g>
+<!-- TaikoL1.getConfig&#45;&gt;TaikoConfig.getConfig -->
+<g id="edge40" class="edge" data-name="TaikoL1.getConfig-&gt;TaikoConfig.getConfig">
+
+<path fill="none" stroke="white" stroke-width="2" d="M669.8,-1277C693.36,-1277 721.73,-1277 746.74,-1277" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="746.45,-1280.5 756.45,-1277 746.45,-1273.5 746.45,-1280.5" style=""/>
+</g>
+<!-- TaikoL1.getVerifierName -->
+<g id="node18" class="node" pointer-events="visible" data-name="TaikoL1.getVerifierName">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="117.13" cy="-1007" rx="76.4" ry="18" style=""/>
+<text text-anchor="middle" x="117.13" y="-1002.8" font-family="Times,serif" font-size="14.00" style="">getVerifierName</text>
+</g>
+<!-- LibUtils.getVerifierName -->
+<g id="node35" class="node" pointer-events="visible" data-name="LibUtils.getVerifierName">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="618.98" cy="-34" rx="76.4" ry="18" style=""/>
+<text text-anchor="middle" x="618.98" y="-29.8" font-family="Times,serif" font-size="14.00" style="">getVerifierName</text>
+</g>
+<!-- TaikoL1.getVerifierName&#45;&gt;LibUtils.getVerifierName -->
+<g id="edge41" class="edge" data-name="TaikoL1.getVerifierName-&gt;LibUtils.getVerifierName">
+
+<path fill="none" stroke="white" stroke-width="2" d="M119.98,-987.64C131.56,-877.83 203.85,-328.62 512.98,-61 519.93,-54.99 528.04,-50.29 536.63,-46.61" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="537.54,-50.01 545.72,-43.26 535.13,-43.44 537.54,-50.01" style=""/>
+</g>
+<!-- key -->
+<g id="node38" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="182.13,-1864 52.13,-1864 52.13,-1776 182.13,-1776 182.13,-1864" style=""/>
+<text text-anchor="start" x="101.76" y="-1845.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="97.88" y="-1825.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="75.33" y="-1805.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="61.73" y="-1785.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node39" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="392.62,-1864 338.62,-1864 338.62,-1776 392.62,-1776 392.62,-1864" style=""/>
+<text text-anchor="start" x="355.62" y="-1845.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="355.62" y="-1825.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="353.62,-1800 353.62,-1820 378.62,-1820 378.62,-1800 353.62,-1800" style=""/>
+<text text-anchor="start" x="355.62" y="-1805.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="355.62,-1782 355.62,-1798 376.62,-1798 376.62,-1782 355.62,-1782" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge42" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M175.13,-1850C249.54,-1850 271.31,-1850 339.76,-1850" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="339.59,-1853.5 349.59,-1850 339.59,-1846.5 339.59,-1853.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge43" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M175.13,-1830C249.54,-1830 271.31,-1830 339.76,-1830" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="339.59,-1833.5 349.59,-1830 339.59,-1826.5 339.59,-1833.5" style=""/>
+</g>
+</g>
+</svg>
