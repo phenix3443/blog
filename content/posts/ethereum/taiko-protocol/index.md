@@ -102,6 +102,19 @@ L1 上部署的两个 ERC20 代币，可用于 swap。
 
 ## TaikoL1
 
+zkRollup 一个重要的地方就是数据可见性：L2上的交易要放在 L1上，并且进行数据验证。TaikoL1 合约就是用来实现这部分内容的：
+
+- proposer get transaction list (txlist) from taikoL2 node。
+-
+
+propose L1 list （txList） 抽象为一个 Block，然后针对 block 进行 propose：
+
+{{< gist phenix3443 96dd996bf97b53173ad142681f5c5551 >}}
+
+> 注意：此处的 Block 不同于 layer-1/layer-2 的 ethereum block 。blockId 也不等同于 ethereum block number。每次成功 propose layer-2 交易都会产生一个新的 taiko block，并记录在 TaikoL1.state.block 中。
+
+### State
+
 Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/TaikoL1.sol#L31) 中。
 
 状态变量 [TaikoData.State](https://github.com/taikoxyz/taiko-mono/blob/1ff0b7a3be7871038714dcff7a40f0ddb26a1578/packages/protocol/contracts/L1/TaikoData.sol#L186-L219) [state](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/TaikoL1.sol#L37) 保存合约运行信息：
@@ -116,11 +129,9 @@ Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-m
 
 从上图中可以看出：`TaikoL1.sol` 主要封装了对外接口，内部实现都是位于在对应的库合约（LibContract）中。
 
+![taikoL1.state changed](images/TakoL1-state.drawio.svg)
+
 ### Block
-
-{{< gist phenix3443 96dd996bf97b53173ad142681f5c5551 >}}
-
-- Taiko L1 中的 Block 与 layer-1/layer-2 的 ethereum block 并不是一回事。blockId 也不等同于 ethereum block number。每次成功 propose layer-2 交易都会产生一个新的 taiko block，并记录在 TaikoL1.state.block 中。
 
 ### 充值提现
 
@@ -135,9 +146,17 @@ Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-m
 
 {{< gist phenix3443 b9faaa2848c620f077c8ae88c2f2f4eb >}}
 
-- proverBlock
-- verifyBlock
-- getVerifierName
+- 将 L2 txlist 封装为 block，放入 TaikoL1.state.blocks 中。
+
+假设当前 propose 第一个 block：
+
+#### proverBlock
+
+{{< gist phenix3443 fb6ea630910c6244d397ce265d624b6e >}}
+
+#### verifyBlock
+
+### getVerifierName
 
 ### 查询链状态
 
