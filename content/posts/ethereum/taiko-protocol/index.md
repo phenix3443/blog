@@ -104,10 +104,10 @@ L1 上部署的两个 ERC20 代币，可用于 swap。
 
 zkRollup 一个重要的地方就是数据可见性：L2上的交易要放在 L1上，并且进行数据验证。TaikoL1 合约就是用来实现这部分内容的：
 
-- proposer get transaction list (txlist) from taikoL2 node。
--
+![数据流图](images/dataflow.drawio.svg)
 
-propose L1 list （txList） 抽象为一个 Block，然后针对 block 进行 propose：
+- proposer 将 L2 transaction list 提交（propose）到 TaikoL1 合约，proposed transactions 被抽象为一个 TaikoData.Block，并生成 BlockProposed Event。
+- driver 通过监听 blockProposed
 
 {{< gist phenix3443 96dd996bf97b53173ad142681f5c5551 >}}
 
