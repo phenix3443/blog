@@ -19,17 +19,17 @@ tags:
 
 ## 概述
 
-按照官方的[使用 kubeadm 引导集群](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/)进行搭建部署。
+按照官方的 [使用 kubeadm 引导集群](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/) 进行搭建部署。
 
 注意安装过程中需要用到 root 权限的，不要使用`sudo`，而使用 `sudo su` 切换到 root 用户执行。
 
 ## 准备工作
 
-硬件和操作系统规格参见[家中的 raspi-4B 设备]({{< ref "../raspi" >}})
+硬件和操作系统规格参见 [家中的 raspi-4B 设备]({{< ref "../raspi" >}})
 
 ### 运行时选择
 
-关于[容器运行时的对比](https://www.zhangjiee.com/blog/2021/container-runtime.html)，两台安装 containerd，一台安装 cri-o。
+关于 [容器运行时的对比](https://www.zhangjiee.com/blog/2021/container-runtime.html)，两台安装 containerd，一台安装 cri-o。
 
 ### 架构
 
@@ -56,7 +56,7 @@ stat -fc %T /sys/fs/cgroup/
 
 ## 安装容器运行时
 
-根据[官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#%E8%BD%AC%E5%8F%91-ipv4-%E5%B9%B6%E8%AE%A9-iptables-%E7%9C%8B%E5%88%B0%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F) 操作。
+根据 [官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#%E8%BD%AC%E5%8F%91-ipv4-%E5%B9%B6%E8%AE%A9-iptables-%E7%9C%8B%E5%88%B0%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F) 操作。
 
 ### 转发 IPv4 并让 iptables 看到桥接流量
 
@@ -109,7 +109,7 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 
 ### containerd
 
-按照[官方说明](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#option-2-from-apt-or-dnf)通过 docker 进行安装，注意执行[linux post-install](https://docs.docker.com/engine/install/linux-postinstall/) 启动 containerd 服务。
+按照 [官方说明](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#option-2-from-apt-or-dnf) 通过 docker 进行安装，注意执行 [linux post-install](https://docs.docker.com/engine/install/linux-postinstall/) 启动 containerd 服务。
 
 生成默认配置文件：
 
@@ -208,14 +208,14 @@ systemctl enable --now cri-docker.socket
 
 ## 使用部署工具安装 Kubernetes
 
-我们选择通过 kubeadm 来引导集群。按照[官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/) 需要做如下准备：
+我们选择通过 kubeadm 来引导集群。按照 [官方指南](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/) 需要做如下准备：
 
 - 操作系统关闭 swap。当前系统并未开启，所以不需要做修改；如需修改，可在 `/etc/fstab` 中注释掉 `swapfile`。
 - 确保每个节点上 MAC 地址，当前系统没有发现 product_uuid，可以忽略。
 
 ### 安装 kubeadm、kubelet 和 kubectl
 
-需要通过环境变量以及[apt 配置代理]({{< ref "../apt" >}})，才可以访问 `packages.cloud.google.com`。
+需要通过环境变量以及 [apt 配置代理]({{< ref "../apt" >}})，才可以访问 `packages.cloud.google.com`。
 
 ```shell
 export https_proxy=http://clash:7890 http_proxy=http://clash:7890 all_proxy=socks5://clash:7890
@@ -290,13 +290,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 - 切换至 root 权限：`sudo su`
 - 执行重置命令：`kubeadm reset -f  --cri-socket=unix:///run/containerd/containerd.sock`
-- 删除所有相关数据:
+- 删除所有相关数据：
 
   ```shell
   rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/\*
   ```
 
-- 刷新所有防火墙(iptables)规则
+- 刷新所有防火墙 (iptables) 规则
 
 ```shell
 iptables -F && iptables -X
@@ -313,7 +313,7 @@ iptables -t mangle -F && iptables -t mangle -X
 kubectl get nodes -o wide
 ```
 
-它应该返回类似如下内容:
+它应该返回类似如下内容：
 
 ```shell
 NAME     STATUS     ROLES           AGE    VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
@@ -322,7 +322,7 @@ ubuntu   Ready    control-plane   3h20m   v1.27.3   192.168.122.11   <none>     
 
 ## 安装 Pod 网络附加组件
 
-根据[指南](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart)安装 calico 网络创建。
+根据 [指南](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart) 安装 calico 网络创建。
 
 ```shell
 sudo su
@@ -335,7 +335,7 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 ```
 
-通过创建必要的自定义资源来安装 Calico。有关此清单中可用的配置选项的更多信息，请参阅[安装参考](https://docs.tigera.io/calico/latest/reference/installation/api)。
+通过创建必要的自定义资源来安装 Calico。有关此清单中可用的配置选项的更多信息，请参阅 [安装参考](https://docs.tigera.io/calico/latest/reference/installation/api)。
 
 ```shell
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
@@ -353,7 +353,7 @@ watch kubectl get pods -n calico-system
 
 ### 控制平面节点隔离
 
-默认情况下，出于安全原因，你的集群不会在控制平面节点上调度 Pod。 如果你希望能够在控制平面节点上调度 Pod，例如单机 Kubernetes 集群，请运行:
+默认情况下，出于安全原因，你的集群不会在控制平面节点上调度 Pod。 如果你希望能够在控制平面节点上调度 Pod，例如单机 Kubernetes 集群，请运行：
 
 ```shell
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
@@ -389,7 +389,7 @@ kubeadm join 192.168.122.12:6443 --token knao8f.3y0su********iq --discovery-toke
 
 ### 启动服务
 
-最后, 考虑到集群宕机自愈的问题, 还需要设置 kubelet 服务开机自动启动:
+最后，考虑到集群宕机自愈的问题，还需要设置 kubelet 服务开机自动启动：
 
 ```shell
 sudo systemctl enable --now kubelet
