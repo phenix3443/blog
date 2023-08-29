@@ -17,7 +17,7 @@ tags: [taiko, rollup]
 images: []
 ---
 
-本文解析 [Taiko 合约](https://github.com/taikoxyz/taiko-mono)，当前版本`commit 06ac4f015ca252e60bc6863a3154e9c22668893b`。
+本文解析 [Taiko 合约](https://github.com/taikoxyz/taiko-mono)，当前版本`commit 85bef055c8778a473fff41318b06792c151efa52`。
 
 <!--more-->
 
@@ -25,7 +25,9 @@ images: []
 
 ## 地址管理
 
-[AddressManger](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/common/AddressManager.sol#L43) 在私有状态变量 [addresses](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/common/AddressManager.sol#L44) 中保存了区块链中合约到部署地址之间的映射：
+AddressManger 与 AddressResolver 搭配使用，实现了类似 ens 的作用，避免硬编码调用合约的地址。
+
+AddressManger 在私有状态变量 [addresses](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/common/AddressManager.sol#L44) 中保存了链上合约到部署地址之间的映射：
 
 ```solidity
 mapping(uint256 chainID=> mapping(bytes32 name => address)) private addresses;
@@ -33,15 +35,13 @@ mapping(uint256 chainID=> mapping(bytes32 name => address)) private addresses;
 
 ![AddressManger](images/AddressManager.png)
 
-[AddressResolver](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/common/AddressResolver.sol#L17) 则会通过 [resolve](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/common/AddressResolver.sol#L91) 方法对外提供 name 到 address 的解析。同时，该合约通过 [EssentialContract](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/common/EssentialContract.sol#L18) 被其他合约继承，并在合约创建的时候通过传入 AddressManger 的部署地址进行初始化。这样，其他合约可以在合约内部直接查找第三方合约地址来进行调用，避免将合约地址硬编码在合约中。
+AddressResolver 则会通过 [resolve](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/common/AddressResolver.sol#L91) 方法对外提供 name 到 address 的解析。同时，该合约通过 [EssentialContract](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/common/EssentialContract.sol#L18) 被其他合约继承。
 
 ![AddressResolver](images/AddressResolver.png)
 
-AddressManger 与 AddressResolver 搭配使用，实现了类似 DNS 的效果。
-
 ## TaikoToken
 
-L1 上部署的 [TaikoToken](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/TaikoToken.sol#L35) 是一个 ERC20 代币合约，可以用于充值和提现，主要用于质押。
+L1 上部署的 [TaikoToken](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/L1/TaikoToken.sol#L35) 是一个 ERC20 代币合约，可以用于充值和提现，主要用于质押。
 
 ## HorseToken && BullToken
 
@@ -53,8 +53,12 @@ zkRollup 一个重要的地方就是数据可见性：L2 上的交易要放在 L
 
 ![数据流图](images/dataflow.drawio.svg)
 
-- proposer 将 L2 transaction list 提交（propose）到 TaikoL1 合约，proposed transactions 被抽象为一个 TaikoData.Block，并生成 BlockProposed Event。
-- driver 通过监听 blockProposed
+- proposer 将 L2 transaction list（后简称 txlist） 提交（propose）到 TaikoL1 合约，proposed transactions 被 TaikoL1 抽象为一个关联的 [TaikoData.Block]({{< ref "#block" >}})，并触发 BlockProposedEvent。
+- driver 监听到 blockProposedEvent 后，从 proposeBlock transaction 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
+- prover 监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
+- TaikoL1 内部自行触发 verifyBlock.
+
+### Block
 
 {{< gist phenix3443 96dd996bf97b53173ad142681f5c5551 >}}
 
@@ -62,21 +66,19 @@ zkRollup 一个重要的地方就是数据可见性：L2 上的交易要放在 L
 
 ### State
 
-Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/TaikoL1.sol#L31) 中。
+Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/L1/TaikoL1.sol#L31) 中。
 
-状态变量 [TaikoData.State](https://github.com/taikoxyz/taiko-mono/blob/1ff0b7a3be7871038714dcff7a40f0ddb26a1578/packages/protocol/contracts/L1/TaikoData.sol#L186-L219) [state](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/TaikoL1.sol#L37) 保存合约运行信息：
+状态变量 [TaikoData.State](https://github.com/taikoxyz/taiko-mono/blob/1ff0b7a3be7871038714dcff7a40f0ddb26a1578/packages/protocol/contracts/L1/TaikoData.sol#L186-L219) [state](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/L1/TaikoL1.sol#L37) 保存合约运行信息：
 
 {{< gist phenix3443 d6768c44f2949306866bd5d764fa946f >}}
 
 - `blocks` 保存了 proposed/proved/verified [block]({{< ref "#block" >}})，可以将这个字段理解为数组实现的循环队列，这个队列的状态可能如下：队列头部是最近的 verified blocks，然后是可能存在 proved blocks，然后是可能存在 proposed blocks。
 
-该变量在 [LibVerifying.init](https://github.com/taikoxyz/taiko-mono/blob/06ac4f015ca252e60bc6863a3154e9c22668893b/packages/protocol/contracts/L1/libs/LibVerifying.sol#L72-L93) 中初始化。
+该变量在 [LibVerifying.init](https://github.com/taikoxyz/taiko-mono/blob/85bef055c8778a473fff41318b06792c151efa52/packages/protocol/contracts/L1/libs/LibVerifying.sol#L72-L93) 中初始化。
 
 ![TaikoL1](images/TaikoL1.svg)
 
 从上图中可以看出：`TaikoL1.sol` 主要封装了对外接口，内部实现都是位于在对应的库合约（LibContract）中。
-
-![taikoL1.state changed](images/TakoL1-state.drawio.svg)
 
 ### Block
 
@@ -117,3 +119,7 @@ Taiko Rollup 的核心逻辑位于 [TaikoL1](https://github.com/taikoxyz/taiko-m
 
 - getCrossChainBlockHash
 - getCrossChainSignalRoot
+
+## SignalService
+
+1. 是在 taikoL1 前面部署的？因为地址被作为参数传递给 taikoL1 部署脚本。
