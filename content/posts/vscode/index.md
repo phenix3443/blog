@@ -1,6 +1,6 @@
 ---
-title: "vscode tips"
-slug: vscode-tips
+title: vscode 使用
+slug: vscode
 description:
 date: 2022-07-01T11:20:19+08:00
 image:
@@ -9,15 +9,19 @@ license:
 hidden: false
 comments: true
 draft: false
+series:
+  - 如何构建高效的开发工具链
 categories:
-  - golang
-  - best-practices
+  - vscode
 tags:
+  -
 ---
 
 所有内容出自[官方文档](https://code.visualstudio.com/docs)。
 
-## develop container
+## Debugging
+
+## Develop Container
 
 出于各种原因，可能是操作系统原因，或者编译器版本，也可能是环境变量冲突，我们需要为单个项目准备独立的开发环境，这种情况下 Docker 是一个很好地选择。[vscode Container](https://code.visualstudio.com/docs/remote/containers) 描述如何在 vscode 中使用 Docker 来为单个项目创建开发容器（dev container）。
 
