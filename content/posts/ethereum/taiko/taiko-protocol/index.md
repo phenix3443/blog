@@ -17,11 +17,52 @@ tags: [taiko, rollup]
 images: []
 ---
 
-本文解析 [Taiko 合约](https://github.com/taikoxyz/taiko-mono)，当前版本`commit 85bef055c8778a473fff41318b06792c151efa52`。
+本文解析 Taiko 代码，主要针对：
 
+- [taiko-protocol](https://github.com/taikoxyz/taiko-mono/tree/main/packages/protocol)，当前版本`commit 85bef055c8778a473fff41318b06792c151efa52`。
+- [taiko-client](https://github.com/taikoxyz/taiko-client) , 当前版本`commit:28ea4dbb658a7e708ffb7bc54a194a29d7013f18`
 <!--more-->
 
 ## 概述
+
+taiko 是一个基于以太坊的安全的、去中心化的 zkRollup 实现。
+
+Rollup 核心逻辑：
+
+- 将所有重建 L2 状态的数据都放在了 L1 上，并通过零知识证明（zk） 来验证这些数据在 L2 的正确性。
+- L2 可以通过 L1 的数据来重建自身状态。
+
+![数据流图](images/dataflow.drawio.svg)
+
+在 Taiko 中，L1 将 L2 的 txlist(transaction list) 抽象为 TaikoBlock 存储 TaikoL1 合约中，TaikoBlock 与以太坊的 Block 完全不同的概念，二者完全没有任何可比性，不可混淆。
+
+proposed txlist 在 TaikoL1 对应一个 TaikoBlock，并且其 ID 是递增的，这是 TaikoL1 中规定的，并且所有的 TaikoBlock 生成后不可改变（除非 L1 reorg）。
+
+TaikoBlock 有三种状态：
+
+- proposed
+
+  proposed txlist 对应一个 proposedBlock。当一个 proposedBlock 生成后， L2 的下一个 Block 也就确定了，这是因为：
+
+  - TaikoBlock 是不变的，基于以太坊的特性，所有 taiko-client(proposer、driver、prover) 看到的 L1 的状态是一致的。
+  - proposer 在 propose txlist 前，其连接的 L2 与 L1 必须同步（官方实现）：`L2.LatestBlock.TaikoBlockID == TaikoL1.LatestProposedBlockID`，这是为了避免 propose 无效的 txlist。但是如果有的 proposer 实现没这么做会有什么问题？假设 propose 错误的 txlist 到 L1，driver 在生成新的 L2 Block 前会对检查和过滤 txlist，如果所有 transactions 都非法，那么就在 L2 提交一个只有 anchorTx 的 Block。
+
+- proved
+
+  当 proposedBlock 被 prover 证明了其在 L2 的正确性后，就转变为 provedBlock。
+
+  由于 TaikoBlock 是不可变的，所以 proposedBlock 的 prove 工作可以并行执行，这加快了 txlist 的验证速度。
+
+- verified
+
+  如果 provedBlock 的所有父块都已经 proved，那么该 block 状态就会转变为 verified。
+
+## Block
+
+- proposer 将 L2 transaction list（后简称 txlist） 提交（propose）到 TaikoL1 合约，proposed transactions 被 TaikoL1 抽象为一个关联的 [TaikoData.Block]({{< ref "#block" >}})，并触发 BlockProposedEvent。
+- driver 监听到 blockProposedEvent 后，从 proposeBlock transaction 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
+- prover 监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
+- TaikoL1 内部自行触发 verifyBlock.
 
 ## 地址管理
 
@@ -48,15 +89,6 @@ L1 上部署的 [TaikoToken](https://github.com/taikoxyz/taiko-mono/blob/85bef05
 L1 上部署的两个 ERC20 代币，可用于 swap。
 
 ## TaikoL1
-
-zkRollup 一个重要的地方就是数据可见性：L2 上的交易要放在 L1 上，并且进行数据验证。TaikoL1 合约就是用来实现这部分内容的：
-
-![数据流图](images/dataflow.drawio.svg)
-
-- proposer 将 L2 transaction list（后简称 txlist） 提交（propose）到 TaikoL1 合约，proposed transactions 被 TaikoL1 抽象为一个关联的 [TaikoData.Block]({{< ref "#block" >}})，并触发 BlockProposedEvent。
-- driver 监听到 blockProposedEvent 后，从 proposeBlock transaction 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
-- prover 监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
-- TaikoL1 内部自行触发 verifyBlock.
 
 ### Block
 
