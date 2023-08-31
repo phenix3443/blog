@@ -184,7 +184,15 @@ L1 上部署的两个 ERC20 代币，可用于 swap。
 
 ## merkle proof
 
-待补充
+Merkle Tree 是一种数据存储结构，可以用一个哈希值（称为 Merkle root）对大量数据进行指纹识别。通过这种结构，人们可以验证这个大型数据结构中是否存在某些值，而无需访问整个 Merkle Tree。为此，验证者需要：
+
+- Merkle root，这是 Merkle Tree 的单个 "指纹 "哈希值
+- value，这是我们要检查是否在 Merkle root 中的值
+- sibling hashes 列表，这些哈希值能让验证者重新计算 Merkle Tree 根。
+
+在 TaikoL1/TaikoL2 合约上调用 `getCrossChainBlockHash(0)` 可以获取目标链上存储的最新已知 Merkle root。通过在 "SourceChain"上使用标准 RPC 调用 eth_getProof，可以获得要验证的值/消息以及最新已知 Merkle root 的 sibling hashes。然后，您只需将它们发送给 "目的链 "上的列表中存储的最新已知块哈希值进行验证。
+
+验证器将利用值（Merkle Tree 中的叶子）和 sibling hashes 重新计算 Merkle root。如果计算出的 Merkle root 与目标链的区块哈希值列表（源链的区块哈希值）中存储的区块哈希值相匹配，那么我们就证明了信息是在源链上发送的，前提是目标链上存储的源链区块哈希值是正确的。
 
 ## SignalService
 
@@ -215,7 +223,7 @@ Taiko 的 SignalService 是一种在 L1 和 L2 上都可用的智能合约，可
 
 1. 首先，我们可以在某个源链上发送一条消息，并将其存储在 SignalService 中。
 2. 接着，我们调用 eth_getProof，它会给出一个证明，证明我们确实在源链上发送了一条消息。
-3. 最后，我们在目标链的 SignalService 上调用 isSignalReceived，它本质上只是验证默克尔证明。isSignalReceived 会查找你声称已在源链（你最初发送信息的地方）上存储信息的块哈希值，并利用默克尔证明中的sibling hash重建默克尔根，从而验证 signal 是否包含在该默克尔根中--这意味着它已被发送。
+3. 最后，我们在目标链的 SignalService 上调用 isSignalReceived，它本质上只是验证默克尔证明。isSignalReceived 会查找你声称已在源链（你最初发送信息的地方）上存储信息的块哈希值，并利用默克尔证明中的 sibling hash 重建默克尔根，从而验证 signal 是否包含在该默克尔根中--这意味着它已被发送。
 
 ## Bridge
 
