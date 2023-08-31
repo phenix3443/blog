@@ -27,12 +27,12 @@ images: []
 
 taiko 是一个基于以太坊的安全的、去中心化的 zkRollup 实现。
 
-Rollup 核心逻辑：
+zkRollup 核心逻辑：
 
 - 将所有重建 L2 状态的数据都放在了 L1 上，并通过零知识证明（zk） 来验证这些数据在 L2 的正确性。
 - L2 可以通过 L1 的数据来重建自身状态。
 
-![数据流图](images/dataflow.drawio.svg)
+### 核心逻辑
 
 在 Taiko 中，L1 将 L2 的 txlist(transaction list) 抽象为 TaikoBlock 存储 TaikoL1 合约中，TaikoBlock 与以太坊的 Block 完全不同的概念，二者完全没有任何可比性，不可混淆。
 
@@ -55,14 +55,52 @@ TaikoBlock 有三种状态：
 
 - verified
 
-  如果 provedBlock 的所有父块都已经 proved，那么该 block 状态就会转变为 verified。
+  如果 provedBlock 的所有父块都已经 proved，就会转变为 verifiedBlock。
 
-## Block
+## 数据流
 
-- proposer 将 L2 transaction list（后简称 txlist） 提交（propose）到 TaikoL1 合约，proposed transactions 被 TaikoL1 抽象为一个关联的 [TaikoData.Block]({{< ref "#block" >}})，并触发 BlockProposedEvent。
-- driver 监听到 blockProposedEvent 后，从 proposeBlock transaction 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
-- prover 监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
-- TaikoL1 内部自行触发 verifyBlock.
+![数据流图](images/dataflow.drawio.svg)
+
+### proposeBlock
+
+propose txlist 到 TaikoL1，并触发 BlockProposedEvent。
+
+### 有效性检查
+
+proposedBlock 有 [两个部分](https://taiko.xyz/docs/concepts/proposing#intrinsic-validity-functions)：
+
+- block metadata
+- txlist（存储在一个 blob 中，BlockMetadata 存储该 blob 的哈希值）
+
+我们将 proposedBlock 的有效性检查分为两部分：
+
+- metadataCheck
+- txListCheck
+
+proposedBlock 必须通过这两项检查，才能将 txList 映射到 Taiko 上的 L2 区块。如果一个 proposedBlock 通过了 metadataCheck，但随后却未能通过 txlistCheck，那么将创建一个只有 anchorTx 的区块。
+
+### createL2lBlock
+  
+监听到 blockProposedEvent 后，从 proposeBlock tx 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
+
+检查 txlist 有效性：
+
+- 如果 txlist 中的每笔交易都是有效的，则会跳过 nonce 无效或发送方以太币余额太少无法支付交易的交易，创建 txlist 的有序子集。该有序子集与锚 anchorTx 一起用于创建 taiko L2 Block。
+- 如果 txlist 中的所有交易无效，则会在 L2 上创建一个只有 anchorTx 的 Block。
+
+#### anchorTx
+
+[anchorTx](https://taiko.xyz/docs/concepts/proposing#anchor-transaction) 必须是 Taiko 区块中的第一笔交易（这对于使区块具有确定性非常重要）。锚事务目前的使用方法如下：
+
+### proveBlock
+  
+监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
+  
+### verifyBlock
+
+TaikoL1 内部自行触发 verifyBlock.
+
+## 部署
 
 ## 地址管理
 
