@@ -1,10 +1,10 @@
 ---
-title: Bridge
+title: Taiko Bridge
 description:
-slug: bridge
+slug: taiko-bridge
 date: 2023-09-01T10:13:41+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true

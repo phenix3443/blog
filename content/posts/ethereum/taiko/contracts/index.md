@@ -1,6 +1,6 @@
 ---
 title: Taiko Contracts
-description:
+description: Taiko 中的智能合约
 slug: taiko-contracts
 date: 2023-09-01T10:33:53+08:00
 featured: false
