@@ -182,11 +182,11 @@ Polygon 的方法比 Scroll 产生了更高性能的 rollup（至少在短期和
 
 #### StarkNet
 
-这就是 StarkWare 采取的 StarkNet 的方法，它目前是最先进的通用目的 rollup。StarkNet 运行一个自定义的智能合约虚拟机（Cairo VM），有自己的低级语言（Cairo），两者都是专为智能合约 rollups 量身定制的。这意味着 StarkNet 没有开箱即用的以太坊兼容性——正如我们之前看到的，即使是操作码级别的 VM 级别兼容性也可能会对 rollup 性能产生潜在的制动作用。
+这就是 StarkWare 在 StarKNet 采取的的方法，它目前是最先进的通用目的 rollup。StarkNet 运行一个自定义的智能合约虚拟机（Cairo VM），有自己的低级语言（Cairo），两者都是专为智能合约 rollups 量身定制的。这意味着 StarkNet 没有开箱即用的以太坊兼容性——正如我们之前看到的，即使是操作码级别的 VM 级别兼容性也可能会对 rollup 性能产生潜在的制动作用。
 
-![starknet vs ethereum](https://miro.medium.com/v2/resize:fit:798/0*Z8FEq-FtZ2XlnPN_)
+![StarkNet vs ethereum](<https://miro.medium.com/v2/resize:fit:798/0*Z8FEq-FtZ2XlnPN>_)
 
-然而，Nethermind 团队（与 StarkWare 合作）创建了 Warp 转译器，该转译器能够将任意 Solidity 代码转换为 Cairo VM 字节码。Warp 的目标是使常见的 Solidity 合约可以移植到 StarkNet——实现许多以太坊开发者在谈到“EVM 兼容性”时的主要目标。然而，在实践中，有一些 Solidity 功能 Warp 不支持，包括低级调用（完整列表可以在这里找到）。
+然而，Nethermind 团队（与 StarkWare 合作）创建了 [Warp 转译器](https://nethermind.io/warp/)，该转译器能够将任意 Solidity 代码转换为 Cairo VM 字节码。Warp 的目标是使常见的 Solidity 合约可以移植到 StarkNet——实现许多以太坊开发者在谈到“EVM 兼容性”时的主要目标。然而，在实践中，有一些 Solidity 功能 Warp 不支持，包括低级调用（完整列表可以在 [这里](https://github.com/NethermindEth/warp) 找到）。
 
 这种构建智能合约 rollup 的方法是维护“Solidity 兼容性”：你并不是在 EVM 内执行程序，也不是与任何其他以太坊接口保持兼容性，但 Solidity 开发者将能够编写可以在你的 rollup 上使用的代码。因此，你可以维护与以太坊相似的开发者体验，而无需妥协你的 rollup 的基础层——两全其美。
 
@@ -198,6 +198,71 @@ Polygon 的方法比 Scroll 产生了更高性能的 rollup（至少在短期和
 
 #### zkSync
 
-采用这种策略的另一个团队是 zkSync。zkSync 创建了他们自己的 VM（SyncVM），该 VM 基于寄存器，并定义了自己的代数中间表示（AIR）。然后，他们构建了一个专门的编译器，将 Yul（一种可以编译为不同 EVM 版本的字节码的中间语言，可以认为是一个更低级的 Solidity）编译为 LLVM-IR，然后将其编译为他们自定义 VM 的指令。这与 StarkWare 采取的方法相似，但理论上提供了更多关于基础语言的灵活性（尽管目前仅支持 Solidity 0.8.x）。zkSync 团队最初创建了他们自己的类似 CAIRO 的语言（Zinc），但已经将大部分努力转向专注于 Solidity 编译器，以便为 L1 开发者提供更简单的迁移。总体而言，他们的策略是比 StarkNet 重用更多的以太坊工具集——我预计他们的客户端 API 等也会更“兼容以太坊”。
+采用这种策略的另一个团队是 [zkSync](https://zksync.io/)。zkSync 创建了他们自己的 VM（SyncVM），该 VM 基于寄存器，并定义了自己的代数中间表示（AIR）。然后，他们构建了一个 [专门的编译器](https://github.com/matter-labs/compiler-solidity)，将 Yul（一种可以编译为不同 EVM 版本的字节码的中间语言，可以认为是一个更低级的 Solidity）编译为 LLVM-IR，然后将其编译为他们自定义 VM 的指令。这与 StarkWare 采取的方法相似，但理论上提供了更多关于基础语言的灵活性（尽管目前仅支持 Solidity 0.8.x）。zkSync 团队最初创建了他们自己的类似 CAIRO 的语言（[Zinc](https://github.com/matter-labs/zinc)），但已经将大部分努力转向专注于 Solidity 编译器，以便为 L1 开发者提供更简单的迁移。总体而言，他们的策略是比 StarkNet 重用更多的以太坊工具集——我预计他们的客户端 API 等也会更“兼容以太坊”。
 
-![zkEVM comppiler](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*U56KlFn0aySbQ98NlyLV5A.png)
+![zkEVM compiler](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*U56KlFn0aySbQ98NlyLV5A.png)
+
+zkSync 通过使用这种自定义 VM 来实现非 EVM 兼容的功能，比如 [账户抽象化（Account Abstraction）](https://v2-docs.zksync.io/dev/zksync-v2/aa.html#introduction)，这一直是以太坊核心协议的 [长期目标](https://eips.ethereum.org/EIPS/eip-2938)。这是自定义 VM 所提供好处的一个很好的例子——你不必等待以太坊构建新功能！
+
+![zksync vs etherem](https://miro.medium.com/v2/resize:fit:776/0*R1YxjzxmO3nJAuwd)
+
+总结来说，你可以明显看到每个团队选择了不同的策略来解决与 zk-rollups 和 EVM 兼容性相关的挑战：
+
+![compare](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*R7ZWNWqkX35Z-oEgR1WkTA.png)
+
+## Vitalik 的 zkEVM 类型
+
+Vitalik Buterin 在其 [关于 zkEVMs 的博客](https://vitalik.eth.limo/general/2022/08/04/zkevm.html) 中强调了目前 rollup 团队面临的根本性困境：EVM 并没有为“可验证”的程序而构建。实际上，正如我们通过上面的分析所展示的，你寻求与以太坊越兼容，你的“可验证格式”的程序就会越不高效。Vitalik 根据它们与现有 EVM 基础设施的兼容度，为通用目的的 rollups 确定了几个广泛的类别：
+
+![vitalik zkevm type](https://miro.medium.com/v2/resize:fit:1400/0*yBXBhh6Fj-gzFhrZ)
+
+对他的论点我想做的唯一扩展是注意到，即使在每个“类型”内部也存在相当大的可变性——我们在处理一个谱系，而不是完全分割的类别。从开发者体验的角度看，对应用层进行了一次小改动的类型 3 rollup 与类型 2 rollup 有更多的共同之处，而与对应用层进行了大量改动但技术上没有引入新 VM 并成为类型 4 的类型 3 rollup 相比。
+
+## 智能合约 Rollups 的当前状态
+
+考虑到理解上述内容所需的详细程度，我们围绕以太坊兼容性发明了一堆令人困惑的术语并不奇怪。事实上，没有一个 zk-rollup 能在所有情况下完美地复制 EVM 的行为——这都是一个程度的问题，每个团队做出的详细选择最终将在维护性和性能方面起到最大的作用，而不仅仅是兼容性。我认为以下定义是最清晰和最一致的：
+
+![tb](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mItDUyyh6mTaq8iW2un0sw.png)
+
+重要的是要明白，以上这些方法没有哪一个是固有地优越的——这是一种分类，而不是层级。它们都做出了不同的权衡：更容易构建、维护和升级，性能更高，更容易与现有工具兼容。最终，领先的 rollup 也将由更好的分发和营销决定，而不仅仅是纯粹的技术能力。尽管如此，做出正确的基础技术决策无疑有很大的优势。Scroll 对 EVM 规范的狂热承诺会使他们能轻易地应对任何 EVM 的升级吗？另一个团队更务实的方法会帮助他们更快地进入市场吗？StarkWare 的自定义 VM+转译器方法是否会证明是长期扩张的更稳固基础？还是另一个团队会从这个领域的第一批参与者无疑会犯的错误中吸取教训，并抢在他们之前达成目标？最终，以太坊发展当前时刻的美妙之处在于，我们有不同的团队用截然不同的方法推动着一个共同的目标。
+
+但在我们过于激动之前，也应该对智能合约 rollup 的当前准备状况保持冷静。每个团队都有强烈的动机将自己宣传为“即将接管世界”——但最早也要到 2022 年底，以太坊上才会有“生产级别”的智能合约 rollups，而且许多这些团队直到 2023 年深入之后才会准备好。基于 StarkNet 的经验，我们应该预期从 rollup 进入测试网开始至少需要一年的迭代，然后这个 rollup 才准备好在主网上支持稳定的生产级别的交易量。
+
+![timeline](https://miro.medium.com/v2/resize:fit:1272/format:webp/1*xdiOctbvDiwkrkTh2hU1pw.png)
+
+由于这种不成熟的状态，应用特定的 rollup 仍然是那些需要在不妥协以太坊安全性的前提下扩展规模的开发者最强大的选择。实际上，即使在通用 rollup 可用并更广泛地集成之后，我预计应用特定 rollup 的性能、自定义能力和可靠性在某些用例（例如交易所、NFT 的铸造/交易）上在可预见的未来仍将优越。
+
+## 其他 Rollup 因素
+
+尽管这篇文章的主要关注点是以太坊生态系统的兼容性与性能，但还有其他一些因素会影响你是否应该在某个特定的通用 rollup 上构建。我将提出几个主要的额外标准：
+
+- 费用：这些 rollup 会以原生代币、以太币或者两者的复杂组合收取费用吗？费用结构对用户和开发者体验有巨大影响，因为 rollup 经常需要拥有手续费代币以支付计算费用。
+- 证明和排序：所有的 rollup 都需要一个负责交易排序和生成证明的实体。目前大多数应用特定的 rollup 是“单一排序者”，这提供了更高的吞吐量，但以牺牲韧性为代价。大多数通用 rollup 最初都是作为单一排序者 rollup 开始的，但它们通常计划随着时间的推移去中心化这个排序者。
+- 自我保管：zk-rollup 的核心承诺是在保留以太坊安全性的同时解锁规模。然而，许多通用 rollup 目前没有明确的机制来在恶意或不可用的排序者事件中恢复用户资产。
+- 数据可用性：如简介所述，自我保管的保证受到状态数据在故障情况下的可用性的制约。然而，完全的数据可用性为用户引入了额外的成本，从而导致了一系列的数据可用性模式。这在应用特定的 rollup 世界（例如 Validiums、Volitions）中已经被广泛使用，但每个通用 rollup 都需要单独添加这个功能。
+
+![factor](https://miro.medium.com/v2/resize:fit:1320/format:webp/1*0_DLxq1nTTBbdnX4DRuHJg.png)
+
+## 总结
+
+智能合约 rollup 是以太坊扩展路线图中令人极为兴奋的一部分。这些 rollup 与现有的以太坊工具集之间的不同权衡是以太坊开发者生态系统多样性的惊人见证。
+
+然而，当前关于 EVM 兼容性的讨论通常是失焦的。从开发者的角度看，所有这些 rollup 都将支持 Solidity 代码。真正的以太坊兼容性是一个更大的挑战，但这实际上是有重大权衡的，开发者在承诺使用一个 rollup 之前应该注意到这一点。目前，大多数 rollup 项目都在大量“预售” - 销售他们的 3 年多的愿景，而不是今天（甚至在 12 个月内）可能实现的功能，这可能会严重混淆视听。
+
+为了透明化，我希望每个主要的 rollup 团队能对以下问题提供更清晰的答案：
+
+L1 和 L2 之间的运行时的精确区别是什么？ L2 上将修改哪些操作码？ L1 和 L2 的其他 VM 特性（例如费用结构）会有不同吗？
+你的自定义 VM 的正式规范在哪里，它的性能比其他选项更好/更差的地方在哪里？
+这个 rollup 将对其他以太坊接口（例如客户端 API、库）进行多少次更改，从而破坏以太坊工具？
+这个 rollup 什么时候会在测试网上线？ 在主网上？ 能够支持 1000+ 自定义合约 tps 的持续生产吞吐量？
+
+您预计什么时候会支持用户资产的完全自我保管，以及这在通用 rollup 的上下文中会是什么样子？
+一旦这些 rollup 在测试网上发布，回答这些问题应该会更容易。在此之前，我很想看到团队们继续发布有关他们的解冓方案将做出的确切权衡的更多技术细节，以及这将如何影响智能合约和工具开发人员。
+
+随着合并即将来临，经过战斗考验的应用特定 rollup 在生产中，以及通用 rollup 在接下来的一年中将进入主网，以太坊的扩展未来就在眼前。
+
+如果没有整个 rollup 社区的帮助，特别是所有给予预发行反馈的人，这篇文章永远不会完成 - 我非常感激！任何剩下的错误都是我的，由于这篇文章的很大一部分是从未发布的代码、旧的会议演示和未完成的文档中综合得出的，我预计会有很多。如果你认为应该进行更新或澄清，请随时给我发送 Twitter DM。
+
+如果你想使用 rollup 技术的未来将世界上最大的游戏吸引到以太坊，Immutable 正在招聘！
+
+Alex Connolly, Immutable 共同创始人 & CTO
