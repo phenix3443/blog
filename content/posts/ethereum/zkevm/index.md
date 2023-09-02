@@ -1,5 +1,5 @@
 ---
-title: "zkemv 学习"
+title: "zkEVM 学习"
 description:
 date: 2022-06-07T22:42:28+08:00
 image:
@@ -11,7 +11,7 @@ draft: true
 categories:
   - ethereum
 tags:
-  - zkevm
+  - zkEVM
 ---
 
 ## 资料
@@ -22,7 +22,7 @@ tags:
 
 Some potentially interesting lookup things that could improve the prover performance:
 
-- Caulk - https://eprint.iacr.org/2022/621: Can potentially enable very large lookup tables which can make certain operations in circuits more efficient
-- Standard Plookup - https://eprint.iacr.org/2020/315: Differs from the lookups currently used in halo2. The benefit here would be that the lookups could be done in differently sized columns than the circuit. Though unsure how much this could help combined with the different constraints of zkEVM. Theoretically worse than Caulk but maybe easier to implement.
+- Caulk - <https://eprint.iacr.org/2022/621>: Can potentially enable very large lookup tables which can make certain operations in circuits more efficient
+- Standard Plookup - <https://eprint.iacr.org/2020/315>: Differs from the lookups currently used in halo2. The benefit here would be that the lookups could be done in differently sized columns than the circuit. Though unsure how much this could help combined with the different constraints of zkEVM. Theoretically worse than Caulk but maybe easier to implement.
 
-https://www.eventbrite.com/e/compiler-and-composability-tickets-377470232627?aff=ebdsoporgprofile
+<https://www.eventbrite.com/e/compiler-and-composability-tickets-377470232627?aff=ebdsoporgprofile>

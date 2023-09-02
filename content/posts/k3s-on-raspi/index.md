@@ -19,24 +19,24 @@ tags:
 
 ## 概述
 
-之前[在树莓派集群上部署了 k8s]({{< ref "../k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
+之前 [在树莓派集群上部署了 k8s]({{< ref "../k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
 
 当前 k3s 版本：`v1.26.5+k3s1 (7cefebea)`。
 
 ## 系统架构
 
-整体架构使用[带有嵌入式数据库的单服务器](https://docs.k3s.io/zh/architecture#%E5%B8%A6%E6%9C%89%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8D%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%BE%E7%BD%AE)形式。
+整体架构使用 [带有嵌入式数据库的单服务器](https://docs.k3s.io/zh/architecture#%E5%B8%A6%E6%9C%89%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8D%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%BE%E7%BD%AE) 形式。
 
 ![带有嵌入式数据库的单服务器](https://docs.k3s.io/zh/img/k3s-architecture-single-server-dark.svg)
 
 ## 部署准备
 
-- 根据[安装要求](https://docs.k3s.io/zh/installation/requirements)检查准备工作。
+- 根据 [安装要求](https://docs.k3s.io/zh/installation/requirements) 检查准备工作。
 - [树莓派注意事项](https://docs.k3s.io/zh/advanced#raspberry-pi)。
 
 ### 网络拓扑
 
-使用[家中闲置树莓派 4B]({{< ref "../raspi" >}})来搭建整个集群。
+使用 [家中闲置树莓派 4B]({{< ref "../raspi" >}}) 来搭建整个集群。
 
 | hostname | role   |
 | -------- | ------ |
@@ -48,7 +48,7 @@ tags:
 
 #### vxlan
 
-k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C)管理集群网络，从 Ubuntu 21.10 开始，对 Raspberry Pi 的 vxlan 支持已移至单独的内核模块中。
+k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C) 管理集群网络，从 Ubuntu 21.10 开始，对 Raspberry Pi 的 vxlan 支持已移至单独的内核模块中。
 
 ```shell
 sudo apt update && sudo apt upgrade -y
@@ -61,7 +61,7 @@ sudo apt install -y linux-modules-extra-raspi
 
 参考 [快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
 
-使用[配置文件](https://docs.k3s.io/zh/installation/configuration#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)控制安装：
+使用 [配置文件](https://docs.k3s.io/zh/installation/configuration#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6) 控制安装：
 
 {{< gist phenix3443 4768186a97f4db5e3d89e73e18872631 >}}
 
@@ -86,13 +86,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 {{< gist phenix3443 9122aa42bd7e012f667234d3d5042bf2 >}}
 
-关于 helm 参与[使用 helm 管理 kubernetes 应用]({{< ref "../helm" >}})
+关于 helm 参与 [使用 helm 管理 kubernetes 应用]({{< ref "../helm" >}})
 
 ### 部署 ingress-nginx
 
 #### 设置代理
 
-[nginx-ingress](https://kubernetes.github.io/ingress-nginx/) 启动的 pods 需要从国内无法访问的 `registry.k8s.io` 拉取镜像，给 containerd 临时配置[配置 HTTP 代理](https://docs.k3s.io/zh/advanced#%E9%85%8D%E7%BD%AE-http-%E4%BB%A3%E7%90%86) 可以解决该问题。
+[nginx-ingress](https://kubernetes.github.io/ingress-nginx/) 启动的 pods 需要从国内无法访问的 `registry.k8s.io` 拉取镜像，给 containerd 临时配置 [配置 HTTP 代理](https://docs.k3s.io/zh/advanced#%E9%85%8D%E7%BD%AE-http-%E4%BB%A3%E7%90%86) 可以解决该问题。
 
 ```shell
 # cat /etc/systemd/system/k3s.service.env
@@ -109,7 +109,7 @@ sudo systemctl restart k3s
 
 #### 安装 ingress-nginx
 
-按照[官方文档](https://kubernetes.github.io/ingress-nginx/deploy/)安装，这里我们选择使用 helm 安装。
+按照 [官方文档](https://kubernetes.github.io/ingress-nginx/deploy/) 安装，这里我们选择使用 helm 安装。
 
 ```shell
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -140,17 +140,17 @@ sudo systemctl restart k3s
 
 查看 k3s 服务启动日志 `journalctl -u k3s`，下面的日志中列出了一些需要关注的信息，比如：
 
-- apiserver/scheduler/controller-manager 启动选项(L11-L17)
-- server node token 的位置(L19)
-- server node 与 agent node 加入的方法(L20-L22)
-- kubeconfig 位置(L23)
-- PodCIDRs 范围(L48)
+- apiserver/scheduler/controller-manager 启动选项 (L11-L17)
+- server node token 的位置 (L19)
+- server node 与 agent node 加入的方法 (L20-L22)
+- kubeconfig 位置 (L23)
+- PodCIDRs 范围 (L48)
 
 {{< gist phenix3443 cd9be018d3b26bcc32f2010cf26639e5 >}}
 
 ## 部署 agent
 
-按照[快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
+按照 [快速入门指南](https://docs.k3s.io/zh/quick-start) 进行部署。
 
 安装依赖
 

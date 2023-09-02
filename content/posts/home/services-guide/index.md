@@ -41,7 +41,7 @@ tags:
      - 电信封掉了一下常见的 HTTP 端口，如 80/443，使得访问服务的时候必须要在域名后携带端口号，一点都不优雅。
      - 需要自己申请 SSL 证书，配置 nginx 代理，为内网服务提供 HTTPS 支持。
      - 直接将内网服务暴露在外网有安全隐患。
-  2. 通过 [cloudflare tunnel 提供内网穿透功能](https://sspai.com/post/79278)进行访问。优点如下：
+  2. 通过 [cloudflare tunnel 提供内网穿透功能](https://sspai.com/post/79278) 进行访问。优点如下：
      - 配置简单。
      - cloudflare 负责解析域名，同时默认为域名提供 SSL 证书，支持 HTTPS 访问。
      - cloudflare 有访问控制功能，使得内网服务更加安全。
@@ -56,7 +56,7 @@ tags:
 
 作为业余摄影爱好者，现在积累的素材都已经上 T 了。年初时候 macmini 系统崩溃了一次，虽然最后数据恢复了，但仍然心有余悸。需求点：
 
-- 同步。不只是备份，多端同步方便其他工作端(macbook/windows/Android/ios)进一步处理和分享。
+- 同步。不只是备份，多端同步方便其他工作端 (macbook/windows/Android/ios) 进一步处理和分享。
 - 速度要快。有 P2P 支持多设备同步当然更快。
 - 最好支持加密后同步，方便利用现有网盘功能进行备份，这样既可以利用网盘功能，又不担心资源泄露。
 
@@ -93,16 +93,16 @@ tags:
 
 ![arch](images/arch.drawio.svg)
 
-- [raspi 4b 组成集群]({{< ref "../raspi" >}})作为硬件支撑.
-- [clash]{{< ref "../clash" >}} 搭建透明代理，处理整个家庭的网络，解决部署过程中的镜像问题。
-- 通过 [kubernetes]({{< ref "../k3s-on-raspi" >}}) 管理服务。
-- [longhorn]({{< ref "../longhorn" >}}) 将 raspi 的硬盘资源在 k8s 池化。
-- 通过[prometheus+grafana]({{< ref "../prometheus" >}})监控。
+- [raspi 4b 组成集群]({{< ref "../../raspi" >}}) 作为硬件支撑。
+- [clash]{{< ref "../../clash" >}} 搭建透明代理，处理整个家庭的网络，解决部署过程中的镜像问题。
+- 通过 [kubernetes]({{< ref "../../k3s-on-raspi" >}}) 管理服务。
+- [longhorn]({{< ref "../../longhorn" >}}) 将 raspi 的硬盘资源在 k8s 池化。
+- 通过 [prometheus+grafana]({{< ref "../../prometheus" >}}) 监控。
 - collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
 
 ## 进度
 
-- [resilio]({{< ref "../resilio" >}}) 用于资源同步。
-- [cloudreve]({{< ref "../cloudreve" >}}) 私人网盘空间。
-- [alist]({{< ref "../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
+- [resilio]({{< ref "../../resilio" >}}) 用于资源同步。
+- [cloudreve]({{< ref "../../cloudreve" >}}) 私人网盘空间。
+- [alist]({{< ref "../../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
 - clash 用于软路由，科学上网。

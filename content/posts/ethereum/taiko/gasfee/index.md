@@ -1,8 +1,8 @@
 ---
-title: Taiko Protocol
+title: Taiko Gasfee
 description:
-slug: taiko-protocol
-date: 2023-08-25T15:31:15+08:00
+slug: taiko-gasfee
+date: 2023-09-01T10:15:29+08:00
 featured: false
 draft: true
 comment: true
@@ -10,9 +10,10 @@ toc: true
 reward: true
 pinned: false
 carousel: false
-series: []
-categories: []
-tags: []
+series:
+  - Taiko 源码解析
+categories: [ethereum]
+tags: [taiko, rollup]
 images: []
 ---
 
