@@ -297,14 +297,14 @@ deployCounterV1 消耗 gas:
 
 | 代理方式    | total   | deployCounterV1 | deployProxy |
 | ----------- | ------- | --------------- | ----------- |
-| transparent | 1231744 | 300849          | 646647      |
-| uups        | 1470474 | 924066          | 207069      |
+| transparent | 854179 | 229669          | 533819      |
+| uups        | 1020146 | 808530          | 131325      |
 
 upgradeToCounterV2 消耗 gas:
 |代理方式|total|deployCounterV2|upgradeProxy|
 |---|---|---|---|
-|transparent|482248|325438|40465
-|uups|1304090|953852|46396
+|transparent|329373|252494|16077
+|uups|919551|836156|22008
 
 TODO: 为什么 gas 消耗与下面的内容不符合呢？
 
