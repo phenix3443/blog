@@ -31,9 +31,9 @@ tags:
 hugo completion zsh > $(brew --prefix)/share/zsh/site-functions/_hugo
 ```
 
-参见[zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
+参见 [zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
 
-其他shell安装参见[hugo completion](https://gohugo.io/commands/hugo_completion/)
+其他 shell 安装参见 [hugo completion](https://gohugo.io/commands/hugo_completion/)
 
 查看当前站点的配置：
 
@@ -41,7 +41,7 @@ hugo completion zsh > $(brew --prefix)/share/zsh/site-functions/_hugo
 hugo config --format yaml
 ```
 
-更多命令行使用参见[cli](https://gohugo.io/commands/)
+更多命令行使用参见 [cli](https://gohugo.io/commands/)
 
 ### modules
 
@@ -56,12 +56,11 @@ Hugo module 由 Go module 提供支持。有关 Go module 的更多信息，请�
 
 我们可以 [通过 module 来使用 theme](https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme)，比如当前博客主题就是通过 module 挂载的：
 
-{{< code-toggle >}}
+```yaml
 module:
   imports:
     - path: github.com/razonyang/hugo-theme-bootstrap
-
-{{< /code-toggle >}}
+```
 
 [Hugo Modules: everything you need to know!](https://www.thenewdynamic.com/article/hugo-modules-everything-from-imports-to-create/)
 
