@@ -6,3 +6,6 @@ zh-hans:
     keywords: "Hugo, blog"
     archive:
       dateFormat: 01-02
+en:
+  languageName: English
+  weight: 1
