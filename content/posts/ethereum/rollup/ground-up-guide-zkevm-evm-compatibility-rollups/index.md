@@ -216,7 +216,7 @@ zkSync 通过使用这种自定义 VM 来实现非 EVM 兼容的功能，比如 
 
 ### Vitalik 的 zkEVM 类型
 
-Vitalik Buterin 在其 [关于 zkEVMs 的博客](https://vitalik.eth.limo/general/2022/08/04/zkEVM.html) 中强调了目前 rollup 团队面临的根本性困境：EVM 并没有为“可验证”的程序而构建。实际上，正如我们通过上面的分析所展示的，你越追求与以太坊兼容，你的“可验证格式”的程序性能就越低。Vitalik 根据它们与现有 EVM 基础设施的兼容度，为通用目的的 rollups 确定了几个广泛的类别：
+Vitalik Buterin 在其 [关于 zkEVMs 的博客](https://vitalik.eth.limo/general/2022/08/04/zkEVM.html)([中译文](https://www.chaincatcher.com/article/2077517)) 中强调了目前 rollup 团队面临的根本性困境：EVM 并没有为“可验证”的程序而构建。实际上，正如我们通过上面的分析所展示的，你越追求与以太坊兼容，你的“可验证格式”的程序性能就越低。Vitalik 根据它们与现有 EVM 基础设施的兼容度，为通用目的的 rollups 确定了几个广泛的类别：
 
 ![vitalik zkEVM type](https://miro.medium.com/v2/resize:fit:1400/0*yBXBhh6Fj-gzFhrZ)
 
