@@ -9,12 +9,14 @@ license:
 hidden: false
 comments: true
 draft: false
-series: [以太坊中的密码学]
+series: 
+  - 以太坊中的密码学
 categories:
   - ethereum
 tags:
   - kzg
   - cryptography
+math: true
 ---
 
 本文介绍 KZG 多项式承诺。
@@ -51,7 +53,7 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 - [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 比较难，看不懂。
 - [详解 KZG 如何应用于 zk-rollup 以及以太坊 DA 方案](https://www.defidaonews.com/article/6784542)
 
-### trust setup
+### 可信设置
 
 - EIP-4844 中采用了一种常见的 multi-participant trust setup，即 powers-of-tau；
 - 遵循 1-of-N 可信模型，不管多少人参与 generating setup 的过程，只要有一个人不泄漏自己的生成方式，可信初始化就是有效的；
@@ -68,8 +70,11 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 
 这是一个多方参与的活动：每个贡献者创建一个秘钥，并运行一次计算，将其与之前贡献的秘密混合在一起。 然后，输出被公开并传递给下一个贡献者。最终输出将包含在未来的升级中，以帮助扩展以太坊网络。
 
+## 应用
+
 ## 延伸阅读
 
+- [详解 KZG 在 zk-rollup 和以太坊 DA 方案的应用](<https://scroll.io/blog/kzg)([中译文>](<<https://www.panewslab.com/zh/articledetails/cbf8uz1d.html>))
 - [深度解读 EIP-4844：Sharding 的一小步，以太坊扩容的一大步](https://www.chaincatcher.com/article/2086654)
 - [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
 - [多项式承诺，正在重塑整个区块链](https://web3caff.com/zh/archives/38949)

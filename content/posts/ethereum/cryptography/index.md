@@ -9,7 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-series: [以太坊中的密码学]
+series:
+  - 以太坊中的密码学
 categories:
   - ethereum
 tags:
@@ -34,16 +35,12 @@ tags:
 
 ## 椭圆曲线
 
-参考：
-
 - [椭圆曲线密码学的简单介绍](https://zhuanlan.zhihu.com/p/26029199)
 - [一文读懂 ECDSA 算法如何保护数据](https://zhuanlan.zhihu.com/p/97953640)
 - [椭圆曲线密码学简介（一）：实数域的椭圆曲线及其群运算规则](https://zhuanlan.zhihu.com/p/102807398) 以及后续系列文章。
 
 ### 配对
 
-参考：
-
 - [Exploring Elliptic Curve Pairings](https://medium.com/@VitalikButerin/exploring-elliptic-curve-pairings-c73c1864e627), 简体中文版 [探索椭圆曲线配对](https://zhuanlan.zhihu.com/p/592591301)，[繁体中文版](https://medium.com/cryptocow/exploring-elliptic-curve-pairings-e322a3f029e8)
 
-## 参考
+## 延伸阅读
