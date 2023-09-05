@@ -20,8 +20,8 @@ images: []
 进一步理解 zkEVM:
 
 1. transaction 在 EVM 执行过程中会转化为一系列的 opcode。
-2. opcode 执行过程中会产生 memory/storage/stack 的变化，也就是 trace，这些 trace 可以作为 transaction 执行的见证（wittiness）。
-3. zkEVM 将 wittiness 转化为算数电路（circuit），通过约束（constraints）证明 opcode 执行的正确性，并生成 wittiness 与 publicInputs 存在某种相关性的证明（zkProof）。
+2. opcode 执行过程中会产生 memory/storage/stack 的变化，也就是 trace，这些 trace 可以作为 transaction 执行的见证（witness）。
+3. zkEVM 将 witness 转化为算数电路（circuit），通过约束（constraints）证明 opcode 执行的正确性，并生成 witness 与 publicInputs 存在某种相关性的证明（zkProof）。
 4. 将 zkProof 和 publicInput 丢给 verifier 进行验证：用户提交的 transaction 确实已经被执行了，并且和用户期望的 publicInput 相符。
 
 疑问：
