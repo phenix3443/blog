@@ -28,8 +28,10 @@ math: true
 多项式 (Polynomial) 是代数学中的基础概念，是由称为未知数的`变量`和称为`系数`的常数通过有限次加减法，乘法以及自然数幂次的乘方运算得到的代数表达式。以单变量多项式为例说明：
 
 $$
-f(x) = a_0 + a_1x + ... + a_nX^n = a_0,a_1,....,a_n
+f(x) = \sum_{i=0}^{n}a_i x^i = a_0 + a_1x + ... + a_nX^n = a_0,a_1,....,a_n
 $$
+
+- Degree $deg(f(x))=n$
 
 以上是系数表示形式，系数序列确定多项式也就确定了。还有一种表示方法是使用 n+1 点值对表示 n 次多项式。
 
@@ -55,11 +57,14 @@ $$
 
 参考 [有限域](http://accu.cc/content/cryptography/ecc/#_1)
 
-## 椭圆曲线
+## 椭圆曲线{#elliptic_curve}
 
-- [椭圆曲线密码学的简单介绍](https://zhuanlan.zhihu.com/p/26029199)
+- [椭圆曲线密码学简介（一）：实数域的椭圆曲线及其群运算规则](https://zhuanlan.zhihu.com/p/102807398)
+- [椭圆曲线密码学简介（二）：有限域的椭圆曲线及离散对数问题](https://zhuanlan.zhihu.com/p/104531745)
+- [椭圆曲线密码学简介（三）：ECDH 加密算法和 ECDSA 数字签名算法](https://zhuanlan.zhihu.com/p/107599962)
+- [椭圆曲线密码学简介（四）：破解安全性及与 RSA 之间的比较](https://zhuanlan.zhihu.com/p/108103413)
 - [一文读懂 ECDSA 算法如何保护数据](https://zhuanlan.zhihu.com/p/97953640)
-- [椭圆曲线密码学简介（一）：实数域的椭圆曲线及其群运算规则](https://zhuanlan.zhihu.com/p/102807398) 以及后续系列文章。
+- [椭圆曲线密码学的简单介绍](https://zhuanlan.zhihu.com/p/26029199)
 
 ### 配对
 

@@ -202,9 +202,17 @@ $$
 
 这种方法采用部分揭示方式验证，将对 $f(x)$ 的验证转化为两个数值对之间关系的验证，自始至终没有完全暴露最初的多项式 $f(x)$，使得多项式增加了隐私性。现在已经比较接近 Kate 承诺的方案了。
 
+建议进一步学习 [币圈李白：零知识证明 KZG Commitment 1:Polynomial Commitment](https://www.youtube.com/watch?v=nkrk3jLj8Jw)，详细介绍了多项式性质以及应用、IOP、Non-IOP 等。
+
 ### 应用场景
 
-上面的 Merkle 树如果说有其不足之处的话，当叶子节点的数量级非常大，树层级数变多，在打开验证节点需要的 merkle 树证明路径也就越长，数据量就越大，相对于此，前文描述的多项式承诺没有这个问题，所以 Vitalik 的一篇文章：
+上面的 Merkle 树如果说有其不足之处的话，当叶子节点的数量级非常大，树层级数变多，在打开验证节点需要的 merkle 树证明路径也就越长，数据量就越大，相对于此，前文描述的多项式承诺没有这个问题：
+
+多项式承诺利用一个度为 $d$ 的多项式隐藏其对应的数据，数据对应多项式系数，或者等效的多个点值对。密码学多年的研究已经证明，当多项式的度远远小于验证域的阶时候，可以通过只验证点值的方式就能实现计算意义上的完备性 (Computational Soundness)。
+
+显而易见，如果只验证少数几个点值对，计算工作量远远小于验证个点值对插值求多项式，这也提供了良好的简洁性，即 Succinct。但是简单的利用多项式来实现“通用”、“零知识”等重要的密码学特征，还需要做很多工作。
+
+Vitalik 的一篇文章：
 [Using polynomial commitments to replace state roots](https://ethresear.ch/t/using-polynomial-commitments-to-replace-state-roots/7095)([中文版](https://www.8btc.com/article/567865)) 畅想以后可能考虑使用多项式承诺代替现在已有的 merkle 树承诺。
 
 多项式承诺应用方向总结起来可以分为 3 大类：

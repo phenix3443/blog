@@ -11,10 +11,13 @@ reward: true
 pinned: false
 carousel: false
 math: true
-series: []
-categories: []
-tags: []
-images: []
+series: 
+  - 以太坊中的密码学
+categories:
+  - ethereum
+tags:
+  - cryptography
+  - zkp
 ---
 
 本文介绍零知识证明。
@@ -44,6 +47,10 @@ function C(x, w) {  return ( sha256(w) == x );}
 换句话说：该程序接收一个公共哈希 x 和一个秘密值 w ，如果 w 的 SHA-256 哈希等于 x ，则返回 true 。
 
 将爱丽丝的问题通过函数 $C(x,w)$ 进行翻译，我们可以看到爱丽丝需要创建一个证明（proof），证明她拥有 $s$ ，使得 $C(H, s) == true$ ，而无需揭示 $s$ 。这就是 zk-SNARKs 解决的一般问题。
+
+## 核心原理
+
+多项式性质 [Schwartz-Zippel Lemma](https://www.youtube.com/watch?v=nkrk3jLj8Jw) 是很多零知识证明方法的核心原理。
 
 ## zk-SNARK 的定义
 

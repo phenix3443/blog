@@ -117,7 +117,7 @@ Rollups 在 data blob 中发布他们执行的交易，还公布了对数据的�
 
 ### 什么是 KZG？
 
-KZG 是 `Kate-Zaverucha-Goldberg` 的缩写--这是三个 [原始作者](https://link.springer.com/chapter/10.1007/978-3-642-17373-8_11) 的名字，他们的方案将一团数据简化为一个小的 [加密 "承诺 (commitment)"](https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html)。rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。KZG 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollups 和最终以太坊协议的其他部分所使用的零知识技术兼容。
+rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。[KZG]({{< ref "../kzg" >}}) 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollups 和最终以太坊协议的其他部分所使用的零知识技术兼容。
 
 ### 什么是 KZG Ceremony？
 

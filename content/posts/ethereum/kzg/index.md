@@ -36,14 +36,28 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 
 ## 数学原理
 
-- [零知识证明 KZG Commitment 1:Polynomial Commitment](https://www.youtube.com/watch?v=nkrk3jLj8Jw) 强烈推荐阅读。
-- 可参考 Qi Zhou 博士在 Dapp Learning 讲解的关于 [Polynomial Commitment KZG with Examples (part 1)](https://www.youtube.com/watch?v=n4eiiCDhTes)。
-- [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 比较难，看不懂。
+建议阅读 [币圈李白：零知识证明 KZG Commitment 1:Polynomial Commitment](https://www.youtube.com/watch?v=nkrk3jLj8Jw) 建议阅读。详细介绍了：
+
+- 如何使用拉格朗日差值将数据转为多项式
+- 多项式性质和应用
+- 多项式承诺在零知识证明（交互式、非交互式）中的应用
+- 简要介绍了 KZG。
+
+![kzg](images/kzg.png)
+
+可参考 Qi Zhou 博士关于 kzg 的讲解：
+
+- [Polynomial Commitment KZG with Examples (part 1)](https://www.youtube.com/watch?v=n4eiiCDhTes)。
+- [Polynomial Commitment KZG with Examples (part 2)](https://www.youtube.com/watch?v=NVvNHe_RGZ8)。
+
+- 如何将多项式限制在放在 [椭圆曲线]({{< ref "../cryptography#elliptic_curve" >}}) 上。
+
+[KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 比较难，看不懂。
 
 ## 可信设置
 
 - EIP-4844 中采用了一种常见的 multi-participant trust setup，即 powers-of-tau；
-- 遵循 1-of-N 可信模型，不管多少人参与 generating setup 的过程，只要有一个人不泄漏自己的生成方式，可信初始化就是有效的；
+- 遵循 [1-of-N 可信模型](https://www.ethereum.cn/Thinking/trust-model)，不管多少人参与 generating setup 的过程，只要有一个人不泄漏自己的生成方式，可信初始化就是有效的；
 - 必要性
   - KZG commitment 的 trust setup 可以简单理解为：生成一个在每次执行 cryptographic protocol 时需要依赖的一个参数，类似于 zk-snark 需要可信初始化；
   - Prover 在提供证明时，KZG commitment C = f(s)g1。其中 f 是评估函数，s 就是 KZG trusted setup 最终获得的 final secret；
