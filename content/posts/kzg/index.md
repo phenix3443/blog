@@ -27,8 +27,9 @@ math: true
 
 ## 前置知识
 
+- [区块链中的密码学]({{< ref "../cryptography" >}})，介绍了群、环、域。
 - [多项式承诺]({{< ref "../polynomial-commitments" >}}) 介绍了什么是多项式承诺，以及目前实现多项式承诺几种典型实现的对比。
-- [区块链中的密码学]({{< ref "../cryptography" >}})，介绍了多项式、群、环、域、椭圆曲线、生成元、配对公式、朗格朗日插值等数学定义。
+- [椭圆曲线]({{< ref "../elliptic_curve" >}}) 椭圆曲线、生成元、配对公式等知识。
 
 ## 简介
 
@@ -50,7 +51,7 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
 - [Polynomial Commitment KZG with Examples (part 1)](https://www.youtube.com/watch?v=n4eiiCDhTes)。
 - [Polynomial Commitment KZG with Examples (part 2)](https://www.youtube.com/watch?v=NVvNHe_RGZ8)。
 
-- 如何将多项式限制在放在 [椭圆曲线]({{< ref "../cryptography#elliptic_curve" >}}) 上。
+- 如何将多项式限制在放在 [椭圆曲线]({{< ref "../elliptic_curve" >}}) 上。
 
 [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 比较难，看不懂。
 
