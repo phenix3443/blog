@@ -43,7 +43,7 @@ foundry 由以下部分组成：
 - 快速远程 RPC 分叉模式，利用类似 tokio 的 Rust 异步基础架构。
 - 灵活的调试日志
   - DappTools 风格，使用 `DsTest` 输出的日志
-  - Hardhat 风格，使用流行的 `console.sol`` 合约
+  - Hardhat 风格，使用流行的 `console.sol` 合约
 - 便携（5-10MB）且易于安装，无需 Nix 或其他软件包管理器
 - 通过 [Foundry GitHub](https://github.com/foundry-rs/foundry-toolchain) 操作实现快速 CI。
 

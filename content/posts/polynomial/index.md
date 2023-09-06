@@ -4,7 +4,7 @@ description: 多项式
 slug: polynomial
 date: 2023-09-06T10:34:43+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true

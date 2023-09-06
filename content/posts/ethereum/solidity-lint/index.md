@@ -92,7 +92,7 @@ solc-select use 0.8.18
 
 ### 配置
 
-有些选项可以通过 json 配置文件设置。默认配置文件是`slither.config.json`，可通过 `--config-file file.config.json`` 更改。
+有些选项可以通过 json 配置文件设置。默认配置文件是`slither.config.json`，可通过 `--config-file file.config.json` 更改。
 
 支持以下标志：
 

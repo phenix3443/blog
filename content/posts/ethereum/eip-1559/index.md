@@ -9,7 +9,7 @@ license:
 hidden: false
 comments: true
 draft: true
-series: [eip 翻译]
+series: [eip 学习]
 categories: [ethereum]
 tags:
   - eip

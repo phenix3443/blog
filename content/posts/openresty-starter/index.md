@@ -124,7 +124,7 @@ include <path-to-project>/project.proxy.nginx.conf;
 
 ## 压测
 
-推荐使用 `tcpcopy`` 进行压测。其他工具介绍参见：
+推荐使用 `tcpcopy` 进行压测。其他工具介绍参见：
 
 + [十个免费的 WEB 压力测试工具](https://coolshell.cn/articles/2589.html)
 + [哪款网站压力测试工具值得推荐？](https://www.zhihu.com/question/21861449)

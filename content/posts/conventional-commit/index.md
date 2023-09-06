@@ -90,7 +90,7 @@ npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 
 ### prompt
 
-`@commitlint/prompt-cli`` 是一个 [prompt](https://commitlint.js.org/#/guides-use-prompt) 工具，有助于快速创作遵守配置文件的 commit，但是 [cz-commitlint](http://commitizen.github.io/cz-cli/) 是一个更好的选择：具有更现代的方法与 cli 进行交互：
+`@commitlint/prompt-cli` 是一个 [prompt](https://commitlint.js.org/#/guides-use-prompt) 工具，有助于快速创作遵守配置文件的 commit，但是 [cz-commitlint](http://commitizen.github.io/cz-cli/) 是一个更好的选择：具有更现代的方法与 cli 进行交互：
 
 ```shell
 npm install --save-dev commitizen
