@@ -10,6 +10,7 @@ toc: true
 reward: true
 pinned: false
 carousel: false
+math: false
 series: []
 categories: []
 tags: []
