@@ -9,11 +9,10 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
+series: [eip 翻译]
+categories: [ethereum]
 tags:
   - eip
-  - sharding
 ---
 
 本文介绍 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)。

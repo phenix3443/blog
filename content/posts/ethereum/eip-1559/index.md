@@ -9,10 +9,10 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-  - eip
+series: [eip 翻译]
+categories: [ethereum]
 tags:
+  - eip
   - transaction
 ---
 

@@ -8,22 +8,23 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-  - eip
+series: [eip 翻译]
+categories: [ethereum]
+tags: [eip]
 tags:
+  - eip
   - transaction
 ---
 
-## 概述[^1]
+## 概述 [^1]
 
-在柏林升级之前，以太坊的交易(Transaction)都采用同一种格式。每个以太坊交易都有 6 个字段：nonce、gasprice、gaslimit、to address、value、data、v、r 和 s。这些字段需要经过 RLP 编码，如下所示：
+在柏林升级之前，以太坊的交易 (Transaction) 都采用同一种格式。每个以太坊交易都有 6 个字段：nonce、gasprice、gaslimit、to address、value、data、v、r 和 s。这些字段需要经过 RLP 编码，如下所示：
 
 `RLP([nonce, gasPrice, gasLimit, to, value, data, v, r, s])`
 
 当时以太坊主要有 4 种不同的交易类型：
 
-- 带有收款方地址(to)、数据字段(data)的常规交易。
+- 带有收款方地址 (to)、数据字段 (data) 的常规交易。
 - 不带有收款方地址的合约部署交易，其数据字段填写的是合约代码。
 - 签名 v 值不含链 ID 的交易（[EIP-155](https://eips.ethereum.org/EIPS/eip-155) 实行之前）。
 - 签名 v 值含有链 ID 的交易。
@@ -32,7 +33,7 @@ tags:
 
 [EIP-155](https://eips.ethereum.org/EIPS/eip-155) 就是一个很好的例子。它通过在交易中引入链 ID 来实现重放攻击保护。由于在交易参数中增加新的字段会破坏向后兼容性，链 ID 被编码进了交易签名的恢复参数（v）。
 
-[EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) 定义了类型化交易封装(Typed Transaction Envelope)格式：`TransactionType || TransactionPayload` 为交易格式，`TransactionType || ReceiptPayload` 为收据格式。
+[EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) 定义了类型化交易封装 (Typed Transaction Envelope) 格式：`TransactionType || TransactionPayload` 为交易格式，`TransactionType || ReceiptPayload` 为收据格式。
 
 - `TransactionType`：交易类型字段，0 至 0x7f 范围内的某个值，最多可代表 128 种交易类型。
 

@@ -9,15 +9,15 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - eip
+series: [eip 翻译]
+categories: [ethereum]
 tags:
+  - eip
   - erc-20
   - openzeppelin
 ---
 
-## 概述[^1]
+## 概述 [^1]
 
 代币（Token）几乎可以代表以太坊中的任何东西：
 
@@ -27,13 +27,13 @@ tags:
 - 金融资产，如公司的股份
 - 法定货币，如美元
 - 一盎司黄金
-- 以及更多...
+- 以及更多。..
 
 以太坊如此强大的功能必须由一个强大的标准来处理，这正是 ERC-20 发挥其作用的地方。这个标准允许开发者建立可与其他产品和服务互操作的代币应用。
 
 ## ERC-20
 
-ERC-20(`Ethereum Request for Comments 20`)，由 Fabian Vogelsteller 在 2015 年 11 月以[EIP-20](https://eips.ethereum.org/EIPS/eip-20)提出，作为可转换代币(`Fungible Tokens`)的标准，它实现了智能合约内代币的 API，比如：
+ERC-20(`Ethereum Request for Comments 20`)，由 Fabian Vogelsteller 在 2015 年 11 月以 [EIP-20](https://eips.ethereum.org/EIPS/eip-20) 提出，作为可转换代币 (`Fungible Tokens`) 的标准，它实现了智能合约内代币的 API，比如：
 
 - 账户间转移代币。
 - 获取账户当前代币余额。
@@ -54,5 +54,3 @@ ERC-20(`Ethereum Request for Comments 20`)，由 Fabian Vogelsteller 在 2015 �
 ## 参考
 
 [^1]: [ERC-20 Token Standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
-[^2]: [ERC20 合约内容理解](https://juejin.cn/post/7173617988707287071)
-[^3]: [ERC20 合约项目实践（上）](https://juejin.cn/post/7173960131968204814)
