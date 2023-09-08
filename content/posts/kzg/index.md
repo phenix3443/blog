@@ -57,21 +57,12 @@ KZG 多项式承诺（KZG Polynomial Commitment）源自于 Aniket Kate, Gregory
   - Prover 在提供证明时，KZG commitment C = f(s)g1。其中 f 是评估函数，s 就是 KZG trusted setup 最终获得的 final secret；
   - 可以看出 final secret 是生成多项式承诺的核心参数，而作为获取这个核心参数的可信流程，这次 KZG Ceremony 对于整个 sharding 的实现非常重要。
 
-### KZG Ceremony
-
-[kzg ceremony](https://ceremony.ethereum.org/) 将为 EIP-4844（又名 proto-danksharding）等以太坊扩容工作提供密码学基础，这些类型的事件也被称为“可信设置 (trust setup)”。
-
-![kzg ceremony](https://www.chaincatcher.com/upload/image/20230130/1675042683843709.jpg)
-
-这是一个多方参与的活动：每个贡献者创建一个秘钥，并运行一次计算，将其与之前贡献的秘密混合在一起。 然后，输出被公开并传递给下一个贡献者。最终输出将包含在未来的升级中，以帮助扩展以太坊网络。
+- [vitalik: How do trusted setups work?](https://vitalik.ca/general/2022/03/14/trustedsetup.html)
 
 ## 应用
 
 ## 延伸阅读
 
-- [详解 KZG 在 zk-rollup 和以太坊 DA 方案的应用](https://scroll.io/blog/kzg)([中译文](https://www.panewslab.com/zh/articledetails/cbf8uz1d.html))
-- [深度解读 EIP-4844：Sharding 的一小步，以太坊扩容的一大步](https://www.chaincatcher.com/article/2086654)
-- [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
 - [多项式承诺，正在重塑整个区块链](https://web3caff.com/zh/archives/38949)
 
 ## 参考
