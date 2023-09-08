@@ -31,7 +31,7 @@ tags:
 
 参考 [群环域](http://accu.cc/content/cryptography/group_ring_field/)
 
-### 有限域
+### 有限域{#finite_field}
 
 参考 [有限域](http://accu.cc/content/cryptography/ecc/#_1)
 

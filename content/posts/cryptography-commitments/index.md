@@ -1,7 +1,7 @@
 ---
 title: "Polynomial Commitments"
-description: 多项式承诺
-slug: polynomial-commitments
+description: 密码学承诺
+slug: cryptography-commitments
 date: 2023-04-03T00:53:54+08:00
 image:
 math:
