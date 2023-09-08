@@ -111,6 +111,8 @@ $$e([a]_1,[b]_2)=e(G,H)^{(ab)}=[ab]_T$$
 
 $$q(X)=\frac{p(X)−y}{X−z}$$
 
+> 译注：这被称为“商多项式”，请注意，只有当 $p(z)=y$ 时，$q(X)$ 才存在。因此，这个商多项式的存在就是取值的证明。
+
 等同于 $q(X)(X−z)=p(X)−y$  。
 
 ## 卡特证明
@@ -203,3 +205,7 @@ $$
 我们目前正在探索使用 Kate 承诺实现无状态版本的以太坊。因此，我强烈建议在 ethresearch 论坛中使用关键字 [Kate](https://ethresear.ch/search?q=kate) 来搜索你感兴趣的话题。
 
 另一篇很赞的博文是 Vitalik 的 [introduction to PLONK]({{< ref "../understanding-plonk" >}})，其中大量运用到了多项式承诺，其中卡特方案就是多项式承诺实现的主要方案。
+
+## Next
+
+- [KZG 在 rollup 和以太坊 DA 中的实践]({{< ref "../kzg-in-rollup" >}}) 中也描述了另外一种 KZG 的生成方式。
