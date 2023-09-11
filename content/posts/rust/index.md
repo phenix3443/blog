@@ -1,7 +1,7 @@
 ---
-title: Rust
-description: rust 学习
-slug: rust
+title: Rust Tools
+description: rust 工具链
+slug: rust-tools
 date: 2023-09-09T11:07:27+08:00
 featured: false
 draft: false
@@ -11,9 +11,9 @@ reward: true
 pinned: false
 carousel: false
 math: false
-series: []
+series: [如何构建高效的开发工具链]
 categories: [rust]
-tags: [rustup,cargo]
+tags: [rustup,cargo,vscode]
 images: []
 ---
 
