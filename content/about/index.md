@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Describe yourself."
+description: "About me"
 reward: false
 postDate: false
 readingTime: false
