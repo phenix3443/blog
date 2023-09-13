@@ -1,0 +1,153 @@
+---
+title: Go Context
+description: 深入理解 golang context
+slug: go-context
+date: 2023-09-13T13:49:20+08:00
+featured: false
+draft: false
+comment: true
+toc: true
+reward: true
+pinned: false
+carousel: false
+math: false
+series: [go 源码分析]
+categories: [go]
+tags: [context]
+images: []
+---
+
+本文深入理解 golang context 的使用。
+
+<!--more-->
+
+## 概述
+
+context package 定义了 Context 类型，它携带截止日期，取消信号以及其他请求范围的值，跨越 API 边界和进程之间传递。
+
+发送到服务器的请求应创建一个 context，而对服务器的输出调用应接受一个 context。它们之间的函数调用链必须传播 context，可以选择使用 WithCancel、WithDeadline、WithTimeout 或 WithValue 创建的派生 context 来替换它。当一个 context 被取消时，所有从它派生出来的 context 也会被取消。
+
+WithCancel、WithDeadline 和 WithTimeout 函数接受一个 Context（父级）并返回一个派生的 Context（子级）和一个 CancelFunc。调用 CancelFunc 会取消子级及其子级，移除父级对子级的引用，并停止任何相关的计时器。如果未调用 CancelFunc，子级及其子级会泄露，直到父级被取消或计时器触发。go vet 工具检查所有控制流路径上是否使用了 CancelFunc。
+
+WithCancelCause 函数返回一个 CancelCauseFunc，该函数接受一个错误并将其记录为取消原因。在被取消的 context 或其任何子项上调用 Cause 可以检索到原因。如果没有指定原因，Cause(ctx) 将返回与 ctx.Err() 相同的值。
+
+使用 context 的程序应遵循以下规则，以保持各个包之间的接口一致性，并使静态分析工具能够检查 context 传播：
+
+1. 请不要将 context 存储在结构类型中；相反，应明确地将 context 传递给每个需要它的函数。context 应该是第一个参数，通常命名为 ctx：
+
+   ```go
+   func DoSomething(ctx context.Context, arg Arg) error {
+   // ... use ctx ...
+   }
+   ```
+
+2. 请不要传递一个空的 Context，即使某个函数允许这样做。如果你不确定应该使用哪个 Context，那么请传递 context.TODO。
+3. 仅将 context 值用于跨进程和 API 的请求范围数据，不用于向函数传递可选参数。
+4. 相同的 Context 可以传递给在不同 goroutines 中运行的函数；Contexts 对于多个 goroutines 同时使用是安全的。
+
+请参阅<https://blog.golang.org/context>，该网站有使用 Contexts 的服务器的示例代码。
+
+## 使用
+
+### AfterFunc
+
+```go
+func AfterFunc(ctx Context, f func()) (stop func() bool)
+```
+
+AfterFunc 安排在 ctx 完成（取消或超时）后在其自己的 goroutine 中调用 f。如果 ctx 已经完成，AfterFunc 会立即在其自己的 goroutine 中调用 f。
+
+对一个 context 进行多次 AfterFunc 调用是独立的；一个调用并不会替换另一个。
+
+调用返回的 stop 函数会终止 ctx 与 f 的关联。如果调用停止了 f 的运行，它将返回 true。如果停止返回 false，那么要么 context 已完成并且 f 已在其自己的 goroutine 中启动；要么 f 已经被停止。停止函数不会等待 f 完成才返回。如果调用者需要知道 f 是否已完成，它必须明确地与 f 协调。
+
+如果 ctx 具有`AfterFunc(func()) func() bool`方法，AfterFunc 将使用它来安排调用。
+
+### Cause
+
+```go
+func Cause(c Context) error
+```
+
+Cause 返回一个非空错误，解释为什么 c 被取消。c 或其父级的首次取消设置了原因。如果该取消是通过调用 CancelCauseFunc(err) 发生的，那么 Cause 返回 err。否则，Cause(c) 返回与 c.Err() 相同的值。如果 c 还未被取消，Cause 返回 nil。
+
+### WithCancel
+
+```go
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
+```
+
+WithCancel 返回一个带有新 Done 通道的父级副本。当调用返回的取消函数或者父级 context 的 Done 通道关闭时，无论哪种情况先发生，返回的 context 的 Done 通道都会关闭。
+
+取消此 context 会释放与之相关的资源，因此一旦在此 context 中运行的操作完成，代码应立即调用取消。
+
+Example ¶
+func WithCancelCause ¶
+added in go1.20
+func WithCancelCause(parent Context) (ctx Context, cancel CancelCauseFunc)
+WithCancelCause behaves like WithCancel but returns a CancelCauseFunc instead of a CancelFunc. Calling cancel with a non-nil error (the "cause") records that error in ctx; it can then be retrieved using Cause(ctx). Calling cancel with nil sets the cause to Canceled.
+WithCancelCause 的行为类似于 WithCancel，但它返回的是 CancelCauseFunc 而不是 CancelFunc。用非空错误（"原因"）调用取消会在 ctx 中记录该错误；然后可以使用 Cause(ctx) 来检索它。用 nil 调用取消会将原因设置为 Canceled。
+
+Example use:  示例使用：
+
+ctx, cancel := context.WithCancelCause(parent)
+cancel(myError)
+ctx.Err() // returns context.Canceled
+context.Cause(ctx) // returns myError
+func WithDeadline ¶
+func WithDeadline(parent Context, d time.Time) (Context, CancelFunc)
+WithDeadline returns a copy of the parent context with the deadline adjusted to be no later than d. If the parent's deadline is already earlier than d, WithDeadline(parent, d) is semantically equivalent to parent. The returned [Context.Done] channel is closed when the deadline expires, when the returned cancel function is called, or when the parent context's Done channel is closed, whichever happens first.
+WithDeadline 返回一个父 context 的副本，其截止日期调整为不迟于 d。如果父 context 的截止日期已经早于 d，那么 WithDeadline(parent, d) 在语义上等同于 parent。返回的 [Context.Done] 通道在截止日期到期，返回的取消函数被调用，或者父 context 的 Done 通道被关闭时关闭，以最先发生的为准。
+
+Canceling this context releases resources associated with it, so code should call cancel as soon as the operations running in this Context complete.
+取消此 context 会释放与之相关的资源，因此，一旦在此 context 中运行的操作完成，代码应立即调用取消。
+
+Example ¶
+func WithDeadlineCause ¶
+added in go1.21.0
+func WithDeadlineCause(parent Context, d time.Time, cause error) (Context, CancelFunc)
+WithDeadlineCause behaves like WithDeadline but also sets the cause of the returned Context when the deadline is exceeded. The returned CancelFunc does not set the cause.
+WithDeadlineCause 的行为类似于 WithDeadline，但在超过截止日期时还会设置返回的 Context 的原因。返回的 CancelFunc 不会设置原因。
+
+func WithTimeout ¶
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
+WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).
+WithTimeout 返回的是 WithDeadline(parent, time.Now().Add(timeout))。
+
+Canceling this context releases resources associated with it, so code should call cancel as soon as the operations running in this Context complete:
+取消此 context 会释放与之相关的资源，因此一旦在此 context 中运行的操作完成，代码应立即调用取消：
+
+func slowOperationWithTimeout(ctx context.Context) (Result, error) {
+ ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
+ defer cancel()  // releases resources if slowOperation completes before timeout elapses
+ return slowOperation(ctx)
+}
+Example ¶
+func WithTimeoutCause ¶
+added in go1.21.0
+func WithTimeoutCause(parent Context, timeout time.Duration, cause error) (Context, CancelFunc)
+WithTimeoutCause behaves like WithTimeout but also sets the cause of the returned Context when the timeout expires. The returned CancelFunc does not set the cause.
+WithTimeoutCause 的行为类似于 WithTimeout，但在超时时也会设置返回的 Context 的原因。返回的 CancelFunc 不会设置原因。
+
+Types ¶
+type CancelCauseFunc ¶
+added in go1.20
+type CancelCauseFunc func(cause error)
+A CancelCauseFunc behaves like a CancelFunc but additionally sets the cancellation cause. This cause can be retrieved by calling Cause on the canceled Context or on any of its derived Contexts.
+一个 CancelCauseFunc 的行为类似于 CancelFunc，但它还会设置取消原因。这个原因可以通过在被取消的 Context 或其任何派生的 Context 上调用 Cause 来获取。
+
+If the context has already been canceled, CancelCauseFunc does not set the cause. For example, if childContext is derived from parentContext:
+如果 context 已经被取消，CancelCauseFunc 不会设置原因。例如，如果 childContext 是从 parentContext 派生的：
+
+if parentContext is canceled with cause1 before childContext is canceled with cause2, then Cause(parentContext) == Cause(childContext) == cause1
+if childContext is canceled with cause2 before parentContext is canceled with cause1, then Cause(parentContext) == cause1 and Cause(childContext) == cause2
+type CancelFunc ¶
+type CancelFunc func()
+A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.
+一个 CancelFunc 告诉一个操作放弃其工作。CancelFunc 并不会等待工作停止。CancelFunc 可能会被多个 goroutines 同时调用。在第一次调用之后，对 CancelFunc 的后续调用将无效。
+
+## 原则
+
+## 源码
+
+## 参考
