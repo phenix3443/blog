@@ -27,6 +27,10 @@ images: []
 
 ## Once
 
+once.Do 只会执行一次，即使更换了别的函数也不会再次执行。示例代码：
+
+{{< gist phenix3443 5fe32e9a956fbb7ab86b0eb6cad4b9a6 >}}
+
 ## Pool
 
 ## Mutex
