@@ -9,8 +9,9 @@ hidden: false
 comments: true
 draft: false
 categories:
-  - geth
+  - ethereum
 tags:
+  - geth
 ---
 
 所有内容来自 [Geth Documentation](https://geth.ethereum.org/docs/)，如果错漏，请以官方文档为准。
@@ -19,7 +20,7 @@ tags:
 
 [Geth](https://geth.ethereum.org/) 是以太坊协议的官方 Go 实现，可以用作以太坊的独立客户端。
 
-## 交互示例[^1]
+## 交互示例 [^1]
 
 clef 生成账号：
 
@@ -52,14 +53,14 @@ geth --goerli --datadir geth-tutorial --authrpc.addr localhost --authrpc.port 85
 或者也可以参考下面的代码：
 {{< gist jmcook1186 ea5de9215ecedb1b0105bcfa9c30d44c >}}
 
-## 主网(mainnet)
+## 主网 (mainnet)
 
-关于连接网络，更多可以参考[Connecting To The Network](https://geth.ethereum.org/docs/interface/peer-to-peer)。
+关于连接网络，更多可以参考 [Connecting To The Network](https://geth.ethereum.org/docs/interface/peer-to-peer)。
 
-## 测试网络(testnet)
+## 测试网络 (testnet)
 
-- Görli: Proof-of-authority test network
-- 专用网(private net)
+- Goerli: Proof-of-authority test network
+- 专用网 (private net)
 
 连接`goerli`测试网络：`geth --goerli --syncmode "light" --http`，更多命令命令行参数参见 [Command-line Options](https://geth.ethereum.org/docs/interface/command-line-options)
 
