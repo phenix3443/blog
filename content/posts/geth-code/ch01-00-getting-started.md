@@ -1,8 +1,8 @@
 ---
-title: Tests in Geth
-description: Geth 中的测试代码
-slug: dioe-tests
-date: 2023-09-12T00:24:09+08:00
+title: Ch01 00 Getting Started
+description:
+slug: dioe-getting-started
+date: 2023-09-15T22:22:53+08:00
 featured: false
 draft: true
 comment: true
@@ -15,10 +15,13 @@ series:
   - 以太坊设计与实现
 categories: [ethereum]
 tags: [geth]
+images: []
 ---
 
 Summary.
 
 <!--more-->
 
-Content.
+## 启动
+
+## 配置

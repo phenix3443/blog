@@ -1,20 +1,18 @@
 ---
 title: "geth blockchain 实现"
-slug: geth-blockchain
+slug: dioe-blockchain
 description: Geth 源码解析：blockchain
 date: 2022-10-31T19:29:44+08:00
-slug: blockchain-insert
 image:
 math:
 license:
 hidden: false
 comments: true
-draft: false
-categories:
-  - geth
-  - 源码分析
-tags:
-  - blockchain
+draft: true
+series:
+  - 以太坊设计与实现
+categories: [ethereum]
+tags: [geth]
 ---
 
 ## 概述 [^1]
