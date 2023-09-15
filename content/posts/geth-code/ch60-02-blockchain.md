@@ -17,7 +17,7 @@ tags:
   - blockchain
 ---
 
-## 概述[^1]
+## 概述 [^1]
 
 ## blockchain
 
@@ -39,11 +39,11 @@ Geth 客户端共有三种同步模式`snap`,`full`和`light`，默认是`snap`�
 
 对于那些不需要的 state 数据，我们可以不进行存储。万一哪天需要用到了，由于保存了完整的区块信息，我们是可以费点时间重新计算得到这些数据的。
 
-以太坊提供的方式是对 trie 树的节点进行修剪。在 trie 的实现中，会对存在于内存中的节点进行“引用计数”，即每个节点都有一个记录自己被引用次数的数字，当引用数量变为 0 时，节点内存就会被释放，也就不会被写入到数据库中去了。trie 模块提供了`trie.Database.Reference`和`trie.Database.Dereference`方法，可以引用和解引用某一个节点（关于对 trie 节点的引用，可以参考[这篇文章](https://yangzhe.me/2019/01/12/ethereum-trie-part-1/)和[这篇文章](https://yangzhe.me/2019/01/18/ethereum-trie-part-2/）)。
+以太坊提供的方式是对 trie 树的节点进行修剪。在 trie 的实现中，会对存在于内存中的节点进行“引用计数”，即每个节点都有一个记录自己被引用次数的数字，当引用数量变为 0 时，节点内存就会被释放，也就不会被写入到数据库中去了。trie 模块提供了`trie.Database.Reference`和`trie.Database.Dereference`方法，可以引用和解引用某一个节点（关于对 trie 节点的引用，可以参考 [这篇文章](https://yangzhe.me/2019/01/12/ethereum-trie-part-1/) 和 [这篇文章](https://yangzhe.me/2019/01/18/ethereum-trie-part-2/）)。
 
-trie 节点的这种“引用计数”式的设计应该是很好理解的，[这篇文章](https://blog.ethereum.org/2015/06/26/state-tree-pruning/)也对其进行了详细的说明。在本篇文章里，我们重点关注 blockchain 模块是如何使用这一功能对 state 进行修剪的。
+trie 节点的这种“引用计数”式的设计应该是很好理解的，[这篇文章](https://blog.ethereum.org/2015/06/26/state-tree-pruning/) 也对其进行了详细的说明。在本篇文章里，我们重点关注 blockchain 模块是如何使用这一功能对 state 进行修剪的。
 
-对 state 进行修剪是在插入区块时进行的，具体是在 BlockChain.writeBlockWithState 中，更详细的讨论参见[^1]。
+对 state 进行修剪是在插入区块时进行的，具体是在 BlockChain.writeBlockWithState 中，更详细的讨论参见 [^1]。
 
 ## 区块的组织
 
@@ -53,7 +53,7 @@ trie 节点的这种“引用计数”式的设计应该是很好理解的，[�
 
 ![blockchain](blockchain.png)
 
-这个图体现了以太坊区块链的大多数特性。大多数区块组成了一个链条，每个区块指向了自己的父多块，直到`创世区块（Genesis）`。但也很容易注意到，这个链条从头到尾并不是只有一条，而是有不少“毛刺”似的或长或短的分支链。这些分支链条被称为`侧链(sidechain)`，而主要的那个链条则是`主链(也称为规范链：canonical chain)`，而这种出现分支链的情况就叫做`分叉(fork)`。
+这个图体现了以太坊区块链的大多数特性。大多数区块组成了一个链条，每个区块指向了自己的父多块，直到`创世区块（Genesis）`。但也很容易注意到，这个链条从头到尾并不是只有一条，而是有不少“毛刺”似的或长或短的分支链。这些分支链条被称为`侧链 (sidechain)`，而主要的那个链条则是`主链（也称为规范链：canonical chain)`，而这种出现分支链的情况就叫做`分叉 (fork)`。
 
 每个区块都会有一个`高度`，它是这个区块在链条上的位置的计数。比如创世块的高度是 0，因为它是第一个区块。第二个区块的高度是 1，以此类推。如果我们仔细观察图中的区块高度，会发现主链上最后一个区块的高度并不是最大。这说明以太坊中并**不以区块高度来判断**是主链还是侧链。后面我们会再详细说一下这个问题。
 
@@ -69,13 +69,13 @@ trie 节点的这种“引用计数”式的设计应该是很好理解的，[�
 
 以太坊中关于区块链结构的代码位于三个目录下：
 
-+`core/`（仅包含目录下的 go 文件）：包含了几乎所有重要功能，是以太坊区块链的核心代码： +`blockchain.go`中实现的`BlockChain`结构及方法是核心实现，代表具有给定创世块的数据库的规范链。BlockChain 管理链导入(import)、恢复(recover)、链重组(reorg)。 +`headerchain.go`中实现的`HeaderChain`实现了对区块头的管理。 +`core/rawdb`目录实现了从数据库中读写所有区块结构的方法。 +`light/`：实现了`light`同步模式下区块链的组织和维护。
++`core/`（仅包含目录下的 go 文件）：包含了几乎所有重要功能，是以太坊区块链的核心代码： +`blockchain.go`中实现的`BlockChain`结构及方法是核心实现，代表具有给定创世块的数据库的规范链。BlockChain 管理链导入 (import)、恢复 (recover)、链重组 (reorg)。 +`headerchain.go`中实现的`HeaderChain`实现了对区块头的管理。 +`core/rawdb`目录实现了从数据库中读写所有区块结构的方法。 +`light/`：实现了`light`同步模式下区块链的组织和维护。
 
 从这些代码中可以看出区块链在代码中是如何组织的。
 
 ### Block
 
-现在看下一个完整的区块[Block](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/types/block.go#L170)包含了哪些数据：
+现在看下一个完整的区块 [Block](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/types/block.go#L170) 包含了哪些数据：
 
 ```go
 
@@ -85,7 +85,7 @@ trie 节点的这种“引用计数”式的设计应该是很好理解的，[�
 
 [BlockChain](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/core/blockchain.go#L167)
 
-将块导入区块链是根据两阶段验证器(validator)定义的规则集进行的。 Processor 对 block 以及其中的交易进行处理。世界状态(state) 的验证在 Validator 的第二部分完成。 失败会中止导入。
+将块导入区块链是根据两阶段验证器 (validator) 定义的规则集进行的。 Processor 对 block 以及其中的交易进行处理。世界状态 (state) 的验证在 Validator 的第二部分完成。 失败会中止导入。
 
 BlockChain 还有有助于返回数据库中的`任何`链以及代表规范链的块。 重要的是要注意 GetBlock 可以返回任何块，这些块甚至不需要包含在规范链中，而 GetBlockByNumber 始终代表规范链。
 
@@ -149,6 +149,4 @@ func (bc *BlockChain) InsertChain(chain types.Blocks) (int, error) {
 
 检查完成后，就调用`BlockChain.insertChain`进行实际的插入工作。
 
-`BlockChain.insertChain`由于逻辑比较多且稍复杂，单独写[文章]({{< ref "../blockchain_insert" >}})分阶段来分析具体的代码。
-
-[^1]: http://yangzhe.me/2019/03/24/ethereum-blockchain/
+[^1]: <http://yangzhe.me/2019/03/24/ethereum-blockchain/>
