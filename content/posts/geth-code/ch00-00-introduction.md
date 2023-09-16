@@ -1,10 +1,10 @@
 ---
-title: "简介"
-description: 以太坊设计与实现
+title: "Introduction"
+description: 简介
 slug: dioe-introduction
 date: 2022-04-22T14:44:16+08:00
-image: ethereum-arch-and-code.webp
-math:
+image: 
+math: false
 license:
 hidden: false
 comments: true
@@ -17,7 +17,10 @@ tags:
   - geth
 ---
 
+本文介绍以太坊的概述。
 <!-- more -->
+## 概述
+
 ## 参考
 
 使用 [go-callvis](https://github.com/ofabry/go-callvis) 查看代码调用。

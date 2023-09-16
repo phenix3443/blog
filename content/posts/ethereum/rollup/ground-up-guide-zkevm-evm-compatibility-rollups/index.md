@@ -10,7 +10,8 @@ toc: true
 reward: true
 pinned: false
 carousel: false
-series: [ethereum 好文翻译]
+series: 
+  - ethereum 好文翻译
 categories: [ethereum]
 tags: [Rollup,zkRollup,evm]
 images: []

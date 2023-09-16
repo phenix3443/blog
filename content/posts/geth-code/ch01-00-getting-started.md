@@ -1,5 +1,5 @@
 ---
-title: Ch01 00 Getting Started
+title: Geth Getting Started
 description:
 slug: dioe-getting-started
 date: 2023-09-15T22:22:53+08:00
@@ -18,7 +18,7 @@ tags: [geth]
 images: []
 ---
 
-Summary.
+本文介绍如何使用启动 geth 客户端连接网络。
 
 <!--more-->
 
