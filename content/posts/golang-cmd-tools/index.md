@@ -11,7 +11,7 @@ reward: true
 pinned: false
 carousel: false
 math: false
-series: []
+series: [golang 源码]
 categories: [golang]
 tags: [cmd]
 images: []
