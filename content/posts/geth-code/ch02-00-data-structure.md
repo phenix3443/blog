@@ -1,7 +1,7 @@
 ---
 title: Ch02 00 Data Structure
 description:
-slug: dioe-data-structure
+slug: data-structure
 date: 2023-09-15T22:39:05+08:00
 featured: false
 draft: true
@@ -11,9 +11,10 @@ reward: true
 pinned: false
 carousel: false
 math: false
-series: []
-categories: []
-tags: []
+series:
+  - 以太坊设计与实现
+categories: [ethereum]
+tags: [geth]
 images: []
 ---
 

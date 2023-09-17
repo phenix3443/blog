@@ -1,8 +1,8 @@
 ---
 title: "RPC"
-description:
+description: Geth RPC 接口
 date: 2022-05-23T08:56:34+08:00
-slug: dioe-rpc
+slug: geth-rpc
 image:
 math:
 license:

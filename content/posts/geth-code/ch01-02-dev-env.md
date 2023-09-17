@@ -2,7 +2,7 @@
 title: "Build Develop Environment"
 description: 构架代码调试环境
 date: 2022-09-15T23:19:15+08:00
-slug: dioe-dev-env
+slug: geth-dev-env
 math:
 license:
 hidden: false
@@ -13,7 +13,9 @@ series:
 categories: [ethereum]
 tags: [geth]
 ---
+本文介绍如何构建 Geth 调试环境。
 
+<!-- more -->
 ## 私有网络
 
 之所以不使用 [Developer mode](https://geth.ethereum.org/docs/developers/dapp-developer/dev-mode) 是因为该模式下不方便指定有足够 eth 的测试账户，该模式随机生成测试账号，但是无法拿到私钥。

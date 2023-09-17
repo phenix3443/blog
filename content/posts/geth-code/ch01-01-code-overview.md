@@ -1,7 +1,7 @@
 ---
-title: "Overview"
+title: "Geth Overview"
 description: Geth 概览
-slug: dioe-overview
+slug: geth-overview
 date: 2022-09-15T23:19:15+08:00
 math:
 license:
@@ -17,4 +17,8 @@ tags: [geth]
 本文介绍 geth 的架构和代码布局。
 
 <!-- more -->
-## 架构
+## 代码架构
+
+![Geth 架构](images/architecture.drawio.svg)
+
+## 代码布局

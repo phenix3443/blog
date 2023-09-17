@@ -1,7 +1,7 @@
 ---
 title: Geth Getting Started
 description:
-slug: dioe-getting-started
+slug: geth-getting-started
 date: 2023-09-15T22:22:53+08:00
 featured: false
 draft: true
@@ -18,10 +18,16 @@ tags: [geth]
 images: []
 ---
 
-本文介绍如何使用启动 geth 客户端连接网络。
+本文介绍 geth 的基本使用。
 
 <!--more-->
 
 ## 启动
 
 ## 配置
+
+## 账号
+
+## 同步网络
+
+## 控制台
