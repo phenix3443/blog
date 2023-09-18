@@ -77,6 +77,22 @@ TPClash 配置：
 
 {{< gist phenix3443 b619938d79dec3451c72889eda2e4079 >}}
 
+### DNS 劫持
+
+如果 clash 的 DNS 劫持没有生效，可能需要修改系统默认的 DNS 配置。
+
+```shell
+sudo systemctl stop systemd-resolved
+sudo rm -f /etc/resolv.conf
+echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+```
+
+再次查看 github 域名解析：
+
+{{< gist phenix3443 5e8b8d8d1d8fcb32c29ef84369ccb2ba >}}
+
+看到对应的域名解析已经变为`198.18.0.3`，说明 clash 配置的 DNS 劫持已经生效。
+
 ### 开机启动
 
 TPClash 通过 systemd 进行管理：
@@ -100,61 +116,6 @@ sudo sysctl -w net.ipv4.ip_forward=1
 ```
 
 永久生效需要编辑 `/etc/sysctl.conf` 文件中的相关字段。
-
-### DNS 劫持
-
-如果 clash 的 DNS 劫持没有生效，可能需要系统默认的 DNS 配置。
-
-#### 确认没有生效
-
-可以通过 [resolvectl](http://www.jinbuguo.com/systemd/resolvectl.html) 查看当前的 dns 设置。
-
-{{< gist phenix3443 e372a18662b3796221db0626a0f4981b >}}
-
-可以看到当前默认的 DNS 是路由器下发的 192.168.122.1。
-
-也可以查看 github.com 的域名解析：
-
-{{< gist phenix3443 ed4ae8a7bbe09c63b709357e19fb022a >}}
-
-可以 github.com 通过本地 127.0.0.53 这个虚拟 DNS 服务器解析为公网地址，不是 clash 劫持 DNS 后分配的地址（198.18.x.x）。
-
-为使配置中的 DNS 劫持生效，这里有两种方法修改 DNS 配置：
-
-#### netplan
-
-如果系统使用 netplan 管理网络，在配置文件中添加 nameservers 相关设置。推荐使用 netplan 管理网络设置。
-
-{{< gist phenix3443 3df45d7c8d86c5a91bd38e65068e91a2 >}}
-
-#### resolved
-
-如果没有使用 netplan 管理网络，修改系统 [systemd-resolved](https://wiki.archlinux.org/title/systemd-resolved)，可以如下设置：
-
-```shell
-sudo mkdir /etc/systemd/resolved.conf.d
-sudo vim /etc/systemd/resolved.conf.d/clash.conf
-```
-
-{{< gist phenix3443 55abd84255eb54e8003a72ee1d6e1ae4 >}}
-
-重启服务：
-
-```shell
-sudo systemctl restart systemd-resolved
-```
-
-#### 确认生效
-
-查看系统 DNS 配置：
-
-{{< gist phenix3443 2a274d3f1acfff3f30780540315c3d2a >}}
-
-再次查看 github 域名解析：
-
-{{< gist phenix3443 5e8b8d8d1d8fcb32c29ef84369ccb2ba >}}
-
-看到对应的域名解析已经变为`198.18.0.8`，说明 clash 配置的 DNS 劫持已经生效。
 
 ### 其他主机设置
 
