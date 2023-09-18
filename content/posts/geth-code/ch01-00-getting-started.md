@@ -1,6 +1,6 @@
 ---
 title: Geth Getting Started
-description:
+description: Geth 基本使用
 slug: geth-getting-started
 date: 2023-09-15T22:22:53+08:00
 featured: false
@@ -17,10 +17,6 @@ categories: [ethereum]
 tags: [geth]
 images: []
 ---
-
-本文介绍 geth 的基本使用。
-
-<!--more-->
 
 ## 概述
 
