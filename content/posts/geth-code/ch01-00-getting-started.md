@@ -24,6 +24,16 @@ images: []
 
 ## 概述
 
+以太坊节点由两个客户端组成：一个执行客户端和一个共识客户端。Geth 就是一个执行客户端。自从以太坊关闭了工作量证明并实施了权益证明后，Geth 就需要与另一款名为“共识客户端”的软件配对，以便跟踪以太坊区块链。
+
+执行客户端（Geth）负责处理交易、交易广播、状态管理以及支持以太坊虚拟机 EVM。然而，Geth 并不负责构建区块、区块广播或处理共识逻辑。这些都是共识客户端的职责范围。
+
+以下示意图展示了两个以太坊客户端之间的关系。这两个客户端各自连接到自己的对等网络（P2P）。这是因为执行客户端通过其 P2P 网络传播交易，使他们能够管理自己的本地交易池。共识客户端通过其 P2P 网络传播区块，从而实现共识和链的增长。
+
+![node-architecture](https://geth.ethereum.org/images/docs/node-architecture-text-background.png)
+
+为了使这种双客户端结构能够运行，共识客户端必须能够将交易包传递给 Geth 以执行。本地执行交易是客户端验证交易不违反任何以太坊规则，并且提出的以太坊状态更新是正确的方式。同样，当节点被选为区块生产者时，共识客户端必须能够从 Geth 请求交易包以包含在新的区块中。这种客户端间的通信是通过使用引擎 API 的本地 RPC 连接来处理的。
+
 ## 安装
 
 官方有介绍 [多种方法安装 geth](https://geth.ethereum.org/docs/getting-started/installing-geth) ，由于我们是目的阅读源码，所以选择本地编译 Geth，以便后续的调试和代码走读。
@@ -43,7 +53,7 @@ Clef 的`newaccount`子命令生成新账户，`--keystore`参数用于指示存
 mkdir -p data/keystore && clef newaccount --keystore data/keystore
 ```
 
-然后根据提示操作即可生成账号。
+然后根据提示操作即可生成账号。[更多账号管理方面的知识](https://geth.ethereum.org/docs/fundamentals/account-management)
 
 ## 启动 Clef
 
@@ -66,6 +76,8 @@ Clef 使用保存在密钥库中的私钥来签署交易，因此，需要与 Ge
 - `--singer`: 将 Geth 指向 Clef。
 
 执行上述命令将启动 Geth。仍需要有一个共识客户端，否则 Geth 将无法正确同步区块链。
+
+更多 [命令行参数](https://geth.ethereum.org/docs/fundamentals/command-line-options)。
 
 ## 启动共识客户端
 

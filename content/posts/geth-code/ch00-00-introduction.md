@@ -17,7 +17,7 @@ tags:
   - geth
 ---
 
-本文介绍以太坊的基本概念。
+本文介绍以太坊的基本概念以及几种实现。
 <!-- more -->
 ## 概述
 
@@ -39,7 +39,9 @@ Ethereum 上每个账户的以太币余额以及每个智能合约存储的数�
 
 ## Merge
 
-## Geth
+## 客户端实现
+
+### Geth
 
 [Geth](https://geth.ethereum.org) 是以太坊协议的官方 Golang 执行层实现。
 
