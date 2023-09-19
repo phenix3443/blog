@@ -20,10 +20,6 @@ tags:
 images: []
 ---
 
-本文介绍 geth 启动流程。
-
-<!--more-->
-
 ## 概述
 
 Geth 中的命令行程序基于 [urfave/cli]({{< ref "../golang-cmd-tools#urfave-cli" >}})，该工具可以方便的进行命令行参数的解析。
