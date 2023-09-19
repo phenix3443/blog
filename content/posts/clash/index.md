@@ -62,6 +62,14 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 
 ## 透明代理
 
+### DNS 劫持
+
+如果系统 DNS 使用的内网地址，比如 ubuntu 使用 systemd-resolved，该服务在 `127.0.0.53:53` 自建了 DNS 服务，这导致 clash 的 DNS 劫持没有生效，具体原因参见 [github 相关的讨论](https://github.com/Dreamacro/clash/issues/2615)。
+
+这种情况下，需要关闭 systemd-resolved 服务，并修改系统默认的 DNS 配置：
+
+{{< gist phenix3443 dd095c148529c7efd1e327bda00d3051 >}}
+
 ### 配置
 
 [TProxy](https://liqiang.io/post/tproxy-in-linux) 是 Linux 一种用于支持透明代理的，常见的实现方式是 [iptables](https://liqiang.io/post/dive-in-iptables) 以及 nftables。
@@ -77,21 +85,9 @@ TPClash 配置：
 
 {{< gist phenix3443 b619938d79dec3451c72889eda2e4079 >}}
 
-### DNS 劫持
-
-如果 clash 的 DNS 劫持没有生效，可能需要修改系统默认的 DNS 配置。
-
-```shell
-sudo systemctl stop systemd-resolved
-sudo rm -f /etc/resolv.conf
-echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
-```
-
-再次查看 github 域名解析：
+看到 github.com 的域名解析已经变为`198.18.0.3`，说明 clash 配置的 DNS 劫持已经生效。
 
 {{< gist phenix3443 5e8b8d8d1d8fcb32c29ef84369ccb2ba >}}
-
-看到对应的域名解析已经变为`198.18.0.3`，说明 clash 配置的 DNS 劫持已经生效。
 
 ### 开机启动
 
