@@ -58,7 +58,7 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 
 需要注意的是：代理规则支持 PROCESS-NAME/PROCESS-PATH，可以用来直接对指定程序设置代理，在没有设置透明代理的情况下，对于那些不提供代理设置的应用程序（比如 discord）简直是福音。
 
-[rule providers](https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers) 可以让我们方便的使用别人配置好的代理规则。
+[rule providers](https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers) 可以让我们方便的使用别人配置好的代理规则，我们也可以自己利用 Github Gist 编写 provider，方便在各个客户端同步。
 
 ## 透明代理
 
