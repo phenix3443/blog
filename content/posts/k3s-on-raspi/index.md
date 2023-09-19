@@ -72,6 +72,8 @@ sudo apt install -y linux-modules-extra-raspi
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
+可以通过 `/usr/local/bin/k3s-uninstall.sh` 来执行卸载。
+
 ### 设置 kubeconfig
 
 为当前用户设置 kubeconfig，这个配置虽然不会被 k3s 安装的 kubectl 用到，但是下面的 helm 会用到。
