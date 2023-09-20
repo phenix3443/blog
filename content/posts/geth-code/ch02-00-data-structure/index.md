@@ -1,5 +1,5 @@
 ---
-title: Ch02 00 Data Structure
+title: Geth Data Structure
 description:
 slug: data-structure
 date: 2023-09-15T22:39:05+08:00

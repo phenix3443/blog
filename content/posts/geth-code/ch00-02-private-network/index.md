@@ -1,28 +1,24 @@
 ---
-title: "Build Develop Environment"
-description: 构架代码调试环境
+title: "Build Private Network"
+description: 利用 Geth 搭建私链
 date: 2022-09-15T23:19:15+08:00
-slug: geth-dev-env
+slug: geth-build-private-network
 math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 series:
   - 以太坊设计与实现
 categories: [ethereum]
 tags: [geth]
 ---
-本文介绍如何构建 Geth 调试环境。
 
-<!-- more -->
-## 私有网络
+## 概述
 
-之所以不使用 [Developer mode](https://geth.ethereum.org/docs/developers/dapp-developer/dev-mode) 是因为该模式下不方便指定有足够 eth 的测试账户，该模式随机生成测试账号，但是无法拿到私钥。
+我们可以通过搭建 [私有网络](https://geth.ethereum.org/docs/fundamentals/private-network) 来进行测试功能。
 
-我们通过搭建 [私有网络](https://geth.ethereum.org/docs/fundamentals/private-network) 来进行测试。
-
-### Genesis Block
+## Genesis Block
 
 每个区块链都从创世区块（genesis block）开始。当 Geth 首次以默认设置运行时，它会将 Mainnet 创世区块提交到数据库。对于私有网络，通常更倾向于使用不同的创世区块。创世区块是通过一个 genesis.json 文件配置的，其路径必须在启动 Geth 时提供。
 
@@ -51,7 +47,7 @@ tags: [geth]
 
 - `period`配置选项设定了链的目标区块时间。
 
-### Init Chain
+## Init Chain
 
 初始化区块链：
 
@@ -60,7 +56,7 @@ make geth
 ./build/bin/geth init --datadir data genesis.json
 ```
 
-### Start Chain
+## Start Chain
 
 ```shell
 ./build/bin/geth  --datadir data --http --http.api eth,web3,net
@@ -71,9 +67,3 @@ make geth
 ```shell
 geth attach http://127.0.0.1:8545
 ```
-
-## vscode
-
-借助 [vscode Debug 功能](https://code.visualstudio.com/docs/editor/debugging) 了解程序的运行。为此我们需要一个 `launch.json` 文件。
-
-{{< gist phenix3443 9295f08ae43c3fed788c4ee7419bfe2d >}}
