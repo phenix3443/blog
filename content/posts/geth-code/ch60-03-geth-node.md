@@ -1,10 +1,10 @@
 ---
 title: Geth Node
 description: Geth Node 启动流程
-slug: dioe-geth-node
+slug: geth-node
 date: 2023-09-17T20:21:18+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true
@@ -22,17 +22,19 @@ images: []
 
 ## 概述
 
-Geth 中的命令行程序基于 [urfave/cli]({{< ref "../golang-cmd-tools#urfave-cli" >}})，该工具可以方便的进行命令行参数的解析。
+Geth 中的命令行程序基于 [urfave/cli]({{< ref "../golang-cmd-tools#urfave-cli" >}})，该工具可以方便的集成了 subcommand 以及命令行参数的解析。
 
 ## Node
 
- ([Node](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L44)) 是以太坊节点的实现，它支持多种协议，是一组服务的集合，这些服务使用共享资源来提供 RPC API。这些服务还可以提供 devp2p 协议，当启动节点实例时，它们将连接到 devp2p 网络上
+ ([Node](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L44)) 是以太坊节点的实现，它支持多种协议，是一组服务（services）的集合，这些服务使用共享资源来提供 RPC API。这些服务还可以提供 devp2p 协议，当启动节点实例时，它们将连接到 devp2p 网络上。
 
  在创建 geth 节点的时候，定义的是变量名是 [stack](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/cmd/geth/config.go#L150)，有协议栈的含义。
 
 ## 生命周期
 
 Node 对象具有 [三种基本状态](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L71-L73)： INITIALIZING（初始化）、RUNNING（运行）和 CLOSED（关闭）。
+
+![geth-node-lifecycle](images/geth-node.drawio.svg)
 
 创建一个节点会分配基本资源，如数据目录，并返回处于初始化状态的节点。在此状态下，可以 [注册实现 Lifecycle 接口的对象](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L559)、[RPC API](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L104-L117) 和 [p2p 网络协议](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L133-L140)。在初始化期间，允许执行基本操作，如打开键值数据库。
 
@@ -67,3 +69,5 @@ LevelDB 数据库也存储在实例子目录中。如果多个节点实例使用
 ## 数据目录共享示例
 
 在这个示例中，使用相同数据目录启动了两个节点实例，分别命名为 A 和 B。节点实例 A 打开了数据库 "db"，节点实例 B 打开了数据库 "db" 和 "db-2"。以下文件将在数据目录中创建：
+
+{{< gist phenix3443 54de8362cdbdd07715501cc7bcdf2e27 >}}
