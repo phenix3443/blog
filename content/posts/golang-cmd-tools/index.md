@@ -4,7 +4,7 @@ description:
 slug: golang-cmd-tools
 date: 2023-09-16T19:53:39+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true
