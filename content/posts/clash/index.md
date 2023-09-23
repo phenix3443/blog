@@ -58,7 +58,7 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 
 需要注意的是：代理规则支持 PROCESS-NAME/PROCESS-PATH，可以用来直接对指定程序设置代理，在没有设置透明代理的情况下，对于那些不提供代理设置的应用程序（比如 discord）简直是福音。
 
-[rule providers](https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers) 可以让我们方便的使用别人配置好的代理规则，我们也可以自己利用 Github Gist 编写 provider，方便在各个客户端同步。
+[rule providers](https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers) 可以让我们方便的使用别人配置好的代理规则，我们也可以自己利用 Github 仓库编写 provider，方便在各个客户端同步，参见下面配置中 `myProvider` 的不分。
 
 ## 透明代理
 
@@ -69,6 +69,8 @@ TYPE,ARGUMENT,POLICY(,no-resolve)
 这种情况下，需要关闭 systemd-resolved 服务，并修改系统默认的 DNS 配置：
 
 {{< gist phenix3443 dd095c148529c7efd1e327bda00d3051 >}}
+
+> 注意：`tun.dns-hijack` 部分最好不要设置成 `any:53`，以免影响本机上的其他服务。比如我机器上还部署了 k8s，这会影响 k8s 集群的 dns 解析。
 
 ### 配置
 
