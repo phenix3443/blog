@@ -23,27 +23,29 @@ images: []
 
 ### bash
 
+启用自动补全：
+
 ```shell
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 ```
 
 ### zsh
 
+启用补全功能：
+
 ```shell
 echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' > $(brew --prefix)/share/zsh/site-functions/_kubectl
 ```
 
-kubectl 这个命令还是比较长的，如果给它一个更短的别名可以节省很多时间，设置
+kubectl 这个命令如果有更短的别名可以更方便输入：
 
 ```shell
 alias k=kubectl
 ```
 
-这样就可以使用 k get pod 这样的命令去获取 pod 信息，但是这样的别名没有自动补全：
+但是这样的别名没有自动补全，我们需要继续修改：
 
 ```sh
 alias k=kubectl
 complete -F __start_kubectl k
 ```
-
-这样就完美了，k 命令也有了自动补全。
