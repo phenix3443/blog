@@ -48,3 +48,28 @@ docker compose -f integration_test/nodes/docker-compose.yml logs -f l2_execution
 ## Next
 
 已经搭建好了调试环境，让我们一步步的看下 taiko 程序的执行。
+
+## taiko-mono
+
+```shell
+pnpm install
+```
+
+# 功能特点
+
+- 一键启动调试。
+- 调试后自动清理现场。
+
+## vscode 扩展
+
+## 调试
+
+基于 vscode 提供的 [Debugging](https://code.visualstudio.com/docs/editor/debugging) 和 [Task](https://code.visualstudio.com/docs/editor/tasks) 功能定制，启动调试只需要两步：
+
+1. 启动 L2 执行层节点：
+
+   ![Start L2](images/start-L2.png)
+
+2. 启动 Taiko 客户端
+
+   ![Start Taiko Client](images/start-L2.png)
