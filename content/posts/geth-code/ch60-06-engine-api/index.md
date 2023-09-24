@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 math: false
 series:
-  - 以太坊设计与实现
+  - 以太坊情景分析
 categories: [ethereum]
 tags: [geth]
 images: []

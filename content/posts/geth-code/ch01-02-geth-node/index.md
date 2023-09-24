@@ -1,6 +1,6 @@
 ---
-title: Geth Node
-description: Geth Node 启动流程
+title: Start Geth Node
+description: Geth 如何启动
 slug: geth-node
 date: 2023-09-17T20:21:18+08:00
 featured: false
@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 math: false
 series:
-  - 以太坊设计与实现
+  - 以太坊情景分析
 categories:
   - ethereum
 tags:
@@ -52,7 +52,7 @@ Node 对象具有 [三种基本状态](https://github.com/phenix3443/go-ethereum
 
 ## 节点管理的资源
 
-节点实例使用的所有文件系统资源都位于名为 "data" 的目录中。每个资源的位置可以通过额外的节点配置进行覆盖。数据目录是可选的。如果未设置数据目录，并且资源的位置未明确指定，包 "node" 将[在内存中创建资源](https://github.com/phenix3443/go-ethereum/blob/f52d18e6a1e5d7cdd9daa00e6432637559246ae0/node/node.go#L756)。
+节点实例使用的所有文件系统资源都位于名为 "data" 的目录中。每个资源的位置可以通过额外的节点配置进行覆盖。数据目录是可选的。如果未设置数据目录，并且资源的位置未明确指定，包 "node" 将 [在内存中创建资源](https://github.com/phenix3443/go-ethereum/blob/f52d18e6a1e5d7cdd9daa00e6432637559246ae0/node/node.go#L756)。
 
 为了访问 devp2p 网络，Node 配置并启动 p2p.Server。devp2p 网络上的每个主机都具有唯一的标识符，即节点密钥。Node 实例会跨重启保留此密钥。Node 还加载静态和可信的节点列表，并确保保存了关于其他主机的信息。
 
