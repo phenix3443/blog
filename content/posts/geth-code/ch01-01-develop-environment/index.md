@@ -7,7 +7,7 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 series:
   - 以太坊情景分析
 categories: [ethereum]
@@ -57,6 +57,6 @@ Geth 通过`--dev`标志可以启动“开发者模式”。这将创建一个�
 
 ## VSCode
 
-借助 [vscode Debug 功能](https://code.visualstudio.com/docs/editor/debugging) 了解程序的运行。为此我们需要一个 `launch.json` 文件。
+vscode [Debugging](https://code.visualstudio.com/docs/editor/debugging) 和 [tasks](https://code.visualstudio.com/docs/editor/tasks) 可以方便的帮助我们构建调试环境，下面是相关配置：
 
 {{< gist phenix3443 9295f08ae43c3fed788c4ee7419bfe2d >}}
