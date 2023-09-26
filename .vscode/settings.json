@@ -78,6 +78,7 @@
     "eeprom",
     "efdb",
     "enode",
+    "errc",
     "Errorf",
     "esbenp",
     "etherbase",

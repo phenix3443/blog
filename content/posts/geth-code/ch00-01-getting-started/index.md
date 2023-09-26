@@ -89,7 +89,7 @@ Clef 使用保存在密钥库中的私钥来签署交易，因此，需要与 Ge
 
 {{< gist phenix3443 8721f2057048c2864c355eb5ba534464 >}}
 
-默认情况下，Geth 使用 snap-sync，它根据共识客户端提供的的信息顺序下载区块，而不是创世区块。它将数据保存在`data/geth/chaindata/`的文件中。一旦验证了`header`的顺序，Geth 在开始“状态修复（state healing）”阶段更新新到达数据的状态之前，会下载区块体和状态数据。这一点可以通过打印到终端的日志来确认。终端中应该有一个快速增长的日志序列，其语法如下：
+默认情况下，Geth 使用 [snap 同步]({{< ref "../ch01-04-sync#snap">}})。它将数据保存在`data/geth/chaindata/`的文件中。一旦验证了`header`的顺序，Geth 在开始“状态修复（state healing）”阶段更新新到达数据的状态之前，会下载区块体和状态数据。这一点可以通过打印到终端的日志来确认。终端中应该有一个快速增长的日志序列，其语法如下：
 
 ```shell
 INFO [04-29][15:54:09.238] Looking for peers             peercount=2 tried=0 static=0
