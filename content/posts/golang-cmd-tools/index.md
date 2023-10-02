@@ -37,3 +37,11 @@ Summary.
   - 通过 [urfave/cli-altsrc](https://github.com/urfave/cli-altsrc) 支持 format 结构化文件
 
 可以查看 [官方文档](https://cli.urfave.org/)。
+
+## go mod
+
+在使用 replace 功能的时候进行使用 `go mod edit -replace` 命令，而不是直接编辑 go.mod 文件：
+
+```shell
+go mod edit -replace github.com/docker/docker=github.com/docker/engine@ea84732a7725
+```

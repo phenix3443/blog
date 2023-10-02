@@ -29,7 +29,7 @@ images: []
 初始化：
 
 ```shell
-npx husky-init && npm install
+pnpm dlx husky-init && pnpm install
 ```
 
 上面的命令会：
