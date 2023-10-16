@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "abidump",
+    "ADDMOD",
     "adietrichs",
     "Adsense",
     "Alertmanager",
@@ -85,6 +86,7 @@
     "Ethlint",
     "ethresearch",
     "evmdis",
+    "EVMs",
     "extradata",
     "facebookgroup",
     "failfast",
@@ -160,6 +162,7 @@
     "mload",
     "Mofi",
     "monkeypatching",
+    "MULMOD",
     "mythril",
     "nameserver",
     "netfilter",
@@ -231,6 +234,7 @@
     "sidechain",
     "Slith",
     "SLOAD",
+    "SMOD",
     "sogou",
     "Solana",
     "solhint",
