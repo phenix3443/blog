@@ -134,7 +134,7 @@ $$
 
 其中$x_n$代表数组下标，即 $x_n = n$。
 
-我们可以通过 [多项式差值](https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC) 或者 [多项式拟合](https://zh.wikipedia.org/zh-cn/%E6%9B%B2%E7%B7%9A%E6%93%AC%E5%90%88) 将这些点值对编码为一个多项式（比如 [consensus-specs 中使用的方法](https://github.com/ethereum/consensus-specs/blob/23d3aeebba3b5da0df4bd25108461b442199f406/specs/eip4844/polynomial-commitments.md#blob_to_polynomial)）。对于任意的 $x_n$，都可以通过这个多项式计算出对应的 $y_n$。
+我们可以通过 [多项式插值](https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC) 或者 [多项式拟合](https://zh.wikipedia.org/zh-cn/%E6%9B%B2%E7%B7%9A%E6%93%AC%E5%90%88) 将这些点值对编码为一个多项式（比如 [consensus-specs 中使用的方法](https://github.com/ethereum/consensus-specs/blob/23d3aeebba3b5da0df4bd25108461b442199f406/specs/eip4844/polynomial-commitments.md#blob_to_polynomial)）。对于任意的 $x_n$，都可以通过这个多项式计算出对应的 $y_n$。
 
 到此为止，我们可以得出结论：**任何二进制数据都可以编码为一个多项式**。
 
