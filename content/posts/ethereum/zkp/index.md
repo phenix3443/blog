@@ -4,7 +4,7 @@ description: 零知识证明
 slug: zkp
 date: 2023-09-01T15:28:59+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true
