@@ -59,7 +59,7 @@ ZK-rollups 得以实现，归功于一个简单的观察：像 STARKs 或 SNARKs
 
 ![application-specific vs general purpose rollup](https://miro.medium.com/v2/resize:fit:1270/format:webp/1*cqAgC5RsGHuWoK2rUzofrA.png)
 
-这种增加的灵活性有几个权衡：性能大大降低，对卷积参数的定制性减少，费用增加。然而，最大的权衡就是，简直没有通用 zk-rollup 的实现，更别说能够应对生产量的了。但这种情况正在开始改变：
+这种增加的灵活性有几个权衡：性能大大降低，对 Rollup 参数的定制性减少，费用增加。然而，最大的权衡就是，简直没有通用 zk-rollup 的实现，更别说能够应对生产量的了。但这种情况正在开始改变：
 
 - [StarkNet](https://starkware.co/starknet/) 目前已经在主网上线（尽管处于有限的 Alpha 阶段）。
 - 3 个独立的项目（[zkSync](https://twitter.com/zksync/status/1549757888641437696)、[Polygon Hermez/zkEVM](https://twitter.com/0xPolygon/status/1549716947847479302) 和 [Scroll](https://twitter.com/Scroll_ZKP/status/1549268276152500225)）都在 2022 年的 ETH CC 上宣布，他们将是第一个达到主网的“zkEVM”。
