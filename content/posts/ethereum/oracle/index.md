@@ -259,13 +259,13 @@ contract PriceConsumerV3 {
 
 ### 获取事件的结果
 
-Oracle 服务使创建响应现实世界事件的智能合约成为可能，它允许合约通过链下组件连接到外部 API，并从这些数据源消耗信息。例如，前面提到的预测 dapp 可以请求 Oracle 从可信的链下来源（如美联社）返回选举结果。
+Oracle 服务使创建响应现实世界事件的智能合约成为可能，它允许合约通过链下组件连接到外部 API，并从这些数据源消耗信息。例如，前面提到的预测 DApp 可以请求 Oracle 从可信的链下来源（如美联社）返回选举结果。
 
 ### 合约自动化
 
 在大多数情况下，合约的大部分功能是公开的，可以被 EOA 和其他合约调用。
 
-但合约中也有一些私人功能，其他人无法访问；这些功能通常对 dapp 的整体功能至关重要。潜在的例子包括定期为用户铸造新的 NFT 的 `mintERC721Token()`函数，在预测市场中授予报酬的函数，或在 DEX 中解锁已锁定的代币的函数。
+但合约中也有一些私人功能，其他人无法访问；这些功能通常对 DApp 的整体功能至关重要。潜在的例子包括定期为用户铸造新的 NFT 的 `mintERC721Token()`函数，在预测市场中授予报酬的函数，或在 DEX 中解锁已锁定的代币的函数。
 
 开发人员将需要每隔一段时间触发此类函数，以保持应用程序的顺利运行，这就是为什么智能合约的自动执行具有吸引力。
 
@@ -275,14 +275,14 @@ Oracle 服务使创建响应现实世界事件的智能合约成为可能，它�
 
 ## 可用的 Oracle
 
-有多种 Oracle 应用程序，可以将其集成到 Ethereum dapp 中。
+有多种 Oracle 应用程序，可以将其集成到 Ethereum DApp 中。
 
 - [Chainlink](https://chain.link/)- Chainlink 是一个去中心化的 Oracle 网络，提供防篡改的输入、输出和计算，支持任何区块链上的高级智能合约。
 - [Witnet](https://witnet.io/) - Witnet 是一个无权限、去中心化和抗审查的 Oracle，帮助智能合约对现实世界的事件作出反应，并提供强大的加密经济保障。
 - [UMA Oracle](https://uma.xyz/) - UMA 的 optimistic Oracle 允许智能合约快速和接收任何种类的数据，用于不同的应用，包括保险、金融衍生品和预测市场。
 - [Tellor](https://tellor.io/) - Tellor 是一个透明的、无权限的 Oracle 协议，可以让你的智能合约在需要的时候轻松获得任何数据。
 - [Band Protocol](https://bandprotocol.com/) - Band Protocol 是一个跨链数据 Oracle 平台，它将现实世界的数据和 API 聚合并连接到智能合约。
-- [Provable](https://provable.xyz/) - Provable 将区块链 dapp 与任何外部网络 API 连接起来，并利用 TLSNotary 证明、可信执行环境（TEE）和安全加密原语来保证数据的真实性。
+- [Provable](https://provable.xyz/) - Provable 将区块链 DApp 与任何外部网络 API 连接起来，并利用 TLSNotary 证明、可信执行环境（TEE）和安全加密原语来保证数据的真实性。
 - [Paralink](https://paralink.network/) - Paralink 为在以太坊和其他流行的区块链上运行的智能合约提供一个开源和去中心化的 Oracle 平台。
 - [Dos.Network](https://dos.network/) - DOS Network 是一个去中心化的 Oracle 服务网络，以现实世界的数据和计算能力提升区块链的可用性。
 - [Pyth 网络](https://pyth.network/) - Pyth 网络是一个第一方金融 Oracle 网络，旨在在一个防篡改、去中心化和可自我维持的环境中发布链上的连续真实世界数据。

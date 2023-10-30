@@ -36,7 +36,7 @@ tags:
 
 - 跨链转移任何数据、信息和资产。
 - 为协议解锁新的功能和使用场景。例如，最初部署在 Ethereum Mainnet 上的产量养殖协议可以在所有 EVM 兼容的链上提供流动资金池。
-- 有机会利用不同区块链的优势。例如，开发人员可以通过在 rollup 上部署他们的 dapp，从不同的 L2 解决方案提供的较低费用中受益，侧链和用户可以在它们之间建立 bridge。
+- 有机会利用不同区块链的优势。例如，开发人员可以通过在 rollup 上部署他们的 DApp，从不同的 L2 解决方案提供的较低费用中受益，侧链和用户可以在它们之间建立 bridge。
 - 来自不同区块链生态系统的开发者之间可以合作建立新产品。
 - 吸引来自不同生态系统的用户和社区到他们的 dapps。
 
@@ -88,7 +88,7 @@ bridge 占了 DeFi 最大黑客的 [前三名](https://rekt.news/leaderboard/)�
 
 ## DAPP 集成
 
-这里有一些实际的应用，开发者可以考虑关于 bridge 和让如何让 dapp 跨链：
+这里有一些实际的应用，开发者可以考虑关于 bridge 和让如何让 DApp 跨链：
 
 ### 集成 bridge
 
@@ -96,23 +96,23 @@ bridge 占了 DeFi 最大黑客的 [前三名](https://rekt.news/leaderboard/)�
 
 - 建立自己的 bridge。建立一个安全可靠的 bridge 并不容易，如果采取信任最小化的路线更是如此。此外，它需要多年的经验，与可扩展性和互操作性研究有关的技术专长。此外，它还需要一个实践团队来维护 bridge，并吸引足够的流动资金来使其可行。
 
-- 向用户展示多种 bridge 选择。许多 [dapp](https://ethereum.org/en/developers/docs/dapps/) 要求用户拥有他们的原生代币来进行互动。为了使用户能够访问他们的代币，他们在网站上提供不同的 bridge 选项。然而，这种方法是一个快速解决问题的方法，因为它使用户离开了 dapp 界面，仍然需要他们与其他 dapp 和 bridge 互动。这是一种繁琐的使用体验，犯错的范围也会增加。
+- 向用户展示多种 bridge 选择。许多 [DApp](https://ethereum.org/en/developers/docs/dapps/) 要求用户拥有他们的原生代币来进行互动。为了使用户能够访问他们的代币，他们在网站上提供不同的 bridge 选项。然而，这种方法是一个快速解决问题的方法，因为它使用户离开了 DApp 界面，仍然需要他们与其他 DApp 和 bridge 互动。这是一种繁琐的使用体验，犯错的范围也会增加。
 
-- 集成一个 bridge。这种解决方案不需要 dapp 把用户送到外部 bridge 和 DEX 接口。它允许 dapp 改善用户的使用体验。然而，这种方法也有其局限性：
+- 集成一个 bridge。这种解决方案不需要 DApp 把用户送到外部 bridge 和 DEX 接口。它允许 DApp 改善用户的使用体验。然而，这种方法也有其局限性：
   - 评估和维护 bridge 是很难的，而且很耗时。
   - 选择一个 bridge 会产生一个单点故障和依赖性。
-  - dapp 受限于 bridge 的能力。
-  - 仅有 bridge 可能是不够的。dapp 可能需要 DEX 来提供更多的功能，如跨链交换。
+  - DApp 受限于 bridge 的能力。
+  - 仅有 bridge 可能是不够的。DApp 可能需要 DEX 来提供更多的功能，如跨链交换。
 - 集成多个 bridge。这种解决方案解决了与整合单一 bridge 相关的许多问题。然而，它也有局限性，因为整合多个 bridge 需要消耗资源，并为开发者带来技术和通信开销--这是加密货币中最稀缺的资源。
-- 集成 bridge 聚合器。 dapp 的另一个选择是集成一个 bridge 聚合解决方案，让他们可以访问多个 bridge。bridge 聚合器继承了所有 bridge 的优势，因此不受任何单一 bridge 能力的限制。值得注意的是，bridge 聚合器通常会维护 bridge 集成，这使 dapp 不用再为 bridge 集成的技术和操作方面的问题而烦恼。
+- 集成 bridge 聚合器。 DApp 的另一个选择是集成一个 bridge 聚合解决方案，让他们可以访问多个 bridge。bridge 聚合器继承了所有 bridge 的优势，因此不受任何单一 bridge 能力的限制。值得注意的是，bridge 聚合器通常会维护 bridge 集成，这使 DApp 不用再为 bridge 集成的技术和操作方面的问题而烦恼。
 
 话虽如此，bridge 聚合器也有其局限性。例如，虽然他们可以提供更多的 bridge 选项，但除了聚合器平台上提供的 bridge 外，市场上通常还有更多的 bridge 可供选择。此外，就像 bridge 一样，bridge 聚合者也面临着智能合约和技术风险（更多的智能合约=更多的风险）。
 
-如果一个应用程序走的是整合 bridge 或聚合器的路线，那么根据整合的深度，有不同的选择。例如，如果它只是一个前端整合，以改善用户的入职体验，一个 dapp 会整合小工具。然而，如果整合是为了探索更深层次的跨链策略，如赌注、 yield farming 等，dapp 会整合 SDK 或 API。
+如果一个应用程序走的是整合 bridge 或聚合器的路线，那么根据整合的深度，有不同的选择。例如，如果它只是一个前端整合，以改善用户的入职体验，一个 DApp 会整合小工具。然而，如果整合是为了探索更深层次的跨链策略，如赌注、 yield farming 等，DApp 会整合 SDK 或 API。
 
-### 在多条链上部署一个 dapp
+### 在多条链上部署一个 DApp
 
-要在多个链上部署一个 dapp，开发人员可以使用 [Alchemy](https://www.alchemy.com/)、[Hardhat](https://hardhat.org/)、[Truffle](https://trufflesuite.com/)、[Moralis](https://moralis.io/) 等开发平台。通常情况下，这些平台都有可组合的插件，可以使 dapp 实现跨链。例如，开发者可以使用 [hardhat-deploy 插件](https://github.com/wighawag/hardhat-deploy) 提供的确定性部署代理。
+要在多个链上部署一个 DApp，开发人员可以使用 [Alchemy](https://www.alchemy.com/)、[Hardhat](https://hardhat.org/)、[Truffle](https://trufflesuite.com/)、[Moralis](https://moralis.io/) 等开发平台。通常情况下，这些平台都有可组合的插件，可以使 DApp 实现跨链。例如，开发者可以使用 [hardhat-deploy 插件](https://github.com/wighawag/hardhat-deploy) 提供的确定性部署代理。
 
 实例：
 

@@ -13,7 +13,7 @@ categories:
   - ethereum
 tags:
   - uniswap
-  - dapp
+  - DApp
 ---
 
 [Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，本文以 UniswapV2 为例：
@@ -134,27 +134,27 @@ INIT_CODE_HASH: 0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da34884
 
 ### multicall
 
-multicall 使用 [dapp.tools](https://dapp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
+multicall 使用 [DApp.tools](https://DApp.tools/) 开发、测试和部署智能合约，我们首先要安装该工具。
 
-dapp.tools 是用于以太坊智能合约开发的命令行工具和智能合约库。该工具依赖 `nix`：
+DApp.tools 是用于以太坊智能合约开发的命令行工具和智能合约库。该工具依赖 `nix`：
 
 ```shell
 apt update && apt install -y git nix
-echo y | nix profile install github:dapphub/dapptools#{dapp,ethsign,hevm,seth} --extra-experimental-features nix-command --extra-experimental-features flakes
-alias dapp=~/.nix-profile/bin/dapp
+echo y | nix profile install github:dapphub/dapptools#{DApp,ethsign,hevm,seth} --extra-experimental-features nix-command --extra-experimental-features flakes
+alias DApp=~/.nix-profile/bin/DApp
 ```
 
-dapp 安装过程会持续很长时间。完成之后进行编译：
+DApp 安装过程会持续很长时间。完成之后进行编译：
 
 ```shell
 cd multicall
-dapp update && dapp build
+DApp update && DApp build
 ```
 
 会在 `out/` 下生成编译后好的 abi 文件，其中信息很多，需要提取 multicall 合约部分：
 
 ```shell
-jq '.contracts."src/Multicall.sol:Multicall"' out/dapp.sol.json > ../uniswap-contracts/build/Multicall.json
+jq '.contracts."src/Multicall.sol:Multicall"' out/DApp.sol.json > ../uniswap-contracts/build/Multicall.json
 cd -
 ```
 

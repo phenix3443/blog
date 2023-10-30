@@ -21,7 +21,7 @@ ZKEVM 是一种虚拟机，它生成 [零知识证明](https://www.alchemy.com/o
 
 ZKEVM 是 [ZK-Rollup](https://www.alchemy.com/blog/zero-knowledge-rollups) 的一部分，ZK-Rollup 是以太坊第二层扩展解决方案，通过将计算和状态存储转移到链下来提高吞吐量。ZK-rollup 将交易数据和验证链下交易批次有效性的零知识证明一起提交给以太坊。
 
-早期的 ZK-Rollup 缺乏执行智能合约的能力，仅限于简单的代币交换和支付。但是，随着 EVM 兼容的零知识虚拟机的引入，ZK-Rollup 开始支持以太坊 dApps。
+早期的 ZK-Rollup 缺乏执行智能合约的能力，仅限于简单的代币交换和支付。但是，随着 EVM 兼容的零知识虚拟机的引入，ZK-Rollup 开始支持以太坊 DApps。
 
 在这篇文章中，我们探讨了 ZKEVM 是如何运作的，为什么它重要，以及存在哪些类型的 ZKEVM。
 
@@ -33,7 +33,7 @@ ZKEVM 是一种支持零知识证明计算的 EVM 兼容虚拟机。与常规虚
 
 ### EVM 兼容性
 
-[EVM](https://www.alchemy.com/overviews/what-is-the-ethereum-virtual-machine-evm) 是以太坊网络上部署的智能合约执行的运行环境。EVM 充当一个“世界计算机”，为运行在以太坊区块链上的去中心化应用程序（dApps）提供动力。
+[EVM](https://www.alchemy.com/overviews/what-is-the-ethereum-virtual-machine-evm) 是以太坊网络上部署的智能合约执行的运行环境。EVM 充当一个“世界计算机”，为运行在以太坊区块链上的去中心化应用程序（DApps）提供动力。
 
 如果一台虚拟机能够运行在 EVM 环境中创建的程序，那么它就被认为是“兼容 EVM”的。这样的虚拟机可以执行用 Solidity 或其他在以太坊开发中使用的高级语言编写的智能合约。ZKEVM 是兼容 EVM 的，因为它们可以执行以太坊智能合约，而无需对底层逻辑进行大量修改。
 
@@ -199,7 +199,7 @@ Vitalik 在文章 [The different types of ZK-EVMs](https://vitalik.eth.limo/gene
 
 - Type 3：几乎等效于 EVM。
 
-  Type 3 ZK-EVM 省略了不适用于 ZK 的预编译，并可能调整内存和存储访问。依赖已删除的预编译的 dApp 需要进行重写。在不常见的情况下，Type 3 ZK-EVM 和原始 EVM 处理边缘情况的方式的差异可能需要对 dApp 进行调整。
+  Type 3 ZK-EVM 省略了不适用于 ZK 的预编译，并可能调整内存和存储访问。依赖已删除的预编译的 DApp 需要进行重写。在不常见的情况下，Type 3 ZK-EVM 和原始 EVM 处理边缘情况的方式的差异可能需要对 DApp 进行调整。
 
 - Type 4：语言兼容。用高级语言（例如 Solidity，Zinc）编写的智能合约源代码被编译为中间表现形式，生成适用于 ZK 友好的虚拟机的操作码。
 

@@ -22,7 +22,7 @@ tags:
 
 ## 概述
 
-[hardhat](https://hardhat.org/) 由用于编辑、编译、调试和部署智能合约和 dApp 的不同组件组成，所有这些组件共同创建一个完整的以太坊合约开发环境。
+[hardhat](https://hardhat.org/) 由用于编辑、编译、调试和部署智能合约和 DApp 的不同组件组成，所有这些组件共同创建一个完整的以太坊合约开发环境。
 
 本文是对 [官方文档](https://hardhat.org/hardhat-runner/docs/getting-started#overview) 的实践和补充。
 
@@ -38,7 +38,7 @@ tags:
 
 ## Network
 
-通过 `npx hardhat node`， 可以搭建本地测试网络，供其他钱包或者程序连接，有助于本地测试合约和 dapp 程序。
+通过 `npx hardhat node`， 可以搭建本地测试网络，供其他钱包或者程序连接，有助于本地测试合约和 DApp 程序。
 
 Hardhat 还可以将主网区块链的状态 [复制 (fork)](https://hardhat.org/hardhat-network/docs/guides/forking-other-networks) 到本地环境中，包括所有余额和部署的合约。技术上来说，hardhat 可以 fork 任何 EVM-compatible blockchain，这样我们就可以更方便的在本地测试其他现有网络，不用担心 token 不足或者目标网络没有部署合适的测试网络等问题。
 

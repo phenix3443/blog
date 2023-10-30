@@ -48,7 +48,7 @@ Taiko 协议中两个重要的合约：TaikoL1、TaikoL2 都会跟踪另一条�
 
 两个合约都实现了 `getCrossChainSignalRoot` 来通过对方链上的 BlockID 进行查询对应的的 signalRoot。
 
-用户或 dapp 可以调用 [eth_getProof](https://eips.ethereum.org/EIPS/eip-1186)，生成 merkle 证明。需要向 eth_getProof 提供以下信息：
+用户或 DApp 可以调用 [eth_getProof](https://eips.ethereum.org/EIPS/eip-1186)，生成 merkle 证明。需要向 eth_getProof 提供以下信息：
 
 - signal（您要证明的数据存在于链上某个区块的存储根中）
 - SignalService 地址（存储所提供 signal 的合约地址）
@@ -68,4 +68,4 @@ Taiko 协议中两个重要的合约：TaikoL1、TaikoL2 都会跟踪另一条�
 
 桥接器是一套智能合约和一个前端网络应用程序，允许您在 Sepolia 和 Taiko 之间发送 testnet ETH 和 ERC-20 代币。这座桥只是建立在太阁核心协议（特别是信号服务）之上的一种可能的实现方式，任何人都可以用它来建立桥。
 
-首先，下面是我们使用信号服务实现桥接 dapp 的流程图：
+首先，下面是我们使用信号服务实现桥接 DApp 的流程图：
