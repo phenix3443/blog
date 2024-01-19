@@ -3,6 +3,7 @@ title: {{ replace .Name "-" " " | title }}
 description:
 slug: {{ lower .Name }}
 date: {{ .Date }}
+lastmod: {{ .Lastmod }}
 featured: false
 draft: true
 comment: true

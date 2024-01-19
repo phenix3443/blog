@@ -40,3 +40,8 @@ markup:
     endLevel: 4
     ordered: false
     startLevel: 1
+
+enableGitInfo: true
+
+frontmatter:
+  lastmod: [":git", "lastmod", ":fileModTime", ":default"]
