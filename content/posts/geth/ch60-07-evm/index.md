@@ -42,9 +42,14 @@ API 调用参见官方说明 [Real-time events](https://geth.ethereum.org/docs/i
 
 订阅某种程度上可以看成是生产者 (producer) 和消费者 (consumer) 之间的通信，我们从这个角度看代码更容易理解。
 
-[`NewSubscription`](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription.go#L49) 函数的唯一参数是生产者函数 (`producer` )，[`Subscription`](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription.go#L41) 类型的返回值用于管理订阅，可以看成是 producer 和 consumer 之间的通信桥梁：消费者通过该值告诉生产者取消订阅，生产者通过该值告诉消费者生产过程中发生了什么错误，这就是`Subscription`类型两个接口的功能。同时这也规定了应该如何编写生产者和消费者函数：
+首先看 [`NewSubscription`](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription.go#L49) 函数：
 
-- 生产者必须要处理取消订阅事件，消费中一般通过 `chan<-struct{}` 进行通知。
+- 唯一参数是生产者函数 (`producer` )
+- 返回值是 [`Subscription`](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription.go#L41) 类型，该值用于管理订阅，可以看成是生产者和消费者之间的通信桥梁：消费者通过该返回值告诉生产者取消订阅，生产者通过该值告诉消费者生产过程中发生了什么错误，这就是`Subscription`类型两个接口的功能。
+
+从上面的分析可以知道应该如何编写生产者和消费者函数：
+
+- 生产者必须要处理取消订阅事件，通过参数 `chan<-struct{}` 进行得到通知。
 - 消费者必须要处理生产者出现的错误（由`Subscription.Err()`返回）。
 
 还有个问题：消费者怎么获取生产者产生的数据？这个代码注释中有说明：
@@ -63,11 +68,6 @@ API 调用参见官方说明 [Real-time events](https://geth.ethereum.org/docs/i
 
 好了，现在我们知道应该如何编写 producer 和 consumer 函数了。
 
-`Resubscribe` 用于处理订阅失败的情况，是一个非常方便的封装函数。从核心 `subscribe()` 的处理流程可以看出应该如何编写 producer 函数：
-
-- 通过 context 管理协程。
-- 处理上次产生的 err。
-
-同时从该函数以及测试代码中也可以学习到 context 使用和预防协程泄露的处理。
+`Resubscribe` 用于处理订阅失败的情况，可以看做是对 NewSubscription 的进一步封装。同时从核心函数`subscribe()` 的处理流程以及测试代码中也可以学习到 context 使用和预防协程泄露的处理。
 
 ### feed
