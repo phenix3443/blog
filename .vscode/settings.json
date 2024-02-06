@@ -125,6 +125,7 @@
     "GPIO",
     "graphviz",
     "groth",
+    "grun",
     "hashers",
     "headerchain",
     "heapster",
