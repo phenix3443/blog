@@ -1,6 +1,6 @@
 ---
 title: "TypeScript"
-description: TypScript 学习总结
+description: TypeScript 入门
 slug: typescript
 date: 2023-02-23T22:11:08+08:00
 image:
@@ -14,37 +14,40 @@ categories:
 tags:
 ---
 
-本文介绍 typescript 学习资源。
-
-<!---->
-
 ## 概述
 
-[TypeScript](https://www.typescriptlang.org/zh)
+本文介绍 [TypeScript](https://www.typescriptlang.org/zh) 的项目模板 [typescript-starter](https://github.com/phenix3443/typescript-starter) 是如何搭建的。
 
 ## 安装
 
-在项目中使用单独的 typescript、tslint、[ts-node](https://www.npmjs.com/package/ts-node) 配置
+在项目中使用单独的 [typescript](https://www.npmjs.com/package/typescript)、[eslint](https://www.npmjs.com/package/eslint)、[ts-node](https://www.npmjs.com/package/ts-node) 配置
 
-```shell
-mkdir test && cd test
-npm init
-npm install --save-dev typescript tslint @types/ts-node
+```sh
+pnpm init &&
+pnpm install --save-dev typescript tslint ts-node
 ```
 
-查案当前 typescript 编译器版本：
+## tsc
+
+查看当前 typescript 编译器 ([tsc](https://www.typescriptlang.org/docs/handbook/compiler-options.html)) 的版本：
 
 ```shell
-npx tsc --version
+pnpm tsc --version
 ```
 
-编译代码文件 `tsc hello.ts`, 然后通过 `node hello.js` 运行代码。
+使用 `tsc --init` 在当前工作目录使用推荐设置创建 tsconfig.json，具体的配置项信息参见 [官方说明](https://www.typescriptlang.org/tsconfig)。
 
-```shell
-npx ts-node hello.ts
-```
+{{< gist phenix3443 edb0d6ccf63a5a4cfb3463726765cfb5 hello.ts >}}
 
-或者直接通过 运行 `ts-node hello.ts`。
+通过 ts-node 可以直接执行脚本，不需要预先将 ts 编译为 js： `pnpm ts-node hello.ts`
+
+## eslint
+
+[eslint](https://eslint.org/)
+
+可以通过 `pnpm dlx @eslint/create-config` 交互式的生成配置。
+
+## ts-node
 
 ## 语法
 
@@ -58,7 +61,3 @@ npx ts-node hello.ts
 - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
 
 ## 参考
-
-[^1]: [Types as Sets](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html#types-as-sets)
-
-## Next
