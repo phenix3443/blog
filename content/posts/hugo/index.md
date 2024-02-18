@@ -95,9 +95,10 @@ hugo config mounts
 + [bootstrap](https://github.com/razonyang/hugo-theme-bootstrap)
 + [even](https://github.com/olOwOlo/hugo-theme-even)，经典，但是时间久了没有更新。
 + [DoIt](https://github.com/HEIGE-PCloud/DoIt) 是 [loveIt](https://github.com/dillonzq/LoveIt) 的后续开发。
-+ [fixit](https://github.com/hugo-fixit/FixIt) 和 DoIt 有点像，但是个人感觉更好。
++ [FixIt](https://github.com/hugo-fixit/FixIt) 和 DoIt 有点像，但是个人感觉更好。
 + [meme](https://github.com/reuixiy/hugo-theme-meme)
 + [Docsy](https://themes.gohugo.io/themes/docsy/) A Hugo theme for technical documentation sites
++ [nexT](https://github.com/hugo-next/hugo-theme-next) 非常棒的一个主题，下次尝试。
 
 ## 部署
 
