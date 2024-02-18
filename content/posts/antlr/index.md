@@ -98,7 +98,7 @@ assign: ID '=' expr ';'; //匹配类似 sp=100; 的赋值语句
 
 {{< figure src="image/antlr-class.png" title="" caption="图 3-2 部分对象在内存中的交互方式" >}}
 
-{{< figure src="image/sytex-tree.png" title="" caption="图 3-3 语法分析树" >}}
+{{< figure src="image/syntax-tree.png" title="" caption="图 3-3 语法分析树" >}}
 
 ANTLR 尽可能多地使用共享数据结构来节约内存。如图 3-2 所示，语法分析树中的叶子节点（词法符号）仅仅是盛放词法符号流中的词法符号的容器。每个词法符号都记录了自己在字符序列中的开始位置和结束位置，而非保存子字符串的拷贝（这点也可从 2.2 节 antlr4-parser 生成的 tokens 看出）。其中，不存在空白字符对应的词法符号（索引为 2 和 4 的字符）的原因是，我们假定我们的词法分析器会丢弃空白字符。
 
