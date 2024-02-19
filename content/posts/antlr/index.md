@@ -1,6 +1,6 @@
 ---
 title: Antlr
-description:
+description: 使用 antlr 开发新语言
 slug: antlr
 date: 2024-02-05T10:35:48+08:00
 featured: false
