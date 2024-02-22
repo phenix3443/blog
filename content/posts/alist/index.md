@@ -31,3 +31,7 @@ tags: [alist]
 ## 添加 115 网盘
 
 配置比较简单，通过 cookie 进行登录。
+
+## 参考
+
+- [AList 白嫖网盘空间神器](https://www.iplaysoft.com/alist.html)
