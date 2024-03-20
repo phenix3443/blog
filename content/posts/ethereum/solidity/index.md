@@ -42,46 +42,36 @@ solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/insta
 
 [官方推荐的代码风格](https://docs.soliditylang.org/zh/latest/natspec-format.html#natspec)
 
-### lint code
+要同时使用 [Solhint]({{< ref "../solidity-lint" >}})  和 Prettier 来处理 Git 提交中更改的 Solidity 文件，你需要在 lint-staged 配置中指定这两个工具。这样，在每次提交前，改动的 Solidity 文件将首先被 Solhint 检查，然后由 Prettier 格式化。以下是配置这些工具的步骤：
 
-通过 [solidity lint 工具]({{< ref "../solidity-lint" >}}) 来检查代码。
-
-### lint commit
-
-通过 [commitlint]({{< ref "../../conventional-commit" >}}) 规范项目的 commit message。
-
-```shell
-npm install --save-dev @commitlint/cli @commitlint/config-conventional
+```sh
+npm install solhint prettier prettier-plugin-solidity lint-staged  @commitlint/cli @commitlint/config-conventional --save-dev
 ```
 
-### format code
+- [commitlint]({{< ref "../../conventional-commit" >}}) 规范项目的 commit message。
+- [Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，用于自动格式化 solidity 代码。
 
-[Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，用于自动格式化 solidity 代码。
+接下来，在你的 package.json 文件中设置 lint-staged 来指定在提交包含特定文件类型时运行 Prettier：
 
-```shell
-npm install --save-dev prettier prettier-plugin-solidity
+```json
+Copy code
+"lint-staged": {
+  "*.{js,jsx,ts,tsx}": "prettier --write",
+  "*.md": "prettier --write"
+}
 ```
+
+通过 [husky]({{< ref "../../husky" >}}) 将上面的这些操作自动化。以便在每次提交前运行 lint-staged 和 commit 检查 ：
+
+````sh
+npx husky install
+npx husky add .husky/pre-commit "npx lint-staged"
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+````
 
 对应的也需要更新 prettier 配置：
 
 {{< gist phenix3443 b6d390da5db39688195118b20d3d0c54 >}}
-
-package.json 添加用于格式化项目中的 solidity 文件的 script：
-
-```json
-{
-  "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol"
-}
-```
-
-### 自动化
-
-通过 [husky]({{< ref "../../husky" >}}) 将上面的这些操作自动化。
-
-```shell
-npx husky add .husky/pre-commit "npm run format:sol"
-npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
-```
 
 ## vscode 扩展
 
