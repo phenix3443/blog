@@ -35,7 +35,9 @@ SP 提供可公开访问的 [API](https://docs.bnbchain.org/greenfield-docs/docs
 
 从代码层面来看，SP 不仅仅是一个实现层，它被扩展成了一个名为 [`GfSp` 的框架](https://github.com/bnb-chain/greenfield-storage-provider/blob/master/core/README.md)，允许用户根据自己的需求实现自己的逻辑。如果用户想要实现一些特定的功能，可以重写抽象接口中声明的这些方法。如果用户不需要实现自定义需求， `GfSp` 将使用默认实现。
 
-有九个重要的抽象层：
+### core
+
+代码仓库中的 core 目录下定义类该框架的九个重要的抽象层：
 
 + [lifecycle](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/lifecycle): 它提供了两个抽象接口来管理服务： Service 和 Lifecycle 来控制和管理 SP 中的服务。
 + [module](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/module)：提供多个抽象接口与 GfSp 中的不同模块进行交互。因此，用户可以实现相应的方法来满足自己的需求。
@@ -46,6 +48,16 @@ SP 提供可公开访问的 [API](https://docs.bnbchain.org/greenfield-docs/docs
 + [rcmgr](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/rcmgr)：提供了管理 SP 中 cpu 和内存资源的抽象接口。
 + [task](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/task)：提供与 SP 后台服务交互的最小 uint 的抽象接口。
 + [taskqueue](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/taskqueue)：提供任务调度和执行的抽象接口。
+
+### base
+
+base 目录下的 GfSpBaseApp 实现了 GfSp 框架，它是程序的入口。GfSpBaseApp 启动 Grpc 服务器并指定使用 Grpc 进行模块之间的通信，因为 SP 是一组微服务，不同的模块可以任意组合部署在不同的进程中。
+
+GfSpBaseApp 只实现特定的进程，这些进程是 GfSp 框架的标准部分，不需要的部分通过模块化定制。
+
+非标准进程可以通过调用 ServerForRegister 将 Grpc 服务注册到 GfSpBaseApp，参见元数据示例。
+
+GfSpBaseApp 还实现了所有核心基础结构接口。GfSpBaseApp 将调用实现 Core Special Modular 的默认 Modular，以完成 SP 请求审批、上传对象负载数据、下载对象等工作流。
 
 ## modules
 
