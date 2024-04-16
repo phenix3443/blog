@@ -37,7 +37,7 @@ tags:
 
 我们为什么需要这种数据呢？
 
-显然，如果其他人没有办法读取数据，那就无法完成验证。因此让其他人能够获取交易原始数据这一点至关重要，它也被称为 [数据可用性 (Data Availability)]({{< ref "../data-availability" >}})。
+显然，如果其他人没有办法读取数据，那就无法完成验证。因此让其他人能够获取交易原始数据这一点至关重要，它也被称为 [数据可用性 (Data Availability)]({{< ref "posts/ethereum/data-availability" >}})。
 
 ![l2-use-calldata](img/l2-calldata.png)
 
@@ -57,7 +57,7 @@ EIP-4844 的改进，其实就是围绕着这个脉络进行的。
 
 Proto-Danksharding，也被称为 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)，这个名字来自于提出这个想法的两位研究人员：Protolambda 和 Dankrad Feist。
 
-如果用一句话来概括 [EIP-4844]({{< ref "../eip-4844">}}) 究竟做了什么，那就是：引入了`“携带 blob 的交易 (Blob-carrying Transaction)”`这一`新的交易类型`。Blob 就是上文提到的，为 L2 的数据传输所专门设计的数据类型。
+如果用一句话来概括 [EIP-4844]({{< ref "posts/ethereum/eip-4844">}}) 究竟做了什么，那就是：引入了`“携带 blob 的交易 (Blob-carrying Transaction)”`这一`新的交易类型`。Blob 就是上文提到的，为 L2 的数据传输所专门设计的数据类型。
 
 因此，将有关 blob 的细节理解清楚，就可以说基本搞明白了 EIP-4844 。
 
@@ -72,7 +72,7 @@ Blob 是由共识层的节点进行存储的，而不是像 Calldata 那样在�
 
 - Blob 本身，是一个由 4096 个元素所构成的向量 (Vector)，每个元素 32 个字节，每个 blob 约为`4096 * 32 bytes=128kB`。单块 blob 上限可以从低开始，并在多次网络升级中增长。
 
-  这个向量每个维度都可以看做是一个不高于 4096 阶的有限域多项式的各个系数，这个结构设计，是为了方便 [KZG 多项式承诺]({{< ref "../../kzg" >}}) 的生成。
+  这个向量每个维度都可以看做是一个不高于 4096 阶的有限域多项式的各个系数，这个结构设计，是为了方便 [KZG 多项式承诺]({{< ref "posts/kzg" >}}) 的生成。
 
 - 每个 transaction 最多挂 2 个 blob。
 - 每个 block 理想状态包含 8 个 blob，约为 1MB(`128kB*8=1MB`)，最多包含 16 个 blob，约为 2MB。
@@ -117,7 +117,7 @@ Rollups 在 data blob 中发布他们执行的交易，还公布了对数据的�
 
 ### 什么是 KZG？
 
-rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。[KZG]({{< ref "../../kzg" >}}) 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollups 和最终以太坊协议的其他部分所使用的零知识技术兼容。
+rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生错误行为。这涉及到验证者重新执行 blob 中的交易，以检查承诺是否有效。这在概念上与执行客户端在一层使用 Merkle 证明检查 Ethereum 交易有效性的方式相同。[KZG]({{< ref "posts/kzg" >}}) 是一种替代性证明，它将多项式方程与数据拟合。承诺人在一些秘密数据点上计算该多项式。验证者将在数据拟合相同的多项式，并在相同的数值上计算，检查结果是否相同。这是一种验证数据的方式，与一些 rollups 和最终以太坊协议的其他部分所使用的零知识技术兼容。
 
 ### 什么是 KZG Ceremony？
 
@@ -141,7 +141,7 @@ rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生
 
 ## EIP-4844 的影响
 
-在架构层面，EIP-4844 引入了新的交易类型 Blob-carrying Transaction，这是以太坊第一次为 L2 单独构建数据层，也是之后 [Full Danksharding]({{< ref "../danksharding" >}}) 实现的第一步。
+在架构层面，EIP-4844 引入了新的交易类型 Blob-carrying Transaction，这是以太坊第一次为 L2 单独构建数据层，也是之后 [Full Danksharding]({{< ref "posts/ethereum/danksharding" >}}) 实现的第一步。
 
 在经济模型层面，EIP-4844 将为 blob 引入新的 Fee Market，这也会是以太坊迈向 Multi-dimensional Market 的第一步。
 
@@ -175,7 +175,7 @@ rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生
 
 ## EIP-4844 后的展望：Fully Danksharding
 
-EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完整版 Danksharding]({{< ref "../danksharding">}}) 中，每个节点都可以直接通过数据可用性采样（Data Availability Sampling），实现对 L2 数据正确性的实时验证。这将会进一步提高 L2 的安全性和性能。
+EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完整版 Danksharding]({{< ref "posts/ethereum/danksharding">}}) 中，每个节点都可以直接通过数据可用性采样（Data Availability Sampling），实现对 L2 数据正确性的实时验证。这将会进一步提高 L2 的安全性和性能。
 
 ## 延伸阅读
 
@@ -190,4 +190,4 @@ EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完�
 
 ## Next
 
-- [eip-4844]({{< ref "../eip-4844" >}})
+- [eip-4844]({{< ref "posts/ethereum/eip-4844" >}})

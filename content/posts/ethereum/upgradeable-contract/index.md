@@ -116,7 +116,7 @@ UUPS 代理模式也有缺点。虽然这种模式的部署成本更低（gas �
 
 ## 代码演练
 
-下面，我们将通过使用 [OpenZeppelin]({{< ref "../openzeppelin" >}}) 和 [Foundry]({{< ref "../foundry" >}}) 从头开始创建和部署一个可升级的智能合约。
+下面，我们将通过使用 [OpenZeppelin]({{< ref "posts/ethereum/openzeppelin" >}}) 和 [Foundry]({{< ref "posts/ethereum/foundry" >}}) 从头开始创建和部署一个可升级的智能合约。
 
 在开始之前，强烈建议阅读 [OpenZeppelin: Using with Upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
 
@@ -126,7 +126,7 @@ UUPS 代理模式也有缺点。虽然这种模式的部署成本更低（gas �
 
 {{< gist phenix3443 868da315757b9f430b417d27b297b3a6 >}}
 
-我们通过 [@openzeppelin/contracts-upgradeable](https://docs.openzeppelin.com/contracts/4.x/upgradeable) 将 [之前]({{< ref "../solidity/#example" >}}) 使用的`Counter`合约修改为可升级的`CounterV1`合约。
+我们通过 [@openzeppelin/contracts-upgradeable](https://docs.openzeppelin.com/contracts/4.x/upgradeable) 将 [之前]({{< ref "posts/ethereum/solidity#example" >}}) 使用的`Counter`合约修改为可升级的`CounterV1`合约。
 
 首先安装需要用到的 openzeppelin 依赖：
 
@@ -162,11 +162,11 @@ forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
 
 #### 部署逻辑合约
 
-通过 [forge script]({{< ref "../foundry#forge_script" >}}) 部署此逻辑合约：
+通过 [forge script]({{< ref "posts/ethereum/foundry#forge_script" >}}) 部署此逻辑合约：
 
 {{< gist phenix3443 ab528785ae6e86e00803fb4204215034 >}}
 
-执行 `sh deploy_counter_v1.sh` 将合约部署到 [forge Anvil]({{< ref "../foundry/#anvil" >}}) 本地测试网。
+执行 `sh deploy_counter_v1.sh` 将合约部署到 [forge Anvil]({{< ref "posts/ethereum/foundry/#anvil" >}}) 本地测试网。
 
 这样，终端中会出现类似下图的确认信息，可能合约地址有所不同：
 
@@ -182,7 +182,7 @@ forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
 
 #### 确认部署结果{#verify_deploy_counter_v1}
 
-现在我们使用 [forge Cast]({{< ref "../foundry/#cast" >}}) 测试一下合约部署结果是否符合预期。
+现在我们使用 [forge Cast]({{< ref "posts/ethereum/foundry/#cast" >}}) 测试一下合约部署结果是否符合预期。
 
 {{< gist phenix3443 3b230f4fdb1808e356c9d0c0741beaee >}}
 
@@ -250,11 +250,11 @@ COUNTER_V1=0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 #### 部署逻辑合约 <!-- markdownlint-disable-line -->
 
-通过 [forge script]({{< ref "../foundry#forge_script" >}}) 部署此逻辑合约：
+通过 [forge script]({{< ref "posts/ethereum/foundry#forge_script" >}}) 部署此逻辑合约：
 
 {{< gist phenix3443 28bb1d8355d131e5ad738c57b079ecc8 >}}
 
-执行 `sh deploy_counter_v1.sh` 将合约部署到 [forge Anvil]({{< ref "../foundry/#anvil" >}}) 本地测试网。
+执行 `sh deploy_counter_v1.sh` 将合约部署到 [forge Anvil]({{< ref "posts/ethereum/foundry/#anvil" >}}) 本地测试网。
 
 这样，终端中会出现类似下图的确认信息，可能合约地址有所不同：
 
@@ -335,4 +335,4 @@ UUPS 代理使用 [ERC1967Proxy](https://docs.openzeppelin.com/contracts/4.x/api
 
 - [OpenZepplin: Proxy Patterns](https://blog.openzeppelin.com/proxy-patterns)
 - [Foundry 教程：使用多种方式编写可升级的智能合约（上）](https://blog.wongssh.cf/2022/07/18/foundry-contract-upgrade-part1/)
-- [Foundry 教程：使用多种方式编写可升级的智能合约（下）](https://blog.wssh.trade/posts/foundry-contract-upgrade-part2/)
+- [Foundry 教程：使用多种方式编写可升级的智能合约（下）](https://blog.wssh.trade/posts/ethereum/foundry-contract-upgrade-part2/)

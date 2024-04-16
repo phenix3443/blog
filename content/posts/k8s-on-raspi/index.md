@@ -25,7 +25,7 @@ tags:
 
 ## 准备工作
 
-硬件和操作系统规格参见 [家中的 raspi-4B 设备]({{< ref "../raspi" >}})
+硬件和操作系统规格参见 [家中的 raspi-4B 设备]({{< ref "posts/raspi" >}})
 
 ### 运行时选择
 
@@ -215,7 +215,7 @@ systemctl enable --now cri-docker.socket
 
 ### 安装 kubeadm、kubelet 和 kubectl
 
-需要通过环境变量以及 [apt 配置代理]({{< ref "../apt" >}})，才可以访问 `packages.cloud.google.com`。
+需要通过环境变量以及 [apt 配置代理]({{< ref "posts/apt" >}})，才可以访问 `packages.cloud.google.com`。
 
 ```shell
 export https_proxy=http://clash:7890 http_proxy=http://clash:7890 all_proxy=socks5://clash:7890
@@ -407,5 +407,5 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 
 ## Next
 
-- [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k8s 不会部署 Dashboard，可以安装来管理集群。
-- [树莓派部署 k3s 构建 kubernetes 集群]({{< ref "../k3s-on-raspi" >}})。k3s 更适合树莓派这种低性能设备。
+- [kubernetes-dashboard 管理集群]({{< ref "posts/k8s-dashboard" >}})。默认情况下 k8s 不会部署 Dashboard，可以安装来管理集群。
+- [树莓派部署 k3s 构建 kubernetes 集群]({{< ref "posts/k3s-on-raspi" >}})。k3s 更适合树莓派这种低性能设备。

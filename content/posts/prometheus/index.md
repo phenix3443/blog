@@ -200,7 +200,7 @@ kubectl port-forward services/prometheus-server 6789:80
 
 ### Graph{#graph}
 
-通过 Graph 面板，用户可以直接使用 [PromQL]({{< ref "#PromQL" >}}) 实时查询结果。该功能多用于临时查询和调试，更专业应使用 [grafana]({{< ref "../grafana" >}}) 等工具。
+通过 Graph 面板，用户可以直接使用 [PromQL]({{< ref "#PromQL" >}}) 实时查询结果。该功能多用于临时查询和调试，更专业应使用 [grafana]({{< ref "posts/grafana" >}}) 等工具。
 
 ### Status
 
@@ -268,4 +268,4 @@ Prometheus 的告警分为两个部分。Prometheus 服务器中的 [alert rule]
 
 ## Next
 
-- Prometheus UI 提供了快速验证 PromQL 以及临时可视化支持的能力，而在大多数场景下监控系统通常还需要可以长期使用的监控数据可视化面板（Dashboard）。这时用户可以考虑使用第三方的可视化工具如 [Grafana]({{< ref "../grafana" >}})
+- Prometheus UI 提供了快速验证 PromQL 以及临时可视化支持的能力，而在大多数场景下监控系统通常还需要可以长期使用的监控数据可视化面板（Dashboard）。这时用户可以考虑使用第三方的可视化工具如 [Grafana]({{< ref "posts/grafana" >}})

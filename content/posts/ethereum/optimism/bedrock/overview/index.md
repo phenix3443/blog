@@ -18,7 +18,7 @@ tags:
 
 ## 引言
 
-[上篇文章]({{< ref "../introduction/" >}})我们介绍了 optimism 的网络角色以及关键的交互流程。从这篇文章开始，我们从代码角度分析 optimism 的实现。
+[上篇文章]({{< ref "posts/ethereum/optimism/bedrock/introduction/" >}}) 我们介绍了 optimism 的网络角色以及关键的交互流程。从这篇文章开始，我们从代码角度分析 optimism 的实现。
 
 ## 代码架构
 
@@ -26,10 +26,10 @@ tags:
 
 ### L1 组件
 
-- `DepositFeed`：源于 L1 状态下的智能合约调用的 L2 交易的提要（todo:这里的翻译是什么意思？）。
+- `DepositFeed`：源于 L1 状态下的智能合约调用的 L2 交易的提要（todo: 这里的翻译是什么意思？）。
   - `DepositFeed` 合约发出 `TransactionDeposited` 事件，`rollup driver` 读取这些事件以处理 deposits。
   - Deposits 保证在`sequencing window`内反映在 L2 状态中。
-  - 请注意，deposit 的是交易(transaction)，而不是代币（token）。然而，deposited transaction 是实现代币充值的关键部分（代币在 L1 上锁定，然后通过 deposited transaction 在 L2 上铸造）。
+  - 请注意，deposit 的是交易 (transaction)，而不是代币（token）。然而，deposited transaction 是实现代币充值的关键部分（代币在 L1 上锁定，然后通过 deposited transaction 在 L2 上铸造）。
 - `BatchInbox`：用于`Batch Submitter`提交 transaction batches 的 L1 地址。
   - transaction batches 包括 L2 交易的 calldata、时间戳和排序信息。
   - BatchInbox 是一个常规的 EOA 地址。这让我们可以通过不执行任何 EVM 代码来节省 gas 成本（todo：这句话是什么意思）。
@@ -66,7 +66,7 @@ tags:
 
 ### 交易/块传播
 
-规范链接:[Execution Engine]({{< ref "../ee" >}})
+规范链接：[Execution Engine]({{< ref "posts/ethereum/optimism/bedrock/ee" >}})
 
 由于 EE 在底层使用 Geth，Optimism 使用 Geth 的内置 P2P 网络和交易池来传播交易。同一网络还可用于传播提交的块并支持快照同步（snap sync）。
 
@@ -78,7 +78,7 @@ tags:
 
 ### deposits
 
-规范链接:[deposits]({{< ref "../deposits" >}})
+规范链接：[deposits]({{< ref "posts/ethereum/optimism/bedrock/deposits" >}})
 
 Optimism 支持两种类型的`deposit`：`user deposits` 和 `L1 attributes deposits` 。 为了执行`user deposits`，用户调用`DepositFeed`合约上的`depositTransaction` 方法。 这反过来会发出`TransactionDeposited`事件，rollup 节点会在区块推导期间读取这些事件。
 
@@ -98,7 +98,7 @@ Optimism 的区块推导函数是这样设计的：
 - 支持定序器和定序器共识。
 - 对定序器审查具有弹性。
 
-##### Epochs and 定序窗口(Sequencing Window)
+##### Epochs and 定序窗口 (Sequencing Window)
 
 rollup chain 被细分为 epoch。 L1 区块编号和 epoch 编号之间存在 1:1 的对应关系。
 

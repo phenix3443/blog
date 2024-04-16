@@ -28,7 +28,7 @@ tags:
 
 - [官方文档](https://docs.soliditylang.org/zh/latest/index.html)
 - [中文文档](https://docs.soliditylang.org/zh/latest/)
-- [使用 foundry chisel 交互式工具]({{< ref "../foundry#chisel" >}}) 学习语法
+- [使用 foundry chisel 交互式工具]({{< ref "posts/ethereum/foundry#chisel" >}}) 学习语法
 
 ## 示例代码
 
@@ -36,20 +36,20 @@ tags:
 
 ## 编译器
 
-solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/installing-solidity.html) 编译后才可以由 [evm]({{< ref "../evm" >}}) 执行。虽然很多工具，如 [hardhat]({{< ref "../hardhat" >}})、[foundry]({{< ref "../foundry" >}}) 可以直接编译部署，但是了解 [编译器的配置](https://docs.soliditylang.org/zh/latest/using-the-compiler.html) 更有助于理解这些工具的相关设置。
+solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/installing-solidity.html) 编译后才可以由 [evm]({{< ref "posts/ethereum/evm" >}}) 执行。虽然很多工具，如 [hardhat]({{< ref "posts/ethereum/hardhat" >}})、[foundry]({{< ref "posts/ethereum/foundry" >}}) 可以直接编译部署，但是了解 [编译器的配置](https://docs.soliditylang.org/zh/latest/using-the-compiler.html) 更有助于理解这些工具的相关设置。
 
 ## code style
 
 [官方推荐的代码风格](https://docs.soliditylang.org/zh/latest/natspec-format.html#natspec)
 
-要同时使用 [Solhint]({{< ref "../solidity-lint" >}})  和 Prettier 来处理 Git 提交中更改的 Solidity 文件，你需要在 lint-staged 配置中指定这两个工具。这样，在每次提交前，改动的 Solidity 文件将首先被 Solhint 检查，然后由 Prettier 格式化。以下是配置这些工具的步骤：
+要同时使用 [Solhint]({{< ref "posts/ethereum/solidity-lint" >}})  和 Prettier 来处理 Git 提交中更改的 Solidity 文件，你需要在 lint-staged 配置中指定这两个工具。这样，在每次提交前，改动的 Solidity 文件将首先被 Solhint 检查，然后由 Prettier 格式化。以下是配置这些工具的步骤：
 
 ```sh
 npm install solhint prettier prettier-plugin-solidity lint-staged  @commitlint/cli @commitlint/config-conventional --save-dev
 ```
 
-- [commitlint]({{< ref "../../conventional-commit" >}}) 规范项目的 commit message。
-- [Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "../../prettier" >}}) 插件，用于自动格式化 solidity 代码。
+- [commitlint]({{< ref "posts/conventional-commit" >}}) 规范项目的 commit message。
+- [Prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) 是一款用于 solidity 文件的 [Prettier]({{< ref "posts/prettier" >}}) 插件，用于自动格式化 solidity 代码。
 
 接下来，在你的 package.json 文件中设置 lint-staged 来指定在提交包含特定文件类型时运行 Prettier：
 
@@ -61,7 +61,7 @@ Copy code
 }
 ```
 
-通过 [husky]({{< ref "../../husky" >}}) 将上面的这些操作自动化。以便在每次提交前运行 lint-staged 和 commit 检查 ：
+通过 [husky]({{< ref "posts/husky" >}}) 将上面的这些操作自动化。以便在每次提交前运行 lint-staged 和 commit 检查 ：
 
 ````sh
 npx husky install
@@ -124,13 +124,13 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 ### foundry
 
-[foundry]({{< ref "../foundry" >}}) 相比 [hardhat]({{< ref "../hardhat" >}}) 编译合约更加快速，也不用额外学习 js/ts 脚本来部署和编写测试用例。
+[foundry]({{< ref "posts/ethereum/foundry" >}}) 相比 [hardhat]({{< ref "posts/ethereum/hardhat" >}}) 编译合约更加快速，也不用额外学习 js/ts 脚本来部署和编写测试用例。
 
 ## 第三方库
 
 ### OpenZepplin
 
-[OpenZepplin]({{< ref "../openzeppelin" >}}) 是合约开发的常用库，提前安装。
+[OpenZepplin]({{< ref "posts/ethereum/openzeppelin" >}}) 是合约开发的常用库，提前安装。
 
 ```shell
 pnpm install @openzeppelin/contracts @openzeppelin/contracts-upgradeable

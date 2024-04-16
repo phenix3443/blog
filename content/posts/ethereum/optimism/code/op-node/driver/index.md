@@ -18,7 +18,7 @@ tags:
 
 ## 引言
 
-代码基于 optimism 最新的 [bedrock]({{< ref "../../../bedrock/overview" >}}) 版本。
+代码基于 optimism 最新的 [bedrock]({{< ref "posts/ethereum/optimism/code/overview" >}}) 版本。
 
 ```go
 

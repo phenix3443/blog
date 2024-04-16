@@ -92,12 +92,12 @@ sudo rpi-eeprom-update
 
 ### 本地化
 
-[本地化]({{< ref "../locale" >}})
+[本地化]({{< ref "posts/locale" >}})
 
 ### 设置网络
 
 - 路由器设置 mac 地址绑定，方便 SSH 登录。
-- [启用 WIFI]({{< ref "../wifi" >}})
+- [启用 WIFI]({{< ref "posts/wifi" >}})
 
 ### 设置主机名
 

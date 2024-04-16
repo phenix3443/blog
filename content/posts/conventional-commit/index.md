@@ -81,7 +81,7 @@ extends:
 
 ### 使用
 
-参考 [官方文档](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint) , 通过 [husky]({{< ref "../husky" >}}) 集成到 git-hook 进行安装测试：
+参考 [官方文档](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint) , 通过 [husky]({{< ref "posts/husky" >}}) 集成到 git-hook 进行安装测试：
 
 ```shell
 npm install --save-dev commitlint @commitlint/config-conventional
@@ -117,4 +117,4 @@ npx commitizen init cz-conventional-changelog --save-dev --save-exact
 
 ## Next
 
-- 使用 [release please]({{< ref "../release-please" >}}) 自动生成 changelog，自动更新版本。
+- 使用 [release please]({{< ref "posts/release-please" >}}) 自动生成 changelog，自动更新版本。

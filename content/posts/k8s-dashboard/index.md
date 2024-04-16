@@ -131,4 +131,4 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 ## Next
 
-- [helm]({{< ref "../helm" >}})
+- [helm]({{< ref "posts/helm" >}})

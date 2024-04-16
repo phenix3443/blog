@@ -93,16 +93,16 @@ tags:
 
 ![arch](images/arch.drawio.svg)
 
-- [raspi 4b 组成集群]({{< ref "../../raspi" >}}) 作为硬件支撑。
-- [clash]{{< ref "../../clash" >}} 搭建透明代理，处理整个家庭的网络，解决部署过程中的镜像问题。
-- 通过 [kubernetes]({{< ref "../../k3s-on-raspi" >}}) 管理服务。
-- [longhorn]({{< ref "../../longhorn" >}}) 将 raspi 的硬盘资源在 k8s 池化。
-- 通过 [prometheus+grafana]({{< ref "../../prometheus" >}}) 监控。
+- [raspi 4b 组成集群]({{< ref "posts/raspi" >}}) 作为硬件支撑。
+- [clash]{{< ref "posts/clash" >}} 搭建透明代理，处理整个家庭的网络，解决部署过程中的镜像问题。
+- 通过 [kubernetes]({{< ref "posts/k3s-on-raspi" >}}) 管理服务。
+- [longhorn]({{< ref "posts/longhorn" >}}) 将 raspi 的硬盘资源在 k8s 池化。
+- 通过 [prometheus+grafana]({{< ref "posts/prometheus" >}}) 监控。
 - collabora 和 onlyoffice 运行对树莓派的负载较大，所以部署在 GCP 上面。
 
 ## 进度
 
-- [resilio]({{< ref "../../resilio" >}}) 用于资源同步。
-- [cloudreve]({{< ref "../../cloudreve" >}}) 私人网盘空间。
-- [alist]({{< ref "../../alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
+- [resilio]({{< ref "posts/resilio" >}}) 用于资源同步。
+- [cloudreve]({{< ref "posts/cloudreve" >}}) 私人网盘空间。
+- [alist]({{< ref "posts/alist" >}}) 网盘聚合，用于聚合 115、阿里云盘等网盘资源。
 - clash 用于软路由，科学上网。

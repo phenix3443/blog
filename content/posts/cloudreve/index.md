@@ -73,4 +73,4 @@ cloudreve 中关于[文档预览/编辑的相关说明](https://docs.cloudreve.o
 
 ## WebDAV
 
-通过 WebDav 可以直接将磁盘挂载到 MacOS 或者已经部署的 [alist]({{< ref "../alist/index.md" >}}) 上
+通过 WebDav 可以直接将磁盘挂载到 MacOS 或者已经部署的 [alist]({{< ref "posts/alist/index.md" >}}) 上

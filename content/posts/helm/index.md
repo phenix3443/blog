@@ -33,7 +33,7 @@ Helm 安装 charts 到 Kubernetes 集群中，每次安装都会创建一个新�
 
 ## 常用命令
 
-- `helm completion zsh > $(brew --prefix)/share/zsh/site-functions/_helm` 为 zsh 安装自动补全，参见 [zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
+- `helm completion zsh > $(brew --prefix)/share/zsh/site-functions/_helm` 为 zsh 安装自动补全，参见 [zsh 自动补全]({{< ref "posts/zsh#auto-completion" >}})
 - `helm repo list` 已经安装的 repo 列表。
 - `helm repo add <repo> <repo-url>` 添加新的 repo。
 - `helm search repo <chart>` 在当前所有已添加的 repo 中查找 chart。
@@ -104,7 +104,7 @@ helm install alist ./alist -f values.yaml
 
 名为 `artifacthub-repo.yml`的元数据文件可用于设置验证发布者或所有权声明等功能。请注意，该文件必须与 chart 仓库下的 `index.yaml` 文件位于同一级别，而且必须由 chart 仓库 HTTP 服务器提供。
 
-- [如何查找 github repository ID]({{< ref "../github#repositoryID" >}})
+- [如何查找 github repository ID]({{< ref "posts/github#repositoryID" >}})
 
 ### add annotations
 
@@ -139,4 +139,4 @@ helm pull kubernetes-dashboard/kubernetes-dashboard --untar=true
 
 ## Next
 
-- 目前的云平台部署都需要付费，可以学习 [如何在 Raspi 上部署 k8s 集群]({{< ref "../k8s-on-raspi" >}})。
+- 目前的云平台部署都需要付费，可以学习 [如何在 Raspi 上部署 k8s 集群]({{< ref "posts/k8s-on-raspi" >}})。

@@ -33,7 +33,7 @@ brew install minikube
 
 ![cn image failed](images/cn-failed.png)
 
-需要直接使用代理，可以参考[使用 clash 设置透明代理]({{< ref "../clash" >}})
+需要直接使用代理，可以参考[使用 clash 设置透明代理]({{< ref "posts/clash" >}})
 
 启动集群，同时启用插件 dashboard：
 

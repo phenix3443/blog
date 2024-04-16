@@ -59,8 +59,8 @@ Build 编译由导入路径命名的 package 及其依赖项，但不会安装�
 
 ## test
 
-参见[go test]({{< ref "../go-test" >}})
+参见[go test]({{< ref "posts/go-test" >}})
 
 ## lint
 
-参见[go lint]({{< ref "../go-lint" >}})
+参见[go lint]({{< ref "posts/go-lint" >}})

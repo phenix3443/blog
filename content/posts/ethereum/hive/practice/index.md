@@ -21,9 +21,9 @@ tags:
 
 之前的系列文章将 hive 做了一个比较全面的介绍：
 
-- [使用和原理]({{< ref "../overview">}})
-- [如何编写 simulation]({{< ref "../simulator">}})
-- [如何编写 client]({{< ref "../client" >}})
+- [使用和原理]({{< ref "posts/ethereum/hive/overview">}})
+- [如何编写 simulation]({{< ref "posts/ethereum/hive/simulator">}})
+- [如何编写 client]({{< ref "posts/ethereum/hive/client" >}})
 
 这篇文章主要介绍 hive 使用过程中遇到的一些坑。
 

@@ -84,13 +84,13 @@ cd v2-core && yarn && yarn compile
 编译后的代码存放在 `build`  目录，需要把它拷贝至之前创建的 `uniswap-contracts`  目录。
 
 ```shell
-cp -r build ../uniswap-contracts && cd -
+cp -r build posts/uniswap-contracts && cd -
 ```
 
 接下来编译 `Uniswap/v2-periphery`  项目，也是相同的步骤，最后将编译后的代码拷贝到 `uniswap-contracts`  目录：
 
 ```shell
-cd v2-periphery && yarn && yarn compile && cp -r build ../uniswap-contracts && cd -
+cd v2-periphery && yarn && yarn compile && cp -r build posts/uniswap-contracts && cd -
 ```
 
 ## 部署 uniswap 合约
@@ -154,7 +154,7 @@ DApp update && DApp build
 会在 `out/` 下生成编译后好的 abi 文件，其中信息很多，需要提取 multicall 合约部分：
 
 ```shell
-jq '.contracts."src/Multicall.sol:Multicall"' out/DApp.sol.json > ../uniswap-contracts/build/Multicall.json
+jq '.contracts."src/Multicall.sol:Multicall"' out/DApp.sol.json > posts/uniswap-contracts/build/Multicall.json
 cd -
 ```
 

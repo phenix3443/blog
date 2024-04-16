@@ -22,7 +22,7 @@ tags: [geth,debug,rpc]
 - 共识层 [Beacon API webpage](https://ethereum.github.io/beacon-APIs/#/)
 - 执行层：[JSON-RPC API spec](https://github.com/ethereum/execution-apis)
 
-[前面的文章]({{< ref "../ch01-01-develop-environment" >}}) 已经介绍过过如何借助 [vscode debugging](https://code.visualstudio.com/docs/editor/debugging) 功能 以及 geth 的开发者模式来搭建调试环境，本文我们来分析 geth 中 API 的是如何对外提供服务的，以及自己编写一个 Hello-world 的 JSON API。
+[前面的文章]({{< ref "posts/geth/ch01-01-develop-environment" >}}) 已经介绍过过如何借助 [vscode debugging](https://code.visualstudio.com/docs/editor/debugging) 功能 以及 geth 的开发者模式来搭建调试环境，本文我们来分析 geth 中 API 的是如何对外提供服务的，以及自己编写一个 Hello-world 的 JSON API。
 
 ## 源码走读
 

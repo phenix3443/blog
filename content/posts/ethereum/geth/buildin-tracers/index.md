@@ -16,7 +16,7 @@ tags: [geth,evm,tracing]
 images: []
 ---
 
-[上篇文章]({{< ref "../basic-tracing" >}}) 介绍了基本跟踪的使用，本文介绍 geth 的内建跟踪器。
+[上篇文章]({{< ref "posts/ethereum/geth/basic-tracing" >}}) 介绍了基本跟踪的使用，本文介绍 geth 的内建跟踪器。
 
 <!--more-->
 ## 概述

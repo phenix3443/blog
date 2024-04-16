@@ -27,7 +27,7 @@ images: []
 
 ## 摘要
 
-这个 EIP 建议为特定配对友好的椭圆曲线添加预编译合约。这可以与 [EIP-196]({{< ref "../eip-196" >}}) 结合，以验证以太坊智能合约中的 [zkSNARKs]({{< ref "../zksnark" >}})。zkSNARKs 对以太坊的一般好处是，它将增加用户的隐私（因为零知识特性），并且可能也是一种可扩展性解决方案（因为其简洁性和高效可验证性）。
+这个 EIP 建议为特定配对友好的椭圆曲线添加预编译合约。这可以与 [EIP-196]({{< ref "posts/ethereum/eip-196" >}}) 结合，以验证以太坊智能合约中的 [zkSNARKs]({{< ref "posts/ethereum/zksnark" >}})。zkSNARKs 对以太坊的一般好处是，它将增加用户的隐私（因为零知识特性），并且可能也是一种可扩展性解决方案（因为其简洁性和高效可验证性）。
 
 ## 动机
 
@@ -39,7 +39,7 @@ images: []
 
 ## 规范
 
-对于 `block.number >= BYZANTIUM_FORK_BLKNUM` 的区块，请添加一个预编译合约，该合约与“[alt_bn128](https://blog.csdn.net/mutourend/article/details/128236672)”椭圆曲线群上的双线性函数有关。我们将以 [离散对数]({{< ref "../../cryptography" >}}) 的形式定义预编译合约。当然，离散对数被假设为难以计算，但我们将给出一个等效的规范，该规范利用了下文中可以有效计算的椭圆曲线配对函数。
+对于 `block.number >= BYZANTIUM_FORK_BLKNUM` 的区块，请添加一个预编译合约，该合约与“[alt_bn128](https://blog.csdn.net/mutourend/article/details/128236672)”椭圆曲线群上的双线性函数有关。我们将以 [离散对数]({{< ref "posts/cryptography" >}}) 的形式定义预编译合约。当然，离散对数被假设为难以计算，但我们将给出一个等效的规范，该规范利用了下文中可以有效计算的椭圆曲线配对函数。
 
 Address: 0x8
 
@@ -62,7 +62,7 @@ Output: If the length of the input is incorrect or any of the inputs are not ele
 
 ### 群定义
 
-群组 $G_1$ 和 $G_2$ 是素数阶`q`的 [循环群]({{< ref "../../cryptography" >}}):
+群组 $G_1$ 和 $G_2$ 是素数阶`q`的 [循环群]({{< ref "posts/cryptography" >}}):
 
 $$
 q = 21888242871839275222246405745257275088548364400416034343698204186575808495617
@@ -142,7 +142,7 @@ $F_p^2$ 中域元素的编码选择按此顺序进行，以便与元素本身的
 
 ## 实施
 
-预编译合约可以通过 [椭圆曲线配对函数]({{< ref "../../elliptic_curve#pairing" >}}) 来实现，更具体地说，是在 alt_bn128 曲线上的最优 ate 配对，这可以被有效地实现。为了看到这一点，首先注意到配对函数 e: $G_1*G_2 \rightarrow G_T$ 满足以下属性（ $G_1$ 和 $G_2$ 是以加法形式写的， $G_T$ 是以乘法形式写的）：
+预编译合约可以通过 [椭圆曲线配对函数]({{< ref "posts/elliptic_curve#pairing" >}}) 来实现，更具体地说，是在 alt_bn128 曲线上的最优 ate 配对，这可以被有效地实现。为了看到这一点，首先注意到配对函数 e: $G_1*G_2 \rightarrow G_T$ 满足以下属性（ $G_1$ 和 $G_2$ 是以加法形式写的， $G_T$ 是以乘法形式写的）：
 
 (1) $e(m \* P_1, n \* P_2) = e(P_1, P_2)^{m *n}$
 

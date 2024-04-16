@@ -16,9 +16,9 @@ tags:
   - bedrock
 ---
 
-## 引言[^1]
+## 引言 [^1]
 
-[Deposited transactions](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#deposited)，也称为 [deposits](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#deposits)，是在 L1 上发起并在 L2 上执行的交易。 本文档概述了一种用于 deposit 的新[交易类型](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#transaction-type)。 它还描述了如何在 L1 上启动 deposits，以及 L2 上的授权和验证条件。
+[Deposited transactions](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#deposited)，也称为 [deposits](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#deposits)，是在 L1 上发起并在 L2 上执行的交易。 本文档概述了一种用于 deposit 的新 [交易类型](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#transaction-type)。 它还描述了如何在 L1 上启动 deposits，以及 L2 上的授权和验证条件。
 
 注意：deposited transaction 特指 L2 交易，deposit 可以指各个阶段的交易（比如 deposit L1 时）。
 
@@ -27,7 +27,7 @@ tags:
 [Deposited transactions](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#deposited) 与现有交易类型有以下显着区别：
 
 1. 它们源自 L1 块，并且必须作为协议的一部分包含在内。
-2. 它们不包括签名验证（请参阅[User-Deposited Transactions]({{< ref "#user-deposited-transactions" >}})了解基本原理）。
+2. 它们不包括签名验证（请参阅 [User-Deposited Transactions]({{< ref "#user-deposited-transactions" >}}) 了解基本原理）。
 3. 它们在 L1 上购买 L2 gas，因此，L2 gas 不可退还。
 
 我们定义了一个新的 [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) 兼容交易类型，前缀为`0x7E`，然后是一个版本化的字节序列。第一个版本将`0x00`作为版本字节，然后是以下字段（rlp 按照它们在此处出现的顺序编码）：
@@ -64,13 +64,13 @@ deposit transaction 的 sourceHash 是根据来源计算的：
 虽然我们只定义了一种新的交易类型，但我们可以根据它们在 L2 区块中的位置来区分两种 deposited transactions ：
 
 - 第一个交易必须是 [L1 attributes deposited transaction]({{< ref "#l1-attributes-deposited-transaction" >}})，然后是
-- 提交给 L1 上的 deposit feed 合约的一系列零个或多个[user-deposit transaction]({{< ref "#user-deposited-transactions" >}})。User-deposited transactions 仅出现在 L2 epoch 的第一个区块中。
+- 提交给 L1 上的 deposit feed 合约的一系列零个或多个 [user-deposit transaction]({{< ref "#user-deposited-transactions" >}})。User-deposited transactions 仅出现在 L2 epoch 的第一个区块中。
 
 我们只定义了一个新的交易类型，以尽量减少对 L1 客户端软件的修改和复杂性。
 
 ### Validation and Authorization of Deposited Transactions
 
-如上所述，deposit 的交易类型不包括用于验证的签名。相反，授权由 [L2 chain derivation](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#L2-chain-derivation)过程处理，如果正确应用该过程，将只会推导出具有[L1 deposit 合约]({{< ref "#deposit-contract" >}})日志证明的`from`地址的交易。
+如上所述，deposit 的交易类型不包括用于验证的签名。相反，授权由 [L2 chain derivation](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#L2-chain-derivation) 过程处理，如果正确应用该过程，将只会推导出具有 [L1 deposit 合约]({{< ref "#deposit-contract" >}}) 日志证明的`from`地址的交易。
 
 ### Execution
 
@@ -96,13 +96,13 @@ L2 不能购买 gas，也不提供退款。用于 deposit 的 gas 从 L2 上的 
 
 #### Nonce Handling
 
-尽管缺少签名验证，我们仍然会在执行 deposit 交易时增加`from`帐户的 nonce。在 rollup 上仅 deposit 的情况下，这对于交易排序或重放预防不是必需的，但是它与在[合约创建](https://github.com/ethereum/execution-specs/blob/617903a8f8d7b50cf71bf1aa733c37897c8d75c1/src/ethereum/frontier/utils/address.py#L40)期间使用 nonce 保持一致。它还可以简化与下游工具（例如钱包和区块浏览器）的集成。
+尽管缺少签名验证，我们仍然会在执行 deposit 交易时增加`from`帐户的 nonce。在 rollup 上仅 deposit 的情况下，这对于交易排序或重放预防不是必需的，但是它与在 [合约创建](https://github.com/ethereum/execution-specs/blob/617903a8f8d7b50cf71bf1aa733c37897c8d75c1/src/ethereum/frontier/utils/address.py#L40) 期间使用 nonce 保持一致。它还可以简化与下游工具（例如钱包和区块浏览器）的集成。
 
 ## L1 Attributes Deposited Transaction {#l1-attributes-deposited-transaction}
 
 [L1 attributes deposited transaction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#l1-attributes-deposited-transaction) 是发送到 [L1 attributes predeployed contract]({{< ref "#l1-attributes-predeployed-contract" >}}) 的 deposit transaction.
 
-该交易必须包含以下字段:
+该交易必须包含以下字段：
 
 - `from` is 0xdeaddeaddeaddeaddeaddeaddeaddeaddead0001 (the address of the [L1 Attributes depositor account]({{< ref "#l1-attributes-depositor-account" >}}))
 - `to` is 0x4200000000000000000000000000000000000015 (the address of the L1 attributes predeployed contract).
@@ -110,7 +110,7 @@ L2 不能购买 gas，也不提供退款。用于 deposit 的 gas 从 L2 上的 
 - `value` is 0
 - `gasLimit` is set to 150,000,000.
 - `isSystemTransaction` is set to true.
-- `data` 是对[L1 attributes predeployed contract]({{< ref "#l1-attributes-predeployed-contract" >}})的 `setL1BlockValues()` 函数的 ABI 编码调用，具有与相应的 L1 块关联的正确值（参见[reference implementation]({{< ref "#l1-attributes-predeployed-contract-reference-implementation" >}})）
+- `data` 是对 [L1 attributes predeployed contract]({{< ref "#l1-attributes-predeployed-contract" >}}) 的 `setL1BlockValues()` 函数的 ABI 编码调用，具有与相应的 L1 块关联的正确值（参见 [reference implementation]({{< ref "#l1-attributes-predeployed-contract-reference-implementation" >}})）
 
 L1 attributes deposited transactions 不消耗任何 gas。
 
@@ -137,14 +137,14 @@ L2 上的预部署合约，地址为`0x4200000000000000000000000000000000000015`
   - basefee (uint256)
   - hash (bytes32)
 - sequenceNumber (uint64)： 等于相对于 epoch 开始的 L2 块编号，即最后更改到 L1 属性的 L2 块的距离，并在新 epoch 开始时重置为 0。
-- 与 L1 块相关的系统可配置项，请参阅[系统配置规范](https://github.com/ethereum-optimism/optimism/blob/develop/specs/system_config.md)：
+- 与 L1 块相关的系统可配置项，请参阅 [系统配置规范](https://github.com/ethereum-optimism/optimism/blob/develop/specs/system_config.md)：
   - batcherHash (bytes32): A versioned commitment to the batch-submitter(s) currently operating.
   - l1FeeOverhead (uint256): The L1 fee overhead to apply to L1 cost computation of transactions in this L2 block.
   - l1FeeScalar (uint256): The L1 fee scalar to apply to L1 cost computation of transactions in this L2 block.
 
-该合约实施了一种授权方案，因此它只接受来自[depositor account]({{< ref "#l1-attributes-depositor-account" >}})的状态改变调用。
+该合约实施了一种授权方案，因此它只接受来自 [depositor account]({{< ref "#l1-attributes-depositor-account" >}}) 的状态改变调用。
 
-合约有如下 solidity 接口，可以按照[合约 ABI 规范](https://docs.soliditylang.org/en/v0.8.10/abi-spec.html)进行交互。
+合约有如下 solidity 接口，可以按照 [合约 ABI 规范](https://docs.soliditylang.org/en/v0.8.10/abi-spec.html) 进行交互。
 
 #### L1 Attributes Predeployed Contract: Reference Implementation {#l1-attributes-predeployed-contract-reference-implementation}
 
@@ -187,6 +187,6 @@ Deposit Contract 处理两种特殊情况：
 
 ## 总结
 
-本文介绍了 optimism deposit 相关知识。关于 withdraw 参见[这篇文章]({{< ref "../withdraw" >}})
+本文介绍了 optimism deposit 相关知识。关于 withdraw 参见 [这篇文章]({{< ref "posts/ethereum/optimism/bedrock/withdraw" >}})
 
 [^1]: [deposits](https://github.com/ethereum-optimism/optimism/blob/develop/specs/deposits.md)

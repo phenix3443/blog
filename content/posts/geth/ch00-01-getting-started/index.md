@@ -120,4 +120,4 @@ curl <http://localhost:8545>
 
 ## 控制台
 
-Geth 提供了一个暴露 Web3.js API 的 Javascript 控制台来与区块链进行交互，但是更推荐使用 [Foundry cast]({{< ref "../../ethereum/foundry#cast" >}}) 工具。
+Geth 提供了一个暴露 Web3.js API 的 Javascript 控制台来与区块链进行交互，但是更推荐使用 [Foundry cast]({{< ref "posts/ethereum/foundry#cast" >}}) 工具。

@@ -18,7 +18,7 @@ tags:
 
 ## 引言
 
-之前的文章中分析了 hive 中 [simulation 的运行原理]({{< ref "../overview#how-it-works">}}) 还有 [client 的声明周期]({{< ref "../client#client-lifecycle" >}})，本文结合源码分析一下 hive 执行流程：
+之前的文章中分析了 hive 中 [simulation 的运行原理]({{< ref "posts/ethereum/hive/overview#how-it-works">}}) 还有 [client 的声明周期]({{< ref "posts/ethereum/hive/client#client-lifecycle" >}})，本文结合源码分析一下 hive 执行流程：
 
 `ethereum/rpc` 这个 simulator 的执行结果：
 
@@ -353,7 +353,7 @@ TestSpec.runTest 直接调用 test case 逻辑。
 
 #### ClientTestSpec
 
-[ClientTestSpec.runTest](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/hivesim/testapi.go#L339)描述了单个 ClientTestSpec 类型的 simulation 核心逻辑：
+[ClientTestSpec.runTest](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/hivesim/testapi.go#L339) 描述了单个 ClientTestSpec 类型的 simulation 核心逻辑：
 
 ```go
 func (spec ClientTestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Suite) error {
@@ -363,7 +363,7 @@ func (spec ClientTestSpec) runTest(host *Simulation, suiteID SuiteID, suite *Sui
     }
     for _, clientDef := range clients {
         // 根据 test case 中指定的 role 过滤命令行中指定的 client，然后对其执行所有的 test case.
-        // 如果test case 没有指定 role，对所有的额 client 执行测试。
+        // 如果 test case 没有指定 role，对所有的额 client 执行测试。
         // 'role' is an optional filter, so eth1 tests, beacon node tests,
         // validator tests, etc. can all live in harmony.
         if spec.Role != "" && !clientDef.HasRole(spec.Role) {

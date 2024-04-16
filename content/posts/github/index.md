@@ -36,7 +36,7 @@ Github 通过 [project](https://docs.github.com/en/issues/trying-out-the-new-pro
 
 ## action
 
-通过 [action]({{< ref "../github-actions" >}}) 使用 Github 的 CI/CD 能力。[Awesome Actions](https://github.com/sdras/awesome-actions) 搜集了常用的 actions。
+通过 [action]({{< ref "posts/github-actions" >}}) 使用 Github 的 CI/CD 能力。[Awesome Actions](https://github.com/sdras/awesome-actions) 搜集了常用的 actions。
 
 ## 测试覆盖率
 

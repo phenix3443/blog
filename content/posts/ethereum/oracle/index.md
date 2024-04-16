@@ -208,7 +208,7 @@ Oracle Contract 可以依赖多个节点（这些节点也依赖多个数据源�
 
 例如，如果你计划建立一个 DeFi 借贷协议，需要查询作为质押品存入的资产（如 ETH）的当前市场价格。
 
-DeFi 中流行的“Price Oracle”包括 Chainlink Price Feeds、Compound Protocol 的 [Open Price Feed](https://compound.finance/docs/prices)、Uniswap 的 [Time-Weighted Average Prices(TWAPs)]({{< ref "../uniswap/v2/core-concepts/oracles">}}) 和 [Maker Oracles](https://docs.makerdao.com/smart-contract-modules/oracle-module)。在将这些 Price Oracle 集成到项目之前，最好了解这些 Oracle 所带来的注意事项。本文详细分析了计划使用上述任何一种价格神器时需要考虑的问题。
+DeFi 中流行的“Price Oracle”包括 Chainlink Price Feeds、Compound Protocol 的 [Open Price Feed](https://compound.finance/docs/prices)、Uniswap 的 [Time-Weighted Average Prices(TWAPs)]({{< ref "posts/ethereum/uniswap/v2/core-concepts/oracles">}}) 和 [Maker Oracles](https://docs.makerdao.com/smart-contract-modules/oracle-module)。在将这些 Price Oracle 集成到项目之前，最好了解这些 Oracle 所带来的注意事项。本文详细分析了计划使用上述任何一种价格神器时需要考虑的问题。
 
 下面是一个例子，说明你如何在智能合约中使用 Chainlink 价格源检索最新的 ETH 价格。
 

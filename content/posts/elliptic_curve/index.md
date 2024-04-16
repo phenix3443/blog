@@ -73,7 +73,7 @@ e(P + P', Q) = e(P, Q) · e(P', Q)\\\\
 e(P, Q + Q') = e(P, Q) · e(P, Q')
 $$
 
-椭圆曲线配对（Elliptic Curve Pairing）和 [双线性映射（Bilinear Mapping）]({{< ref "../cryptography#bilinear_mapping" >}}) 之间存在密切的关系，因为椭圆曲线配对通常是一种实现双线性映射的特殊数学运算。该性质可以推论：$$e(m \ast P_1, n \ast P_2) = e(P_1, P_2)^{m \ast n}$$
+椭圆曲线配对（Elliptic Curve Pairing）和 [双线性映射（Bilinear Mapping）]({{< ref "posts/cryptography#bilinear_mapping" >}}) 之间存在密切的关系，因为椭圆曲线配对通常是一种实现双线性映射的特殊数学运算。该性质可以推论：$$e(m \ast P_1, n \ast P_2) = e(P_1, P_2)^{m \ast n}$$
 
 ### 非退化性{#non_degeneracy}
 
@@ -103,7 +103,7 @@ Tate 配对的主要思想是利用双线性映射来将两个椭圆曲线上的
 
 ### 延伸阅读
 
-- [vitalik: 探索椭圆曲线配对]({{< ref "../exploring-elliptic-curve-pairings" >}})
+- [vitalik: 探索椭圆曲线配对]({{< ref "posts/exploring-elliptic-curve-pairings" >}})
 
 ## BLS12_381 曲线{#BLS12_381}
 

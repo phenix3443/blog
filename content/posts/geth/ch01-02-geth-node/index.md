@@ -22,7 +22,7 @@ images: []
 
 ## 概述
 
-Geth 中的命令行程序基于 [urfave/cli]({{< ref "../../golang-cmd-tools#urfave-cli" >}})，该工具可以方便的集成了 subcommand 以及命令行参数的解析。
+Geth 中的命令行程序基于 [urfave/cli]({{< ref "posts/golang-cmd-tools#urfave-cli" >}})，该工具可以方便的集成了 subcommand 以及命令行参数的解析。
 
 ## Node
 

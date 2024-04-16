@@ -64,7 +64,7 @@ TL:DR 推荐使用下面的配置：
 
 ## Slither
 
-参见 [使用 Slither 提高代码质量]({{< ref "../slither" >}})
+参见 [使用 Slither 提高代码质量]({{< ref "posts/ethereum/slither" >}})
 
 ## mythril
 

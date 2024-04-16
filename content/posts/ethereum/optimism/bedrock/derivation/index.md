@@ -16,7 +16,7 @@ tags:
   - bedrock
 ---
 
-## 引言[^1]
+## 引言 [^1]
 
 该文章还在写作中，关于如何派生这一块还有很多东西需要了解，可以先直接看下原文。
 
@@ -24,7 +24,7 @@ tags:
 
 > 请注意，以下内容假定单个定序器和批处理器（batcher）。将来，该设计将进行调整以容纳多个此类实体。
 
-[L2 链推导(chain derivation)](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#L2-chain-derivation)，即从 L1 数据推导 L2 块，是 rollup 节点的主要职责之一，无论是在验证器模式还是在定序器模式下（推导作为对定序的健全性检查，并能够检测 L1 链重组).
+[L2 链推导 (chain derivation)](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#L2-chain-derivation)，即从 L1 数据推导 L2 块，是 rollup 节点的主要职责之一，无论是在验证器模式还是在定序器模式下（推导作为对定序的健全性检查，并能够检测 L1 链重组）.
 
 L2 链源自 L1 链。具体而言，每个 L1 块都映射到包含多个 L2 块的 [L2 sequencing epoch](https://github.com/ethereum-optimism/optimism/blob/develop/specs/glossary.md#sequencing-epoch)。 epoch 编号被定义为等于相应的 L1 块编号。
 
@@ -79,7 +79,7 @@ L2 块和 batch 之间的区别很微妙但很重要：块包含一个 L2 state 
 
 如果定序器错误地应用状态转换并发布 output root ，则此 output root 将不正确。错误的 output root 将受到故障证明的挑战，然后由现有定序器 batch 的正确 output root 替换。
 
-有关详细信息，请参阅批量[Batch Submission specification]({{< ref "../sequencer-batch-submitter" >}})。
+有关详细信息，请参阅批量 [Batch Submission specification]({{< ref "posts/ethereum/optimism/bedrock/sequencer-batch-submitter" >}})。
 
 #### Batch Submission Wire Format {#batch-submission-wire-format}
 
@@ -139,7 +139,7 @@ todo: 待补充
 
 #### L1 Retrieval
 
-在 L1 检索 stage ，我们从 outer stage （L1 Traversal）读取获得的块，并为其提取数据。特别是，我们提取了一个字节字符串，该字节字符串对应于属于该块的所有批处理交易中的数据串联。该字节流对 channel frames 流进行编码（有关更多信息，请参阅[]({{< ref "#batch-submission-wire-format" >}})）。
+在 L1 检索 stage ，我们从 outer stage （L1 Traversal）读取获得的块，并为其提取数据。特别是，我们提取了一个字节字符串，该字节字符串对应于属于该块的所有批处理交易中的数据串联。该字节流对 channel frames 流进行编码（有关更多信息，请参阅 []({{< ref "#batch-submission-wire-format" >}})）。
 
 这些 frames 被解析，然后按 channel 分组到我们称为 channel bank 的结构中。当向 channel 添加 frames 时，个别 frames 可能无效，但 channel 在 channel 超时之前没有有效性的概念。这允许添加选项以在将来从 channel 中进行部分读取。
 

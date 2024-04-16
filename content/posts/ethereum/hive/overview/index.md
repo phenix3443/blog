@@ -16,13 +16,13 @@ tags:
   - test
 ---
 
-## 引言[^1]
+## 引言 [^1]
 
 [Hive](https://github.com/ethereum/hive/blob/master/docs/overview.md) 是一个帮助以太坊（ethereum）客户端（clients）进行集成测试（integration tests）的系统。
 
 在 Hive 中，集成测试称为“`simulations`”，也就是一个 simulation 就是一个测试用例（test case）。 simulations 由 `simulator` 控制，simulator 是可用任何语言编写的程序。simulator 启动客户端并包含测试逻辑。它将测试结果上报 Hive，在那里它们被聚合以显示在 web 浏览器中。simulator 实际上是 simulation 的 docker 化运行环境，所有的 simulation 都此 docker 环境中运行。
 
-Hive 与其他通用 CI 基础设施的不同之处在于其同太坊客户端及其功能紧密集成。simulator 程序通常不需要关心客户端实现之间的差异，因为 Hive 提供了一个通用接口来启动和配置它们。当前，可以为任何 Ethereum 1 网络定义配置客户端（通过定义创世块和硬分叉激活块号）。simulations 还可以指示客户端加载预定义的测试链并启用挖矿（mining）。可以在 [hive 客户端文档]({{< ref "../client" >}}) 中找到有关客户端配置的更多信息。
+Hive 与其他通用 CI 基础设施的不同之处在于其同太坊客户端及其功能紧密集成。simulator 程序通常不需要关心客户端实现之间的差异，因为 Hive 提供了一个通用接口来启动和配置它们。当前，可以为任何 Ethereum 1 网络定义配置客户端（通过定义创世块和硬分叉激活块号）。simulations 还可以指示客户端加载预定义的测试链并启用挖矿（mining）。可以在 [hive 客户端文档]({{< ref "posts/ethereum/hive/client" >}}) 中找到有关客户端配置的更多信息。
 
 Ethereum Foundation 运行 hive 的公共实例来检查共识兼容性、P2P 网络规范合规性以及大多数 Ethereum 客户端实现的用户 API 支持。您可以在 <https://hivetests.ethdevops.io/> 找到最新的测试结果。
 
@@ -64,7 +64,7 @@ Hive 首先使用 docker 构建 simulator 和客户端镜像。此例中，它�
 
 一旦构建了所有镜像， simulator 程序就会在 docker 容器中启动。`HIVE_SIMULATOR` 环境变量包含 hive 控制器（hive controller，也就是 hive 命令启动的服务）的 HTTP 服务 URL。可以通过此 URL 访问 [hive simulation API](https://github.com/ethereum/hive/blob/master/docs/simulators.md#simulation-api-reference)。simulator 启动客户端并通过 API 报告向 hive 控制器测试结果。
 
-当 simulator 请求客户端实例时，Hive 控制器使用构建的客户端镜像启动一个新的 docker 容器。客户端容器入口点通过 simulator 提供的环境变量和文件接收进行配置（参见[simulator/devp2p](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/simulators/devp2p/main.go#L65)）。根据此配置数据，客户端入口点配置客户端的创世状态并导入测试链（如果提供）。客户端启动后可以与其进行 RPC 和 p2p 通信。
+当 simulator 请求客户端实例时，Hive 控制器使用构建的客户端镜像启动一个新的 docker 容器。客户端容器入口点通过 simulator 提供的环境变量和文件接收进行配置（参见 [simulator/devp2p](https://github.com/ethereum/hive/blob/f0f647240e9bfb24d0658ad88005faeafdf53008/simulators/devp2p/main.go#L65)）。根据此配置数据，客户端入口点配置客户端的创世状态并导入测试链（如果提供）。客户端启动后可以与其进行 RPC 和 p2p 通信。
 
 当客户端完成启动时，simulator 程序在 RPC 和 p2p 端点上与其通信。可以启动多个客户端，客户端也可以相互通信。
 
@@ -111,7 +111,7 @@ simulation 运行的结果存储在“结果目录（result directory）”中�
 
 结果目录还包含 simulator 和客户端输出的日志文件。
 
-## 工具集[^2] {#tools}
+## 工具集 [^2] {#tools}
 
 ### hive
 
@@ -146,7 +146,7 @@ go build .
 - `--docker.nocache <expression>`：选择强制重建的 docker 镜像的正则表达式。可以在 simulator 开发期间使用此选项以确保构建新镜像，即使 simulator 代码没有更改也是如此。
 - `--sim.timelimit <timeout>`：simulation 超时时间。如果超过此时间，Hive 将中止 simulator 。没有默认超时。
 
-上面的 expression 是 golang regexp 支持[re2 语法](https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex)。更多命令行参数参见[command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
+上面的 expression 是 golang regexp 支持 [re2 语法](https://learn.microsoft.com/zh-cn/deployedge/edge-learnmore-regex)。更多命令行参数参见 [command line](https://github.com/ethereum/hive/blob/master/docs/commandline.md)
 
 ```log
 % ./hive --sim devp2p --sim.limit discv4 --client go-ethereum

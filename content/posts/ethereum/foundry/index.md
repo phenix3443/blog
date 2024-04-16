@@ -59,7 +59,7 @@ curl -L https://foundry.paradigm.xyz | bash
 
 foundry 带有 [shell 自动补全](https://book.getfoundry.sh/config/shell-autocompletion) 功能。
 
-添加 [zsh 自动补全]({{< ref "../../zsh/#auto-completion" >}})：
+添加 [zsh 自动补全]({{< ref "posts/zsh/#auto-completion" >}})：
 
 ```shell
 forge completions zsh > $(brew --prefix)/share/zsh/site-functions/_forge
@@ -228,7 +228,7 @@ cast tx --rpc-url http://127.0.0.1:8545 0xab10eb28fa2bb1ecc0641c73a14a59e7d594f6
 
 ## Anvil
 
-Anvil 是 Foundry 附带的本地测试网节点。可以使用它从前端测试您的合约或通过 RPC 进行交互。类似于 [hardhat network]({{< ref "../hardhat#network" >}})
+Anvil 是 Foundry 附带的本地测试网节点。可以使用它从前端测试您的合约或通过 RPC 进行交互。类似于 [hardhat network]({{< ref "posts/ethereum/hardhat#network" >}})
 
 anvil 也支持 fork 其他 chain 来方便测试，更多参考 [anvil Reference](https://book.getfoundry.sh/reference/anvil/)。
 

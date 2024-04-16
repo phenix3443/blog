@@ -165,6 +165,6 @@ cargo publish
 - [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) 它会实时编译和分析你的 Rust 代码，提示代码中的错误，并对类型进行标注。你也可以使用官方的 Rust 插件取代。
 - [rust syntax](https://marketplace.visualstudio.com/items?itemName=dustypomerleau.rust-syntax)：为代码提供语法高亮。
 - [crates](https://marketplace.visualstudio.com/items?itemName=serayuzgur.crates)：帮助你分析当前项目的依赖是否是最新的版本。
-- [toml]({{< ref "../toml#vscode" >}})：Rust 使用 toml 做项目的配置管理。可以配置 TOML 相关的扩展。
+- [toml]({{< ref "posts/toml#vscode" >}})：Rust 使用 toml 做项目的配置管理。可以配置 TOML 相关的扩展。
 - [rust test lens](https://marketplace.visualstudio.com/items?itemName=hdevalke.rust-test-lens)：可以帮你快速运行某个 Rust 测试。
 - [Codeium](https://marketplace.visualstudio.com/items?itemName=Codeium.codeium)：基于 AI 的自动补全，可以帮助你更快地撰写代码。

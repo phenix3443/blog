@@ -83,7 +83,7 @@ hardhat 还包括 [`hardhat-gas-reporter`](https://hardhat.org/hardhat-runner/do
 
 ## Verify Contract {#verify}
 
-[以太坊如何合约验证]({{< ref "../verify-contract" >}}) 全面介绍了以太坊合约验证的具体细节。
+[以太坊如何合约验证]({{< ref "posts/ethereum/verify-contract" >}}) 全面介绍了以太坊合约验证的具体细节。
 
 使用 Hardhat 验证合约是一件非常方便的事情，部署完成后，通过命令行即可验证：
 

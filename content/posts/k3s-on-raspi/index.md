@@ -19,7 +19,7 @@ tags:
 
 ## 概述
 
-之前 [在树莓派集群上部署了 k8s]({{< ref "../k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
+之前 [在树莓派集群上部署了 k8s]({{< ref "posts/k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
 
 当前 k3s 版本：`v1.26.5+k3s1 (7cefebea)`。
 
@@ -36,7 +36,7 @@ tags:
 
 ### 网络拓扑
 
-使用 [家中闲置树莓派 4B]({{< ref "../raspi" >}}) 来搭建整个集群。
+使用 [家中闲置树莓派 4B]({{< ref "posts/raspi" >}}) 来搭建整个集群。
 
 | hostname | role   |
 | -------- | ------ |
@@ -88,7 +88,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 {{< gist phenix3443 9122aa42bd7e012f667234d3d5042bf2 >}}
 
-关于 helm 参与 [使用 helm 管理 kubernetes 应用]({{< ref "../helm" >}})
+关于 helm 参与 [使用 helm 管理 kubernetes 应用]({{< ref "posts/helm" >}})
 
 ### 部署 ingress-nginx
 
@@ -175,5 +175,5 @@ curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIR
 
 ## Next
 
-- [kubernetes-dashboard 管理集群]({{< ref "../k8s-dashboard" >}})。默认情况下 k3s 不会部署 Dashboard，可以安装来管理集群。
-- [如何使用 longhorn 构建分布式存储]({{< ref "../longhorn" >}})，通过 longhorn 将磁盘资源进行整合。
+- [kubernetes-dashboard 管理集群]({{< ref "posts/k8s-dashboard" >}})。默认情况下 k3s 不会部署 Dashboard，可以安装来管理集群。
+- [如何使用 longhorn 构建分布式存储]({{< ref "posts/longhorn" >}})，通过 longhorn 将磁盘资源进行整合。

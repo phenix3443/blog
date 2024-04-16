@@ -33,7 +33,7 @@ tags:
 
 ## 源码验证
 
-在 [以太坊虚拟机（EVM）]({{< ref "../evm" >}}) 中部署智能合约之前，开发人员将合约的源码编译为字节码。由于 EVM 不能解释高级指令，将源码编译为字节码（即低级的机器指令）对于在 EVM 中执行合约逻辑是必要的。
+在 [以太坊虚拟机（EVM）]({{< ref "posts/ethereum/evm" >}}) 中部署智能合约之前，开发人员将合约的源码编译为字节码。由于 EVM 不能解释高级指令，将源码编译为字节码（即低级的机器指令）对于在 EVM 中执行合约逻辑是必要的。
 
 验证智能合约很重要，因为宣传的合约代码可能与区块链上运行的代码不同。
 
@@ -97,7 +97,7 @@ Etherscan 是最常用的验证合约的工具。然而，Etherscan 的合约验
 
 ### Hardhat
 
-详见 [如何在 Hardhat 中验证合约]({{< ref "../hardhat/index.md#verify" >}})
+详见 [如何在 Hardhat 中验证合约]({{< ref "posts/ethereum/hardhat/index.md#verify" >}})
 
 ### Sourcify
 

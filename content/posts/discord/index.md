@@ -21,5 +21,5 @@ tags:
 ## 代理
 
 - 开启 Surge for Mac 或者 ClashX Pro`enhanced mode`是最省心的方式。
-- 或者使用 [透明代理]({{< ref "../clash" >}})。
+- 或者使用 [透明代理]({{< ref "posts/clash" >}})。
 - 使用网页版。

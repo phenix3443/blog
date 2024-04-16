@@ -48,4 +48,4 @@ series:
 
 ## Next
 
-- [通过 prometheus 监控集群状态]({{< ref "../prometheus" >}})
+- [通过 prometheus 监控集群状态]({{< ref "posts/prometheus" >}})

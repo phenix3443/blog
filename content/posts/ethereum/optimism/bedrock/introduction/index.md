@@ -22,7 +22,7 @@ tags:
 
 BedRock 是 Optimism 网络的下一个主要版本，计划于 2023 年第一季度发布。这篇文章主要介绍整个网络中各个参与角色是如何交互的。
 
-## 网络角色[^1]
+## 网络角色 [^1]
 
 Optimism 中有三个参与者：用户（users）、定序器（sequencers）和验证器（verifiers）。
 
@@ -70,13 +70,13 @@ Optimism 中有三个参与者：用户（users）、定序器（sequencers）�
 
 上图中涉及组件的相关链接：
 
-- [Batch Inbox (WIP)](../batch-inbox/)
-- [Rollup Node](../rollup-node/)
-- [Execution Engine](../ee/)
-- [Sequencer Batch Submitter (WIP)](../sequencer-batch-submitter/)
-- [L2 Output Oracle](../l2-output-oracle/)
-- [L2 Output Submitter](../l2-output-submitter/)
-- [Fault Proof VM (WIP)](../fault-proof-vm/)
+- [Batch Inbox (WIP)](posts/batch-inbox/)
+- [Rollup Node](posts/ethereum/optimism/bedrock/rollup-node/)
+- [Execution Engine](posts/ee/)
+- [Sequencer Batch Submitter (WIP)](posts/sequencer-batch-submitter/)
+- [L2 Output Oracle](posts/l2-output-oracle/)
+- [L2 Output Submitter](posts/l2-output-submitter/)
+- [Fault Proof VM (WIP)](posts/fault-proof-vm/)
 
 ### withdraw
 
@@ -86,10 +86,10 @@ Optimism 中有三个参与者：用户（users）、定序器（sequencers）�
 
 上图中涉及组件相关链接：
 
-- [L2 Output Oracle](../l2-output-oracle/)
+- [L2 Output Oracle](posts/l2-output-oracle/)
 
 ## 总结
 
-[后续文章]({{< ref "../overview/" >}})我们从代码层面介绍 optimism 是如何实现的。
+[后续文章]({{< ref "posts/ethereum/optimism/bedrock/overview/" >}}) 我们从代码层面介绍 optimism 是如何实现的。
 
 [^1]: [Introduction](https://github.com/ethereum-optimism/optimism/blob/develop/specs/introduction.md)

@@ -23,7 +23,7 @@ images: []
 
 ## commit
 
-可以配合 [conventional-commit]({{< ref "../conventional-commit" >}}) 规范化 commit 提交。
+可以配合 [conventional-commit]({{< ref "posts/conventional-commit" >}}) 规范化 commit 提交。
 
 ## hooks
 

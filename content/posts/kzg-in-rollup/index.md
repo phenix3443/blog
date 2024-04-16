@@ -30,7 +30,7 @@ tags:
 
 我们在 Scroll 希望能揭示零知识证明的内在运作机制。这并不会让它们失去任何神奇之处，我们认为帮助社区理解我们工作的技术层面非常重要。
 
-在这篇文章中，我们介绍了很多零知识证明系统的关键要素：[多项式承诺（polynomial commitment）方案]({{< ref "../cryptography-commitments" >}})。然后我们简要解释一下 [KZG]({{< ref "../kzg" >}})，它是实践中使用最广泛的多项式承诺方案之一。接着，我们会继续讨论如何在 Scroll 的 [zk-rollups]({{< ref "../ethereum/zkrollup" >}}) 以及以太坊的 Proto-Danksharding 中使用 KZG。最后，我们展示了 zk-rollups 以及 [Proto-Danksharding]({{< ref "../ethereum/proto-danksharding" >}}) 如何能够高效、优雅地相互集成，这种集成是通过它们各自使用多项式承诺方案来实现的。
+在这篇文章中，我们介绍了很多零知识证明系统的关键要素：[多项式承诺（polynomial commitment）方案]({{< ref "posts/cryptography-commitments" >}})。然后我们简要解释一下 [KZG]({{< ref "posts/kzg" >}})，它是实践中使用最广泛的多项式承诺方案之一。接着，我们会继续讨论如何在 Scroll 的 [zk-rollups]({{< ref "posts/ethereum/zkrollup" >}}) 以及以太坊的 Proto-Danksharding 中使用 KZG。最后，我们展示了 zk-rollups 以及 [Proto-Danksharding]({{< ref "posts/ethereum/proto-danksharding" >}}) 如何能够高效、优雅地相互集成，这种集成是通过它们各自使用多项式承诺方案来实现的。
 
 ## 为什么我们要讨论多项式？
 
@@ -94,7 +94,7 @@ tags:
 
 这是关于 KZG 背后的数学原理的快速概述，略去了一些细节。如果你想深入了解（并看到一个酷炫的扩展，你可以用一个证明来证明多个取值），请查看这些优秀的资源：
 
-+ [Dankrad Feist’s notes on KZG]({{< ref "../kate-polynomial-commitments-mandarin" >}}) 上面的证明过程与此文中相同，只是关于椭圆标量加法的记法不同。
++ [Dankrad Feist’s notes on KZG]({{< ref "posts/kate-polynomial-commitments-mandarin" >}}) 上面的证明过程与此文中相同，只是关于椭圆标量加法的记法不同。
 + [Alin Tomescu’s notes on KZG](https://alinush.github.io/2020/05/06/kzg-polynomial-commitments.html)
 
 ## 使用案例

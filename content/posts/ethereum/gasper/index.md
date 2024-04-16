@@ -22,7 +22,7 @@ tags:
 
 ## 前置知识
 
-- [共识机制]({{< ref "../consensus" >}})
+- [共识机制]({{< ref "posts/ethereum/consensus" >}})
 
 ## Gasper
 

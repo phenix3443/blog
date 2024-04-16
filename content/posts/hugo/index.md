@@ -32,7 +32,7 @@ math: true
 hugo completion zsh > $(brew --prefix)/share/zsh/site-functions/_hugo
 ```
 
-参见 [zsh 自动补全]({{< ref "../zsh#auto-completion" >}})
+参见 [zsh 自动补全]({{< ref "posts/zsh#auto-completion" >}})
 
 其他 shell 安装参见 [hugo completion](https://gohugo.io/commands/hugo_completion/)
 
@@ -104,7 +104,7 @@ hugo config mounts
 
 ### Build check
 
-Push 到仓库前可以先进行本地 build 来检查是否有错误，避免 Github Action 出错到站站点更新失败，这个功能可以通过 [husky]({{< ref "../husky" >}}) 配置为 git hook 来自动化。
+Push 到仓库前可以先进行本地 build 来检查是否有错误，避免 Github Action 出错到站站点更新失败，这个功能可以通过 [husky]({{< ref "posts/husky" >}}) 配置为 git hook 来自动化。
 
 ```shell
 npx husky add ./husky/pre-push "hugo && rm -fr public"

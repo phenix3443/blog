@@ -49,7 +49,7 @@ L1 上部署的两个 ERC20 代币，可用于 swap。
 
 ![TaikoL1](images/TaikoL1.svg)
 
-从上图中可以看出：`TaikoL1.sol` 主要封装了对外接口，内部实现都是位于在对应的库合约（LibContract）中。除了 [taiko core]({{< ref "../core" >}}) 中介绍的核心逻辑，还支持一下功能：
+从上图中可以看出：`TaikoL1.sol` 主要封装了对外接口，内部实现都是位于在对应的库合约（LibContract）中。除了 [taiko core]({{< ref "posts/taiko/core" >}}) 中介绍的核心逻辑，还支持一下功能：
 
 {{< gist phenix3443 d6768c44f2949306866bd5d764fa946f >}}
 

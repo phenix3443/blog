@@ -35,7 +35,7 @@ tags:
 
 ## 预备知识
 
-如果你对 [有限域]({{< ref "../cryptography#finite_field" >}})、[椭圆曲线]({{< ref "../elliptic_curve" >}}) 和 [配对]({{< ref "../elliptic_curve#pairing" >}}) 这几个话题不是很熟悉的话，非常推荐去读一读 Vitalik Buterin 的博客：[探索椭圆曲线配对]({{< ref "../exploring-elliptic-curve-pairings" >}}) 。
+如果你对 [有限域]({{< ref "posts/cryptography#finite_field" >}})、[椭圆曲线]({{< ref "posts/elliptic_curve" >}}) 和 [配对]({{< ref "posts/elliptic_curve#pairing" >}}) 这几个话题不是很熟悉的话，非常推荐去读一读 Vitalik Buterin 的博客：[探索椭圆曲线配对]({{< ref "posts/exploring-elliptic-curve-pairings" >}}) 。
 
 ## 默克尔树对比
 
@@ -57,11 +57,11 @@ tags:
 2. 证明大小独立于多项式大小，永远是一个群元素。验证同样独立于多项式大小，无论多项式次数为多少都只要两次群乘法和两次配对。
 3. 大多数时候该方案隐藏多项式 - 事实上，无限多的多项式将会拥有完全一样的卡特承诺。但是这并不是完美隐藏：如果你能猜到多项式（比如说该多项式过于简单，或者可能的多项式集合很小），你就可以找到这个被承诺的多项式。
 
-还有一点，在一个承诺中合并任意数量的取值证明是可行的。这些性质使得卡特方案对于零知识证明系统来说非常具有吸引力，例如 [PLONK]({{< ref "../understanding-plonk" >}}) 和 SONIC。同时对于一些更日常的目的，或者简单的作为一个矢量承诺来使用也是非常有趣的场景，接下来的文章中我们就会看到。
+还有一点，在一个承诺中合并任意数量的取值证明是可行的。这些性质使得卡特方案对于零知识证明系统来说非常具有吸引力，例如 [PLONK]({{< ref "posts/understanding-plonk" >}}) 和 SONIC。同时对于一些更日常的目的，或者简单的作为一个矢量承诺来使用也是非常有趣的场景，接下来的文章中我们就会看到。
 
 ## 椭圆曲线以及配对
 
-正如之前所提到的预备知识所说，我强烈推荐 Vitalik Buterin 的博客：[探索椭圆曲线配对]({{< ref "../exploring-elliptic-curve-pairings" >}})。它包含了理解本文所需的背景知识：特别是 [有限域]({{< ref "../cryptography#finite_field" >}})，[椭圆曲线]({{< ref "../elliptic_curve" >}}) 和 [配对]({{< ref "../elliptic_curve#pairing" >}}) 相关知识。
+正如之前所提到的预备知识所说，我强烈推荐 Vitalik Buterin 的博客：[探索椭圆曲线配对]({{< ref "posts/exploring-elliptic-curve-pairings" >}})。它包含了理解本文所需的背景知识：特别是 [有限域]({{< ref "posts/cryptography#finite_field" >}})，[椭圆曲线]({{< ref "posts/elliptic_curve" >}}) 和 [配对]({{< ref "posts/elliptic_curve#pairing" >}}) 相关知识。
 
 假设 $G_1$ 和 $G_2$是两条椭圆曲线，并满足配对 $e: \mathbb G_1 \times \mathbb G_2 \rightarrow \mathbb G_T$ ，假设 $p$ 是 $G_1$ 和 $G_2$ 的阶，$G$ 和 $H$ 是 $G_1$ 和 $G_2$ 的生成元。接下来，我们定义一个非常有效的速记符号， $\forall x \isin F_p$:
 
@@ -204,8 +204,8 @@ $$
 
 我们目前正在探索使用 Kate 承诺实现无状态版本的以太坊。因此，我强烈建议在 ethresearch 论坛中使用关键字 [Kate](https://ethresear.ch/search?q=kate) 来搜索你感兴趣的话题。
 
-另一篇很赞的博文是 Vitalik 的 [introduction to PLONK]({{< ref "../understanding-plonk" >}})，其中大量运用到了多项式承诺，其中卡特方案就是多项式承诺实现的主要方案。
+另一篇很赞的博文是 Vitalik 的 [introduction to PLONK]({{< ref "posts/understanding-plonk" >}})，其中大量运用到了多项式承诺，其中卡特方案就是多项式承诺实现的主要方案。
 
 ## Next
 
-- [KZG 在 rollup 和以太坊 DA 中的实践]({{< ref "../kzg-in-rollup" >}}) 中也描述了另外一种 KZG 的生成方式。
+- [KZG 在 rollup 和以太坊 DA 中的实践]({{< ref "posts/kzg-in-rollup" >}}) 中也描述了另外一种 KZG 的生成方式。

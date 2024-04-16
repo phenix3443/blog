@@ -16,7 +16,7 @@ tags: [geth,evm,tracing]
 images: []
 ---
 
-[上篇文章]({{< ref "../tracing" >}}) 介绍对 Geth 中的 EVM tracing 做了简要介绍，这篇文章介绍其中的跟踪类型： 基本跟踪。
+[上篇文章]({{< ref "posts/ethereum/geth/tracing" >}}) 介绍对 Geth 中的 EVM tracing 做了简要介绍，这篇文章介绍其中的跟踪类型： 基本跟踪。
 
 <!--more-->
 ## 概述
@@ -109,7 +109,7 @@ curl -H "Content-Type: application/json" -d '{"id": 1, "jsonrpc": "2.0", "method
 
 ## 总结
 
-本文介绍了如何在 Geth 中进行基本跟踪。基本跟踪是非常低级的，可以生成大量数据，但这些数据可能并不都有用。因此，也可以使用一组 [内置跟踪器]({{< ref "../buildin-tracers" >}})，或者用 Javascript 或 Go 编写 [自定义跟踪器](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)。
+本文介绍了如何在 Geth 中进行基本跟踪。基本跟踪是非常低级的，可以生成大量数据，但这些数据可能并不都有用。因此，也可以使用一组 [内置跟踪器]({{< ref "posts/ethereum/geth/buildin-tracers" >}})，或者用 Javascript 或 Go 编写 [自定义跟踪器](https://geth.ethereum.org/docs/developers/evm-tracing/custom-tracer)。
 
 ## 参考
 
