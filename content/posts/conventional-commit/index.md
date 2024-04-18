@@ -81,11 +81,16 @@ extends:
 
 ### 使用
 
-参考 [官方文档](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint) , 通过 [husky]({{< ref "posts/husky" >}}) 集成到 git-hook 进行安装测试：
+参考 [官方文档](https://commitlint.js.org/guides/getting-started.html) , 通过 [husky]({{< ref "posts/husky" >}}) 集成到 git-hook 进行安装测试：
 
 ```shell
-npm install --save-dev commitlint @commitlint/config-conventional
-npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
+npm install --save-dev @commitlint/{cli,config-conventional}
+echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg 
+```
+添加 commitlint 配置：
+
+```shell
+echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
 ### prompt

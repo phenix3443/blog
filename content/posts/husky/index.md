@@ -29,7 +29,7 @@ images: []
 初始化：
 
 ```shell
-pnpm add --save-dev husky && pnpm exec husky init
+npm add --save-dev husky && npx husky init
 ```
 
 上面的命令会：
