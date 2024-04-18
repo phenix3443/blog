@@ -29,25 +29,21 @@ images: []
 初始化：
 
 ```shell
-npx husky-init && npm install
+pnpm add --save-dev husky && pnpm exec husky init
 ```
 
 上面的命令会：
 
 - 在 package.json 中添加 prepare 脚本。
-- 创建一个可以编辑的 pre-commit 示例（默认情况下，npm test 会在提交时运行）。
+- 创建一个可以编辑的 pre-commit 示例（默认情况下，pnpm test 会在提交时运行）。
 - 配置 Git 钩子路径。
 
-要添加其他钩子，请使用 `husky add`。例如针对 commit message 做 lint 的 hook：
+可以通过创建文件来添加 git  hook:
 
 ```shell
-npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
+echo "npm test" > .husky/pre-commit
 ```
 
 ## hook 中的条件执行
 
-hook 本身都是 shell 脚本，所以可以编写的很复杂：
-
-只有在某些文件发生变化的时候才触发 hook 中的函数，例如：对于 `pre-commit` hook, 只有`solidity/`目录下的文件发生改动的时候才触发 format 该目录下的文件。
-
-{{< gist phenix3443 1f69d28814db8fc4f1954e2d6216feac >}}
+hook 本身都是 shell 脚本，所以可以编写的很复杂，比如可以结合 [lint-staged](https://github.com/lint-staged/lint-staged) 只在某些文件发生变化时候对其进行 lint，这适用于添加 lint 的时候不影响未修改的存量代码。
