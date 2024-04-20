@@ -33,11 +33,12 @@ k3s 是轻量级的 Kubernetes，当前版本：`v1.26.5+k3s1 (7cefebea)`。
 
 ### 网络拓扑
 
-使用 [家中闲置树莓派 4B]({{< ref "posts/raspi" >}}) 来搭建整个集群。
+使用 [家中闲置树莓派 4B]({{< ref "posts/raspi" >}}) 和零刻 EQ12 来搭建整个集群。
 
 | hostname | role   |
 | -------- | ------ |
-| rb1      | server |
+| EQ12| server|
+| rb1      | agent |
 | rb2      | agent  |
 | rb3      | agent  |
 
@@ -48,7 +49,8 @@ k3s 是轻量级的 Kubernetes，当前版本：`v1.26.5+k3s1 (7cefebea)`。
 k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C) 管理集群网络，从 Ubuntu 21.10 开始，对 Raspberry Pi 的 vxlan 支持已移至单独的内核模块中。
 
 ```shell
-sudo apt update && sudo apt upgrade -y
+sudo apt update && 
+sudo apt upgrade -y &&
 sudo apt install -y linux-modules-extra-raspi
 ```
 
@@ -69,7 +71,7 @@ sudo apt install -y linux-modules-extra-raspi
 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
-可以通过 `/usr/local/bin/k3s-uninstall.sh` 来执行卸载。
+通过 `/usr/local/bin/k3s-uninstall.sh` 来执行卸载。
 
 ### 设置 kubeconfig
 
@@ -83,9 +85,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ### 安装 helm
 
-{{< gist phenix3443 9122aa42bd7e012f667234d3d5042bf2 >}}
+[使用 helm 管理 kubernetes 应用]({{< ref "posts/helm" >}})
 
-关于 helm 参与 [使用 helm 管理 kubernetes 应用]({{< ref "posts/helm" >}})
+{{< gist phenix3443 9122aa42bd7e012f667234d3d5042bf2 >}}
 
 ### 部署 ingress-nginx
 

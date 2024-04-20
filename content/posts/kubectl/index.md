@@ -37,6 +37,8 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' > $(brew --prefix)/share/zsh/site-functions/_kubectl
 ```
 
+## 别名
+
 kubectl 这个命令如果有更短的别名可以更方便输入：
 
 ```shell
