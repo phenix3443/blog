@@ -62,7 +62,11 @@
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2"
+  },
   "name": "blog",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "type": "module"
 }

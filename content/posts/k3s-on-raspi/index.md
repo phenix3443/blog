@@ -9,19 +9,16 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - kubernetes
-tags:
-  - raspi
-  - k3s
-  - ubuntu
+series: []
+categories: [kubernetes]
+tags: [kubectl,k3s]
 ---
 
 ## 概述
 
-之前 [在树莓派集群上部署了 k8s]({{< ref "posts/k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 k3s 来部署 kubernetes 集群。
+之前 [在树莓派集群上部署了 k8s]({{< ref "posts/k8s-on-raspi" >}})，发现运行 control-panel 的节点在没有任何任务的情况下，负载也经常到 9-13，已经无法正常 SSH 登录，所以决定使用 [k3s](https://docs.k3s.io/zh/) 来部署 kubernetes 集群。
 
-当前 k3s 版本：`v1.26.5+k3s1 (7cefebea)`。
+k3s 是轻量级的 Kubernetes，当前版本：`v1.26.5+k3s1 (7cefebea)`。
 
 ## 系统架构
 

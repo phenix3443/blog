@@ -4,7 +4,7 @@ description: kubectl 使用
 slug: kubectl
 date: 2023-09-19T17:12:18+08:00
 featured: false
-draft: true
+draft: false
 comment: true
 toc: true
 reward: true
@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [k8s]
+categories: [kubernetes]
 tags: [kubectl]
 images: []
 ---
