@@ -46,6 +46,8 @@ kubectl port-forward services/grafana 6789:80
 
 [导入和导出 dashboard](https://grafana.com/docs/grafana/latest/dashboards/share-dashboards-panels/#dashboard-export) 可以方便的使用他人已经配置好的 dashboard。
 
+当前树莓派使用的 dashboard: <https://grafana.com/grafana/dashboards/19195-raspi-overview/>
+
 ## 配置
 
 参考 [configuration](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/)
