@@ -17,6 +17,10 @@ tags: [greenfield]
 images: []
 ---
 
+## 前置知识
+
+- [Data Storage]({{< ref "posts/greenfield/data-storage" >}})
+
 ## 概述
 
 GF 建议采用 Virtual Groups 作为解决方案，以消除 Buckets/Objects 与 SP 之间的相互依赖关系。这种方法可以有效减少在 SP 退出和 Bucket 迁移过程中修改链上存储 BucketInfo 和 ObjectInfo 时需要传输的大量交易。
@@ -25,9 +29,9 @@ Virtual Group 由一个 Primary SP 和多个 Secondary SPs 组成。每个 Objec
 
 ### 术语
 
-+ Global Virtual Group (GVG)：GVG 由一个 Primary SP 和多个 Secondary SP 组成。
-+ Local Virtual Group（LVG）：每个 Bucket 都维护一个从 Local Group ID 到 Global Group ID 的映射。
-+ Virtual Group Family（VGF）：每个 Primary SP 可创建多个 Virtual Group Family，每个 Family 包含多个 Global Virtual Group。每个 Family 只能存储数量有限的 Bucket。
+- Global Virtual Group (GVG)：GVG 由一个 Primary SP 和多个 Secondary SP 组成。
+- Local Virtual Group（LVG）：每个 Bucket 都维护一个从 Local Group ID 到 Global Group ID 的映射。
+- Virtual Group Family（VGF）：每个 Primary SP 可创建多个 Virtual Group Family，每个 Family 包含多个 Global Virtual Group。每个 Family 只能存储数量有限的 Bucket。
 
 ### 关系
 
@@ -42,8 +46,6 @@ Local Virtual Group 关联它们对应的 Bucket，每个 Object 都需要存储
 Family 可以包含同一 SP 创建的多个 GVG。一个 Bucket 只能由同一个 Family 中的 GVG 服务，Bucket 内不允许有跨 Family 的 GVG。一旦 Family 的总存储容量超过 64TB（TBD），Family 内的 GVG 就不能再为新的 Bucket 提供服务，SP 必须创建一个新的 Family。通过引入 Family，Primary SP 可以在不破坏一个 Bucket、一个 Primary SP 规则的情况下退出 Family。
 
 ![Family-relationship](image/relationship.png)
-
-关于如何存储数据，参见 [Data Storage](https://docs.bnbchain.org/greenfield-docs/docs/guide/core-concept/data-storage/#primary-sp)
 
 ### 存储质押
 
@@ -97,4 +99,4 @@ Group 内的 Secondary SP 数量可作为该 Group 内存储的所有 Object 的
 
 ## 参考
 
-+ [virtual-Group](https://docs.bnbchain.org/greenfield-docs/docs/guide/greenfield-blockchain/modules/virtual-Group/)
+- [virtual-Group](https://docs.bnbchain.org/greenfield-docs/docs/guide/greenfield-blockchain/modules/virtual-Group/)
