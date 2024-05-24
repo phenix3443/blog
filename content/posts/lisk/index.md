@@ -54,6 +54,6 @@ TLDR:
 ## 相关资料
 
 1. [Lisk 的空投季以 #HodlerDrop 揭开序幕](https://lisk.com/blog/posts/lisk-airdrop-season-kicks-off-hodlerdrop)
-2. [https://lisk.com/blog/posts/lsk-2.0-migration-to-an-ERC-20-token](https://lisk.com/blog/posts/lsk-2.0-migration-to-an-ERC-20-token>)
+2. [https://lisk.com/blog/posts/lsk-2.0-migration-to-an-ERC-20-token](https://lisk.com/blog/posts/lsk-2.0-migration-to-an-ERC-20-token)
 3. [LSK Token Migration Snapshot Height Announcement](https://lisk.com/blog/posts/lsk-token-migration-snapshot-height-announcement)
-4. [关于支持 Lisk（LSK）合约置换的公告](https://www.binance.com/zh-CN/support/announcement/%E5%85%B3%E4%BA%8E%E6%94%AF%E6%8C%81lisk-lsk-%E5%90%88%E7%BA%A6%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E5%91%8A-80b0136686834d318621cd1457fd3461>)
+4. [关于支持 Lisk（LSK）合约置换的公告](https://www.binance.com/zh-CN/support/announcement/%E5%85%B3%E4%BA%8E%E6%94%AF%E6%8C%81lisk-lsk-%E5%90%88%E7%BA%A6%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E5%91%8A-80b0136686834d318621cd1457fd3461)
