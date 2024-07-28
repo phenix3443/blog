@@ -11,9 +11,9 @@ reward: true
 pinned: false
 carousel: false
 math: false
-series: [golang 源码]
-categories: [golang]
-tags: [cmd]
+series: []
+categories: [go]
+tags: [tools]
 images: []
 ---
 

@@ -13,7 +13,7 @@ carousel: false
 math: false
 series: [go 源码分析]
 categories: [go]
-tags: [go,gin,echo]
+tags: [gin,echo]
 images: []
 ---
 
