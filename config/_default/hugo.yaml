@@ -8,8 +8,6 @@ hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Ko
 #  - fr
 #  - zh-cn
 #  - zh-tw
-paginate: 10
-# paginatePath: page
 enableRobotsTXT: true
 enableEmoji: true
 pygmentsUseClasses: true

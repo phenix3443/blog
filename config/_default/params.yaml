@@ -119,7 +119,6 @@ post:
   # readMoreFromContent: true
 
 archive:
-  paginate: 20 # Archive pagination. Default to 100.
   # basePath = "/archiv" # The base path of archive pages.
   # dateFormat: 01-02 # Archive date format. Default to Jan 2.
 
@@ -164,7 +163,6 @@ creativeCommons:
 #requiredFields: # Extra required fields. Available fields: email and the extra fields.
 #  - email
 #  - url
-#paginate: 5 # Default to 10.
 #moderation: false # Same as Staticman's moderation.
 
 # See https://giscus.app
@@ -182,7 +180,6 @@ creativeCommons:
 # lazyLoading: false # Default to true.
 
 search:
-  paginate: 5 # Pagination. Default to 10.
   # resultContentWordCount: 240 # The maximum word count of result content for displaying.
   # Fuse.js options. See https://fusejs.io/api/options.html.
   fuse:
@@ -254,12 +251,57 @@ repo:
 
 topAppBar:
   # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-  social:
-    github: phenix3443
-    twitter: phenix3443
+  # social:
+  #   github: phenix3443
+  #   twitter: phenix3443
 #docs:
 # nav:
 # expand: true # Expand docs navigators.
 
 #feeds:
 # content: true
+author:
+  name: phenix3443
+  avatar: images/profile.webp # Avatar image. Default to "images/profile.webp".
+  bio: "Gopher, Full Stack Engineer."
+  # company: Tencent # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
+  location: Shenzhen,China # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
+  # about: https://blog.panghuli.cn # The external about page. The internal about page will be used if not set.
+  params: {}
+  # layout: compact
+  # See https://hbs.phenix3443.com/v1/en/docs/widgets/social-links/.
+
+social:
+  # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
+  email: phenix3443
+  facebook: phenix3443
+  github: phenix3443
+  gitlab: phenix3443
+  linkedin: phenix3443
+  stackoverflow: 1748657
+  twitter: phenix3443
+  # weibo:
+  # zhihu:
+  # instagram:
+  # quora:
+  # tumblr:
+  # reddit:
+  telegram: phenix3443
+  # qq: 344300476
+  dockerhub: phenix3443
+  # bitbucket:
+  # kaggle:
+  medium: phenix3443 # Medium username or custom domain(e.g. https://custom.domain.tld).
+  # lastfm:
+  # bilibili:
+  # youtube: phenix3443
+  # discord: phenix3443
+  # discourse: https://yourforum.tld
+  # facebookgroup:
+  # tiktok:
+  # pinterest:
+  # mastodon:
+  # liberapay:
+  # paypal:
+  # patreon:
+  # tipeee:
