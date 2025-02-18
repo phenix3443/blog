@@ -24,7 +24,9 @@ math: true
 
 [hugo](https://gohugo.io/) 号称“世界上最快的静态网站生成器”。
 
-## 使用
+## hugo cli
+
+### 自动补全
 
 为 zsh 安装自动补全：
 
@@ -36,7 +38,51 @@ hugo completion zsh > $(brew --prefix)/share/zsh/site-functions/_hugo
 
 其他 shell 安装参见 [hugo completion](https://gohugo.io/commands/hugo_completion/)
 
-查看当前站点的配置：
+### 生成站点
+
+通过命令`hugo new site my-site`生成默认的文件，目录结构如下：
+
+```bash
+my-site
+├── archetypes
+│   └── default.md
+├── assets
+├── content
+├── data
+├── hugo.toml
+├── i18n
+├── layouts
+├── static
+└── themes
+```
+
+### 启动站点
+
+```bash
+hugo server -D
+```
+
+## 配置
+
+hugo 支持多种文件格式（toml/yaml/json）的 [配置](https://gohugo.io/getting-started/configuration/)，默认配置是位于根目录下的 `hugo.yaml` 文件。
+
+除了使用单一的站点配置文件，还可以将配置按环境、根配置键和语言拆分放在`config`目录下：
+
+```bash
+my-project/
+└── config/
+    ├── _default/
+    │   ├── hugo.yaml
+    │   ├── menus.en.yaml
+    │   ├── menus.de.yaml
+    │   └── params.yaml
+    └── production/
+        └── params.toml
+```
+
+## FAQ
+
+### 查看当前站点的配置
 
 ```shell
 hugo config --format yaml
