@@ -1,0 +1,7 @@
+---
+# This is a configuration file for markdownlint, a linter for Markdown files.
+# For more information, see
+# https://github.com/DavidAnson/markdownlint?tab=readme-ov-file#rules--aliases
+default: true
+MD013: false
+MD024: false

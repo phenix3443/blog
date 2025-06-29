@@ -35,11 +35,7 @@ actions:
   disabled:
     - trunk-announce
   enabled:
-    - commitizen
     - commitlint
     - trunk-fmt-pre-commit
     - trunk-check-pre-push
     - trunk-upgrade-available
-tools:
-  enabled:
-    - commitizen@4.3.1
