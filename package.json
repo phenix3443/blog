@@ -62,7 +62,10 @@
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cz-commitlint": "^19.8.1"
+  },
   "name": "blog",
   "version": "0.1.0"
 }
