@@ -20,6 +20,7 @@ series:
 本文介绍 kubernetes dashboard 的安装和使用。
 
 <!--more-->
+
 ## 概述
 
 [Kubernetes Dashboard](https://github.com/kubernetes/dashboard) 是一个通用的、基于 Web 的 Kubernetes 集群的用户界面。它允许用户管理集群中运行的应用程序，并对其进行故障排除，以及管理集群本身。

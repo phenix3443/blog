@@ -17,7 +17,7 @@ tags:
 
 ## 概述
 
-eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 `eth/67`。 这里分析 geth 中对于[eth 协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md)的实现。
+eth 是 RLPx 传输协议，可促进 peer 之间的以太坊区块链信息交换。当前的协议版本是 `eth/67`。 这里分析 geth 中对于 [eth 协议说明](https://github.com/ethereum/devp2p/blob/master/caps/eth.md) 的实现。
 
 ## 注册 eth 协议为 p2p 子协议
 
@@ -39,7 +39,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 }
 ```
 
-在`eth.New`中[注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265) eth 相关 p2p 子协议。
+在`eth.New`中 [注册](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/backend.go#L265) eth 相关 p2p 子协议。
 
 ```go
 // Protocols returns all the currently configured
@@ -89,7 +89,7 @@ func MakeProtocols(backend Backend, network uint64, dnsdisc enode.Iterator) []p2
 }
 ```
 
-- [ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43)指示当前 geth 支持两个版本的 eth 协议：
+- [ProtocolVersions](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/protocol.go#L43) 指示当前 geth 支持两个版本的 eth 协议：
 
 ```go
 // ProtocolVersions are the supported versions of the `eth` protocol (first
@@ -109,7 +109,7 @@ var ProtocolVersions = []uint{ETH67, ETH66}
     },
 ```
 
-当 p2p 模块发现一个新的节点并完成链接时，会调用[`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106)函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415)。这个函数首先本地实例化一个 peer，然后启动运行它。
+当 p2p 模块发现一个新的节点并完成链接时，会调用 [`p2p.Protocol.Run`](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/eth/protocols/eth/handler.go#L106) 函数。该函数在启动协议时通过一个单独的 goroutine[执行](https://github.com/ethereum/go-ethereum/blob/c4a662176ec11b9d5718904ccefee753637ab377/p2p/peer.go#L415)。这个函数首先本地实例化一个 peer，然后启动运行它。
 
 `Backend.RunPeer`实际调用的是`s.handler.RunPeer`，这是因为调用`MakeProtocols`时第一个参数进行了类型转换：`(*ethHandler)(s.handler)`。
 
@@ -274,7 +274,7 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 
 ### 状态同步（又名“快速同步”）
 
-协议版本 eth/63 到 eth/66 也允许同步 state tree。从协议版本 eth/67 开始，以太坊 state tree 不能再使用 eth 协议检索，而是由辅助协议 [snap](https://github.com/ethereum/devp2p/blob/master/caps/snap.md)提供 state 下载。
+协议版本 eth/63 到 eth/66 也允许同步 state tree。从协议版本 eth/67 开始，以太坊 state tree 不能再使用 eth 协议检索，而是由辅助协议 [snap](https://github.com/ethereum/devp2p/blob/master/caps/snap.md) 提供 state 下载。
 
 状态同步通常通过下载 block header 链来进行，验证它们的有效性。在链同步部分中请求块体，但不执行交易，仅验证其“数据有效性”。客户端在链头附近选择一个块（`pivot block`）并下载该块的 state。
 
@@ -299,5 +299,3 @@ eth 协议的节点应了解从创世块到当前最新块的所有块的完整�
 当客户端池中出现新交易时，它应该使用`Transactions`和`NewPooledTransactionHashes`消息将它们传播到网络。`Transactions` 消息转发完整的交易对象，通常发送给一小部分随机连接的 peer 。所有其他 peer 都会收到交易哈希的通知，还可以请求完整的交易对象（如果不知道的话）。将完整的交易分发给一小部分 peer 通常可以确保所有节点都接收到交易并且不需要请求它。
 
 节点永远不应该将交易发送回它可以确定已经知道它的 peer （因为它以前被发送过，或者因为它最初是从这个 peer 通知的）。这通常是通过记住一组最近由 peer 转发的交易哈希来实现的。
-
-[^1]: [以太坊源码解析：区块同步-Protocol](https://yangzhe.me/2019/04/14/ethereum-protocol/)

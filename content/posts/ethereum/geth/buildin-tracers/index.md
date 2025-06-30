@@ -12,13 +12,14 @@ pinned: false
 carousel: false
 series: [evm-tracing]
 categories: [ethereum]
-tags: [geth,evm,tracing]
+tags: [geth, evm, tracing]
 images: []
 ---
 
 [上篇文章]({{< ref "posts/ethereum/geth/basic-tracing" >}}) 介绍了基本跟踪的使用，本文介绍 geth 的内建跟踪器。
 
 <!--more-->
+
 ## 概述
 
 Geth 捆绑了多种可通过 [tracing API](https://geth.ethereum.org/docs/interacting-with-geth/rpc/ns-debug) 调用的跟踪器。其中一些内置跟踪器是用 Go 原生实现的，另一些则是用 Javascript 实现的。默认跟踪器是操作码记录器（又称结构记录器），它是所有方法的默认跟踪器。其他跟踪器必须通过在 API 调用中向 tracer 参数传递其名称来指定。

@@ -34,7 +34,7 @@ HodlerDrop 的目标是根据迁移时间的参与度和持有量，为 Lisk 的
 
 要获得潜在空投的全部金额，必须参与几项关键活动：
 
-1. 申领新的 ERC-20 LSK 代币：需要使用 [Lisk Portal](https://portal.lisk.com/claim) 在 Lisk L2 上申领新的 LSK 代币。这是至关重要的一步，因为的空投潜力将与持有的新 ERC-20 LSK 代币相关联。具体操作参见 [How To Claim Your LSK ERC-20 Tokens - The Ultimate Step-By-Step Guide](<https://www.youtube.com/watch?v=pcr-Yz_QN24>)
+1. 申领新的 ERC-20 LSK 代币：需要使用 [Lisk Portal](https://portal.lisk.com/claim) 在 Lisk L2 上申领新的 LSK 代币。这是至关重要的一步，因为的空投潜力将与持有的新 ERC-20 LSK 代币相关联。具体操作参见 [How To Claim Your LSK ERC-20 Tokens - The Ultimate Step-By-Step Guide](https://www.youtube.com/watch?v=pcr-Yz_QN24)
 2. 将的 LSK 质押 Lisk L2 上：网络承诺至关重要！通过 Lisk L2 即将推出的入股计划，LSK 持有者将能够获得收益。空投给的 LSK 数量将取决于入股的 LSK 数量和入股时间。至少需要一个月的时间才能获得资格。
 3. 在 Lisk DAO 中委托投票权：为了建立健全的治理系统，必须在 Lisk DAO 中委托投票权。如果希望直接参与 Lisk 的管理，可以将投票权委托给他人或自己。
 4. 接收空投：完成所有必要操作后，就可以通过 [Lisk Portal](https://portal.lisk.com/claim) 接收空投。网页界面将引导完成每个步骤，并随时显示可以领取的空投数量。

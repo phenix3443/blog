@@ -5,5 +5,7 @@ dictionaries: []
 words:
   - commitizen
   - oxipng
+  - rcmgr
+  - taskqueue
 ignoreWords: []
 import: []

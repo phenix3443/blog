@@ -1,12 +1,11 @@
----
 # This is a configuration file for yamllint, a linter for YAML files.
 # For more information, see
 # https://yamllint.readthedocs.io/en/stable/configuration.html
-version: 1.26
 extends: default
 rules:
-  quoted-strings:
-    required: only-when-needed
-    extra-allowed: ["{|}"]
+  document-start: disable
+  line-length: disable
+  quoted-strings: disable
   octal-values:
     forbid-implicit-octal: true
+  truthy: disable

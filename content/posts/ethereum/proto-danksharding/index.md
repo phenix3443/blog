@@ -121,7 +121,7 @@ rollups 提交的 data blobs 必须经过验证，以确保 rollups 没有发生
 
 ### 什么是 KZG Ceremony？
 
-[kzg ceremony](https://ceremony.ethereum.org/)  是一种让整个以太坊社区的许多人一起生成一个秘密的随机数字串的方式，可以用来验证一些数据。这串数字不为人所知，不能被任何人重新创建，这一点非常重要。为了确保这一点，每个参加 Ceremony 的人都会从之前的参与者那里收到一个字符串。然后他们创建一些新的随机值（例如，通过让他们的浏览器测量他们的鼠标移动），并将其与之前的值混合在一起。然后，他们把这个值发送给下一个参与者，并从他们的本地机器上销毁它。只要 Ceremony 中的一个人诚实地做这件事，最终的值将是攻击者无法知道的。EIP-4844 的 KZG Ceremony 向公众开放，数以万计的人参与其中，增加自己的熵。为了使 Ceremony 受到破坏，必须所有参与者都是不诚实的。从参与者的角度来看，如果他们知道自己是诚实的，就没有必要相信其他人，因为他们知道他们保证了 Ceremony 的安全（他们单独满足了 [1-N](https://www.ethereum.cn/Thinking/trust-model) 个诚实参与者的要求）。
+[kzg ceremony](https://ceremony.ethereum.org/) 是一种让整个以太坊社区的许多人一起生成一个秘密的随机数字串的方式，可以用来验证一些数据。这串数字不为人所知，不能被任何人重新创建，这一点非常重要。为了确保这一点，每个参加 Ceremony 的人都会从之前的参与者那里收到一个字符串。然后他们创建一些新的随机值（例如，通过让他们的浏览器测量他们的鼠标移动），并将其与之前的值混合在一起。然后，他们把这个值发送给下一个参与者，并从他们的本地机器上销毁它。只要 Ceremony 中的一个人诚实地做这件事，最终的值将是攻击者无法知道的。EIP-4844 的 KZG Ceremony 向公众开放，数以万计的人参与其中，增加自己的熵。为了使 Ceremony 受到破坏，必须所有参与者都是不诚实的。从参与者的角度来看，如果他们知道自己是诚实的，就没有必要相信其他人，因为他们知道他们保证了 Ceremony 的安全（他们单独满足了 [1-N](https://www.ethereum.cn/Thinking/trust-model) 个诚实参与者的要求）。
 
 将为 EIP-4844（又名 proto-danksharding）等以太坊扩容工作提供密码学基础，这些类型的事件也被称为“可信设置 (trust setup)”。
 
@@ -185,7 +185,9 @@ EIP-4844 只是“Proto-Danksharding”，意为 Danksharding 的原型。[完�
 ## 参考
 
 [^1]: [一文读懂 EIP-4844：如何降低 Layer2 费用 100 倍？](https://www.8btc.com/article/6794798)
+
 [^3]: [OP in Paris: OP Lab's Protolambda walks us through EIP-4844](https://www.youtube.com/watch?v=KQ_kIlxg3QA)
+
 [^5]: [如何在证明中使用 KZG 承诺](https://www.ethereum.cn/Technology/kzg-commitments-in-proofs)
 
 ## Next

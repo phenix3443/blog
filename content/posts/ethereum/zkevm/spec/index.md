@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 series: []
 categories: [ethereum]
-tags: [rollup,zkevm]
+tags: [rollup, zkevm]
 images: []
 ---
 

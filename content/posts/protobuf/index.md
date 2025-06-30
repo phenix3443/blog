@@ -42,9 +42,9 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 
 #### 输出模式
 
- 假设当前输入文件是`protos/buzz.proto`，其中定义的 Go 导入路径为`example.com/project/protos/fizz`，注意，导入路径相比文件位置多了 **fizz**。
+假设当前输入文件是`protos/buzz.proto`，其中定义的 Go 导入路径为`example.com/project/protos/fizz`，注意，导入路径相比文件位置多了 **fizz**。
 
- protoc 生成的`.pb.go`文件在输出目录中的位置取决于编译器标志，有几种输出模式：
+protoc 生成的`.pb.go`文件在输出目录中的位置取决于编译器标志，有几种输出模式：
 
 - 如果指定了`paths=import`标志，则输出文件将放置在以 Go 包的导入路径命名的目录中。即输出文件事当前目录下的`example.com/project/protos/fizz/buzz.pb.go`。如果未指定路径标志，这是默认输出模式。
 - 如果指定了`module=$PREFIX`标志，则输出文件将放置在以 Go 包的导入路径命名的目录中，但会从输出文件名中删除指定的目录前缀。即输出文件是当前目录下的`protos/fizz/buzz.pb.go`。

@@ -72,7 +72,7 @@ commitlint 配置文件可以有多种文件 [格式](https://github.com/convent
 
 ```yaml
 extends:
-  - "@commitlint/config-conventional"    
+  - "@commitlint/config-conventional"
 ```
 
 可以通过 `npx commitlint --print-config` 验证配置是否生效。
@@ -85,8 +85,9 @@ extends:
 
 ```shell
 npm install --save-dev @commitlint/{cli,config-conventional}
-echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg 
+echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 ```
+
 添加 commitlint 配置：
 
 ```shell

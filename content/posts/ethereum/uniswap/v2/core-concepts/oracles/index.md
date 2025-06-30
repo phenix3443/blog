@@ -17,7 +17,7 @@ tags:
 
 ## 概述
 
-`价格预言机(Price Oracle)` 是用于查看特定资产的价格信息的工具。在未引入 Oracle 时，uniswap 可能存在资产偏差阈值较大，价格更新较慢等问题。
+`价格预言机 (Price Oracle)` 是用于查看特定资产的价格信息的工具。在未引入 Oracle 时，uniswap 可能存在资产偏差阈值较大，价格更新较慢等问题。
 
 以太坊上的许多 Oracle 设计都是在 `ad-hoc basis` 上实现的，具有不同程度的去中心化和安全性。正因为如此，该生态系统已经见证了许多出名的黑客攻击，其中主要的攻击媒介就是 Oracle 实现。[这里](https://samczsun.com/taking-undercollateralized-loans-for-fun-and-for-profit/) 将讨论其中的一些漏洞。
 
@@ -70,7 +70,7 @@ contract UniswapV2Pair {
 
 `price0CumulativeLast` 和 `price1CumulativeLast` 分别记录了 token0 和 token1 的累计价格。所谓累计价格，其代表的是整个合约历史中每一秒的 Uniswap 价格总和。且只会在每个区块第一笔交易时执行累加计算，累加的值不是当前区块的第一笔交易的价格，而是在这之前的最后一笔交易的价格，所以至少也是上个区块的价格。取自之前区块的价格，可以大大提高操控价格的成本，所以自然也提高了安全性。
 
-UniswapV2 的 TWAP 主要缺点是需要链下程序定时触发合约中的 `update()`函数，存在维护成本。UniswapV3 解决了这个问题[^2]。
+UniswapV2 的 TWAP 主要缺点是需要链下程序定时触发合约中的 `update()`函数，存在维护成本。UniswapV3 解决了这个问题 [^2]。
 
 ## 固定时间窗口
 
@@ -178,7 +178,7 @@ consult() 函数则可查询出用 TWAP 价格计算可兑换的数量。比如�
 
 上图所示的时间窗口为 1 小时，划分为了 6 个时间片段，每个时间片段则为 10 分钟。那每过 10 分钟，整个时间窗口就会往右滑动一格。而计算 TWAP 时的公式则没有变，依然还是取自时间窗口的起点和终点。如果时间窗口为 24 小时，按照固定时间窗口算法，每隔 24 小时 TWAP 价格才会更新，但使用滑动时间窗口算法后，假设时间片段为 1 小时，则 TWAP 价格是每隔 1 小时就会更新。
 
-Uniswap 官方也同样提供了这种[滑动时间窗口 TWAP 实现的示例代码](https://github.com/Uniswap/v2-periphery/blob/master/contracts/examples/ExampleSlidingWindowOracle.sol):
+Uniswap 官方也同样提供了这种 [滑动时间窗口 TWAP 实现的示例代码](https://github.com/Uniswap/v2-periphery/blob/master/contracts/examples/ExampleSlidingWindowOracle.sol):
 
 ```solidity
 pragma solidity =0.6.6;
@@ -320,14 +320,14 @@ windowSize 表示时间窗口大小，比如 24 小时，granularity 是划分�
 
 由上面的步骤可以看出：每个交易对在区块中任何交易发生之前都要测量记录市场价格。
 
-这个价格的操纵成本很高，因为它是由上一个区块中的最后一笔交易设定的。为了将测量的价格设置为与全球市场价格不同步的价格，攻击者必须在前一个区块的末尾做一笔赔本的交易，通常不能保证他们会在下一个区块中套利回来。这种类型的攻击带来了一些挑战，迄今为止还[没有被观察到](https://arxiv.org/abs/1912.01798)。
+这个价格的操纵成本很高，因为它是由上一个区块中的最后一笔交易设定的。为了将测量的价格设置为与全球市场价格不同步的价格，攻击者必须在前一个区块的末尾做一笔赔本的交易，通常不能保证他们会在下一个区块中套利回来。这种类型的攻击带来了一些挑战，迄今为止还 [没有被观察到](https://arxiv.org/abs/1912.01798)。
 
 那么能否只用上一个块中的价格，而不使用时间加权呢？不幸的是，仅仅这样做是不够的。如果特别重要的价值交易根据这种机制产生的价格进行结算，攻击者的利润很可能会超过损失。
 
-一些注意事项:
+一些注意事项：
 
 - 对于 10 分钟的 TWAP，每 10 分钟采样一次。对于 1 周的 TWAP，每周取样一次。
-- 对于一个简单的 TWAP，操纵的成本随着 Uniswap 的流动性而增加(大约是线性的)，也随着平均的时间长度而增加(大约是线性的)。
+- 对于一个简单的 TWAP，操纵的成本随着 Uniswap 的流动性而增加（大约是线性的），也随着平均的时间长度而增加（大约是线性的）。
 - 攻击成本的估算相对简单。在 1 小时的 TWAP 上移动 5% 的价格，大约等于在 1 小时内每个区块移动 5%的价格所损失的套利和费用。
 
 而使用使用时间加权的累计价格，在一个特定的时间段内，操纵价格的成本可以粗略估计为整个时期内每个区块的套利和费用损失。对于较大的流动性池和较长的时间段，这种攻击是不切实际的，因为操纵的成本通常超过了风险的价值。
@@ -341,5 +341,5 @@ windowSize 表示时间窗口大小，比如 24 小时，granularity 是划分�
 ## 参考
 
 [^1]: [DeFi:Uniswap v2 协议原理解析](https://juejin.cn/post/7178857641421045820)
+
 [^2]: [价格预言机的使用总结（二）：UniswapV2 篇](https://mirror.xyz/keeganlee.eth/_4Frr-yjzTnxw80CSSLM5_NYsLDuF1_pSccWYD7ckkc)
-[^3]: [building an Oracle](https://docs.uniswap.org/contracts/v2/guides/smart-contract-integration/building-an-oracle)

@@ -26,9 +26,9 @@ Geth 中的命令行程序基于 [urfave/cli]({{< ref "posts/golang-cmd-tools#ur
 
 ## Node
 
- ([Node](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L44)) 是以太坊节点的实现，它支持多种协议，是一组服务（services）的集合，这些服务使用共享资源来提供 RPC API。这些服务还可以提供 devp2p 协议，当启动节点实例时，它们将连接到 devp2p 网络上。
+([Node](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/node/node.go#L44)) 是以太坊节点的实现，它支持多种协议，是一组服务（services）的集合，这些服务使用共享资源来提供 RPC API。这些服务还可以提供 devp2p 协议，当启动节点实例时，它们将连接到 devp2p 网络上。
 
- 在创建 geth 节点的时候，定义的是变量名 [stack](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/cmd/geth/config.go#L150) 就有协议栈的含义。
+在创建 geth 节点的时候，定义的是变量名 [stack](https://github.com/phenix3443/go-ethereum/blob/b5f3e54a8b2b9950095d78c8ccde4f8c806dc384/cmd/geth/config.go#L150) 就有协议栈的含义。
 
 ## 生命周期
 

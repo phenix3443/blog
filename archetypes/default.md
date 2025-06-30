@@ -1,8 +1,8 @@
 ---
-title: {{ replace .Name "-" " " | title }}
+title: { { replace .Name "-" " " | title } }
 description:
-slug: {{ lower .Name }}
-date: {{ .Date }}
+slug: { { lower .Name } }
+date: { { .Date } }
 featured: false
 draft: true
 comment: true

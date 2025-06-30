@@ -14,4 +14,4 @@ draft: true
 
 ## 资料
 
-[^1]: [区块链的确定性 finality 意味着什么](https://www.tuoluo.cn/article/detail-49762.html)
+- [区块链的确定性 finality 意味着什么](https://www.tuoluo.cn/article/detail-49762.html)

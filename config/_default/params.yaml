@@ -118,12 +118,12 @@ post:
   # It supports only of the manual summaries splitting via <!--more-->.
   # readMoreFromContent: true
 
-archive:
-  # basePath = "/archiv" # The base path of archive pages.
-  # dateFormat: 01-02 # Archive date format. Default to Jan 2.
+# archive:
+#   basePath = "/archiv" # The base path of archive pages.
+#   dateFormat: 01-02 # Archive date format. Default to Jan 2.
 
-analytics:
-  # baidu:  # Baidu Analytics
+# analytics:
+#   baidu:  # Baidu Analytics
 
 # Site verification
 siteVerification:
@@ -135,35 +135,35 @@ siteVerification:
   sogou:
   shenma:
 
-creativeCommons:
-  # by: true # Credit must be given to you, the creator.
-  # nc: true # Only noncommercial use of your work is permitted.
-  # nd: true # No derivatives or adaptations of your work are permitted.
-  # sa: true # Adaptations must be shared under the same terms.
+# creativeCommons:
+#   by: true # Credit must be given to you, the creator.
+#   nc: true # Only noncommercial use of your work is permitted.
+#   nd: true # No derivatives or adaptations of your work are permitted.
+#   sa: true # Adaptations must be shared under the same terms.
 
 # utterances:
 # repo: phenix3443 # Replace with your repository.
-#issueTerm: pathname # pathname, url, title, og:title
+# issueTerm: pathname # pathname, url, title, og:title
 # label: comment
 # By default, light and dark mode correspond to github-light and github-dark, respectively.
 # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
-#theme:
+# theme:
 
-#staticman:
-#endpoint: https://yourstaticmaninstance # Required, replace with your own Staticman instance.
-#repo: user/repo # Required
-#service: github # or gitlab. Default to GitHub.
-#branch: main # Default to master.
-#property: comments # Default to comments.
-#sorting: desc # Default to asc.
-#reCaptchaKey: "" # The reCaptcha site key.
-#reCaptchaSecret: "" # The reCaptcha encrypted secret. You'll need to encrypt plain secret via https://yourstaticmaninstance/v3/encrypt/PLAINSECRET.
-#extraFields: # Extra fields. Available fields: url.
+# staticman:
+# endpoint: https://yourstaticmaninstance # Required, replace with your own Staticman instance.
+# repo: user/repo # Required
+# service: github # or gitlab. Default to GitHub.
+# branch: main # Default to master.
+# property: comments # Default to comments.
+# sorting: desc # Default to asc.
+# reCaptchaKey: "" # The reCaptcha site key.
+# reCaptchaSecret: "" # The reCaptcha encrypted secret. You'll need to encrypt plain secret via https://yourstaticmaninstance/v3/encrypt/PLAINSECRET.
+# extraFields: # Extra fields. Available fields: url.
 #  - url
-#requiredFields: # Extra required fields. Available fields: email and the extra fields.
+# requiredFields: # Extra required fields. Available fields: email and the extra fields.
 #  - email
 #  - url
-#moderation: false # Same as Staticman's moderation.
+# moderation: false # Same as Staticman's moderation.
 
 # See https://giscus.app
 # giscus:
@@ -202,22 +202,22 @@ search:
 reward:
   alipay: images/reward/alipay.webp
   wechat: images/reward/wechat.webp
-  #paypal: images/reward/paypal.png
-  #patreon: images/reward/patreon.png
-  #liberapay: images/reward/liberapay.png
+  # paypal: images/reward/paypal.png
+  # patreon: images/reward/patreon.png
+  # liberapay: images/reward/liberapay.png
 
-#share:
-#addThis:  # AddThis pubid.
+# share:
+# addThis:  # AddThis pubid.
 
 actionsPanel:
   disabled: true
 
 # Comment or remove this settings to disable font size switcher.
-fontSize:
-  # extraSmall: .8rem
-  # small: .9rem
-  # large: 1.1rem
-  # extraLarge: 1.2rem
+# fontSize:
+#   extraSmall: .8rem
+#   small: .9rem
+#   large: 1.1rem
+#   extraLarge: 1.2rem
 
 pwa:
   manifest:
@@ -249,16 +249,16 @@ repo:
   # subPath: exampleSite
   # dateFormat: 02/01/2006, 15:04:05 PM
 
-topAppBar:
-  # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-  # social:
-  #   github: phenix3443
-  #   twitter: phenix3443
-#docs:
-# nav:
-# expand: true # Expand docs navigators.
+# topAppBar:
+#   See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
+#   social:
+#     github: phenix3443
+#     twitter: phenix3443
+# docs:
+#   nav:
+#     expand: true # Expand docs navigators.
 
-#feeds:
+# feeds:
 # content: true
 author:
   name: phenix3443

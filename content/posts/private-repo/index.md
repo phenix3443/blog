@@ -77,5 +77,7 @@ repository, see https://golang.org/doc/faq#git_https for additional information.
 ```
 
 [^1]: [how-to-use-a-private-go-module-in-your-own-project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
+
 [^2]: [creating-a-personal-access-token](https://docs.github.com/cn/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
 [^3]: [using-encrypted-secrets-in-a-workflow](https://docs.github.com/cn/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow)

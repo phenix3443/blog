@@ -12,7 +12,7 @@ draft: false
 series:
   - 以太坊情景分析
 categories: [ethereum]
-tags: [geth,debug,rpc]
+tags: [geth, debug, rpc]
 ---
 
 ## 概述
@@ -41,7 +41,7 @@ type API struct {
 }
 ```
 
-2. API 对象通过 [Node.RegisterAPIs](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/node/node.go#L584) 注册到 Node.rpcAPIs 中，该字段包含了 node 支持的所有服务，通过命令行 flag 过滤，将可对外提供服务的 apis 封装为 [rpc.Server](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/rpc/server.go#L45)。API.Service 会对应的 [转变](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/rpc/service.go#L65) 为 Server.services[API.Namespace] 下的 callback 函数。
+2. API 对象通过 [Node.RegisterAPIs](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/node/node.go#L584) 注册到 Node.rpcAPIs 中，该字段包含了 node 支持的所有服务，通过命令行 flag 过滤，将可对外提供服务的 apis 封装为 [rpc.Server](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/rpc/server.go#L45)。API.Service 会对应的 [转变](https://github.com/phenix3443/go-ethereum/blob/252d06ee5b2d88f9b8f3f540ed53749303cb6198/rpc/service.go#L65) 为 Server.services API.Namespace] 下的 callback 函数。
 
 ```go
 type Server struct {

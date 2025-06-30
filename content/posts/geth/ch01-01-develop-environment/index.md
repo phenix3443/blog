@@ -46,7 +46,7 @@ Geth 通过`--dev`标志可以启动“开发者模式”。这将创建一个�
 那么，如何解锁一个账户呢？有几种不同的方法可以做到这一点：
 
 - 在运行 Geth 时解锁账户。密码参数是可选的。如果你不提供，将会提示你输入密码。
-  
+
   ```shell
   geth --unlock <YOUR_ACCOUNT_ADDRESS> --password <YOUR_PASSWORD>
   ```

@@ -11,7 +11,7 @@ reward: true
 pinned: false
 carousel: false
 math: true
-series: 
+series:
   - 以太坊中的密码学
 categories:
   - ethereum

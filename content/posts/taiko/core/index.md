@@ -43,7 +43,6 @@ TaikoBlock 有三种状态：
 - proposed
 
   proposed txlist 对应一个 proposedBlock。当一个 proposedBlock 生成后， L2 的下一个 Block 也就确定了，这是因为：
-
   - TaikoBlock 生成后是不变的，基于以太坊的特性，所有 taiko-client(proposer、driver、prover) 看到的 L1 的状态是一致的。
   - proposer 在 propose txlist 前，其连接的 L2 与 L1 必须同步（官方实现）：`L2.LatestBlock.TaikoBlockID == TaikoL1.LatestProposedBlockID`，这是为了避免 propose 无效的 txlist。
   - 假设有的 proposer 没有同步就 propose 会有什么问题？无效的 txlist 可能会别 propose 到 L1，但 driver 在生成新的 L2 Block 前会对检查和过滤 txlist，如果所有 transactions 都非法，那么就在 L2 提交一个只有 [anchorTx]({{< ref "#anchorTx" >}}) 的 Block。
@@ -57,7 +56,7 @@ TaikoBlock 有三种状态：
 - verified
 
   如果 provedBlock 的所有父块都已经 proved，就会转变为 verifiedBlock。
-  
+
   为什么 TaikoBlock 需要 verified，而不是只 proved 就够了？因为 TaikoBlock 可以并行 prove，provedBlock 的 parent 并不一定已经被 prove。verifiedBlock 则说明其本身以及父块都已经 proved, 即其对应的 txlist 已经对应 L2 的某一个 block 了。
 
 ### AnchorTransaction {#anchorTx}
@@ -115,7 +114,7 @@ proposedBlock 有 [两个部分](https://taiko.xyz/docs/concepts/proposing#intri
 proposedBlock 必须通过这两项检查，才能将 txList 映射到 Taiko 上的 L2 区块。如果一个 proposedBlock 通过了 metadataCheck，但随后却未能通过 txlistCheck，那么将创建一个只有 anchorTx 的区块。
 
 ## createL2lBlock
-  
+
 监听到 blockProposedEvent 后，从 proposeBlock tx 的 calldata 解析出 txlist，然后通过 forkChoiceUpdate 更新 L2 上的区块。
 
 检查 txlist 有效性：
@@ -124,7 +123,7 @@ proposedBlock 必须通过这两项检查，才能将 txList 映射到 Taiko 上
 - 如果 txlist 中的所有交易无效，则会在 L2 上创建一个只有 anchorTx 的 Block。
 
 ## proveBlock
-  
+
 监听到 L2 上的 NewBlockEvent，然后获取相关数据做验证。
 
 {{< gist phenix3443 fb6ea630910c6244d397ce265d624b6e >}}

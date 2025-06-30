@@ -20,6 +20,7 @@ series:
 本文介绍如何使用 iTerm2。
 
 <!--more-->
+
 ## 概述
 
 [iTerm2](https://iterm2.com/) 是一款 macos 下使用的终端工具，用来替代系统默认的 terminal，本文针对日常使用配置做整理，请先阅读 [官方文档](https://iterm2.com/documentation.html) 。
@@ -146,7 +147,6 @@ iTerm2 可以与 unix [Shell 集成](https://iterm2.com/documentation-shell-inte
 - 回到之前标记（mark）的位置。
 - 当前命令完成运行时发出警报。
 - 可以右键单击远程主机上的文件名（例如，在 ls 的输出中）来下载它。
-
   - iTerm2 根据主机名字猜测 ssh host 中的名字，但二者可能不同，这会导致 ssh 连接失败，参考 [how-can-i-override-the-hostname](https://gitlab.com/gnachman/iterm2/-/wikis/scp-not-connecting#how-can-i-override-the-hostname)，解决办法：
 
     Edit your login script on the remote machine (~/.login, ~/.profile, ~/.bash_profile, ~/.zshrc, or ~/.config/fish/config.fish, depending on your shell). You should see a line like this:

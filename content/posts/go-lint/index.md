@@ -29,7 +29,7 @@ brew install golangci-lint && brew upgrade golangci-lint
 
 ## 使用
 
- `golangci-lint run` 对代码进行检查。
+`golangci-lint run` 对代码进行检查。
 
 如何在包含数千个问题的大型项目中引入该工具呢？
 
@@ -44,11 +44,8 @@ brew install golangci-lint && brew upgrade golangci-lint
 ```json
 {
   "go.lintTool": "golangci-lint",
-  "go.lintFlags": [
-    "--fast"
-  ]
+  "go.lintFlags": ["--fast"]
 }
-
 ```
 
 ## 配置

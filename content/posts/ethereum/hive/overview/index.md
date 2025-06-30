@@ -227,4 +227,5 @@ hivechain 默认生成空块。 如果以下帐户在创世状态下有余额，
 - 0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e
 
 [^1]: [hive overview](https://github.com/ethereum/hive/blob/master/docs/overview.md)
+
 [^2]: [hive commandline](https://github.com/ethereum/hive/blob/master/docs/commandline.md)

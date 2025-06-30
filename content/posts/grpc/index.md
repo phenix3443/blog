@@ -28,9 +28,9 @@ tags:
 
 进行 gRPC 开发需要做如下准备：
 
-+ 安装 Golang。
-+ 安装 protoc、protoc-gen-go。推荐使用 v3 版本的  [protobuf]({{< ref "posts/protobuf" >}})。
-+ 安装 protoc-gen-go-grpc。它是一个专为 gRPC 服务生成 Go 代码的插件。这个插件扩展了 protoc-gen-go，专门用于生成符合 gRPC 规范的服务接口代码。使用此插件，开发者可以从 `.proto` 文件自动生成 Go 语言的 gRPC 服务和客户端桩代码，这些代码包括服务定义、客户端和服务器 API 以及消息类型。
+- 安装 Golang。
+- 安装 protoc、protoc-gen-go。推荐使用 v3 版本的 [protobuf]({{< ref "posts/protobuf" >}})。
+- 安装 protoc-gen-go-grpc。它是一个专为 gRPC 服务生成 Go 代码的插件。这个插件扩展了 protoc-gen-go，专门用于生成符合 gRPC 规范的服务接口代码。使用此插件，开发者可以从 `.proto` 文件自动生成 Go 语言的 gRPC 服务和客户端桩代码，这些代码包括服务定义、客户端和服务器 API 以及消息类型。
 
   ```shell
   go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
@@ -42,5 +42,5 @@ tags:
 
 官方 [quick start](https://grpc.io/docs/languages/go/quickstart/) 演示了如何编写一个 hello world 的 grpc 服务。下面我们使用更现代的 [buf]({{< ref "posts/protobuf#buf" >}}) 来重新实现一下。
 
-+ [buf+本地插件](https://github.com/phenix3443/cosmos-starter/releases/tag/v0.0.1)
-+ [buf+远程插件+managed mode](https://github.com/phenix3443/cosmos-starter/releases/tag/v0.0.2)
+- [buf+本地插件](https://github.com/phenix3443/cosmos-starter/releases/tag/v0.0.1)
+- [buf+远程插件+managed mode](https://github.com/phenix3443/cosmos-starter/releases/tag/v0.0.2)

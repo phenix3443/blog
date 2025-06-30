@@ -36,7 +36,7 @@ tags: [geth]
 
 - Clique 用作共识算法。虽然主网络使用权益证明（PoS）来保护区块链，由于 PoA 更便于测试，所以我们使用 Clique 作为测试网络的共识算法。
 - Clique 中只有被授权的“签名者”才能创建新的区块。初始的授权签名者必须通过 extradata 字段配置。
-  
+
   签名者账户密钥可以通过使用 geth 账户命令生成（此命令可以运行多次以创建多个签名者密钥）。
 
   ```shell
@@ -52,7 +52,7 @@ tags: [geth]
 初始化区块链：
 
 ```shell
-make geth 
+make geth
 ./build/bin/geth init --datadir data genesis.json
 ```
 

@@ -227,6 +227,9 @@ Uniswap 存在所必需的智能合约。升级到新版本的核心将需要流
 ## 参考
 
 [^1]: [uniswap glossary](https://docs.uniswap.org/contracts/v2/concepts/protocol-overview/glossary)
+
 [^2]: [Uniswap 深度科普](https://zhuanlan.zhihu.com/p/380749685)
+
 [^3]: [一文读懂 Uniswap V2 改进与创新](https://www.bitpush.news/articles/946109)
+
 [^4]: [DeFi:Uniswap v2 协议原理解析](https://juejin.cn/post/7178857641421045820)

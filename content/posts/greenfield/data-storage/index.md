@@ -51,10 +51,10 @@ Object 有效载荷数据的 EC chunk 存储在一些 SP 上，这些 SP 被称�
 
 冗余策略定义了 Object 有效载荷在 SP 之间的存储方式，该策略在 Greenfield 区块链上进行全局配置。以下是当前的策略：
 
-+ 文件的数据流将根据 Segment 大小的粒度分割成不同的 Segment。如果数据的大小小于分 Segment 大小，则会根据数据本身的大小进行分割。默认分 Segment 大小为 16MB；
-+ Greenfield 使用 Reed-Solomon 算法 Reed-Solomon 算法作为 EC 策略，默认 data chunk 为 4，默认奇偶校验块为 2。
-+ Object 的所有 Segment 都存储在 Primary SP 上；
-+ 对数据 Segment 进行 EC 编码后，EC 编码模块将生成六个 EC chunk，并且将被存储到所选的六个 Secondary SP 中。
+- 文件的数据流将根据 Segment 大小的粒度分割成不同的 Segment。如果数据的大小小于分 Segment 大小，则会根据数据本身的大小进行分割。默认分 Segment 大小为 16MB；
+- Greenfield 使用 Reed-Solomon 算法 Reed-Solomon 算法作为 EC 策略，默认 data chunk 为 4，默认奇偶校验块为 2。
+- Object 的所有 Segment 都存储在 Primary SP 上；
+- 对数据 Segment 进行 EC 编码后，EC 编码模块将生成六个 EC chunk，并且将被存储到所选的六个 Secondary SP 中。
 
 例如，在处理 32MB 文件时，Object 会被分成两 Segment。这两个片 Segment 存储在 Primary SP 中，每个片 Segment 使用纠删码生成六个 4MB 的 piece。这六个 piece 按数字顺序分别存储在六个 Secondary SP 中。
 

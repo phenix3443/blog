@@ -76,8 +76,6 @@ tags:
 
 第二个问题其实也是因为无序导致的，无序的组合每个节点针对同一批账户生成的 hash 值不一致，这就导致无法达成共识。
 
-https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/desDIhssYHK5OkQe72DeDAgy1qKkCcvgK44xT6TE-Pk
-
 ## 总结
 
 ## 参考

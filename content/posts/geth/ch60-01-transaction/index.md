@@ -14,7 +14,7 @@ math: false
 series:
   - 以太坊情景分析
 categories: [ethereum]
-tags: [geth,transaction,txpool]
+tags: [geth, transaction, txpool]
 ---
 
 ## 概述

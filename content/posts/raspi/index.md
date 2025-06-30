@@ -20,7 +20,7 @@ tags:
 
 ### 官方规格
 
-以下数据来自[raspi 4 model B specifications](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)。
+以下数据来自 [raspi 4 model B specifications](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)。
 
 ![raspi-4B 硬件规格](images/hardware.jpeg)
 
@@ -33,7 +33,7 @@ tags:
   - 2 个 USB 3.0 端口
   - 2 个 USB 2.0 端口
 - GPIO： 标准 40 针 GPIO 接头
-- 视频/音频:
+- 视频/音频：
   - 2 个 micro-HDMI 端口（最多支持 4kp60）
   - DSI 屏幕： 2 通道 MIPI DSI 显示端口
   - CSI 摄像头： 2 通道 MIPI CSI 摄像机端口
@@ -60,7 +60,7 @@ tags:
 
 ## 操作系统
 
-使用[Raspberry Pi Imager](https://www.raspberrypi.com/software/) 将操作系统烧录到存储中。烧录镜像的时候进行一些设置：
+使用 [Raspberry Pi Imager](https://www.raspberrypi.com/software/) 将操作系统烧录到存储中。烧录镜像的时候进行一些设置：
 
 当你打开 Raspberry Pi Imager，并选择了要安装的操作系统后，会出现一个齿轮，允许你打开一个 “高级选项” 菜单（如果该操作系统支持的话）。这个菜单可以让你执行一些任务，比如启用 SSH，或者设置 Raspberry Pi 的主机名，以及在第一次启动前配置默认用户。
 
@@ -122,13 +122,13 @@ Operating System: Ubuntu 22.04.2 LTS
 | hostname | 磁盘                  | 硬盘盒        |
 | -------- | --------------------- | ------------- |
 | rb1      | 256GB SSD             | SSk/飚王 C326 |
-| rb2      | 512GB USB3.0 移动硬盘 |
+| rb2      | 512GB USB3.0 移动硬盘 |               |
 | rb3      | 2TB SSD               | 绿联 CM559    |
-| rb4      | 1TB USB3.0 移动硬盘   |
+| rb4      | 1TB USB3.0 移动硬盘   |               |
 
 外置存储设备需要 USB3.1 Type-C 数据充电线进行独立供电，如下图：
 
-![USB供电](images/usb-charge.jpeg)
+![USB 供电](images/usb-charge.jpeg)
 
 ### 电源
 
@@ -139,7 +139,7 @@ Operating System: Ubuntu 22.04.2 LTS
 
 实际使用的时候发现华为 66W/6A 的快充可以持续稳定的给 SSD/移动硬盘供电，电压一直保持在 5V 以上，非华为原装充电器电压会低于树莓派的规定电压，而且只有`HW-110600C00` 这个型号可以， `HW-110600C02` 都不可以。
 
-可以通过华为官网[保修期及权益查询](https://consumer.huawei.com/cn/support/warranty-query/) 查询闲鱼淘的充电器是否原装。
+可以通过华为官网 [保修期及权益查询](https://consumer.huawei.com/cn/support/warranty-query/) 查询闲鱼淘的充电器是否原装。
 
 ### 关机
 

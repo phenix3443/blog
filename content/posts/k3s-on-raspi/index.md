@@ -11,7 +11,7 @@ comments: true
 draft: false
 series: []
 categories: [kubernetes]
-tags: [kubectl,k3s]
+tags: [kubectl, k3s]
 ---
 
 ## 概述
@@ -37,8 +37,8 @@ k3s 是轻量级的 Kubernetes，当前版本：`v1.26.5+k3s1 (7cefebea)`。
 
 | hostname | role   |
 | -------- | ------ |
-| EQ12| server|
-| rb1      | agent |
+| EQ12     | server |
+| rb1      | agent  |
 | rb2      | agent  |
 | rb3      | agent  |
 
@@ -49,7 +49,7 @@ k3s 是轻量级的 Kubernetes，当前版本：`v1.26.5+k3s1 (7cefebea)`。
 k3s 默认使用 [Flannel VXLAN](https://docs.k3s.io/zh/installation/requirements#%E7%BD%91%E7%BB%9C) 管理集群网络，从 Ubuntu 21.10 开始，对 Raspberry Pi 的 vxlan 支持已移至单独的内核模块中。
 
 ```shell
-sudo apt update && 
+sudo apt update &&
 sudo apt upgrade -y &&
 sudo apt install -y linux-modules-extra-raspi
 ```

@@ -39,15 +39,15 @@ SP 提供可公开访问的 [API](https://docs.bnbchain.org/greenfield-docs/docs
 
 代码仓库中的 core 目录下定义类该框架的九个重要的抽象层：
 
-+ [lifecycle](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/lifecycle): 它提供了两个抽象接口来管理服务： Service 和 Lifecycle 来控制和管理 SP 中的服务。
-+ [module](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/module)：提供多个抽象接口与 GfSp 中的不同模块进行交互。因此，用户可以实现相应的方法来满足自己的需求。
-+ [consensus](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/consensus): 它提供了如何查询 Greenfield 区块链上数据的抽象接口。
-+ [piecestore](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/piecestore)：用于与底层存储系统交互。
-+ [spdb](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/spdb)：提供了如何存储 SP 的后台任务和元数据的抽象接口。
-+ [bsdb](): 提供了如何查询 SP 中元数据的抽象接口。
-+ [rcmgr](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/rcmgr)：提供了管理 SP 中 cpu 和内存资源的抽象接口。
-+ [task](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/task)：提供与 SP 后台服务交互的最小 uint 的抽象接口。
-+ [taskqueue](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/taskqueue)：提供任务调度和执行的抽象接口。
+- [lifecycle](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/lifecycle): 它提供了两个抽象接口来管理服务： Service 和 Lifecycle 来控制和管理 SP 中的服务。
+- [module](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/module)：提供多个抽象接口与 GfSp 中的不同模块进行交互。因此，用户可以实现相应的方法来满足自己的需求。
+- [consensus](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/consensus): 它提供了如何查询 Greenfield 区块链上数据的抽象接口。
+- [piecestore](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/piecestore)：用于与底层存储系统交互。
+- [spdb](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/spdb)：提供了如何存储 SP 的后台任务和元数据的抽象接口。
+- [bsdb]: 提供了如何查询 SP 中元数据的抽象接口。
+- [rcmgr](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/rcmgr)：提供了管理 SP 中 cpu 和内存资源的抽象接口。
+- [task](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/task)：提供与 SP 后台服务交互的最小 uint 的抽象接口。
+- [taskqueue](https://github.com/bnb-chain/greenfield-storage-provider/tree/master/core/taskqueue)：提供任务调度和执行的抽象接口。
 
 ### base
 
@@ -75,21 +75,21 @@ Background Modules 负责处理 SP 的内部任务，这些任务是在内部生
 
 SP 包含十五个核心模块：
 
-+ Gater：作为 SP 的网关，提供 HTTP 服务，遵循 S3 协议。它根据用户请求生成相应的任务并将其转发给 SP 内的其他模块。由于 Gater 不允许定制，因此 GfSp 框架的 [modular.go](https://github.com/bnb-chain/greenfield-storage-provider/blob/d5224fe5171eda2f8bf9a913a0ddd0b4f607f177/core/module/modular.go#L24) 文件中没有定义任何接口。
-+ Authenticator：负责验证身份验证。
-+ Approver：负责处理 approve 请求，具体为 `MigrateBucketApproval` 等。
-+ Uploader：它处理来自用户帐户的 `PutObject` 请求，并将有效负载数据存储到主 SP 的片 piece 存储中。
-+ Downloader: 它负责处理来自用户帐户的 `GetObject` 请求和来自 Greenfield 系统中其他组件的 `GetChallengeInfo` 请求。
-+ Executor：负责处理后台任务。该模块可以向 `Manager` 模块请求任务，执行它们并将结果或状态报告回 `Manager` 。
-+ Manager：负责管理 SP 的任务调度以及其他管理功能，如 Bucket 迁移、sp 退出流程等。
-+ P2P：负责处理 SP 之间控制信息的交互。
-+ Receiver: 它从主 SP 接收数据，计算有效负载数据的完整性哈希，对其进行签名，然后将其返回到主 SP 以在 Greenfield 区块链上进行 seal。
-+ Signer: 负责 Greenfield 区块链运营商上 SP 数据的签名，并持有所有 SP 的私钥。由于 SP 帐户的序列号，它必须是单例。
-+ Metadata: 用于为 SP 中的元信息提供高效的查询接口。该模块实现了低延迟和高性能 SP 要求。
-+ BlockSyncer: 记录 Greenfield 区块链中的区块信息。
-+ PieceStore：它与底层存储供应商交互，例如。 AWS S3、MinIO、OSS 等
-+ SPDB：存储了所有后台作业的上下文以及 SP 的元数据。
-+ BSDB：它存储来自 Greenfield 区块链的所有事件数据，并将其提供给 SP 的 Metadata 服务。
+- Gater：作为 SP 的网关，提供 HTTP 服务，遵循 S3 协议。它根据用户请求生成相应的任务并将其转发给 SP 内的其他模块。由于 Gater 不允许定制，因此 GfSp 框架的 [modular.go](https://github.com/bnb-chain/greenfield-storage-provider/blob/d5224fe5171eda2f8bf9a913a0ddd0b4f607f177/core/module/modular.go#L24) 文件中没有定义任何接口。
+- Authenticator：负责验证身份验证。
+- Approver：负责处理 approve 请求，具体为 `MigrateBucketApproval` 等。
+- Uploader：它处理来自用户帐户的 `PutObject` 请求，并将有效负载数据存储到主 SP 的片 piece 存储中。
+- Downloader: 它负责处理来自用户帐户的 `GetObject` 请求和来自 Greenfield 系统中其他组件的 `GetChallengeInfo` 请求。
+- Executor：负责处理后台任务。该模块可以向 `Manager` 模块请求任务，执行它们并将结果或状态报告回 `Manager` 。
+- Manager：负责管理 SP 的任务调度以及其他管理功能，如 Bucket 迁移、sp 退出流程等。
+- P2P：负责处理 SP 之间控制信息的交互。
+- Receiver: 它从主 SP 接收数据，计算有效负载数据的完整性哈希，对其进行签名，然后将其返回到主 SP 以在 Greenfield 区块链上进行 seal。
+- Signer: 负责 Greenfield 区块链运营商上 SP 数据的签名，并持有所有 SP 的私钥。由于 SP 帐户的序列号，它必须是单例。
+- Metadata: 用于为 SP 中的元信息提供高效的查询接口。该模块实现了低延迟和高性能 SP 要求。
+- BlockSyncer: 记录 Greenfield 区块链中的区块信息。
+- PieceStore：它与底层存储供应商交互，例如。 AWS S3、MinIO、OSS 等
+- SPDB：存储了所有后台作业的上下文以及 SP 的元数据。
+- BSDB：它存储来自 Greenfield 区块链的所有事件数据，并将其提供给 SP 的 Metadata 服务。
 
 此外，GfSp 框架还支持根据需要扩展自定义模块。一旦在 GfSp 框架中注册并执行模块化接口，这些自定义模块将被初始化和调度。
 
@@ -109,28 +109,28 @@ ApprovalTask 的时效性使用块高度，如果达到过期高度，则 approv
 
 ApprovalTask 包括：
 
-+ ApprovalCreateBucketTask 用于记录 ask create bucket approve 信息。用户帐户将创建 MsgCreateBucket，SP 应根据 MsgCreateBucket 决定是否批准请求。如果是这样，sp 将 SetExpiredHeight 并签署 MsgCreateBucket。
-+ ApprovalCreateObjectTask 用于记录请求创建 object 的 approve 信息。用户帐户将创建 MsgCreateObject，SP 应根据 MsgCreateObject 决定是否批准请求。如果批准，sp 将 SetExpiredHeight 并对 MsgCreateObject 进行签名。
-+ ApprovalReplicatePieceTask 用于请求 replicate 片段记录到其他 SP（作为 object 的辅助 SP）。它由主 SP 在复制片段阶段启动。在主 SP 将其发送到其他 SP 之前，主 SP 将对任务进行签名，其他 SP 将验证它是由合法 SP 发送的。如果其他 SP 批准了批准，则它们将 SetExpiredHeight 并签署 ApprovalReplicatePieceTask。
+- ApprovalCreateBucketTask 用于记录 ask create bucket approve 信息。用户帐户将创建 MsgCreateBucket，SP 应根据 MsgCreateBucket 决定是否批准请求。如果是这样，sp 将 SetExpiredHeight 并签署 MsgCreateBucket。
+- ApprovalCreateObjectTask 用于记录请求创建 object 的 approve 信息。用户帐户将创建 MsgCreateObject，SP 应根据 MsgCreateObject 决定是否批准请求。如果批准，sp 将 SetExpiredHeight 并对 MsgCreateObject 进行签名。
+- ApprovalReplicatePieceTask 用于请求 replicate 片段记录到其他 SP（作为 object 的辅助 SP）。它由主 SP 在复制片段阶段启动。在主 SP 将其发送到其他 SP 之前，主 SP 将对任务进行签名，其他 SP 将验证它是由合法 SP 发送的。如果其他 SP 批准了批准，则它们将 SetExpiredHeight 并签署 ApprovalReplicatePieceTask。
 
 #### ObjectTask
 
 ObjectTask 与 object 相关联，并记录有关其不同阶段的信息。考虑到 greenfield 上存储参数的变化，每个 object 的存储参数应该在创建时确定，不要在任务流中查询，效率低下且容易出错。这包括：
 
-+ UploadObjectTask, 将 object 有效负载数据上传到主 SP。
-+ ReplicatePieceTask, 将 object 片段复制到辅助 SP。
-+ ReceivePieceTask 辅助 SP 使用此信息来确认 object 是否已成功在 greenfield 进行 sea ，从而确保返回辅助 SP。
-+ SealObjectTask 在 greenfield 上 seal object。
-+ DownloadObjectTask 允许用户下载部分或全部 object 有效负载数据。
-+ ChallengePieceTask 为验证者提供质询件信息，如果他们怀疑用户的有效负载数据未正确存储，则可以使用这些信息来质询 SP。
+- UploadObjectTask, 将 object 有效负载数据上传到主 SP。
+- ReplicatePieceTask, 将 object 片段复制到辅助 SP。
+- ReceivePieceTask 辅助 SP 使用此信息来确认 object 是否已成功在 greenfield 进行 sea ，从而确保返回辅助 SP。
+- SealObjectTask 在 greenfield 上 seal object。
+- DownloadObjectTask 允许用户下载部分或全部 object 有效负载数据。
+- ChallengePieceTask 为验证者提供质询件信息，如果他们怀疑用户的有效负载数据未正确存储，则可以使用这些信息来质询 SP。
 
 #### GCTask
 
 GCTask 是一个抽象接口，用于记录有关垃圾回收的信息。这包括：
 
-+ GCObjectTask，它通过删除已在 greenfield 上删除的有效负载数据来收集单件存储空间。
-+ GCZombiePieceTask，它通过删除由件数据元不在 greenfield 链上的任何异常导致的僵尸件数据来收集件存储空间
-+ GCMetaTask，它通过删除过期数据来收集 SP 元存储空间。
+- GCObjectTask，它通过删除已在 greenfield 上删除的有效负载数据来收集单件存储空间。
+- GCZombiePieceTask，它通过删除由件数据元不在 greenfield 链上的任何异常导致的僵尸件数据来收集件存储空间
+- GCMetaTask，它通过删除过期数据来收集 SP 元存储空间。
 
 ### Task Priority
 
@@ -138,10 +138,10 @@ GCTask 是一个抽象接口，用于记录有关垃圾回收的信息。这包�
 
 任务优先级分为三个级别：
 
-+ TLowPriorityLevel 默认优先级范围为 `[0， 85）`
-+ TMediumPriorityLevel 默认优先级范围为 `[85， 170）`
-+ THighPriorityLevel 默认优先级范围为 `[170， 256]`。
-  
+- TLowPriorityLevel 默认优先级范围为 `[0， 85）`
+- TMediumPriorityLevel 默认优先级范围为 `[85， 170）`
+- THighPriorityLevel 默认优先级范围为 `[170， 256]`。
+
 从 ResourceManager 分配任务执行资源时，资源是根据任务优先级分配的，而不是根据任务优先级分配的，因为任务优先级高达 256 级，任务优先级使资源管理更容易。
 
 ```sh
@@ -204,11 +204,11 @@ TQueueOnStrategyWithLimit 是 TQueueWithLimit 和 TQueueStrategy 的组合，是
 
 ![流程图](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/07-get_approval.jpg)
 
-+ 网关接收来自请求发起者的 GetApproval 请求。
-+ 网关验证请求的签名，确保请求未被篡改。
-+ Gateway 调用 Authenticator 进行授权检查，确保对应的账户存在。
-+ Gateway 调用 Approver 填充 MigrateBucket 消息超时字段并将请求分派给 Signer 服务。
-+ 获取签名者的签名，填写消息的批准签名字段，然后返回给请求发起者。
+- 网关接收来自请求发起者的 GetApproval 请求。
+- 网关验证请求的签名，确保请求未被篡改。
+- Gateway 调用 Authenticator 进行授权检查，确保对应的账户存在。
+- Gateway 调用 Approver 填充 MigrateBucket 消息超时字段并将请求分派给 Signer 服务。
+- 获取签名者的签名，填写消息的批准签名字段，然后返回给请求发起者。
 
 如果用户在短时间内发送多个 MigrateBucket 批准请求，SP 将提供相同的结果，因为设置了过期的区块链高度以防止重复请求，例如 DDoS 攻击。
 
@@ -238,17 +238,17 @@ Create Bucket 操作通过 Go SDK 发起请求。然后，它查询 greenfield �
 
 #### Gateway
 
-+ 网关接收来自客户端的 PutObject 请求。
-+ 网关验证请求的签名，确保请求未被篡改。
-+ Gateway 调用 Authenticator 进行授权检查，确保对应的账号对资源有权限。
-+ 将请求分派到 Uploader 模块。
+- 网关接收来自客户端的 PutObject 请求。
+- 网关验证请求的签名，确保请求未被篡改。
+- Gateway 调用 Authenticator 进行授权检查，确保对应的账号对资源有权限。
+- 将请求分派到 Uploader 模块。
 
 #### Uploader
 
-+ uploader 接受流格式的 object 数据，并根据 Greenfield 链中共识确定的 MaxSegmentSize 进行分段。然后将分段数据存储在 PieceStore 中。
-+ Uploader 创建一个初始状态为 INIT_UNSPECIFIED 的 TaskContext 。开始上传片段后，TaskContext 的状态将转换为 UPLOAD_OBJECT_DOING 。上传所有片段后，TaskContext 的状态将更改为 UPLOAD_OBJECT_DONE 。如果上传过程中出现任何异常情况，TaskContext 的状态将变为 UPLOAD_OBJECT_ERROR 。
-+ 上传所有段后，将段数据校验和和根校验和插入 SPDB。
-+ Uploader 为 Manager 创建上传 object 任务，并向客户端返回成功消息，表明上传 object 请求成功。
+- uploader 接受流格式的 object 数据，并根据 Greenfield 链中共识确定的 MaxSegmentSize 进行分段。然后将分段数据存储在 PieceStore 中。
+- Uploader 创建一个初始状态为 INIT_UNSPECIFIED 的 TaskContext 。开始上传片段后，TaskContext 的状态将转换为 UPLOAD_OBJECT_DOING 。上传所有片段后，TaskContext 的状态将更改为 UPLOAD_OBJECT_DONE 。如果上传过程中出现任何异常情况，TaskContext 的状态将变为 UPLOAD_OBJECT_ERROR 。
+- 上传所有段后，将段数据校验和和根校验和插入 SPDB。
+- Uploader 为 Manager 创建上传 object 任务，并向客户端返回成功消息，表明上传 object 请求成功。
 
 #### TaskExecutor
 
@@ -256,24 +256,24 @@ Create Bucket 操作通过 Go SDK 发起请求。然后，它查询 greenfield �
 
 ![SecondarySP](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/09-replicate_object.jpg)
 
-+ 执行器从管理器中获取 ReplicatePieceTask，这有助于选择合适的虚拟组。
-+ 对象数据异步复制到虚拟组辅助 SP。
-+ TaskExecutor 并行地从 PieceStore 中检索段，并使用 Erasure Coding(EC) 计算这些段的数据冗余方案，生成相应的 EC 段。然后，EC 片段被组织成六个复制数据组，每个组包含基于冗余策略的多个 EC 片段。
-+ 然后将复制数据组以流方式并行发送到选定的辅助 SP。
-+ 一旦辅助 SP 的复制完成，TaskContext 的辅助 SP 信息就会更新。仅当所有辅助 SP 完成复制后，TaskContext 的状态才会从 REPLICATE_OBJECT_DOING 更改为 REPLICATE_OBJECT_DONE 。
+- 执行器从管理器中获取 ReplicatePieceTask，这有助于选择合适的虚拟组。
+- 对象数据异步复制到虚拟组辅助 SP。
+- TaskExecutor 并行地从 PieceStore 中检索段，并使用 Erasure Coding(EC) 计算这些段的数据冗余方案，生成相应的 EC 段。然后，EC 片段被组织成六个复制数据组，每个组包含基于冗余策略的多个 EC 片段。
+- 然后将复制数据组以流方式并行发送到选定的辅助 SP。
+- 一旦辅助 SP 的复制完成，TaskContext 的辅助 SP 信息就会更新。仅当所有辅助 SP 完成复制后，TaskContext 的状态才会从 REPLICATE_OBJECT_DOING 更改为 REPLICATE_OBJECT_DONE 。
 
 #### Receiver 接收器​
 
-+ receiver 检查 SecondarySP 批准是否是自签名的并且是否已超时。如果其中一个条件为真，系统将向 TaskExecutor 返回 SIGNATURE_ERROR 。
-+ Receiver 工作在辅助 SP 中，接收属于同一复制数据组的 EC 分片，并将 EC 分片上传到辅助 SP PieceStore。
-+ 计算 EC 片的完整性校验和，用 SP 的批准私钥对完整性校验和进行签名，然后将其返回给 TaskExecutor。
+- receiver 检查 SecondarySP 批准是否是自签名的并且是否已超时。如果其中一个条件为真，系统将向 TaskExecutor 返回 SIGNATURE_ERROR 。
+- Receiver 工作在辅助 SP 中，接收属于同一复制数据组的 EC 分片，并将 EC 分片上传到辅助 SP PieceStore。
+- 计算 EC 片的完整性校验和，用 SP 的批准私钥对完整性校验和进行签名，然后将其返回给 TaskExecutor。
 
 #### TaskExecutor
 
-+ 接收二级 SP Receiver 的响应，并对签名进行未签名，与二级 SP 的批准公钥进行比较。
-+ 将 MsgSealObject 发送给签名者以签署 seal object 交易，并使用辅助 SP 的完整性哈希和签名广播到 Greenfield 链。 TaskContext 的状态从 REPLICATE_OBJECT_DONE 变为 SIGN_OBJECT_DOING 。如果签名者成功广播 SealObjectTX，则立即将 SEAL_OBJECT_TX_DOING 状态更改为 SIGN_OBJECT_DONE 状态。
-+ 监控 Greenfield 链上 seal object 交易的执行结果，判断 seal 是否成功。如果是，则 TaskContext 状态更改为 SEAL_OBJECT_DONE 状态。
-  
+- 接收二级 SP Receiver 的响应，并对签名进行未签名，与二级 SP 的批准公钥进行比较。
+- 将 MsgSealObject 发送给签名者以签署 seal object 交易，并使用辅助 SP 的完整性哈希和签名广播到 Greenfield 链。 TaskContext 的状态从 REPLICATE_OBJECT_DONE 变为 SIGN_OBJECT_DOING 。如果签名者成功广播 SealObjectTX，则立即将 SEAL_OBJECT_TX_DOING 状态更改为 SIGN_OBJECT_DONE 状态。
+- 监控 Greenfield 链上 seal object 交易的执行结果，判断 seal 是否成功。如果是，则 TaskContext 状态更改为 SEAL_OBJECT_DONE 状态。
+
 ### Download Object
 
 用户可以从 PrimarySP 下载 object。流程图如下所示：
@@ -282,36 +282,36 @@ Create Bucket 操作通过 Go SDK 发起请求。然后，它查询 greenfield �
 
 #### Gateway
 
-+ 接收来自客户端的 GetObject 请求。
-+ 验证请求的签名，确保请求未被篡改。
-+ 检查授权，确保对应的账号对资源有权限。
-+ 检查 object 状态和支付帐户状态，以确保 object 已上传到主 SP，并且支付帐户处于活动状态。
-+ 将请求分派给下载程序。
+- 接收来自客户端的 GetObject 请求。
+- 验证请求的签名，确保请求未被篡改。
+- 检查授权，确保对应的账号对资源有权限。
+- 检查 object 状态和支付帐户状态，以确保 object 已上传到主 SP，并且支付帐户处于活动状态。
+- 将请求分派给下载程序。
 
 #### Downloader
 
-+ 接收来自网关服务的 GetObject 请求。
-+ 检查读取流量是否超过限额。
-+ 如果超过配额，下载程序将拒绝提供服务并向网关返回配额不足的错误。
-+ 如果配额足够，Downloader 会将读取记录插入 SP Traffic-db 中。
-+ Downloader 将 GetObject 请求拆分为 GetPiece 请求（支持范围读取）以检索相应的片段负载数据。然后，Downloader 将 object 有效负载数据流回网关。
+- 接收来自网关服务的 GetObject 请求。
+- 检查读取流量是否超过限额。
+- 如果超过配额，下载程序将拒绝提供服务并向网关返回配额不足的错误。
+- 如果配额足够，Downloader 会将读取记录插入 SP Traffic-db 中。
+- Downloader 将 GetObject 请求拆分为 GetPiece 请求（支持范围读取）以检索相应的片段负载数据。然后，Downloader 将 object 有效负载数据流回网关。
 
 ### QueryMeta
 
 用户可能想要从 SP 查询有关 bucket、object、bucket 读取配额或 bucket 读取记录的一些元数据。 SP 提供了查询元数据的相关 API。流程图如下所示：
 ![query Meta](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/11-query_meta.jpg)
 
-#### Gateway  网关​
+#### Gateway 网关​
 
-+ 接收来自客户端的 QueryMeta 请求。
-+ 验证请求的签名，确保请求未被篡改。
-+ 检查授权，确保对应的账号对资源有权限。
-+ 将请求分派到元数据。
+- 接收来自客户端的 QueryMeta 请求。
+- 验证请求的签名，确保请求未被篡改。
+- 检查授权，确保对应的账号对资源有权限。
+- 将请求分派到元数据。
 
 #### Metadata
 
-+ 元数据接收来自网关的 QueryMeta 请求。
-+ 元数据从 SP DB 或 BS DB 查询 bucket 或 object。
+- 元数据接收来自网关的 QueryMeta 请求。
+- 元数据从 SP DB 或 BS DB 查询 bucket 或 object。
 
 ### Get Challenge Piece Info
 
@@ -321,17 +321,17 @@ Create Bucket 操作通过 Go SDK 发起请求。然后，它查询 greenfield �
 
 #### Gateway
 
-+ 接收来自客户端的挑战请求。
-+ 验证请求的签名，确保请求未被篡改。
-+ 检查授权，确保对应的账号对资源有权限。
-+ 将请求分派给下载程序。
+- 接收来自客户端的挑战请求。
+- 验证请求的签名，确保请求未被篡改。
+- 检查授权，确保对应的账号对资源有权限。
+- 将请求分派给下载程序。
 
 #### Downloader
 
-+ Downloader 收到来自网关的挑战请求。
-+ 将所有段数据校验和和质询段数据有效负载返回给网关。
-+ 从 SPDB 检索所有段数据校验和。
-+ 从 PieceStore 获取挑战段数据。
+- Downloader 收到来自网关的挑战请求。
+- 将所有段数据校验和和质询段数据有效负载返回给网关。
+- 从 SPDB 检索所有段数据校验和。
+- 从 PieceStore 获取挑战段数据。
 
 ### GC Object
 
@@ -341,9 +341,9 @@ GC 用于删除 Greenfield 链上元数据已经被删除的 object，减少每�
 
 ![gc](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/13-gc_object.jpg)
 
-+ Manager 将 GCObjectTask 分派给 TaskExecutor。
-+ TaskExecutor 向 Metadata 发送请求，按顺序查询已删除的 object。
-+ TaskExecutor 删除存储在 PieceStore 中的有效负载数据。
+- Manager 将 GCObjectTask 分派给 TaskExecutor。
+- TaskExecutor 向 Metadata 发送请求，按顺序查询已删除的 object。
+- TaskExecutor 删除存储在 PieceStore 中的有效负载数据。
 
 ### GC ZombiePiece
 
@@ -352,11 +352,11 @@ GC ZombiePiece 是一个抽象接口，用于记录收集碎片存储空间的�
 流程图如下所示：
 ![GC ZombiePiece](https://docs.bnbchain.org/greenfield-docs/assets/images/13-gc-zombie-5ab0ac9dad6e3c70c4344cb76ad42154.png)
 
-+ Manager 将 GCZombiePieceTask 分派给 TaskExecutor。
-+ TaskExecutor 向 SPDB 发送请求以按顺序查询完整性元。
-+ TaskExecutor 根据 IntegrityMeta 表判断一个 Pie 是否是 ZombiePiece。扫描 GCZombiePieceTask（StartObjectId、EndObjectId）中指定的当前 object ID 范围内的所有 IntegrityMeta。
-+ TaskExecutor 根据 PieceHash 表判断一个 Piece 是否是 ZombiePiece。扫描 GCZombiePieceTask（StartObjectId，EndObjectId）中指定的当前 object ID 范围内的所有 PieceHash。
-+ TaskExecutor 删除存储在 PieceStore 中的有效负载数据。
+- Manager 将 GCZombiePieceTask 分派给 TaskExecutor。
+- TaskExecutor 向 SPDB 发送请求以按顺序查询完整性元。
+- TaskExecutor 根据 IntegrityMeta 表判断一个 Pie 是否是 ZombiePiece。扫描 GCZombiePieceTask（StartObjectId、EndObjectId）中指定的当前 object ID 范围内的所有 IntegrityMeta。
+- TaskExecutor 根据 PieceHash 表判断一个 Piece 是否是 ZombiePiece。扫描 GCZombiePieceTask（StartObjectId，EndObjectId）中指定的当前 object ID 范围内的所有 PieceHash。
+- TaskExecutor 删除存储在 PieceStore 中的有效负载数据。
 
 ### GC Meta
 
@@ -366,9 +366,9 @@ GCMetaTask 是一个抽象接口，用于记录通过删除过期数据收集 SP
 
 ![gc-meta-flow](https://docs.bnbchain.org/greenfield-docs/assets/images/13-gc-meta-e5d241e75b2985a6cee491b9f841c332.png)
 
-+ Manager 将 GCMetaTask 分派给 TaskExecutor，由 gcMetaTicker 触发。
-+ TaskExecutor 使用 SpDBImpl::DeleteAllBucketTrafficExpired 向 SPDB 发送请求，以删除过期的 BucketTrafficTable 中的条目。
-+ TaskExecutor 使用 SpDBImpl::DeleteAllReadRecordExpired 向 SPDB 发送请求，以删除过期 ReadRecord 表的条目。
+- Manager 将 GCMetaTask 分派给 TaskExecutor，由 gcMetaTicker 触发。
+- TaskExecutor 使用 SpDBImpl::DeleteAllBucketTrafficExpired 向 SPDB 发送请求，以删除过期的 BucketTrafficTable 中的条目。
+- TaskExecutor 使用 SpDBImpl::DeleteAllReadRecordExpired 向 SPDB 发送请求，以删除过期 ReadRecord 表的条目。
 
 ### GC stale version object
 
@@ -376,8 +376,8 @@ GC StaleVersion 用于在执行 object 更新时，GC GC 中片段存储中的 o
 
 ![gc-stale-object-flow](https://docs.bnbchain.org/greenfield-docs/assets/images/gc-stale-object-08f1ef9346b425168369f5594fd8aed3.png)
 
-+ Manager 将 GCStaleVersionObjectTask 分派给 TaskExecutor。
-+ TaskExecutor 验证 object 数据和元是否过时，并在片段存储和数据库中进行清理。
+- Manager 将 GCStaleVersionObjectTask 分派给 TaskExecutor。
+- TaskExecutor 验证 object 数据和元是否过时，并在片段存储和数据库中进行清理。
 
 ### Migrate Bucket
 
@@ -386,11 +386,11 @@ GC StaleVersion 用于在执行 object 更新时，GC GC 中片段存储中的 o
 流程图如下所示：
 ![migrate bucket](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/14-bucket_migrate.jpg)
 
-+ bucket 用户应向新的主 SP 请求迁移 bucket，并获得新的主 SP 的批准。
-+ bucket 用户在新的主 SP 批准后提交 MigrationBucket 事务。
-+ 目标 SP 从链上订阅事件，并产生迁移执行计划。
-+ dest sp 执行器 fetch migrate gvg 任务来执行，并定期报告进度。
-+ 如果所有 gvg 任务在执行计划中完成，则 dest sp 发送完整的 tx。
+- bucket 用户应向新的主 SP 请求迁移 bucket，并获得新的主 SP 的批准。
+- bucket 用户在新的主 SP 批准后提交 MigrationBucket 事务。
+- 目标 SP 从链上订阅事件，并产生迁移执行计划。
+- dest sp 执行器 fetch migrate gvg 任务来执行，并定期报告进度。
+- 如果所有 gvg 任务在执行计划中完成，则 dest sp 发送完整的 tx。
 
 ### SP Exit SP
 
@@ -400,10 +400,10 @@ The flow chart is shown below:
 流程图如下所示：
 ![sp exit](https://raw.githubusercontent.com/bnb-chain/greenfield-docs/main/static/asset/14-sp_exit.jpg)
 
-+ src sp 通过向区块链发送 StorageProviderExit 交易自行申请退出。
-+ src sp 从链上订阅事件，并产生退出执行计划。
-+ src sp 调度交换出信息 dest sp。
-+ dest sp 通过交换单元生成 gvg 迁移任务。
-+ dest sp 执行器 fetch migrate gvg 任务来执行，并定期报告进度。
-+ 如果所有 gvg 任务在交换出中完成，则目标 sp 发送完整的交换出 tx。
-+ 如果所有交换完成，则 src sp 发送完整的 sp exit tx。
+- src sp 通过向区块链发送 StorageProviderExit 交易自行申请退出。
+- src sp 从链上订阅事件，并产生退出执行计划。
+- src sp 调度交换出信息 dest sp。
+- dest sp 通过交换单元生成 gvg 迁移任务。
+- dest sp 执行器 fetch migrate gvg 任务来执行，并定期报告进度。
+- 如果所有 gvg 任务在交换出中完成，则目标 sp 发送完整的交换出 tx。
+- 如果所有交换完成，则 src sp 发送完整的 sp exit tx。

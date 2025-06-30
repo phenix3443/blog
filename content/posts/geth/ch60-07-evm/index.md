@@ -18,6 +18,7 @@ categories: [ethereum]
 tags: [geth]
 images: []
 ---
+
 本文介绍以太坊的订阅机制以及代码实现。
 
 ## JSON API
@@ -61,7 +62,7 @@ API 调用参见官方说明 [Real-time events](https://geth.ethereum.org/docs/i
 以 [单测代码](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription_test.go#L30) 为例：
 
 - channel c 用于 producer 和 consumer 传递数据。
-- producer 中通过 [channel quit](<https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription_test.go#L38>) 处理 unsubscribe 事件。
+- producer 中通过 [channel quit](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription_test.go#L38) 处理 unsubscribe 事件。
 - 消费者需要处理 producer 返回的 [err](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/event/subscription_test.go#L58)。
 
 还可以通过 http.go 中的 [SubscribeNetwork](https://github.com/ethereum/go-ethereum/blob/89ccc680da96429df7206e583e818ad3b0fe7466/p2p/simulations/http.go#L123) 函数学习如何编写 producer 函数，这里需要注意两次对 `<-stop` 的处理。

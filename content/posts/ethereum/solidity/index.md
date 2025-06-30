@@ -42,7 +42,7 @@ solidity 源码需要通过 [solc](https://docs.soliditylang.org/zh/latest/insta
 
 [官方推荐的代码风格](https://docs.soliditylang.org/zh/latest/natspec-format.html#natspec)
 
-要同时使用 [Solhint]({{< ref "posts/ethereum/solidity-lint" >}})  和 Prettier 来处理 Git 提交中更改的 Solidity 文件，你需要在 lint-staged 配置中指定这两个工具。这样，在每次提交前，改动的 Solidity 文件将首先被 Solhint 检查，然后由 Prettier 格式化。以下是配置这些工具的步骤：
+要同时使用 [Solhint]({{< ref "posts/ethereum/solidity-lint" >}}) 和 Prettier 来处理 Git 提交中更改的 Solidity 文件，你需要在 lint-staged 配置中指定这两个工具。这样，在每次提交前，改动的 Solidity 文件将首先被 Solhint 检查，然后由 Prettier 格式化。以下是配置这些工具的步骤：
 
 ```sh
 npm install solhint prettier prettier-plugin-solidity lint-staged  @commitlint/cli @commitlint/config-conventional --save-dev
@@ -63,11 +63,11 @@ Copy code
 
 通过 [husky]({{< ref "posts/husky" >}}) 将上面的这些操作自动化。以便在每次提交前运行 lint-staged 和 commit 检查 ：
 
-````sh
+```sh
 npx husky install
 npx husky add .husky/pre-commit "npx lint-staged"
 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
-````
+```
 
 对应的也需要更新 prettier 配置：
 
@@ -107,7 +107,6 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 - Code Augmentation / Annotations / Hover / Tooltip
 - 详细的 outline。
 - 通过 [surya](https://github.com/ConsenSys/surya) 输出专门的视图，Surya 是一款用于智能合约系统的实用工具。它提供大量可视化输出和合约结构信息。它还支持以多种方式查询函数调用图，以帮助人工检查合约。
-
   - graph 输出调用视图。
   - ftrace 命令输出一个树状的函数调用跟踪，该跟踪源于定义的 "CONTRACT::FUNCTION"，并遍历 "所有|内部|外部 "类型的调用。外部调用用橙色标记，内部调用不着色。
   - uml 生成类图。该功能依赖 [PlantUML](https://plantuml.com/zh/)，macos 安装：

@@ -1,6 +1,6 @@
 ---
 title: Greenfield Virtual Group
-description:  Virtual Group
+description: Virtual Group
 slug: virtual-Group
 date: 2024-05-10T14:09:04+08:00
 featured: false

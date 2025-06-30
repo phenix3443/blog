@@ -65,7 +65,6 @@ tags:
 - 设置配置文件： `sudo vim /etc/wpa_supplicant/wpa_supplicant-wlan0.conf`，内容如下：
 
   {{< gist phenix3443 087bc43a46348fae071aec2ae18acdf6 >}}
-
   - `ctrl_interface` 设置是为了 wpa_cli 链接。
   - `ap_scan=1` 可以开启扫描网络。
 

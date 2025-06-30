@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 series: []
 categories: []
-tags: [openai,chatgpt]
+tags: [openai, chatgpt]
 images: []
 ---
 

@@ -52,7 +52,11 @@ blockscout 很多功能配置是通过环境变量 [^3] 来进行控制，所有
 ## 参考
 
 [^1]: [Blockscout Features](https://docs.blockscout.com/about/features)
+
 [^2]: [Projects Using Blockscout](https://docs.blockscout.com/about/projects)
+
 [^3]: [ENV Variables](https://docs.blockscout.com/for-developers/information-and-settings/env-variables)
+
 [^4]: [Deployment Differences Between Chains](https://docs.blockscout.com/for-developers/information-and-settings/deployment-differences-between-chains)
+
 [^5]: [Docker Integration](https://github.com/blockscout/blockscout/tree/master/docker-compose)

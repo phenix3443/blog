@@ -12,7 +12,7 @@ pinned: false
 carousel: false
 series: [evm-tracing]
 categories: [ethereum]
-tags: [geth,evm,tracing]
+tags: [geth, evm, tracing]
 images: []
 ---
 

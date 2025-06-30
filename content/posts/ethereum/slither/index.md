@@ -15,7 +15,7 @@ series:
   - 以太坊开发工具链
   - 以太坊合约开发
 categories: [ethereum]
-tags: [solidity, linter,security]
+tags: [solidity, linter, security]
 images: []
 ---
 

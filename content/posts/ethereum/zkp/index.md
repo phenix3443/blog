@@ -11,7 +11,7 @@ reward: true
 pinned: false
 carousel: false
 math: true
-series: 
+series:
   - 以太坊中的密码学
 categories:
   - ethereum
@@ -44,7 +44,7 @@ $\varSigma$ 协议：
 
 协议思想：
 
-1. 证明方 $p$ 将 $\omega$ 与随机数 $e$ 进行线性组合  $z=r+e\cdot\omega$ 来生成响应 $z$.
+1. 证明方 $p$ 将 $\omega$ 与随机数 $e$ 进行线性组合 $z=r+e\cdot\omega$ 来生成响应 $z$.
 2. 验证方 $v$ 基于响应 $z$ 和挑战$e$ 构造椭圆曲线离散对数点 $z\cdot G,e\cdot Q$, 并于承诺 $C$ 在椭圆曲线离散对数上重构线性关系，实现正确性验证，但是不知道秘密 $\omega$ 。 这里用到了双线性映射的性质。
 
 ## 非交互式零知识证明

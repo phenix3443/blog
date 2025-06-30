@@ -32,7 +32,6 @@ tags:
    由于公网 IP 是动态的，所以需要内网主机通过 DDNS 自动更新域名绑定，推荐使用 docker 镜像： [newfuture/ddns](https://hub.docker.com/r/newfuture/ddns)。
 
 2. 路由器进行端口转发，这要求路由器具有两个功能：
-
    - 静态 IP 租赁，也就是绑定 mac 和 IP 地址，静态 IP 才好设置端口转发。
    - 端口映射。
 

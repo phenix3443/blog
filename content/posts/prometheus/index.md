@@ -13,12 +13,12 @@ categories:
   - monitor
 tags:
   - prometheus
-
 ---
 
 本文介绍如何在 k3s 中使用 Prometheus。
 
 <!--more-->
+
 ## 概述
 
 [prometheus](https://prometheus.io/docs/introduction/overview/) 是一个开源的系统和服务的监控系统。它周期性采集 metrics 指标，匹配规则和展示结果，以及触发某些条件的告警发送。

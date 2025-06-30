@@ -17,6 +17,7 @@ tags: [geth]
 本文介绍 geth 的架构和代码布局。
 
 <!-- more -->
+
 ## 代码架构
 
 ![Geth 架构](images/architecture.drawio.svg)

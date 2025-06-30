@@ -38,7 +38,6 @@ tags:
 ### L2 组件
 
 - Rollup node：
-
   - 一个独立的、无状态的二进制文件。
   - 从用户接收 L2 交易。
   - 同步并验证 L1 上的 rollup 数据。
@@ -48,7 +47,6 @@ tags:
   - 将未提交的块传播到其他 rollup node。
 
 - Execution engine：
-
   - 一个普通的 Geth node，经过少量修改以支持 Optimism。
   - 维护 L2 状态。
   - 将状态同步到其他 L2 节点以实现快速加入。

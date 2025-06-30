@@ -13,7 +13,7 @@ carousel: false
 math: false
 series: [如何构建高效的开发工具链]
 categories: [rust]
-tags: [rustup,cargo,vscode]
+tags: [rustup, cargo, vscode]
 images: []
 ---
 

@@ -10,7 +10,7 @@ toc: true
 reward: true
 pinned: false
 carousel: false
-series: 
+series:
   - 以太坊中的密码学
 categories:
   - cryptography

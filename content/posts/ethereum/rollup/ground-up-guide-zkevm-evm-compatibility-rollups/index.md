@@ -10,10 +10,10 @@ toc: true
 reward: true
 pinned: false
 carousel: false
-series: 
+series:
   - ethereum 好文翻译
 categories: [ethereum]
-tags: [Rollup,zkRollup,evm]
+tags: [Rollup, zkRollup, evm]
 images: []
 ---
 
@@ -189,7 +189,7 @@ Polygon 的方法比 Scroll 产生了更高性能的 rollup（至少在短期和
 
 这是 StarkWare 采用的方法，StarkNet 是目前最进展的通用 Rollup 解决方案。StarkNet 运行一个定制的智能合约虚拟机（Cairo VM），配备自己的低级语言（Cairo），两者都是为智能合约 Rollup 而构建的。这意味着 StarkNet 在开箱即用时没有以太坊兼容性——正如我们之前所看到的，即使是基于操作码级别的虚拟机兼容性也可能对 Rollup 的性能造成限制。
 
-![StarkNet vs ethereum](<https://miro.medium.com/v2/resize:fit:798/0*Z8FEq-FtZ2XlnPN>_)
+![StarkNet vs ethereum](<https://miro.medium.com/v2/resize:fit:798/0*Z8FEq-FtZ2XlnPN>\_)
 
 然而，Nethermind 团队（与 StarkWare 合作）创建了 [Warp 转译器](https://nethermind.io/warp/)，该转译器能够将任意 Solidity 代码转换为 Cairo VM 字节码。Warp 的目标是使常见的 Solidity 合约能够在 StarkNet 上进行移植，从而实现许多以太坊开发者在“EVM 兼容性”方面的主要目标。然而，在实践中，Warp 并不支持一些 Solidity 特性，包括低级调用，（完整列表可以在 [这里](https://github.com/NethermindEth/warp) 找到）。
 

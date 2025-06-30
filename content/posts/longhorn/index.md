@@ -21,6 +21,7 @@ series:
 本文介绍如何通过 longhorn 来将 raspi 挂载的硬盘在 k3s 中池化。
 
 <!--more-->
+
 ## 概述
 
 如何将所有工作节点上磁盘在 kubernetes 池化使用？分布式块存储系统 [longhorn](https://longhorn.io/docs/1.4.2/what-is-longhorn/) 提供一种解决方案。

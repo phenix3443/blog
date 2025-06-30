@@ -33,7 +33,7 @@ images: []
 
 greenfield 在 app 启动过程中注册了 [gashub](https://github.com/bnb-chain/greenfield/blob/964001cc3a018b0cb71bd7b8fd0486528a59d8f8/app/app.go#L543) 模块。
 
-通过浏览 [代码](https://github.com/bnb-chain/greenfield/blob/964001cc3a018b0cb71bd7b8fd0486528a59d8f8/app/ante/ante.go#L51) 我们可以看到，gashub.keeper  被用在 anteHandler 中，在 checkTx 的时候使用。
+通过浏览 [代码](https://github.com/bnb-chain/greenfield/blob/964001cc3a018b0cb71bd7b8fd0486528a59d8f8/app/ante/ante.go#L51) 我们可以看到，gashub.keeper 被用在 anteHandler 中，在 checkTx 的时候使用。
 
 所有交易类型都需要将其 gas 计算逻辑注册到 gashub。目前支持 [四种类型](https://github.com/bnb-chain/greenfield-cosmos-sdk/blob/b5c75cfd81109a236b8b1e1fae3c5574d2d3d172/proto/cosmos/gashub/v1beta1/gashub.proto#L21) 的计算逻辑：
 

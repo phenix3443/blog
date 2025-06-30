@@ -13,7 +13,7 @@ carousel: false
 math: false
 series: [go 源码分析]
 categories: [go]
-tags: [gin,echo]
+tags: [gin, echo]
 images: []
 ---
 
@@ -33,8 +33,8 @@ images: []
 
 [Package httptest](https://pkg.go.dev/net/http/httptest) 提供了用于 HTTP 测试的相关工具：
 
-+ httptest.NewRequest"返回一个新的服务器接收请求，适合传递给 http.Handler 进行测试。要生成客户端 HTTP 请求，应该使用 net/http 包中的 [NewRequest](https://pkg.go.dev/net/http#NewRequest) 函数。
-+ httptest.ResponseRecorder 是 http.ResponseWriter 的一个实现，它记录其变化以便在测试中进行后续检查。
+- httptest.NewRequest"返回一个新的服务器接收请求，适合传递给 http.Handler 进行测试。要生成客户端 HTTP 请求，应该使用 net/http 包中的 [NewRequest](https://pkg.go.dev/net/http#NewRequest) 函数。
+- httptest.ResponseRecorder 是 http.ResponseWriter 的一个实现，它记录其变化以便在测试中进行后续检查。
 
 这两个字段配合 http.Handler 可以方便的测试 web 服务中的请求处理逻辑。
 
@@ -42,7 +42,7 @@ images: []
 
 ## 第三方框架
 
-+ [Echo](https://echo.labstack.com/) 是一个高性能、可扩展、极简的 Go Web 框架。
-+ [Gin](https://gin-gonic.com/zh-cn/) 是一个用 Go (Golang) 编写的 Web 框架。
+- [Echo](https://echo.labstack.com/) 是一个高性能、可扩展、极简的 Go Web 框架。
+- [Gin](https://gin-gonic.com/zh-cn/) 是一个用 Go (Golang) 编写的 Web 框架。
 
 相比较而言，Gin 在 Github 上的 star 更多，深入的对比等待补充。

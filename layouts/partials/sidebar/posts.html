@@ -1,12 +1,10 @@
 {{- if default true .Params.sidebar }}
-  <aside class="col-xxl-4 sidebar d-flex">
-    <div class="container d-flex flex-column">
-      {{ partial "hooks/sidebar-begin" . }}
-      {{- if ne "content" .Site.Params.tocPosition }}
-        {{- partial "sidebar/toc" . }}
-      {{- end }}
-      {{- partialCached "sidebar/taxonomies-toggle" . }}
-      {{ partial "hooks/sidebar-end" . }}
-    </div>
-  </aside>
+<aside class="col-xxl-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    {{ partial "hooks/sidebar-begin" . }} {{- if ne "content"
+    .Site.Params.tocPosition }} {{- partial "sidebar/toc" . }} {{- end }} {{-
+    partialCached "sidebar/taxonomies-toggle" . }} {{ partial
+    "hooks/sidebar-end" . }}
+  </div>
+</aside>
 {{- end }}
