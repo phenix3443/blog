@@ -18,8 +18,6 @@ tags:
 
 [chainlink](https://chain.link/)
 
-[faucet](https://faucets.chain.link/)
-
 ## 参考资料
 
 - [新手指南：一文读懂 Chainlink](https://blog.chain.link/what-is-chainlink-zh/)
