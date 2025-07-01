@@ -31,6 +31,10 @@ lint:
     - shfmt@3.6.0
     - trufflehog@3.89.2
     - yamllint@1.37.1
+  ignore:
+    - linters: [ALL]
+      paths:
+        - layouts/shortcodes/gist.html
 actions:
   disabled:
     - trunk-announce

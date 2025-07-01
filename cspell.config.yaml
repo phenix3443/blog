@@ -7,5 +7,6 @@ words:
   - oxipng
   - rcmgr
   - taskqueue
+  - warnf
 ignoreWords: []
 import: []
