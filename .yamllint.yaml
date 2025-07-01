@@ -3,6 +3,7 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html
 extends: default
 rules:
+  comments-indentation: disable
   document-start: disable
   line-length: disable
   quoted-strings: disable
