@@ -4,13 +4,12 @@ description: KZG 多项式承诺
 slug: kzg
 date: 2023-03-31T10:55:28+08:00
 image:
-math:
 license:
 hidden: false
 comments: true
 draft: false
 math: true
-series: 
+series:
   - 以太坊中的密码学
 categories:
   - ethereum

@@ -10,7 +10,6 @@ comments: true
 draft: true
 series: [eip 学习]
 categories: [ethereum]
-tags: [eip]
 tags:
   - eip
   - transaction

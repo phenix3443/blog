@@ -4,7 +4,6 @@ description: 使用 Hugo 生成静态博客站点
 slug: hugo
 date: 2022-04-22T14:42:36+08:00
 image:
-math:
 license:
 hidden: false
 comments: true

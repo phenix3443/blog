@@ -4,12 +4,11 @@ description: 密码学承诺
 slug: cryptography-commitments
 date: 2023-04-03T00:53:54+08:00
 image:
-math:
 license:
 hidden: false
 comments: true
 draft: false
-series: 
+series:
   - 以太坊中的密码学
 categories:
   - ethereum

@@ -4,7 +4,6 @@ description: 常见的密码学概念
 slug: cryptography-in-blockchain
 date: 2023-04-04T22:18:38+08:00
 image:
-math:
 license:
 hidden: false
 comments: true
@@ -16,7 +15,6 @@ categories:
   - ethereum
 tags:
   - cryptography
-
 ---
 
 本文介绍区块链中的密码学知识。
