@@ -200,7 +200,7 @@ yarn
 1. 添加 Sepolia chain ID.
 2. 修改 FACTORY_ADDRESS 和 INIT_CODE_HASH 为之前部署的值。
 
-![node_modules/@uniswap/sdk/dist/constants.d.ts](image/interface/node_modules/sdk/dist/constants.d.ts.png)
+<!-- ![node_modules/@uniswap/sdk/dist/constants.d.ts](image/interface/node_modules/sdk/dist/constants.d.ts.png) -->
 
 `node_modules/@uniswap/sdk/dist/sdk.esm.js`
 
@@ -208,9 +208,9 @@ yarn
 2. 修改 FACTORY_ADDRESS and INIT_CODE_HASH。
 3. 添加 sepolia WETH 新配置。
 
-![node_modules/@uniswap/sdk/dist/sdk.esm.js:factory](image/interface/node_modules/sdk/dist/sdk.esm.js.factory.png)
+<!-- ![node_modules/@uniswap/sdk/dist/sdk.esm.js:factory](image/interface/node_modules/sdk/dist/sdk.esm.js.factory.png) -->
 
-![node_modules/@uniswap/sdk/dist/sdk.esm.js:weth](image/interface/node_modules/sdk/dist/sdk.esm.js.weth.png)
+<!-- ![node_modules/@uniswap/sdk/dist/sdk.esm.js:weth](image/interface/node_modules/sdk/dist/sdk.esm.js.weth.png) -->
 
 `node_modules/@uniswap/sdk/dist/sdk.cjs.development.js`
 
@@ -218,17 +218,17 @@ yarn
 2. 修改 FACTORY_ADDRESS and INIT_CODE_HASH。
 3. 添加 sepolia WETH 新配置。
 
-![sdk/dist/sdk.cjs.development.js_factory](image/interface/node_modules/sdk/dist/sdk.cjs.development.factory.png)
+<!-- ![sdk/dist/sdk.cjs.development.js_factory](image/interface/node_modules/sdk/dist/sdk.cjs.development.factory.png) -->
 
-![sdk/dist/sdk.cjs.development.js_weth](image/interface/node_modules/sdk/dist/sdk.cjs.development.weth.png)
+<!-- ![sdk/dist/sdk.cjs.development.js_weth](image/interface/node_modules/sdk/dist/sdk.cjs.development.weth.png) -->
 
 `node_modules/@uniswap/sdk/dist/entities/token.d.ts`, 添加 sepolia 新配置。
 
-![node_modules/@uniswap/sdk/dist/entities/token.d.ts](image/interface/node_modules/sdk/entities/token.d.ts.png)
+<!-- ![node_modules/@uniswap/sdk/dist/entities/token.d.ts](image/interface/node_modules/sdk/entities/token.d.ts.png) -->
 
 `node_modules/@uniswap/default-token-list/build/uniswap-default.tokenlist.json`添加 sepolia weth 新配置。
 
-![default-token-list/build/uniswap-default.tokenlist.json](image/interface/node_modules/default-token-list/build/uniswap-default.tokenlist.json.png)
+<!-- ![default-token-list/build/uniswap-default.tokenlist.json](image/interface/node_modules/default-token-list/build/uniswap-default.tokenlist.json.png) -->
 
 ### 修改交互代码
 
@@ -290,12 +290,10 @@ yarn
 修改完成之后运行前端程序：`nvm exec yarn start`
 
 ```html
-Starting the development server... Browserslist: caniuse-lite is outdated.
-Please run: npx browserslist@latest --update-db Files successfully emitted,
-waiting for typecheck results... Compiled successfully! You can now view
-@uniswap/interface in the browser. Local: http://localhost:3000 On Your Network:
-http://172.23.227.86:3000 Note that the development build is not optimized. To
-create a production build, use yarn build.
+Starting the development server... Browserslist: caniuse-lite is outdated. Please run: npx browserslist@latest
+--update-db Files successfully emitted, waiting for typecheck results... Compiled successfully! You can now view
+@uniswap/interface in the browser. Local: http://localhost:3000 On Your Network: http://172.23.227.86:3000 Note that the
+development build is not optimized. To create a production build, use yarn build.
 ```
 
 最后打开浏览器访问地址 [http://localhost:3000](http://localhost:3000)  查看效果。
