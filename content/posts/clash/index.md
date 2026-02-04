@@ -23,12 +23,14 @@ series:
 
 ## 概述
 
-[Clash](https://github.com/Dreamacro/clash) 是一款网络代理工具。阅读本文前请先阅读 [官方文档](https://dreamacro.github.io/clash/configuration/introduction.html)，本文主要涉及：
+[Clash](https://github.com/Dreamacro/clash) 是一款网络代理工具。阅读本文前请先阅读 [官方文档](https://clash.wiki/)，本文主要涉及：
 
 - 官方文档中容易忽略的事项以及周边技术资料。
 - 如何使用 TPClash 搭建局域网内的透明代理。
 
-## 代理服务器
+## 配置
+
+### 代理服务器
 
 [proxy-groups](https://dreamacro.github.io/clash/configuration/outbound.html#proxy-groups) 可以方便的对代理进行组合：
 
@@ -42,7 +44,7 @@ series:
 
 proxy-groups 搭配 proxy-providers 可聚合（多个）机场提供的代理资源，以及自建的代理服务器，详见下面的 TPClash 配置。
 
-## 代理规则
+### 代理规则
 
 [代理规则](https://dreamacro.github.io/clash/configuration/rules.html#rules) 的基本语法是：
 
@@ -142,10 +144,6 @@ sudo sysctl -w net.ipv4.ip_forward=1
 启动 enhanced-mode，生效如下：
 
 ![clashx-tune](images/clashx-tun.png)
-
-### clash for windows
-
-[CFW](https://docs.cfw.lbyczf.com/) 是 Clash 的 Windows/macOS/Linux 图形客户端，相比 clashx，更具跨平台性，也更加可配置。
 
 #### 配置说明
 
