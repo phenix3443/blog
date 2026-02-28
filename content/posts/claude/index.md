@@ -1,8 +1,8 @@
 ---
-title: {{ replace .Name "-" " " | title }}
+title: Claude
 description:
-slug: {{ lower .Name }}
-date: {{ .Date }}
+slug: claude
+date: 2026-03-01T00:00:00+08:00
 featured: false
 draft: true
 comment: true
