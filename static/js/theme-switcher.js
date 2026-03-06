@@ -89,8 +89,9 @@
     let currentPath = window.location.pathname;
     const currentThemeConfig = THEMES[currentTheme];
 
+    // Remove theme prefix from current path
     if (currentPath.startsWith(currentThemeConfig.path)) {
-      currentPath = currentPath.substring(currentThemeConfig.path.length - 1);
+      currentPath = currentPath.substring(currentThemeConfig.path.length);
     }
 
     // Ensure path starts with /
@@ -98,8 +99,8 @@
       currentPath = '/' + currentPath;
     }
 
-    // Build new URL with target theme
-    const targetPath = THEMES[targetTheme].path + currentPath.substring(1);
+    // Build new URL with target theme (remove leading / from currentPath)
+    const targetPath = THEMES[targetTheme].path + (currentPath === '/' ? '' : currentPath.substring(1));
 
     // Save preference
     savePreferredTheme(targetTheme);
