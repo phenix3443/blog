@@ -33,3 +33,52 @@ markup:
 
 frontmatter:
   lastmod: [":git", "lastmod", ":fileModTime", ":default"]
+
+params:
+  description: phenix3443's blog.
+  keywords: [Hugo, Blog]
+  scheme: Muse
+  darkmode: true
+  bodyScrollbar:
+    overlay: false
+    stable: true
+  mobileLayoutEconomy: true
+  themeColor:
+    light: "#222"
+    dark: "#222"
+  bookmark:
+    enable: true
+    color: "#222"
+  githubBanner:
+    enable: false
+  menuSets:
+    icons: true
+    transition: true
+    badges: true
+  footer:
+    since: 2016
+    icon:
+      name: fa fa-heart
+      animated: true
+      color: "#ff0000"
+    beian:
+      enable: false
+  font:
+    enable: true
+  codeblock:
+    style: mac
+    copyBtn: true
+    maxHeight: 200
+  sidebar:
+    position: left
+    display: post
+  social:
+    GitHub: https://github.com/phenix3443
+    Email: mailto:phenix3443
+  post:
+    toc:
+      enable: true
+      number: true
+    copyright:
+      enable: true
+      license: CC BY-NC-SA 4.0
