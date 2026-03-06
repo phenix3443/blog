@@ -43,10 +43,13 @@ jobs:
       - name: Build with Hugo
         run: hugo --config config/fixit/hugo.yaml --gc --minify
 
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Link Vercel project
+        run: |
+          mkdir -p .vercel
+          echo '{"projectId":"${{ secrets.VERCEL_PROJECT_ID_FIXIT }}","orgId":"${{ secrets.VERCEL_ORG_ID }}"}' > .vercel/project.json
+
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_FIXIT }}
-          working-directory: ./public
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
