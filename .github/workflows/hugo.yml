@@ -62,10 +62,12 @@ jobs:
           restore-keys: hugo-
       - name: Configure Git
         run: git config core.quotepath false
-      - name: Build all themes
+      - name: Build with Hugo
         run: |
-          chmod +x scripts/build-all-themes.sh
-          BASE_URL="${{ steps.pages.outputs.base_url }}" ./scripts/build-all-themes.sh
+          hugo --config "config/_default,config/bootstrap" \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}"
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
       - name: Cache Save
