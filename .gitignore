@@ -6,3 +6,4 @@ assets/jsconfig.json
 public/
 
 .DS_Store
+_vendor/
