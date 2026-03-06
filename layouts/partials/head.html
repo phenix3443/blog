@@ -1,0 +1,18 @@
+{{- /* Override to inject theme switcher script */ -}}
+{{- $cdn := .Site.Params.cdn | default dict }}
+{{- $fingerprint := .Site.Params.fingerprint }}
+{{- $config := dict "code" .Site.Params.code "fingerprint" $fingerprint "data" (dict) }}
+{{- $config = dict "config" $config | merge $config }}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="robots" content="all">
+<meta name="generator" content="Hugo {{ hugo.Version }}">
+
+{{- /* Theme switcher script */ -}}
+<script src="{{ "/js/theme-switcher.js" | relURL }}"></script>
+
+{{- /* Include original head content if exists */ -}}
+{{- with resources.Get "head.html" }}
+  {{- . | safeHTML }}
+{{- end }}

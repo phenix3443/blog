@@ -4,14 +4,56 @@ keywords: [Hugo, Blog]
 
 # Scheme settings
 scheme: Muse
+darkmode: true
+
+# Body scrollbar settings
+bodyScrollbar:
+  overlay: false
+  stable: true
+
+# Mobile layout economy
+mobileLayoutEconomy: true
+
+# Theme color
+themeColor:
+  light: "#222"
+  dark: "#222"
+
+# Bookmark settings
+bookmark:
+  enable: true
+  color: "#222"
+
+# GitHub banner
+githubBanner:
+  enable: false
 
 # Menu settings
-menu:
-  home: /
-  archives: /archives/
-  categories: /categories/
-  tags: /tags/
-  about: /about/
+menuSets:
+  icons: true
+  transition: true
+  badges: true
+
+# Footer settings
+footer:
+  since: 2016
+  icon:
+    name: fa fa-heart
+    animated: true
+    color: "#ff0000"
+  beian:
+    enable: false
+
+# Font settings
+font:
+  enable: true
+
+# Codeblock settings
+codeblock:
+  style: mac
+  copyBtn: true
+  maxHeight: 200
+
 
 # Sidebar settings
 sidebar:

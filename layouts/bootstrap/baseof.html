@@ -1,8 +1,0 @@
-{{- /* Bootstrap theme layout override to inject theme switcher */ -}}
-{{- define "head-end" }}
-  <script src="/js/theme-switcher.js"></script>
-{{- end }}
-
-{{- define "navbar-end" }}
-  {{- partial "theme-switcher.html" . }}
-{{- end }}
