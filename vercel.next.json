@@ -1,0 +1,9 @@
+{
+  "buildCommand": "hugo --config config/_default,config/next --gc --minify",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
+  "framework": null,
+  "env": {
+    "HUGO_VERSION": "0.147.2"
+  }
+}
