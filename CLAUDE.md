@@ -4,11 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal blog built with Hugo (static site generator) using the hugo-theme-bootstrap theme. The blog is written primarily in Chinese (zh-hans) and is automatically deployed to GitHub Pages via GitHub Actions.
+This is a personal blog built with Hugo (static site generator) with **multi-theme switching** capability. Users can dynamically switch between 3 different themes in the browser. The blog is written primarily in Chinese (zh-hans) and is automatically deployed to GitHub Pages via GitHub Actions.
 
 - **Site URL**: https://blog.panghuli.cn
 - **Hugo Version**: 0.147.2 (extended) in CI/CD
-- **Theme**: github.com/razonyang/hugo-theme-bootstrap v1.13.3
+- **Themes**:
+  - hugo-theme-bootstrap v1.13.3 (default)
+  - FixIt v0.4.3
+  - hugo-theme-next
 - **Primary Language**: Chinese (zh-hans)
 - **Content Location**: `content/posts/` (main blog posts)
 
@@ -16,14 +19,22 @@ This is a personal blog built with Hugo (static site generator) using the hugo-t
 
 ### Local Development
 ```bash
-# Start Hugo development server
+# Start Hugo development server (default theme: bootstrap)
 hugo server
+
+# Start with a specific theme
+hugo server --config "config/_default,config/bootstrap"
+hugo server --config "config/_default,config/fixit"
+hugo server --config "config/_default,config/next"
 
 # Start with drafts visible
 hugo server -D
 
-# Build the site (output to public/)
-hugo --gc --minify
+# Build all themes (recommended)
+./scripts/build-all-themes.sh
+
+# Build a single theme
+hugo --config "config/_default,config/bootstrap" --destination "public/bootstrap" --gc --minify
 ```
 
 ### Content Management
@@ -39,8 +50,15 @@ hugo new posts/post-name/index.md
 
 ### Theme Management
 ```bash
+# Build all themes at once
+./scripts/build-all-themes.sh
+
 # Update the hugo-theme-bootstrap theme
 ./upgrade-hugo-theme-bootstrap.sh
+
+# Update all theme modules
+hugo mod get -u
+hugo mod tidy
 
 # This script:
 # 1. Updates the Hugo module to latest master
@@ -61,10 +79,26 @@ pnpm install
 ## Architecture
 
 ### Hugo Module System
-The theme is loaded as a Hugo module (not a git submodule):
-- Defined in `go.mod`: `github.com/razonyang/hugo-theme-bootstrap v1.13.3`
+Multiple themes are loaded as Hugo modules (not git submodules):
+- Defined in `go.mod`:
+  - `github.com/razonyang/hugo-theme-bootstrap v1.13.3`
+  - `github.com/hugo-fixit/FixIt v0.4.3`
+  - `github.com/hugo-next/hugo-theme-next`
 - Theme dependencies are mirrored in `package.json` with comments pointing to the theme
-- Use `hugo mod` commands to manage the theme module
+- Use `hugo mod` commands to manage theme modules
+
+### Multi-Theme Architecture
+The blog supports 3 themes with user-side dynamic switching:
+- **Build approach**: Each theme generates a complete static site in separate subdirectories
+  - `public/bootstrap/` - Bootstrap theme
+  - `public/fixit/` - FixIt theme
+  - `public/next/` - Next theme
+- **Theme switching**: JavaScript-based with localStorage persistence
+  - Script: `static/js/theme-switcher.js`
+  - UI component: `layouts/partials/theme-switcher.html`
+  - Injected via: `layouts/partials/head.html` and `layouts/partials/header.html`
+- **Entry page**: `public/index.html` redirects to user's preferred theme
+- **Build script**: `scripts/build-all-themes.sh` builds all themes at once
 
 ### Content Structure
 ```
@@ -83,16 +117,34 @@ content/
 ### Custom Layouts
 Custom layout overrides are in `layouts/`:
 - `layouts/partials/sidebar/` - Customized sidebar widgets (about.html, posts.html, profile.html, profile/)
+- `layouts/partials/head.html` - Injects theme switcher script
+- `layouts/partials/header.html` - Injects theme switcher UI
+- `layouts/partials/theme-switcher.html` - Theme switcher dropdown component
 - `layouts/_default/` - Default layout overrides
 - `layouts/posts/` - Post-specific layouts
 - `layouts/shortcodes/` - Custom shortcodes
 
 ### Configuration
-Configuration is split across multiple files in `config/`:
-- `config/_default/hugo.yaml` - Main Hugo configuration (baseURL, taxonomies, permalinks, module imports)
-- `config/_default/params.yaml` - Theme parameters (brand, palette, social links, features)
-- `config/_default/languages.yaml` - Language configuration
-- `config/_default/menu.yaml` - Navigation menus
+Configuration is split across multiple directories in `config/`:
+- `config/_default/` - Shared base configuration for all themes
+  - `hugo.yaml` - Base Hugo configuration
+  - `params.yaml` - Shared parameters
+  - `languages.yaml` - Language configuration
+  - `menu.yaml` - Menu configuration template
+- `config/bootstrap/` - Bootstrap theme-specific configuration
+  - `hugo.yaml` - Theme config with baseURL `/bootstrap/`
+  - `params.yaml` - Bootstrap parameters
+  - `menu.yaml` - Bootstrap menu
+- `config/fixit/` - FixIt theme-specific configuration
+  - `hugo.yaml` - Theme config with baseURL `/fixit/`
+  - `params.yaml` - FixIt parameters
+  - `menu.yaml` - FixIt menu
+- `config/next/` - Next theme-specific configuration
+  - `hugo.yaml` - Theme config with baseURL `/next/`
+  - `params.yaml` - Next parameters
+  - `menu.yaml` - Next menu
+
+Additional shared configuration files:
 - `config/_default/pagination.yaml` - Pagination settings
 - `config/_default/server.yaml` - Development server settings
 - `config/production/params.yaml` - Production-specific overrides
