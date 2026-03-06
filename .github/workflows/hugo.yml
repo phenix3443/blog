@@ -64,7 +64,7 @@ jobs:
         run: git config core.quotepath false
       - name: Build with Hugo
         run: |
-          hugo --config "config/_default,config/bootstrap" \
+          hugo --config "config/bootstrap/hugo.yaml" \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}"

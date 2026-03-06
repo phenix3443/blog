@@ -2,17 +2,12 @@ baseURL: https://blog.panghuli.cn
 title: phenix3443's blog
 copyright: "Copyright © 2016-{year} phenix3443. All Rights Reserved."
 defaultContentLanguage: zh-hans
-hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
-# defaultContentLanguageInSubdir: true
-# disableLanguages:
-#  - fr
-#  - zh-cn
-#  - zh-tw
+hasCJKLanguage: true
 enableRobotsTXT: true
 enableEmoji: true
 pygmentsUseClasses: true
-# googleAnalytics: UA-123-45
 disqusShortname: phenix3443
+enableGitInfo: true
 
 blackfriday:
   hrefTargetBlank: true
@@ -38,8 +33,6 @@ markup:
     endLevel: 4
     ordered: false
     startLevel: 1
-
-enableGitInfo: true
 
 frontmatter:
   lastmod: [":git", "lastmod", ":fileModTime", ":default"]

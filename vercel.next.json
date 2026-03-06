@@ -1,5 +1,5 @@
 {
-  "buildCommand": "hugo --config config/_default,config/next --gc --minify",
+  "buildCommand": "hugo --config config/next/hugo.yaml --gc --minify",
   "outputDirectory": "public",
   "installCommand": "npm install",
   "framework": null,
