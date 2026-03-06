@@ -1,0 +1,17 @@
+main:
+  - identifier: posts
+    name: 文章
+    url: /posts/
+    weight: 1
+  - identifier: categories
+    name: 分类
+    url: /categories/
+    weight: 2
+  - identifier: tags
+    name: 标签
+    url: /tags/
+    weight: 3
+  - identifier: about
+    name: 关于
+    url: /about/
+    weight: 4

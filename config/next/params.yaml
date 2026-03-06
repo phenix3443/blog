@@ -1,0 +1,33 @@
+# hugo-theme-next parameters
+description: phenix3443's blog.
+keywords: [Hugo, Blog]
+
+# Scheme settings
+scheme: Muse
+
+# Menu settings
+menu:
+  home: /
+  archives: /archives/
+  categories: /categories/
+  tags: /tags/
+  about: /about/
+
+# Sidebar settings
+sidebar:
+  position: left
+  display: post
+
+# Social links
+social:
+  GitHub: https://github.com/phenix3443
+  Email: mailto:phenix3443
+
+# Post settings
+post:
+  toc:
+    enable: true
+    number: true
+  copyright:
+    enable: true
+    license: CC BY-NC-SA 4.0

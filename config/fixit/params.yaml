@@ -1,0 +1,51 @@
+# FixIt theme parameters
+version: "0.3.X"
+description: phenix3443's blog.
+keywords: [Hugo, Blog]
+defaultTheme: auto
+fingerprint: sha256
+dateFormat: "2006-01-02"
+
+# Header config
+header:
+  desktopMode: sticky
+  mobileMode: auto
+  title:
+    name: phenix3443
+
+# Footer config
+footer:
+  enable: true
+  custom: "Copyright © 2016-{year} phenix3443. All Rights Reserved."
+  hugo: false
+  siteCopyright: true
+
+# Home page config
+home:
+  profile:
+    enable: true
+    title: phenix3443's blog
+    subtitle: 技术博客
+    social: true
+  posts:
+    enable: true
+    paginate: 10
+
+# Social config
+social:
+  GitHub: phenix3443
+  Email: phenix3443
+  RSS: true
+
+# Page config
+page:
+  toc:
+    enable: true
+    auto: true
+  code:
+    copy: true
+    maxShownLines: 20
+  math:
+    enable: false
+  comment:
+    enable: true
