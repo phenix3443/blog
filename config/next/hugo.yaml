@@ -35,6 +35,10 @@ frontmatter:
   lastmod: [":git", "lastmod", ":fileModTime", ":default"]
 
 params:
+  yearFormat: "2006"
+  monthFormat: "01-02"
+  dateFormat: "2006-01-02"
+  timeFormat: "2006-01-02 15:04:05 -07:00"
   description: phenix3443's blog.
   keywords: [Hugo, Blog]
   scheme: Muse
@@ -55,6 +59,13 @@ params:
     icons: true
     transition: true
     badges: true
+  avatar:
+    rounded: false
+    rotated: false
+  siteState:
+    basic: false
+  linksSets:
+    layout: block
   footer:
     since: 2016
     icon:
@@ -72,13 +83,83 @@ params:
   sidebar:
     position: left
     display: post
+    width: 256
+    offset: 12
+    padding: 18
+  toc:
+    enable: true
+    number: true
+    wrap: false
+    expandAll: false
+    maxDepth: 3
+  motion:
+    enable: true
+    async: true
+    transition:
+      postBlock: fadeIn
+      postHeader: fadeInDown
+      postBody: fadeInDown
+      collHeader: slideInRight
+      sidebar: fadeInUp
+  backTop:
+    enable: true
+    sidebar: false
+    scrollpercent: true
+  readingProgress:
+    enable: false
+    start: left
+    position: top
+    reversed: false
+    color: "#37c6c0"
+    height: 3px
+  postMeta:
+    itemText: true
+  postFooter:
+    tagIcon: false
+  textAlign:
+    desktop: justify
+    mobile: justify
+  socialIcons:
+    iconsOnly: false
+    transition: false
+  tabs:
+    transition:
+      tabs: false
+      labels: false
+  note:
+    style: simple
+    icons: false
+    lightBgOffset: 0
+  creativeCommons:
+    post: false
+  rewardSets:
+    animation: false
+  postEdit:
+    enable: false
+  pdf:
+    enable: false
+    height: 500px
+  share:
+    enable: false
+  relatedPosts:
+    enable: false
+  localSearch:
+    enable: false
+  algoliaSearch:
+    enable: false
+  disqusjs:
+    enable: false
+  gitalk:
+    enable: false
+  gitter:
+    enable: false
+  comments:
+    enable: false
+    storage: false
   social:
     GitHub: https://github.com/phenix3443
     Email: mailto:phenix3443
   post:
-    toc:
-      enable: true
-      number: true
     copyright:
       enable: true
       license: CC BY-NC-SA 4.0
