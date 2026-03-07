@@ -1,9 +1,9 @@
 {
   "buildCommand": "git init && git add -A && git config user.email 'build@vercel.com' && git config user.name 'Vercel' && git commit -m 'init' && PATH=$PWD/go/bin:$PATH ./hugo --config config/fixit/hugo.yaml --gc --minify",
   "outputDirectory": "public",
-  "installCommand": "npm install && curl -L https://go.dev/dl/go1.21.0.linux-amd64.tar.gz | tar -xz && curl -L https://github.com/gohugoio/hugo/releases/download/v0.147.2/hugo_extended_0.147.2_linux-amd64.tar.gz | tar -xz && PATH=$PWD/go/bin:$PATH ./hugo mod vendor",
+  "installCommand": "npm install && curl -L https://go.dev/dl/go1.21.0.linux-amd64.tar.gz | tar -xz && curl -L https://github.com/gohugoio/hugo/releases/download/v0.157.0/hugo_extended_0.157.0_linux-amd64.tar.gz | tar -xz && PATH=$PWD/go/bin:$PATH ./hugo mod vendor",
   "framework": null,
   "env": {
-    "HUGO_VERSION": "0.147.2"
+    "HUGO_VERSION": "0.157.0"
   }
 }
