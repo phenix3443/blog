@@ -9,3 +9,6 @@ public/
 _vendor/
 .vercel
 .env*.local
+
+packages/hugoautogen/
+__pycache__/

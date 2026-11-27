@@ -1,29 +1,30 @@
-
-# Define the shell to use when executing commands
 SHELL := /usr/bin/env bash -o pipefail -o errexit
+export PATH := $(CURDIR)/node_modules/.bin:$(PATH)
+.DEFAULT_GOAL := help
 
-help:
-	@@grep -h '^[a-zA-Z]' $(MAKEFILE_LIST) | awk -F ':.*?## ' 'NF==2 {printf "   %-22s%s\n", $$1, $$2}' | sort
+help: ## 列出常用命令
+	@awk -F ':.*?## ' 'NF==2 {printf "   %-16s%s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-bootstrap: ## 启动 Bootstrap 主题服务器 (端口 1313)
-	hugo server --config "config/bootstrap/hugo.yaml" --port 1313
+serve: ## 启动 FixIt 主站开发服务器
+	npm run dev
 
-fixit: ## 启动 FixIt 主题服务器 (端口 1314)
-	hugo server --config "config/fixit/hugo.yaml" --port 1314
+build: ## 构建 FixIt 主站
+	npm run build
 
-next: ## 启动 Next 主题服务器 (端口 1315)
-	hugo server --config "config/next/hugo.yaml" --port 1315
+fixit: ## 启动 FixIt 子域名开发服务器
+	npm run dev -- --port 1314
 
-build-bootstrap: ## 构建 Bootstrap 主题
-	hugo --config "config/bootstrap/hugo.yaml" --gc --minify
+build-fixit: ## 构建 FixIt 子域名
+	npm run build -- --baseURL https://fixit.blog.panghuli.cn/
 
-build-fixit: ## 构建 FixIt 主题
-	hugo --config "config/fixit/hugo.yaml" --gc --minify
+check: ## 检查脚本和站点配置
+	shellcheck --severity=warning *.sh
+	python3 -m unittest discover -s tests -v
 
-build-next: ## 构建 Next 主题
-	hugo --config "config/next/hugo.yaml" --gc --minify
+test: ## 构建并验证浏览器交互
+	npm test
 
 clean: ## 清理构建文件
 	rm -rf public
 
-.PHONY: help bootstrap fixit next build-bootstrap build-fixit build-next clean
+.PHONY: help serve build fixit build-fixit check test clean

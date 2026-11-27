@@ -1,39 +1,21 @@
 main:
-  - name: Home
-    identifier: home
-    pageRef: /
+  - identifier: posts
+    name: 文章
+    pageRef: /posts
     weight: 1
-    params:
-      icon: <i class="fas fa-home"></i>
-  - name: Blog
-    identifier: blog
+  - identifier: archives
+    name: 归档
+    pageRef: /archives
     weight: 2
-    params:
-      icon: <i class="fas fa-fw fa-blog"></i>
-  - name: About
-    identifier: about
-    pageRef: /about
+  - identifier: categories
+    name: 分类
+    pageRef: /categories
     weight: 3
-    params:
-      icon: <i class="fas fa-info-circle"></i>
-  - name: Support
-    identifier: support
-    weight: 40
-    params:
-      icon: <i class="fas fa-fw fa-question-circle"></i>
-  - name: Repository
-    identifier: repository
-    parent: support
-    url: "https://github.com/phenix3443/blog"
-    weight: 1
-    params:
-      icon: <i class="fab fa-fw fa-github text-primary"></i>
-  - name: Bug Report
-    identifier: bug-report
-    parent: support
-    url: >-
-      https://github.com/phenix3443/blog/issues/new?template=bug_report.yml
-    weight: 2
-    params:
-      description: Tell us about a bug or issue.
-      icon: <i class="fas fa-fw fa-bug text-danger"></i>
+  - identifier: tags
+    name: 标签
+    pageRef: /tags
+    weight: 4
+  - identifier: about
+    name: 关于
+    pageRef: /about
+    weight: 5

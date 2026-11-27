@@ -1,41 +1,49 @@
-baseURL: https://blog.panghuli.cn
+baseURL: https://blog.panghuli.cn/
 title: phenix3443's blog
 copyright: "Copyright © 2016-{year} phenix3443. All Rights Reserved."
-defaultContentLanguage: zh-hans
-hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
-# defaultContentLanguageInSubdir: true
-# disableLanguages:
-#  - fr
-#  - zh-cn
-#  - zh-tw
+defaultContentLanguage: zh-cn
+hasCJKLanguage: true
+timeZone: Asia/Shanghai
 enableRobotsTXT: true
 enableEmoji: true
-pygmentsUseClasses: true
-# googleAnalytics: UA-123-45
-disqusShortname: phenix3443
+enableGitInfo: true
+mainSections: [posts]
 
-blackfriday:
-  hrefTargetBlank: true
+module:
+  imports:
+    - path: github.com/hugo-fixit/FixIt
 
 taxonomies:
   category: categories
   series: series
   tag: tags
 
-build:
-  writeStats: true
-
 permalinks:
   news: /news/:year/:month/:title/
   blog: /blog/:year/:month/:title/
 
-markup:
-  tableOfContents:
-    endLevel: 4
-    ordered: false
-    startLevel: 1
-
-enableGitInfo: true
-
 frontmatter:
   lastmod: [":git", "lastmod", ":fileModTime", ":default"]
+
+outputs:
+  home: [HTML, RSS, search, archives]
+  page: [HTML, Markdown]
+  section: [HTML, RSS]
+  taxonomy: [HTML]
+  term: [HTML, RSS]
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)'], ['$', '$']]
+  highlight:
+    noClasses: false
+  tableOfContents:
+    startLevel: 1
+    endLevel: 4
