@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.170.1
+      DART_SASS_BINARY: dart-sass
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,6 +34,8 @@ jobs:
           npx playwright install --with-deps chromium
           sudo apt-get update
           sudo apt-get install -y shellcheck
+      - name: Verify Sass compiler
+        run: node_modules/.bin/dart-sass --embedded --version
       - name: Check scripts and configuration
         run: make check
       - name: Check JavaScript syntax
