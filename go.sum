@@ -1,14 +1,2 @@
-github.com/hugo-fixit/FixIt v0.4.3 h1:8Vf/c8MAPnlQesU2SFo9sS7MLa39ALv5eoqBShnwVug=
-github.com/hugo-fixit/FixIt v0.4.3/go.mod h1:3XIRedrqakO7/a4ZnhE46haMRF8HgsT0N0B5j5D2iRU=
-github.com/hugo-next/hugo-theme-next v0.0.0-20251225155322-2c5a754f1ca8 h1:kIZ5PZ8hkOv9EcdAHu90bVXdD8ZNHnbEJ6sE1QIZMfo=
-github.com/hugo-next/hugo-theme-next v0.0.0-20251225155322-2c5a754f1ca8/go.mod h1:J2v7ppqg1e1wwYBLgfTTJ6RqRx5VGCAbhmICpY9SGyk=
-github.com/razonyang/hugo-theme-bootstrap v1.2.2 h1:4JZ3dmZ5RKrniCvmB26i/K7jwhC0Pkv4pNDcwVKQLO4=
-github.com/razonyang/hugo-theme-bootstrap v1.2.2/go.mod h1:o+IIPL/5wreiTojnN4MsQqKuxbv3fWAQnMhG9geltQo=
-github.com/razonyang/hugo-theme-bootstrap v1.5.6-0.20240409080005-2ca24764178e h1:kEhGKGaMnA1Vc5G+CF/J8NED1I060F+eM97T9B4IbFg=
-github.com/razonyang/hugo-theme-bootstrap v1.5.6-0.20240409080005-2ca24764178e/go.mod h1:o+IIPL/5wreiTojnN4MsQqKuxbv3fWAQnMhG9geltQo=
-github.com/razonyang/hugo-theme-bootstrap v1.12.0 h1:741zOGgRiKOFej8IIRg7x3pYa6jPQA78VFZmmQ72Rag=
-github.com/razonyang/hugo-theme-bootstrap v1.12.0/go.mod h1:o+IIPL/5wreiTojnN4MsQqKuxbv3fWAQnMhG9geltQo=
-github.com/razonyang/hugo-theme-bootstrap v1.13.3-0.20250512015401-8ede3af8cab8 h1:AdnO1d5JpzjNsTg6t2i0ndW5thZRgOPOj004vvHXvVY=
-github.com/razonyang/hugo-theme-bootstrap v1.13.3-0.20250512015401-8ede3af8cab8/go.mod h1:o+IIPL/5wreiTojnN4MsQqKuxbv3fWAQnMhG9geltQo=
-github.com/razonyang/hugo-theme-bootstrap v1.13.3 h1:uPKgC9A8XgU6qPzbM+eCzAcissjCcV1yjS3Pk5qGBow=
-github.com/razonyang/hugo-theme-bootstrap v1.13.3/go.mod h1:o+IIPL/5wreiTojnN4MsQqKuxbv3fWAQnMhG9geltQo=
+github.com/hugo-fixit/FixIt v1.0.0-rc.5 h1:siYXnvD1YSbSCME8TKKlDMDo7/rezVUZ1iC0OXfRTDg=
+github.com/hugo-fixit/FixIt v1.0.0-rc.5/go.mod h1:D2RkJMpHc5FMFhlqDLljt5jopjiFOapRWG6PaKbjHuE=

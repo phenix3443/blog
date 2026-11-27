@@ -1,105 +1,45 @@
-# Vercel 多主题部署指南
+# Vercel 部署
 
-## 方案概述
+主站和保留的子域名均使用 FixIt：
 
-使用 Vercel 部署 3 个独立项目，每个项目对应一个主题：
+| 站点 | 配置文件 | 域名 |
+| --- | --- | --- |
+| 主站 | `vercel.json` | `blog.panghuli.cn` |
+| 子域名 | `vercel.fixit.json` | `fixit.blog.panghuli.cn` |
 
-- **Bootstrap 主题** → `blog.panghuli.cn`
-- **FixIt 主题** → `fixit.blog.panghuli.cn`
-- **Next 主题** → `next.blog.panghuli.cn`
+构建使用 Hugo 0.170.1 和 `npm ci --include=dev` 安装的 Dart Sass。Node.js 版本要求见 `package.json`。
 
-## 部署步骤
+## 发布两个项目
 
-### 1. 准备工作
+先在 Vercel 确认目标项目，安装 Vercel CLI 并登录，再设置以下环境变量：
 
-```bash
-# 安装 Vercel CLI
-npm i -g vercel
-
-# 登录 Vercel
-vercel login
-```
-
-### 2. 部署 Bootstrap 主题（主站）
+- `VERCEL_ORG_ID`：组织编号。
+- `VERCEL_PROJECT_ID_BOOTSTRAP`：现有主站项目编号；沿用原变量名，以保留已有项目绑定，构建主题已改为 FixIt。
+- `VERCEL_PROJECT_ID_FIXIT`：子域名项目编号。
 
 ```bash
-# 在项目根目录执行
-vercel --prod
-
-# Vercel 会自动使用 vercel.json 配置
+./deploy-vercel.sh
 ```
 
-### 3. 部署 FixIt 主题
+该脚本直接发布生产环境，依次选择两个项目及其配置，任何一步失败都会停止。脚本不删除 `.vercel/`，不覆盖 `vercel.json`，不添加域名。域名在目标项目的设置中配置。
 
-**方法 A：通过 Vercel 仪表板**
+## 单独发布
 
-1. 访问 https://vercel.com/new
-2. 选择 "Import Git Repository"
-3. 选择你的 `blog` 仓库
-4. 配置项目：
-   - **Project Name**: `blog-fixit`
-   - **Framework Preset**: Other
-   - **Root Directory**: `./`（保持默认）
-   - **Build Command**: `hugo --config config/_default,config/fixit --gc --minify`
-   - **Output Directory**: `public`
-   - **Install Command**: `npm install`
-5. 点击 "Deploy"
-6. 部署完成后，在项目页面顶部点击 "View Domains" 或 "Settings"
-7. 找到 "Domains" 部分（通常在项目概览页面或 Settings 标签下）
-8. 点击 "Add" 或 "Add Domain"
-9. 输入：`fixit.blog.panghuli.cn`
-10. 按照提示配置 DNS
-
-**方法 B：通过 CLI（推荐）**
+设置 `VERCEL_ORG_ID` 和目标项目的 `VERCEL_PROJECT_ID` 后执行对应命令：
 
 ```bash
-# 部署 FixIt 主题
-vercel --prod --name blog-fixit
-
-# 添加域名
-vercel domains add fixit.blog.panghuli.cn blog-fixit
+vercel deploy --local-config vercel.json --prod
+vercel deploy --local-config vercel.fixit.json --prod
 ```
 
-### 4. 部署 Next 主题
+`--local-config` 指定构建配置；`VERCEL_PROJECT_ID` 指定发布项目，两者必须匹配。[Vercel 官方说明](https://vercel.com/docs/cli/global-options)。
 
-**方法 A：通过 Vercel 仪表板**
+远端构建没有完整 Git 历史，配置显式关闭 `enableGitInfo`，使用文章元数据计算修改日期，不伪造 Git 提交。
 
-重复步骤 3，但使用：
-- **Project Name**: `blog-next`
-- **Build Command**: `hugo --config config/_default,config/next --gc --minify`
-- **域名**: `next.blog.panghuli.cn`
+## 自动发布与检查
 
-**方法 B：通过 CLI（推荐）**
+- `.github/workflows/deploy-main-vercel.yml` 使用原主站项目密钥 `VERCEL_PROJECT_ID_BOOTSTRAP`。
+- `.github/workflows/deploy-fixit-vercel.yml` 使用 `VERCEL_PROJECT_ID_FIXIT`。
+- 推送到 `main` 会触发生产发布，两个项目均构建 FixIt。
 
-```bash
-# 部署 Next 主题
-vercel --prod --name blog-next
-
-# 添加域名
-vercel domains add next.blog.panghuli.cn blog-next
-```
-
-### 5. DNS 配置
-
-在你的域名提供商（如 Cloudflare、阿里云）添加：
-
-```
-类型    名称    值
-A       blog    76.76.21.21
-CNAME   fixit   cname.vercel-dns.com
-CNAME   next    cname.vercel-dns.com
-```
-
-或者使用 Vercel 提供的具体 CNAME 值（在添加域名时会显示）。
-
-## 自动部署
-
-每次推送到 `main` 分支，Vercel 会自动重新部署所有 3 个项目。
-
-## 费用
-
-完全免费（Hobby 计划），包括：
-- 无限自定义域名
-- 自动 SSL 证书
-- 全球 CDN
-- 每月 100GB 带宽
+发布前运行 `make check` 和 `npm test`。检查中的 Vercel 命令由模拟程序代替，不会发布。

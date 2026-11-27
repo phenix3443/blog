@@ -57,8 +57,8 @@ if [ -z "$NS_RESULT" ]; then
 	echo "   ⚠️  无法查询 Nameservers"
 else
 	echo "   Nameservers:"
-	echo "$NS_RESULT" | while read ns; do
-		if [[ $ns =~ "cloudflare.com" ]]; then
+	echo "$NS_RESULT" | while read -r ns; do
+		if [[ ${ns} == *.cloudflare.com. ]]; then
 			echo "   ✅ $ns (Cloudflare)"
 		else
 			echo "   ⚠️  $ns"
