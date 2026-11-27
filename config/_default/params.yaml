@@ -32,11 +32,12 @@ home:
     subtitle: Gopher, Full Stack Engineer.
     social: true
     typeit: false
-    contribution: false
-    fullscreen: false
+    contribution: true
+    fullscreen: true
   posts:
     enable: true
     paginate: 10
+    columns: 2
 
 social:
   GitHub: phenix3443
@@ -76,3 +77,17 @@ cookieconsent:
 app:
   svg_favicon: /images/logo.webp
   mask_color: ""
+
+summary_plainify: true
+contribution:
+  enable: true
+  max_years: 0
+
+visitor_statistics:
+  enable: true
+  source: https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js
+
+custom_partials:
+  profile: [custom/visitor-stats.html]
+  footer: [custom/visitor-stats-footer.html]
+  assets: [custom/visitor-stats-assets.html]

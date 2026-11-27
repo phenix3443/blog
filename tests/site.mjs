@@ -38,6 +38,14 @@ try {
   assert.equal(await page.locator('html').getAttribute('lang'), 'zh-CN');
   assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://blog.panghuli.cn/');
   assert.equal(await page.locator('.summary').count(), 10);
+  assert.ok(await page.locator('.contribution-graph').count() > 0);
+  assert.equal(await page.locator('.home-profile').getAttribute('data-fullscreen') !== null, true);
+  const statisticIds = ['page_pv', 'page_uv', 'today_pv', 'today_uv', 'site_pv', 'site_uv'];
+  for (const id of statisticIds) {
+    assert.equal(await page.locator(`#busuanzi_${id}`).count(), 1);
+    assert.equal(await page.locator(`#busuanzi_${id}`).innerText(), '—');
+  }
+  assert.equal(await page.locator('script[src*="cdn.busuanzi.cc"]').count(), 0, '本地预览不加载线上计数服务');
   assert.equal(await page.getByRole('button', { name: /blog 子菜单/ }).count(), 0);
   await page.screenshot({ path: join(screenshots, 'home-desktop.png') });
 
@@ -75,8 +83,33 @@ try {
   await page.locator('#header-mobile').getByRole('link', { name: '关于', exact: true }).click();
   await page.waitForURL('**/about/');
   await page.screenshot({ path: join(screenshots, 'about-mobile.png') });
+  const statsContext = await browser.newContext();
+  await statsContext.route('https://blog.panghuli.cn/**', async route => {
+    const url = new URL(route.request().url());
+    const response = await statsContext.request.get(base + url.pathname + url.search);
+    await route.fulfill({ response });
+  });
+  const fixtureCounts = { page_pv: 11, page_uv: 7, today_pv: 30, today_uv: 19, site_pv: 1000, site_uv: 300 };
+  let counterLoads = 0;
+  await statsContext.route('https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js', route => {
+    counterLoads += 1;
+    return route.fulfill({ contentType: 'application/javascript', body:
+      `for (const [id, value] of Object.entries(${JSON.stringify(fixtureCounts)})) {
+         document.querySelectorAll('#busuanzi_' + id).forEach(node => { node.textContent = value; });
+       }` });
+  });
+  const statsPage = await statsContext.newPage();
+  for (const path of ['/', '/posts/cryptography-in-blockchain/']) {
+    await statsPage.goto('https://blog.panghuli.cn' + path, { waitUntil: 'networkidle' });
+    for (const [id, value] of Object.entries(fixtureCounts)) {
+      assert.equal(await statsPage.locator(`#busuanzi_${id}`).count(), 1);
+      assert.equal(await statsPage.locator(`#busuanzi_${id}`).innerText(), String(value));
+    }
+  }
+  assert.equal(counterLoads, 2, '每页只加载一次计数服务');
+  await statsContext.close();
   assert.deepEqual(errors, []);
-  console.log(`首页、搜索、主题切换、归档、分类、标签、关于、公式和手机导航检查通过。截图：${screenshots}`);
+  console.log(`首页、搜索、主题切换、归档、分类、标签、关于、公式、手机导航及六项访问统计集成检查通过。截图：${screenshots}`);
 } finally {
   await browser?.close();
   server.kill();
