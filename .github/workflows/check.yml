@@ -34,6 +34,12 @@ jobs:
           npx playwright install --with-deps chromium
           sudo apt-get update
           sudo apt-get install -y shellcheck
+      - name: Verify Sass compiler
+        run: |
+          node --version
+          ls -l "$DART_SASS_BINARY"
+          "$DART_SASS_BINARY" --version
+          "$DART_SASS_BINARY" --embedded --version
       - name: Check scripts and configuration
         run: make check
       - name: Check JavaScript syntax
