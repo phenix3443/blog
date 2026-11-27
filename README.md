@@ -14,18 +14,21 @@
 ```bash
 npm ci
 npm run dev
+npm run dev -- -D  # 包含草稿
 ```
 
 打开终端输出的本地地址，默认是 <http://localhost:1313/>。
 
 ```bash
 npm run build          # 构建到 public/，清理旧主题遗留的输出
-make check             # 脚本与配置回归检查，需要 Python 3 和 ShellCheck
+make check             # 脚本、配置和草稿构建检查，需要 Python 3 和 ShellCheck
 npx playwright install chromium
 npm test               # 完整构建及浏览器检查
 ```
 
 使用 npm 或 Makefile 入口时，会自动使用项目内的 Dart Sass。直接执行 `hugo` 需要自行将 `node_modules/.bin` 加入 `PATH`。
+
+开发环境仅忽略 FixIt 关于开发模式的预期提示 `warning-dev-env`；其他警告和构建错误仍会报出。`make check` 包含启用草稿并遇到警告即失败的构建检查。
 
 浏览器检查覆盖首页、搜索、深浅色切换和偏好保存、文章公式、归档分页、分类、标签、关于页及手机导航。截图输出到系统临时目录下的 `blog-fixit-validation/`。
 
