@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.170.1
-      DART_SASS_BINARY: ${{ github.workspace }}/node_modules/sass-embedded-linux-x64/dart-sass/sass
+      DART_SASS_BINARY: dart-sass
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,11 +35,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y shellcheck
       - name: Verify Sass compiler
-        run: |
-          node --version
-          ls -l "$DART_SASS_BINARY"
-          "$DART_SASS_BINARY" --version
-          "$DART_SASS_BINARY" --embedded --version
+        run: node_modules/.bin/dart-sass --embedded --version
       - name: Check scripts and configuration
         run: make check
       - name: Check JavaScript syntax
