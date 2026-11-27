@@ -5,6 +5,9 @@ export PATH := $(CURDIR)/node_modules/.bin:$(PATH)
 help: ## 列出常用命令
 	@awk -F ':.*?## ' 'NF==2 {printf "   %-16s%s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+install-sass: ## 安装直接运行 Hugo 所需的系统 Dart Sass
+	npm install --global sass-embedded@1.108.2
+
 serve: ## 启动 FixIt 主站开发服务器
 	npm run dev
 
@@ -29,4 +32,4 @@ test: ## 构建并验证浏览器交互
 clean: ## 清理构建文件
 	rm -rf public
 
-.PHONY: help serve build fixit build-fixit check test clean
+.PHONY: help install-sass serve build fixit build-fixit check test clean

@@ -26,7 +26,14 @@ npx playwright install chromium
 npm test               # 完整构建及浏览器检查
 ```
 
-使用 npm 或 Makefile 入口时，会自动使用项目内的 Dart Sass。直接执行 `hugo` 需要自行将 `node_modules/.bin` 加入 `PATH`。
+使用 npm 或 Makefile 开发入口时，会自动使用项目内的 Dart Sass。若要直接使用 Hugo 命令，可全局安装 Sass 官方 npm 发行包：
+
+```bash
+make install-sass  # 执行 npm install --global sass-embedded@1.108.2
+hugo server -D
+```
+
+该安装是可选的全局安装，不会修改项目锁定的 `sass-embedded` 版本。全局安装与项目内依赖均使用 `sass-embedded` 1.108.2。
 
 开发环境仅忽略 FixIt 关于开发模式的预期提示 `warning-dev-env`；其他警告和构建错误仍会报出。`make check` 包含启用草稿并遇到警告即失败的构建检查。
 
