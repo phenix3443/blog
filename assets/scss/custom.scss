@@ -1,0 +1,71 @@
+:root {
+  --blog-violet: light-dark(rgb(126 115 198 / 18%), rgb(126 115 198 / 18%));
+  --blog-peach: light-dark(rgb(245 184 163 / 16%), rgb(245 184 163 / 8%));
+  --blog-mint: light-dark(rgb(114 191 174 / 16%), rgb(114 191 174 / 12%));
+}
+
+.fi-container:has(.home) {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: -1;
+    block-size: max(100svh, 44rem);
+    pointer-events: none;
+    background:
+      linear-gradient(0deg, var(--fi-global-background-color), transparent 50%),
+      radial-gradient(ellipse 58% 68% at 14% 30%, var(--blog-violet), transparent 70%),
+      radial-gradient(ellipse 58% 68% at 85% 35%, var(--blog-peach), transparent 70%),
+      radial-gradient(ellipse 58% 68% at 55% 80%, var(--blog-mint), transparent 70%);
+  }
+}
+
+.home .home-profile[data-fullscreen] {
+  min-block-size: max(calc(100svh - 3.5rem), 40rem);
+
+  .home-title {
+    font-size: clamp(1.25rem, 1rem + 0.5vw, 1.5rem);
+    text-wrap: balance;
+  }
+
+  .contribution-cell[data-level="0"] { background: light-dark(#efedf6, #2e303f); }
+  .contribution-cell[data-level="1"] { background: light-dark(#d1ccec, #585477); }
+  .contribution-cell[data-level="2"] { background: light-dark(#b2a9dc, #8177a8); }
+  .contribution-cell[data-level="3"] { background: light-dark(#8b7ac2, #ac9dd4); }
+  .contribution-cell[data-level="4"] { background: light-dark(#675496, #c6b8e8); }
+}
+
+.home .summary .content {
+  line-height: 1.75;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 48rem) {
+  .home .home-profile[data-fullscreen] { min-block-size: calc(100svh - 3.5rem); }
+}
+
+.visitor-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  margin-block: 1.25rem;
+  color: var(--fi-global-font-secondary-color);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.75;
+
+  .visitor-stats-group { display: inline-flex; align-items: center; gap: 0.5rem; }
+}
+
+#header-desktop .menu-item > a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.25rem;
+  min-inline-size: 2.25rem;
+  justify-content: center;
+}

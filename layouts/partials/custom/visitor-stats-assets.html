@@ -1,0 +1,4 @@
+{{- if and hugo.IsProduction site.Params.visitor_statistics.enable -}}
+  {{- $script := resources.Get "js/visitor-stats.js" | minify | fingerprint "sha256" -}}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
+{{- end -}}

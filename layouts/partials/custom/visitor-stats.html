@@ -1,0 +1,11 @@
+{{- if site.Params.visitor_statistics.enable -}}
+<div class="visitor-stats" data-visitor-stats data-visitor-host="{{ (urls.Parse site.BaseURL).Hostname }}" data-visitor-source="{{ site.Params.visitor_statistics.source }}" aria-label="访问统计">
+  {{- range slice (dict "key" "page" "label" "本页") (dict "key" "today" "label" "今日") (dict "key" "site" "label" "累计") -}}
+  <span class="visitor-stats-group">
+    <span>{{ .label }}</span>
+    <span title="浏览量" aria-label="浏览量">{{ partial "plugin/icon.html" (dict "Class" "fa-regular fa-eye") }} <span id="busuanzi_{{ .key }}_pv">—</span></span>
+    <span title="访客数" aria-label="访客数">{{ partial "plugin/icon.html" (dict "Class" "fa-regular fa-user") }} <span id="busuanzi_{{ .key }}_uv">—</span></span>
+  </span>
+  {{- end -}}
+</div>
+{{- end -}}
