@@ -10,7 +10,8 @@
     "dev": "hugo server --bind 127.0.0.1",
     "build": "hugo --gc --minify --cleanDestinationDir",
     "check": "make check",
-    "test": "npm run build && node tests/site.mjs"
+    "test": "npm run build && node tests/site.mjs",
+    "postinstall": "node scripts/link-sass.cjs"
   },
   "private": true,
   "engines": {

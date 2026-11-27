@@ -25,7 +25,7 @@ npx playwright install chromium
 npm test               # 完整构建及浏览器检查
 ```
 
-使用 npm 或 Makefile 入口时，会自动使用项目内的 Dart Sass。直接执行 `hugo` 需要自行将 `node_modules/.bin` 加入 `PATH`。
+安装依赖时会为原生 Dart Sass 生成 `node_modules/.bin/dart-sass` 别名，Hugo 直接使用其嵌入式协议。使用 npm 或 Makefile 入口时，会自动找到该编译器。直接执行 `hugo` 需要自行将 `node_modules/.bin` 加入 `PATH`。
 
 浏览器检查覆盖首页、搜索、深浅色切换和偏好保存、文章公式、归档分页、分类、标签、关于页及手机导航。截图输出到系统临时目录下的 `blog-fixit-validation/`。
 
