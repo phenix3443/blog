@@ -1,5 +1,7 @@
 github.com/hugo-fixit/FixIt v0.4.3 h1:8Vf/c8MAPnlQesU2SFo9sS7MLa39ALv5eoqBShnwVug=
 github.com/hugo-fixit/FixIt v0.4.3/go.mod h1:3XIRedrqakO7/a4ZnhE46haMRF8HgsT0N0B5j5D2iRU=
+github.com/hugo-fixit/FixIt v0.4.5 h1:0nO/A/9b2Xbn7rqPn8lr1UtEv2NuzmXi684wm27y2gk=
+github.com/hugo-fixit/FixIt v0.4.5/go.mod h1:3XIRedrqakO7/a4ZnhE46haMRF8HgsT0N0B5j5D2iRU=
 github.com/hugo-next/hugo-theme-next v0.0.0-20251225155322-2c5a754f1ca8 h1:kIZ5PZ8hkOv9EcdAHu90bVXdD8ZNHnbEJ6sE1QIZMfo=
 github.com/hugo-next/hugo-theme-next v0.0.0-20251225155322-2c5a754f1ca8/go.mod h1:J2v7ppqg1e1wwYBLgfTTJ6RqRx5VGCAbhmICpY9SGyk=
 github.com/razonyang/hugo-theme-bootstrap v1.2.2 h1:4JZ3dmZ5RKrniCvmB26i/K7jwhC0Pkv4pNDcwVKQLO4=
