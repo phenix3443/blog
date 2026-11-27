@@ -10,10 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: []
-categories:
-  - protocol
-tags:
-  - protobuf
+categories: ["软件工程"]
+tags: ["protobuf", "protoc", "go", "buf"]
 ---
 
 ## 概述

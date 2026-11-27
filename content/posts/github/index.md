@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - github
-tags:
+categories: ["开发工具"]
+tags: ["github", "github-actions", "code-coverage", "proxy"]
 ---
 
 ## repo

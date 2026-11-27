@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - solidity
-tags:
-  - openzeppelin
+categories: ["以太坊"]
+tags: ["ethereum", "openzeppelin", "smart-contract", "solidity"]
 ---
 
 ## 概述

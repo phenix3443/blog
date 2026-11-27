@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - testnets
+categories: ["以太坊"]
+tags: ["ethereum", "mainnet", "testnet", "sepolia"]
 ---
 
 ## 概述

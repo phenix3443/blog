@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - consensus
+categories: ["以太坊"]
+tags: ["ethereum", "consensus", "proof-of-stake", "proof-of-work"]
 ---
 
 本文介绍以太坊共识。

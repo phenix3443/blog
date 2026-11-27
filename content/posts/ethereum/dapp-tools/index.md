@@ -10,11 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊开发工具链]
-categories:
-  - ethereum
-tags:
-  - DApp-tools
-  - eth-tools
+categories: ["以太坊"]
+tags: ["ethereum", "dapp", "development-tools"]
 ---
 
 本文介绍 DApp-tools 工具的使用。

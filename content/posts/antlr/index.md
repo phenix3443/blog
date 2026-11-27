@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["软件工程"]
+tags: ["antlr", "parser", "compiler"]
 images: []
 ---
 

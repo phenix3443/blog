@@ -11,8 +11,8 @@ comments: true
 draft: false
 series:
   - 以太坊情景分析
-categories: [ethereum]
-tags: [geth, debug, rpc]
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "rpc", "debugging", "source-code"]
 ---
 
 ## 概述

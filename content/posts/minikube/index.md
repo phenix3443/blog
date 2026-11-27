@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - kubernetes
-tags:
-  - minikube
+categories: ["云原生"]
+tags: ["kubernetes", "minikube"]
 ---
 
 ## 概述

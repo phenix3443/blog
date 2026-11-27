@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - javascript
-tags:
-  - nodejs
-  - nvm
+categories: ["JavaScript"]
+tags: ["javascript", "nodejs", "nvm", "fnm"]
 ---
 
 ## Node.js

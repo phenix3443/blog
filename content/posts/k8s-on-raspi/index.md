@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - kubernetes
-tags:
-  - raspi
-  - k8s
-  - ubuntu
+categories: ["云原生"]
+tags: ["kubernetes", "raspberry-pi", "kubeadm", "container-runtime"]
 ---
 
 ## 概述

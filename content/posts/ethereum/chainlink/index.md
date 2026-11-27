@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - chainlink
+categories: ["以太坊"]
+tags: ["ethereum", "chainlink", "oracle"]
 ---
 
 ## 概述

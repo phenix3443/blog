@@ -9,10 +9,8 @@ hidden: false
 comments: true
 draft: true
 series: [eip 学习]
-categories: [ethereum]
-tags:
-  - eip
-  - transaction
+categories: ["以太坊"]
+tags: ["ethereum", "eip", "eip-2718", "transaction"]
 ---
 
 ## 概述 [^1]

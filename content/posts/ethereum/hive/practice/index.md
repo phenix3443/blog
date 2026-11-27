@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - best-practices
-tags:
-  - hive
-  - test
+categories: ["以太坊"]
+tags: ["ethereum", "hive", "testing", "testnet"]
 ---
 
 ## 概述

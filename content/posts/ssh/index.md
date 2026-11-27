@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - tools
-tags:
-  - ssh
+categories: ["网络"]
+tags: ["ssh", "openssh", "ssh-key", "proxy"]
 ---
 
 ## 概述

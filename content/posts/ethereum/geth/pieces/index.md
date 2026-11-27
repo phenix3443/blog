@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - geth
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "node", "rpc"]
 ---
 
 所有内容来自 [Geth Documentation](https://geth.ethereum.org/docs/)，如果错漏，请以官方文档为准。

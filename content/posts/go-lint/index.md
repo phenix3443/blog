@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [go]
-tags: [tools]
+categories: ["Go"]
+tags: ["go", "golangci-lint", "lint", "code-quality"]
 images: []
 ---
 

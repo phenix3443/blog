@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - consensus
-tags:
-  - gasper
+categories: ["以太坊"]
+tags: ["ethereum", "gasper", "casper", "ghost", "consensus"]
 ---
 
 本文介绍 gasper 共识机制。

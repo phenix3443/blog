@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - geth
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "p2p", "eth-protocol"]
 ---
 
 ## 概述

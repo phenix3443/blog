@@ -10,10 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊开发工具链]
-categories:
-  - ethereum
-tags:
-  - hardhat
+categories: ["以太坊"]
+tags: ["ethereum", "hardhat", "solidity", "smart-contract", "testing"]
 ---
 
 本文介绍如何使用 hardhat 辅助开发以太坊智能合约。

@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - uniswap
-  - DApp
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "deployment", "private-network"]
 ---
 
 [Uniswap](https://uniswap.org/) 是以太坊最为流行的去中心化交易所，本文以 UniswapV2 为例：

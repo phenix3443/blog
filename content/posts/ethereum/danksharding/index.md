@@ -10,8 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊扩容]
-categories: [ethereum]
-tags: [danksharding, eip-4844]
+categories: ["以太坊"]
+tags: ["ethereum", "danksharding", "eip-4844", "data-availability"]
 ---
 
 本文介绍 danksharding 相关知识。

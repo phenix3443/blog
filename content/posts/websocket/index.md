@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - websocket
-tags:
+categories: ["软件工程"]
+tags: ["websocket", "go", "network-protocol"]
 ---
 
 ## 概述

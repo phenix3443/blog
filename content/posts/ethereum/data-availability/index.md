@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - data
+categories: ["以太坊"]
+tags: ["ethereum", "data-availability", "rollup"]
 ---
 
 ## 概述[^1]

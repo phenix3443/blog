@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - uniswap
-tags:
-  - pool
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "liquidity-pool", "amm"]
 ---
 
 ## 简介

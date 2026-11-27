@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ubuntu
-tags:
-  - wpa
-  - wifi
+categories: ["网络"]
+tags: ["ubuntu", "wifi", "wpa"]
 ---
 
 ## 无线网络

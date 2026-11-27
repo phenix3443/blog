@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - cloud
-tags:
-  - home-services
+categories: ["家庭服务"]
+tags: ["self-hosted", "network-architecture", "nas"]
 ---
 
 ## 概述

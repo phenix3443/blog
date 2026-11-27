@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - shell
-tags:
-  - bash
+categories: ["系统运维"]
+tags: ["bash", "shell", "shell-script"]
 ---
 
 本文介绍 Bash 的使用技巧。

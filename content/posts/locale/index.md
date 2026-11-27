@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ubuntu
-tags:
-  - locale
-  - timezone
+categories: ["系统运维"]
+tags: ["ubuntu", "locale", "timezone"]
 ---
 
 ## timezone

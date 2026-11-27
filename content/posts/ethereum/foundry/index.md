@@ -10,10 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊开发工具链]
-categories:
-  - ethereum
-tags:
-  - foundry
+categories: ["以太坊"]
+tags: ["ethereum", "foundry", "solidity", "smart-contract", "testing"]
 ---
 
 本文介绍如何使用 Foundry 编写智能合约。

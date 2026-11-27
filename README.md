@@ -53,6 +53,15 @@ hugo server -D
 hugo new content posts/post-name/index.md
 ```
 
+每篇文章（包括草稿）都填写非空的 `categories` 和 `tags`，使用 YAML 数组：
+
+```yaml
+categories: [云原生]
+tags: [kubernetes, helm, helm-chart]
+```
+
+`categories` 选择一个主要主题：以太坊、区块链、密码学、Go、JavaScript、Rust、云原生、系统运维、网络、开发工具、软件工程、人工智能、家庭服务、算法、旅行或随笔。`tags` 标记文章涉及的工具、协议和具体技术点，英文统一使用小写，多个单词用连字符连接；统一使用 `go`、`kubernetes`、`zk-rollup`、`openzeppelin` 等写法，避免同义标签分散。系列文章继续使用 `series` 组织。
+
 旧 Bootstrap、Next 主题配置和专用模板已移除。评论服务未配置；需要启用时填写 FixIt 对应的服务参数。
 
 ## 部署

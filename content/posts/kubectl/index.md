@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [kubernetes]
-tags: [kubectl]
+categories: ["云原生"]
+tags: ["kubernetes", "kubectl", "shell-completion"]
 images: []
 ---
 

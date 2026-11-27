@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - ethereum
+categories: ["以太坊"]
+tags: ["ethereum", "blockchain", "architecture"]
 ---
 
 ## 概述

@@ -13,11 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - cryptography
-  - zkp
+categories: ["密码学"]
+tags: ["cryptography", "zkp", "zero-knowledge-proof"]
 ---
 
 本文介绍零知识证明。

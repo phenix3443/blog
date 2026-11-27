@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - contract
+categories: ["以太坊"]
+tags: ["ethereum", "smart-contract", "solidity"]
 ---
 
 ## 概述

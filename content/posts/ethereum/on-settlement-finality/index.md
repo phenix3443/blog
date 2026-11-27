@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - consensus
-tags:
-  - finality
+categories: ["以太坊"]
+tags: ["ethereum", "finality", "casper", "consensus"]
 ---
 
 翻译自 [on-settlement-finality](https://blog.ethereum.org/2016/05/09/on-settlement-finality)，以下是原文内容：

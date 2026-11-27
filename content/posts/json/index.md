@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - tools
-tags:
-  - json
+categories: ["开发工具"]
+tags: ["json", "jq"]
 ---
 
 ## 概述

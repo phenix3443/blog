@@ -9,14 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - cloud
-tags:
-  - cloudreve
-  - drive
-  - wopi
-  - collabora
-  - onlyoffice
+categories: ["家庭服务"]
+tags: ["cloudreve", "cloud-drive", "webdav", "wopi", "onlyoffice", "collabora"]
 ---
 
 ## 概述

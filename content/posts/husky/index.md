@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [如何构建高效的开发工具链]
-categories: []
-tags: [git, husky]
+categories: ["软件工程"]
+tags: ["husky", "git", "git-hooks"]
 images: []
 ---
 

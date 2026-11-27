@@ -8,8 +8,6 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - geth
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "p2p", "snap-sync"]
 ---

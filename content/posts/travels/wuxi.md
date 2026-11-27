@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["旅行"]
+tags: ["wuxi", "family-travel", "travel-guide"]
 images: []
 ---
 

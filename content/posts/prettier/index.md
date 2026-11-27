@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: []
-categories: []
-tags: []
+categories: ["开发工具"]
+tags: ["prettier", "formatting", "code-style"]
 images: []
 ---
 

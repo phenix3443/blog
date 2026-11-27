@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-  - eip
-tags:
-  - transaction
+categories: ["以太坊"]
+tags: ["ethereum", "eip", "eip-155", "transaction", "replay-protection"]
 ---
 
 ## 概述

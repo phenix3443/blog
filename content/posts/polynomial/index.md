@@ -12,13 +12,8 @@ pinned: false
 carousel: false
 series:
   - 以太坊中的密码学
-categories:
-  - cryptography
-  - ethereum
-tags:
-  - zkevm
-  - zkp
-  - commitments
+categories: ["密码学"]
+tags: ["polynomial", "polynomial-commitment", "lagrange-interpolation", "zkp"]
 ---
 
 本文介绍多项式相关知识。

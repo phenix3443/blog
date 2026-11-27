@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["系统运维"]
+tags: ["shell", "shell-script", "shellcheck"]
 images: []
 ---
 

@@ -14,8 +14,8 @@ math: false
 series:
   - 以太坊开发工具链
   - 以太坊合约开发
-categories: [ethereum]
-tags: [solidity, linter, security]
+categories: ["以太坊"]
+tags: ["ethereum", "solidity", "slither", "static-analysis", "security"]
 images: []
 ---
 

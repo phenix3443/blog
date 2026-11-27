@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["算法"]
+tags: ["leetcode", "algorithm", "recursion", "dynamic-programming"]
 images: []
 ---
 

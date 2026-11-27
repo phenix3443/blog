@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - docker
-tags:
-  - images
-  - proxy
-  - registry
+categories: ["云原生"]
+tags: ["docker", "container-image", "proxy", "container-registry"]
 ---
 
 ## 概述

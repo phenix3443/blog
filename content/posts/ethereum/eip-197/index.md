@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: true
 series: [eip 学习]
-categories: [ethereum]
-tags: [eip]
+categories: ["以太坊"]
+tags: ["ethereum", "eip", "eip-197", "bilinear-pairing", "precompiled-contract"]
 images: []
 ---
 

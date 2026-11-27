@@ -9,6 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "defi", "smart-contract"]
 ---
 
 ## 前言

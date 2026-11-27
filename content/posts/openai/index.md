@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: []
-categories: []
-tags: [openai, chatgpt]
+categories: ["人工智能"]
+tags: ["openai", "chatgpt"]
 images: []
 ---
 

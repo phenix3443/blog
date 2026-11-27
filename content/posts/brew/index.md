@@ -8,9 +8,6 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - tools
-tags:
-  - macos
-  - brew
+categories: ["开发工具"]
+tags: ["homebrew", "macos", "package-manager"]
 ---

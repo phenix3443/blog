@@ -12,10 +12,8 @@ draft: false
 series:
   - 以太坊开发工具链
   - 以太坊合约开发
-categories:
-  - ethereum
-tags:
-  - solidity
+categories: ["以太坊"]
+tags: ["ethereum", "solidity", "smart-contract"]
 ---
 
 本文介绍如何使用 solidity 开发智能合约。

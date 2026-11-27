@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - web
-tags:
-  - react
+categories: ["JavaScript"]
+tags: ["javascript", "react", "jsx"]
 ---
 
 本文介绍 react 学习过程。

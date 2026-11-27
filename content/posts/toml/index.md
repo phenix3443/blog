@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: [toml]
+categories: ["开发工具"]
+tags: ["toml", "configuration"]
 images: []
 ---
 

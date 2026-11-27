@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - hive
-  - test
+categories: ["以太坊"]
+tags: ["ethereum", "hive", "testing", "source-code"]
 ---
 
 ## 引言

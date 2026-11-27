@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [airdrop]
-tags: []
+categories: ["区块链"]
+tags: ["lisk", "airdrop"]
 images: []
 ---
 

@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - account
+categories: ["以太坊"]
+tags: ["ethereum", "account", "eoa", "smart-contract"]
 ---
 
 ## 概述 [^1]

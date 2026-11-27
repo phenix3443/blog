@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - monitor
-tags:
-  - grafana
+categories: ["云原生"]
+tags: ["grafana", "observability", "monitoring", "alerting"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

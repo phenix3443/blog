@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [cosmos]
-tags: [greenfield]
+categories: ["区块链"]
+tags: ["greenfield", "cosmos", "virtual-group", "storage-provider"]
 images: []
 ---
 

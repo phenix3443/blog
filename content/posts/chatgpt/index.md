@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ai
-tags:
-  - chatgpt
+categories: ["人工智能"]
+tags: ["chatgpt", "openai"]
 ---
 
 ## 概述

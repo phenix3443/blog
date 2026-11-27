@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - kubernetes
-  - distribute-storage
-tags:
-  - longhorn
+categories: ["云原生"]
+tags: ["kubernetes", "longhorn", "distributed-storage"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

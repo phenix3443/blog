@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [go]
-tags: [tools]
+categories: ["Go"]
+tags: ["go", "cli", "urfave-cli"]
 images: []
 ---
 

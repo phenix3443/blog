@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - github
-tags:
-  - actions
+categories: ["软件工程"]
+tags: ["github", "github-actions", "ci-cd"]
 ---
 
 ## 概述

@@ -8,8 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - 软件工程
+categories: ["软件工程"]
+tags: ["cyclomatic-complexity", "code-quality"]
 ---
 
 ## 什么是圈复杂度

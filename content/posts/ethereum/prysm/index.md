@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - prysm
+categories: ["以太坊"]
+tags: ["ethereum", "prysm", "consensus-client", "proof-of-stake"]
 ---
 
 ## 概述[^1]

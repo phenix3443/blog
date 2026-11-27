@@ -10,11 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊扩容]
-categories:
-  - ethereum
-tags:
-  - eip
-  - danksharding
+categories: ["以太坊"]
+tags: ["ethereum", "proto-danksharding", "eip-4844", "blob", "kzg"]
 ---
 
 ## 数据可用性导致的扩容瓶颈

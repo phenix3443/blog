@@ -13,8 +13,8 @@ carousel: false
 series:
   - 以太坊开发工具链
   - 以太坊合约开发
-categories: [ethereum]
-tags: [solidity, linter]
+categories: ["以太坊"]
+tags: ["ethereum", "solidity", "solhint", "slither", "mythril"]
 images: []
 ---
 

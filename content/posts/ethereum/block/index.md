@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - block
+categories: ["以太坊"]
+tags: ["ethereum", "block", "block-header"]
 ---
 
 ## Block 数据结构

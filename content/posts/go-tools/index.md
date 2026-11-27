@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - go
-tags:
-  - tools
+categories: ["Go"]
+tags: ["go", "go-modules", "build", "lint"]
 ---
 
 ## 导入路径

@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - macos
-tags:
-  - iterm2
+categories: ["开发工具"]
+tags: ["iterm2", "macos", "terminal"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

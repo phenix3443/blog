@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: []
-categories: [ethereum]
-tags: [rollup, zkevm]
+categories: ["以太坊"]
+tags: ["ethereum", "zkevm", "zkp", "evm"]
 images: []
 ---
 

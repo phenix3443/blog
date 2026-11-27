@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - explorer
+categories: ["以太坊"]
+tags: ["ethereum", "blockscout", "block-explorer", "contract-verification"]
 ---
 
 本文介绍如何使用 blockscout 搭建自己的区块浏览器。

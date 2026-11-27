@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - go
-tags:
-  - unittest
+categories: ["Go"]
+tags: ["go", "unit-testing", "code-coverage", "mock"]
 ---
 
 ## 概述

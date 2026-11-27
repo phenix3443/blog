@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["区块链"]
+tags: ["smart-money", "data-analysis"]
 images: []
 ---
 

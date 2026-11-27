@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - proxy
-tags:
-  - clash
+categories: ["网络"]
+tags: ["clash", "proxy", "dns", "router"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

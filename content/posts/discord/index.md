@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - tools
-tags:
-  - discord
+categories: ["开发工具"]
+tags: ["discord", "proxy"]
 ---
 
 本文介绍 discord 使用。

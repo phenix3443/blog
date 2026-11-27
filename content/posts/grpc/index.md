@@ -10,10 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [grpc]
-categories:
-  - grpc
-tags:
-  - grpc
+categories: ["软件工程"]
+tags: ["grpc", "go", "rpc", "protobuf"]
 ---
 
 ## 概述

@@ -10,8 +10,8 @@ comments: true
 draft: true
 series:
   - 以太坊情景分析
-categories: [ethereum]
-tags: [geth]
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "go", "source-code"]
 ---
 
 本文介绍 geth 的架构和代码布局。

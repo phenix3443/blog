@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 series:
   - ethereum 好文翻译
-categories: [ethereum]
-tags: [Rollup, zkRollup, evm]
+categories: ["以太坊"]
+tags: ["ethereum", "rollup", "zk-rollup", "evm", "zkevm"]
 images: []
 ---
 

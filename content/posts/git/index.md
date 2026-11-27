@@ -10,8 +10,8 @@ reward: true
 pinned: false
 carousel: false
 series: []
-categories: [最佳实践]
-tags: [git]
+categories: ["开发工具"]
+tags: ["git", "git-hooks", "version-control"]
 images: []
 ---
 

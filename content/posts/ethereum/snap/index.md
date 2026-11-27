@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - geth
-  - 源码分析
-tags:
-  - snap
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "snap-sync", "snapshot"]
 ---
 
 ## Snapshots[^1]

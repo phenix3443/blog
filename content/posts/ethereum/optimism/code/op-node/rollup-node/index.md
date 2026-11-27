@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-  - optimism
-tags:
+categories: ["以太坊"]
+tags: ["optimism", "op-node", "rollup", "source-code"]
 ---
 
 ## Rollup node

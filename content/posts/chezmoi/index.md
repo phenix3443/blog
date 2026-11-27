@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [DevOps, 工具]
-tags: [chezmoi, dotfiles, KeePassXC, age, 配置管理, 自动化]
+categories: ["开发工具"]
+tags: ["chezmoi", "dotfiles", "keepassxc", "age", "automation"]
 images: []
 ---
 

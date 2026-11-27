@@ -13,11 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - zkp
-  - plonk
+categories: ["密码学"]
+tags: ["cryptography", "plonk", "zkp"]
 ---
 
 译自 [Understanding Plonk](https://vitalik.ca/general/2019/09/22/plonk.html)

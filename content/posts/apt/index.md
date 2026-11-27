@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ubuntu
-tags:
-  - apt
+categories: ["系统运维"]
+tags: ["ubuntu", "apt", "proxy"]
 ---
 
 ## 概述

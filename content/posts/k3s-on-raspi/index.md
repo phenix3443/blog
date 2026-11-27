@@ -10,8 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: []
-categories: [kubernetes]
-tags: [kubectl, k3s]
+categories: ["云原生"]
+tags: ["kubernetes", "k3s", "raspberry-pi", "kubectl"]
 ---
 
 ## 概述

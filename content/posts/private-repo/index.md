@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - github
-tags:
-  - golang
-  - actions
-  - private-repo
+categories: ["开发工具"]
+tags: ["github", "go", "go-modules", "github-actions", "private-repo"]
 ---
 
 本文介绍日常开发中和私有仓库相关的问题。

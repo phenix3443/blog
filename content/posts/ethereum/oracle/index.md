@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - oracle
+categories: ["以太坊"]
+tags: ["ethereum", "oracle", "chainlink"]
 ---
 
 本文介绍以太坊预言机。

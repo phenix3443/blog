@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - typescript
-tags:
+categories: ["JavaScript"]
+tags: ["typescript", "tsc", "eslint", "ts-node"]
 ---
 
 ## 概述

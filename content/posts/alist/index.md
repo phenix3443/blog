@@ -10,8 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [如何一步步搭建家庭网络服务]
-categories: [cloud]
-tags: [alist]
+categories: ["家庭服务"]
+tags: ["alist", "cloudreve", "cloud-drive"]
 ---
 
 本文记录如何使用 alist 来聚合网盘资源。

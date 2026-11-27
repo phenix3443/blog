@@ -8,6 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
+categories: ["云原生"]
+tags: ["observability", "monitoring", "logging", "tracing"]
 ---
 
 本文介绍可观测性的相关概念，以及如何落地。

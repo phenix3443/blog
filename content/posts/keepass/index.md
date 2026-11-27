@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - tools
-tags:
-  - KeePass
+categories: ["开发工具"]
+tags: ["keepass", "keepassxc", "password-manager"]
 ---
 
 ## 概述

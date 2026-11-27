@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - Web
-tags:
-  - hugo
+categories: ["开发工具"]
+tags: ["hugo", "blog", "static-site"]
 math: true
 ---
 

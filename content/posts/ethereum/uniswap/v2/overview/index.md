@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - uniswap
-tags:
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "defi", "amm"]
 ---
 
 ## 概述

@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
+categories: ["以太坊"]
+tags: ["ethereum", "witness", "stateless-client"]
 ---
 
 ## 概述

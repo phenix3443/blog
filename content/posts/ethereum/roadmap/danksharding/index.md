@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - danksharding
+categories: ["以太坊"]
+tags: ["ethereum", "danksharding", "proto-danksharding", "eip-4844"]
 ---
 
 ## 概述[^1]

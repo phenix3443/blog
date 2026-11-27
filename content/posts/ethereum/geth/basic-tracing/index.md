@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [evm-tracing]
-categories: [ethereum]
-tags: [geth, evm, tracing]
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "evm", "tracing"]
 images: []
 ---
 

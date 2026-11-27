@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-  - optimism
-tags:
-  - ethereum
+categories: ["以太坊"]
+tags: ["optimism", "rollup", "layer2", "finality"]
 ---
 
 ## 概述

@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: true
 series: [greenfield 源码分析]
-categories: [blockchain]
-tags: [cosmos]
+categories: ["区块链"]
+tags: ["greenfield", "cosmos", "storage-provider", "distributed-storage", "source-code"]
 images: []
 ---
 

@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - zkevm
+categories: ["以太坊"]
+tags: ["ethereum", "zkevm", "zk-rollup", "evm"]
 ---
 
 ## 概述

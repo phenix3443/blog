@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - raspi
-tags:
+categories: ["系统运维"]
+tags: ["raspberry-pi", "ubuntu", "raspberry-pi-os"]
 ---
 
 ## 概述

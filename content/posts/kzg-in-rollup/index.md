@@ -13,11 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - cryptography
-  - kzg
+categories: ["密码学"]
+tags: ["kzg", "polynomial-commitment", "zk-rollup", "data-availability"]
 ---
 
 译自 [KZG in Practice: Polynomial Commitment Schemes and Their Usage in Scaling Ethereum](https://scroll.io/blog/kzg)。

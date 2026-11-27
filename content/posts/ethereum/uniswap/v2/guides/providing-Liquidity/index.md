@@ -8,10 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - uniswap
-tags:
-  - develop
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "liquidity-pool", "router"]
 ---
 
 ## 概述

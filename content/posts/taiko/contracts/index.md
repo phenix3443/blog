@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 series:
   - Taiko 源码解析
-categories: [ethereum]
-tags: [taiko, rollup]
+categories: ["以太坊"]
+tags: ["taiko", "rollup", "solidity", "smart-contract"]
 images: []
 ---
 

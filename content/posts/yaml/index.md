@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: [tools]
-tags: [yaml]
+categories: ["开发工具"]
+tags: ["yaml", "yq", "configuration"]
 images: []
 ---
 

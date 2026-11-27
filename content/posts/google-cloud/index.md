@@ -9,9 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - google-cloud
-tags:
+categories: ["云原生"]
+tags: ["google-cloud", "container-registry", "gcloud"]
 ---
 
 ## 概述

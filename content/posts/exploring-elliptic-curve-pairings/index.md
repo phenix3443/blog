@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: true
 series: []
-categories: []
-tags: []
+categories: ["密码学"]
+tags: ["cryptography", "elliptic-curve", "bilinear-pairing"]
 images: []
 ---
 

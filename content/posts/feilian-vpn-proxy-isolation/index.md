@@ -9,13 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - best-practices
-tags:
-  - proxy
-  - clash
-  - tailscale
-  - macos
+categories: ["网络"]
+tags: ["feilian", "proxy", "clash", "tailscale", "macos"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

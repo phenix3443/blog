@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - evm
+categories: ["以太坊"]
+tags: ["ethereum", "evm", "opcode", "smart-contract"]
 ---
 
 本文介绍以太坊虚拟机。

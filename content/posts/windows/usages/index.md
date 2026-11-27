@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - best-practices
-  - windows
-tags:
+categories: ["系统运维"]
+tags: ["windows", "remote-desktop"]
 ---
 
 ## Remote Desktop

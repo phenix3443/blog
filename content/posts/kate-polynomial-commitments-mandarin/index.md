@@ -13,12 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - kzg
-  - commitments
-  - cryptography
+categories: ["密码学"]
+tags: ["cryptography", "kzg", "polynomial-commitment", "elliptic-curve"]
 ---
 
 本文修正了 [KZG 多项式承诺](https://dankradfeist.de/ethereum/2021/10/13/kate-polynomial-commitments-mandarin.html) 中一些描述不好的部分，并添加一些相关知识的引用。

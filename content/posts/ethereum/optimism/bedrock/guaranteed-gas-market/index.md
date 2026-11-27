@@ -8,11 +8,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-  - optimism
-tags:
-  - bedrock
+categories: ["以太坊"]
+tags: ["optimism", "bedrock", "gas-fee"]
 ---
 
 ## 引言[^1]

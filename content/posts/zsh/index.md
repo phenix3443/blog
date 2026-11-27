@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [如何构建高效的开发工具链]
-categories: [shell]
-tags: [zsh, autocompletion]
+categories: ["系统运维"]
+tags: ["zsh", "shell", "shell-completion"]
 images: []
 ---
 

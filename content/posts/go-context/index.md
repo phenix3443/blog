@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: [go 源码分析]
-categories: [go]
-tags: [context]
+categories: ["Go"]
+tags: ["go", "context", "source-code"]
 images: []
 ---
 

@@ -10,11 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [eip 学习]
-categories: [ethereum]
-tags:
-  - eip
-  - erc-20
-  - openzeppelin
+categories: ["以太坊"]
+tags: ["ethereum", "eip", "erc-20", "openzeppelin"]
 ---
 
 ## 概述 [^1]

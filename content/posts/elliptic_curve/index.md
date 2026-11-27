@@ -13,13 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - zkevm
-  - zkp
-  - commitments
-  - cryptography
+categories: ["密码学"]
+tags: ["cryptography", "elliptic-curve", "bilinear-pairing", "bls12-381"]
 ---
 
 本文介绍椭圆曲线加密算法。

@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [以太坊合约开发]
-categories: [ethereum]
-tags: [solidity, contract, upgradeable, OpenZeppelin]
+categories: ["以太坊"]
+tags: ["ethereum", "solidity", "smart-contract", "openzeppelin", "upgradeable-contract"]
 images: []
 ---
 

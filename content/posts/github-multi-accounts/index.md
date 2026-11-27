@@ -4,11 +4,8 @@ description: Github 上使用多个账号和 SSH key 进行项目开发
 slug: github-multi-accounts
 date: 2022-03-11 00:00:00+0000
 image: images/github-ssh.png
-categories:
-  - github
-tags:
-  - git
-  - ssh
+categories: ["开发工具"]
+tags: ["github", "git", "ssh", "multi-account"]
 ---
 
 如果在 Github 有多个账号，比如同时有个人账号以及多个组织账号（organization），开发过程中难免需要切换身份，这篇文章介绍解决此场景下遇到的问题。

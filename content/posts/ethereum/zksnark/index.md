@@ -13,11 +13,8 @@ carousel: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - zkp
-  - zksnark
+categories: ["密码学"]
+tags: ["cryptography", "zk-snark", "zkp"]
 ---
 
 Summary.

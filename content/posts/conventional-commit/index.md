@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: [如何构建高效的开发工具链]
-categories: [CD]
-tags: [git, github, code-style]
+categories: ["软件工程"]
+tags: ["git", "conventional-commits", "commitlint", "ci-cd"]
 images: []
 ---
 

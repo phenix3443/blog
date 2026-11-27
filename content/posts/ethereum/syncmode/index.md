@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - ethereum
-tags:
-  - sync
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "sync", "snap-sync"]
 ---
 
 更详细信息参考 [官方文档](https://geth.ethereum.org/docs/interface/sync-modes)。

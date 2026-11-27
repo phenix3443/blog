@@ -8,6 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
+categories: ["以太坊"]
+tags: ["ethereum", "finality", "consensus"]
 ---
 
 ## 概述

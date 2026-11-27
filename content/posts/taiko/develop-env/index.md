@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 series:
   - taiko 源码解析
-categories: [ethereum]
-tags: [taiko, vscode, debug]
+categories: ["以太坊"]
+tags: ["taiko", "rollup", "debugging", "vscode"]
 images: []
 ---
 

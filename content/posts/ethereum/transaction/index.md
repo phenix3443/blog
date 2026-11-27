@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - transaction
+categories: ["以太坊"]
+tags: ["ethereum", "transaction", "gas-fee"]
 ---
 
 ## 概述

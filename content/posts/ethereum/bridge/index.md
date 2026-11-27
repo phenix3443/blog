@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - ethereum
-tags:
-  - data
-  - bridge
+categories: ["以太坊"]
+tags: ["ethereum", "bridge", "cross-chain"]
 ---
 
 本文描述以太坊跨链相关知识。

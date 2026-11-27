@@ -10,13 +10,8 @@ comments: true
 draft: false
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - zkevm
-  - zkp
-  - commitments
-  - cryptography
+categories: ["密码学"]
+tags: ["cryptography", "polynomial-commitment", "merkle-tree", "zkp"]
 math: true
 ---
 

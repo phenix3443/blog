@@ -10,10 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [以太坊开发工具链]
-categories:
-  - ethereum
-tags:
-  - contract
+categories: ["以太坊"]
+tags: ["ethereum", "smart-contract", "contract-verification", "etherscan", "sourcify"]
 ---
 
 本文介绍以太坊如何验证智能合约。

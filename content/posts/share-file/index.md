@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - best-practices
-tags:
-  - share
+categories: ["网络"]
+tags: ["file-sharing", "lan"]
 ---
 
 ## 概述

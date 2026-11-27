@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - kubernetes
-tags:
-  - dashboard
+categories: ["云原生"]
+tags: ["kubernetes", "dashboard", "helm"]
 series:
   - 如何一步步搭建家庭网络服务
 ---

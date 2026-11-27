@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - uniswap
-tags:
-  - swap
+categories: ["以太坊"]
+tags: ["uniswap", "uniswap-v2", "flash-swap", "arbitrage"]
 ---
 
 ## 概述

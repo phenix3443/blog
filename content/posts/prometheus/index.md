@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - monitor
-tags:
-  - prometheus
+categories: ["云原生"]
+tags: ["prometheus", "monitoring", "promql", "alertmanager"]
 ---
 
 本文介绍如何在 k3s 中使用 Prometheus。

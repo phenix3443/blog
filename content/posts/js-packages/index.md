@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - javascript
-tags:
-  - npm
-  - yarn
-  - pnpm
+categories: ["JavaScript"]
+tags: ["javascript", "npm", "yarn", "pnpm", "package-manager"]
 ---
 
 本文介绍 JavaScript 包管理相关知识。

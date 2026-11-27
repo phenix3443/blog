@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - go
-tags:
-  - log
-  - zap
+categories: ["Go"]
+tags: ["go", "zap", "logging", "source-code"]
 ---
 
 ## 概览

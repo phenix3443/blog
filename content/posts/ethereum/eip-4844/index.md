@@ -10,9 +10,8 @@ hidden: false
 comments: true
 draft: false
 series: [eip 学习]
-categories: [ethereum]
-tags:
-  - eip
+categories: ["以太坊"]
+tags: ["ethereum", "eip", "eip-4844", "blob", "data-availability"]
 ---
 
 本文介绍 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)。

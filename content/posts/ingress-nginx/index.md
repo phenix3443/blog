@@ -8,11 +8,8 @@ license:
 hidden: false
 comments: true
 draft: true
-categories:
-  - kubernetes
-tags:
-  - ingress
-  - nginx
+categories: ["云原生"]
+tags: ["kubernetes", "ingress", "nginx"]
 ---
 
 本文介绍如何使用 ingress controller。

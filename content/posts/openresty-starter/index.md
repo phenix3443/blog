@@ -11,8 +11,8 @@ reward: true
 pinned: false
 carousel: false
 series: []
-categories: [openresty]
-tags: [nginx, lua]
+categories: ["软件工程"]
+tags: ["openresty", "nginx", "lua", "testing", "monitoring"]
 images: []
 ---
 

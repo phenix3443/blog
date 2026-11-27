@@ -11,10 +11,8 @@ comments: true
 draft: false
 series:
   - 如何构建高效的开发工具链
-categories:
-  - vscode
-tags:
-  -
+categories: ["开发工具"]
+tags: ["vscode", "debugging", "dev-containers", "terminal"]
 ---
 
 本文介绍在 vscode 使用过程中遇到的一些问题。所有内容出自 [官方文档](https://code.visualstudio.com/docs)。

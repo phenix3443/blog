@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - cloud
-tags:
-  - home-services
+categories: ["家庭服务"]
+tags: ["self-hosted", "k3s", "kubernetes", "docker-compose"]
 ---
 
 ## v3 k3s 部署

@@ -9,12 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - best-practices
-tags:
-  - router
-  - ddns
-  - lan
+categories: ["网络"]
+tags: ["ddns", "lan", "router", "wake-on-lan"]
 ---
 
 ## 概述

@@ -11,10 +11,8 @@ comments: true
 draft: true
 series:
   - 以太坊情景分析
-categories:
-  - ethereum
-tags:
-  - geth
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "blockchain", "account"]
 ---
 
 本文介绍以太坊的基本概念以及几种实现。

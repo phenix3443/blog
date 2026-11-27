@@ -11,10 +11,8 @@ draft: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - cryptography
+categories: ["密码学"]
+tags: ["cryptography", "hash", "finite-field", "bilinear-pairing"]
 ---
 
 本文介绍区块链中的密码学知识。

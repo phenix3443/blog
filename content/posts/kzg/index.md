@@ -11,13 +11,8 @@ draft: false
 math: true
 series:
   - 以太坊中的密码学
-categories:
-  - ethereum
-tags:
-  - kzg
-  - cryptography
-  - zkp
-  - zkrollup
+categories: ["密码学"]
+tags: ["cryptography", "kzg", "polynomial-commitment", "zkp"]
 ---
 
 本文介绍 KZG 多项式承诺。

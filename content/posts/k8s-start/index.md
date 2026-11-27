@@ -9,10 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - k8s
-tags:
-  - tutorial
+categories: ["云原生"]
+tags: ["kubernetes", "tutorial"]
 ---
 
 ## 概述

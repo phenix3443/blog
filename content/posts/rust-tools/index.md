@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: [如何构建高效的开发工具链]
-categories: [rust]
-tags: [rustup, cargo, vscode]
+categories: ["Rust"]
+tags: ["rust", "rustup", "cargo", "vscode"]
 images: []
 ---
 

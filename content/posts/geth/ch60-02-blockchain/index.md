@@ -11,8 +11,8 @@ comments: true
 draft: true
 series:
   - 以太坊情景分析
-categories: [ethereum]
-tags: [geth]
+categories: ["以太坊"]
+tags: ["ethereum", "geth", "blockchain", "source-code"]
 ---
 
 ## 概述 [^1]

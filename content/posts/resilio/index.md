@@ -9,11 +9,8 @@ license:
 hidden: false
 comments: true
 draft: false
-categories:
-  - cloud
-tags:
-  - sync
-  - resilio
+categories: ["家庭服务"]
+tags: ["resilio", "file-sync", "backup"]
 ---
 
 ## 概述

@@ -12,8 +12,8 @@ pinned: false
 carousel: false
 math: false
 series: []
-categories: []
-tags: []
+categories: ["人工智能"]
+tags: ["claude"]
 images: []
 ---
 
