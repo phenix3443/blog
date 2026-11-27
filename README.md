@@ -26,6 +26,8 @@ npx playwright install chromium
 npm test               # 完整构建及浏览器检查
 ```
 
+安装依赖时会为原生 Dart Sass 生成 `node_modules/.bin/dart-sass` 别名，Hugo 直接使用其嵌入式协议。使用 npm 或 Makefile 入口时，会自动找到该编译器。
+
 使用 npm 或 Makefile 开发入口时，会自动使用项目内的 Dart Sass。若要直接使用 Hugo 命令，可全局安装 Sass 官方 npm 发行包：
 
 ```bash
