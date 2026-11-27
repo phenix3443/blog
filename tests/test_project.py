@@ -26,6 +26,21 @@ class ProjectChecks(unittest.TestCase):
                 self.assertEqual(config["params"]["header"]["title"]["name"], "phenix3443")
                 self.assertEqual(config["defaultcontentlanguage"], "zh-cn")
 
+    def test_drafts_build_without_warnings(self):
+        with tempfile.TemporaryDirectory(prefix="blog-drafts-") as output:
+            environment = dict(os.environ, PATH=str(ROOT / "node_modules/.bin") + os.pathsep + os.environ["PATH"])
+            result = subprocess.run(
+                ["hugo", "--environment", "development", "--buildDrafts", "--panicOnWarning",
+                 "--destination", output],
+                cwd=ROOT, env=environment, text=True, capture_output=True, timeout=60,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertNotIn("WARN", result.stdout + result.stderr)
+            self.assertNotIn("ERROR", result.stdout + result.stderr)
+            drafts = list(Path(output).glob("**/geth-blockchain/index.html"))
+            self.assertEqual(len(drafts), 1)
+            self.assertIn("geth blockchain 实现", drafts[0].read_text())
+
     def test_hugo_versions_are_consistent(self):
         for path in ROOT.glob("vercel*.json"):
             config = json.loads(path.read_text())
