@@ -50,3 +50,11 @@ hugo new content posts/post-name/index.md
 - PR 检查：`.github/workflows/check.yml`，运行脚本检查、完整构建和浏览器测试。
 
 推送到 `main` 会触发现有生产发布流程。本地构建与测试不会发布。
+
+## Hugo 更新提醒
+
+`.github/workflows/check-hugo-release.yml` 每天北京时间 09:17 查询 Hugo 官方最新稳定版，也支持在 Actions 页面手动运行。定时任务需合入仓库默认分支后才会生效。
+
+以 `vercel.json` 的 `env.HUGO_VERSION` 为当前版本；发现更高版本时创建中文 Issue，包含发布说明和需要同步更新的文件。已存在该版本的提醒时不重复创建，包括已经关闭的 Issue。候选版、测试版和草稿发布不触发提醒。
+
+工作流使用内置 `GITHUB_TOKEN` 的 `contents: read` 和 `issues: write` 权限，不需要额外密钥。它只创建更新提醒，不自动改版本或部署。GitHub 的定时调度可能延迟。

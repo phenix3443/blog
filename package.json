@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "devDependencies": {
     "playwright": "^1.58.2",
-    "sass-embedded": "1.108.2"
+    "sass-embedded": "1.108.2",
+    "semver": "7.8.6"
   },
   "scripts": {
     "dev": "hugo server --bind 127.0.0.1",

@@ -17,9 +17,11 @@ fixit: ## 启动 FixIt 子域名开发服务器
 build-fixit: ## 构建 FixIt 子域名
 	npm run build -- --baseURL https://fixit.blog.panghuli.cn/
 
-check: ## 检查脚本和站点配置
+check: ## 检查脚本、更新提醒和站点配置
 	shellcheck --severity=warning *.sh
 	python3 -m unittest discover -s tests -v
+	node --check scripts/check-hugo-release.cjs
+	node --test tests/hugo-release.test.cjs
 
 test: ## 构建并验证浏览器交互
 	npm test
